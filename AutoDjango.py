@@ -1,3 +1,4 @@
+#Django project utility tool
 import os, argparse, json, platform, sys, subprocess, shutil, re, ast
 from pathlib import Path
 try:
