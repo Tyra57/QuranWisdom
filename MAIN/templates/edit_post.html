@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block title %}
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .edit input {
+           width: 100%;
+           font-family: 'poppins', sans-serif;
+           padding: 10px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
+       .edit textarea{
+           font-family: 'poppins', sans-serif;
+           width: 100%;
+           padding: 20px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+       }
+       .edit select{
+           font-family: 'poppins', sans-serif;
+           width: auto;
+           padding: 10px;
+           border: 1px solid #ccc;
+           border-radius: 4px;
+           display: block;
+           margin-bottom: 10px;
+       }
+       button{
+           padding: 10px;
+           font-family: 'Poppins', sans-serif;
+           background-color: #ddd;
+           border: 1px solid #38444d;
+           outline: 0;
+           cursor: pointer;
+           color:#38444d;
+           font-size: 15px;
+       }
+       button:hover{
+           background-color: #38444d;
+           color: white;
+           border: 1px solide #fff;
+               }
+         .edit {
+         margin: 0 150px 100px 150px; 
+         padding: 40px; 
+         background: #dddddd00;
+       }
+       h2{
+        text-align: center; 
+        margin-block: 50px;
+       }
+       /*mobile view*/
+       @media (max-width: 768px){
+           .edit{
+               margin: 0 10px 100px 10px;
+           }
+
+       }
+   </style>
+
+{% endblock title %}
+
+  {% block content %}   
+      
+      <h2>Edit Comment</h2>
+        <form class="edit" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button" type="submit">Save changes</button>
+        </form>
+
+ {% endblock content %}

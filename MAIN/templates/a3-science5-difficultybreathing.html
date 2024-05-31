@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Difficulty Breathing At Higher Altitude</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+  <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
+  <!--Navigation Bar-->
+  <nav>
+   <div class="logo">
+     <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
+   </div>
+   <div class="toggle">
+       <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
+   </div>
+     <ul class="menu">
+       <li><a href="{% url 'home' %}">Home</a></li>
+       <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+       <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+       <li><a href="{% url 'doa' %}">Dua'</a></li>
+       <li><a href="{% url 'faq' %}">Ask a Question</a></li>
+       <li><a href="{% url 'quiz' %}">Quiz</a></li>
+       {% if user.is_authenticated %}
+       <!-- <div class="user-menu">  -->
+     <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
+   
+     <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
+       <div class="sub-menu-container">
+         <div class="sub-menu">
+           <!--close icon-->
+             <div class="close-button">
+               <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
+             </div>   
+             
+             <a href="{% url 'profile' %}" class="user-info-link"> 
+               <div class="user-info">
+                 <img src="{% static 'assets\usermenuimg\user.png' %}">
+                 <h3>Nur Athirah</h3>
+             </div>
+             </a>
+             
+             <hr>
+           
+             <a href="{% url 'update_profile' %}" class="sub-menu-link">
+               <img src="{% static 'assets\usermenuimg\profile.png' %}">
+               <p>Edit Profile</p>
+               <span></span>
+             </a>
+               
+             <a href="#" class="sub-menu-link">
+               <img src="{% static 'assets\usermenuimg\setting.png' %}">
+               <p>Settings & Privacy</p>
+               <span></span>
+             </a>
+               
+             <a href="#" class="sub-menu-link">
+               <img src="{% static 'assets\usermenuimg\help.png' %}">
+               <p>Help & Support</p>
+               <span></span>
+             </a>
+               
+             <a href="{% url 'logout' %}" class="sub-menu-link">
+               <img src="{% static 'assets\usermenuimg\logout.png' %}">
+               <p>Logout</p>
+               <span></span>
+             </a>
+         </div>
+       </div>
+     </div>
+       {% else %}
+       <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
+       <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
+       {% endif %}
+     </ul>
+   </nav>
+  
+ <!--menu script-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="{% static 'js\main.js' %}"></script>
+
+<!--nav link-->
+<div class="nav-link">
+  <div class="nav-link-content">
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> <a href="{% url 'science' %}"> Sciences </a><span><i class="fa-solid fa-chevron-right"></i>
+    </span> Difficulty Breathing At Higher Altitude</p>
+  </div> 
+</div>
+<hr class ="nav-line">
+<br>
+<!--bookmark and comment-->
+<div class="nav-to-right">
+  <div class="nav-to-right-content">
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Science-Difficulty-Breathing-At-Higher-Altitude')" data-slug="Science-Difficulty-Breathing-At-Higher-Altitude"></i></p>
+    <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
+  </div>
+</div>
+
+<!--Forum Section-->
+<div class="overlay" id="overlay">
+  <div class="container">
+      <div class="close">
+          <div class="close-button">
+              <i class="fas fa-times" onclick="off()"></i>
+          </div>         
+          <div class="subforum">
+
+          {% if user.is_authenticated %}
+            <div class ="create-post">
+              <button style="color:#38444d"><a href="{% url 'create_post' %}">Create Post</a></button>
+            </div>
+          {% endif %}
+
+          <div class="subforum-title">
+              <h1>Forum</h1>
+          </div>
+
+          {% for forum in forums %}
+          <div class="subforum-row">
+              <!--<div class="subforum-icon subforum-column center">
+                  <i class="fas fa-user"></i>
+              </div>-->
+              <div class="subforum-description subforum-column">
+                  <h1><a href="{{forum.get_url}}">{{forum.title}}</a></h1>
+                  <p>{{forum.description}}</p>
+              </div>
+              <div class="subforum-stats subforum-column center">
+                  <span>{{forum.num_posts}} Posts</span>
+              </div>
+              <div class="subforum-info subforum-column">
+                  <b><a href="{{forum.last_post.get_url}}">Last Post</a></b> by <a href="">{{forum.last_post.user.fullname|title}}</a>
+                  <br>
+                  on <small>{{forum.last_post.created_at|date:"F d, Y H:i"}}</small>
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+  </div>
+
+   <!-- Forum Info -->
+<div class="forum-info">
+  <div class="chart">
+      Forum Statistic &nbsp;<i class="fa fa-bar-chart"></i>
+  </div>
+  <span><u>{{num_posts}}</u> Posts in <u>{{num_categories}}</u> Categories by <u>{{num_users}}</u> Members.</span><br>
+  {% if forums %}
+      <span>Latest post: <b><a href="{{last_post.get_url}}">{{last_post.title}}</a></b> on {{last_post.date|date}} By <a href="">{{last_post.user.fullname|title}}</a></span>.<br>
+      <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
+  {% endif %}
+</div>      
+
+</div>
+</div>
+<!--ends forum-->
+
+      <!--Sciences content-->
+      <div class="sciences">
+
+        <h1>Difficulty Breathing At Higher Altitude</h1>
+        <img src="{% static 'assets\sciences\difficultybreathing.png' %}" width="600" height="600"><br>
+        <h4>Quranic Verse</h4><br>
+        <p>فَمَن يُرِدِ ٱللَّهُ أَن يَهْدِيَهُۥ يَشْرَحْ صَدْرَهُۥ لِلْإِسْلَـٰمِ ۖ وَمَن يُرِدْ أَن يُضِلَّهُۥ يَجْعَلْ صَدْرَهُۥ ضَيِّقًا حَرَجًۭا كَأَنَّمَا يَصَّعَّدُ فِى ٱلسَّمَآءِ ۚ كَذَٰلِكَ يَجْعَلُ ٱللَّهُ ٱلرِّجْسَ عَلَى ٱلَّذِينَ لَا يُؤْمِنُونَ ١٢٥</p>
+        <p>“Whoever Allah wills to guide, He opens their heart to Islam.1 But whoever He wills to leave astray, He makes their chest tight and constricted as if they were climbing up into the sky. This is how Allah dooms those who disbelieve.”</p>
+        <br>
+        <h4>Scientific Insights</h4><br>
+        <p>At higher altitudes, the air pressure decreases. According to medical science, altitudes above 1500m begin to affect humans. 
+          At 2400m, humans may experience various ailments such as "Altitude Sickness" (blocked ears), "High Altitude Pulmonary Edema" (HAPE), 
+          "High Altitude Cerebral Edema" (HACE), Hypoxia (low oxygen pressure in the body), Barotrauma, and many more. At 8000m (Everest 8848m) and above, 
+          scientists refer to it as the "Death Zone", where almost all humans cannot survive at this altitude unless they use respiratory aids or cabins pressurized to normal pressure. 
+          In this condition, oxygen becomes thin and extremely scarce, causing humans to experience shortness of breath and potentially leading to paralysis or death due to insufficient oxygen reaching the brain, nerves, and lungs.
+        </p>
+        </div>
+        <div class="reference">
+        <h4>References:</h4>
+          <p>West, JB (2002). “Highest Permanent Humant Habitation” High Altitude Medical Biology 3</p>
+          <p>Siri Al-Quran Mendahului Sains (n.d)</p>
+        </div>
+      
+      <!--scroll to top button-->
+  <a href="#" class="scrollToTop">
+    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
+    <script src="{% static 'js\scroll.js' %}"></script> 
+     
+<!--Footer Section-->
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
+      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
+    </div>
+    <div class="footer-content">
+      <h4>Quick Links</h4>
+        <ul class="list">
+          <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+            <li><a href="{% url 'doa' %}">Dua'</a></li>
+            <li><a href="{% url 'quiz' %}">Quiz</a></li>
+        </ul>
+    </div>
+    <div class="footer-content">
+      <h4>Follow Us</h4>
+        <ul class="social-icons">
+          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
+          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
+          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
+</footer> 
+
+<script>
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+  function toggleBookmark(element, slug) {
+    // Check if user is authenticated
+    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+
+    if (!isAuthenticated) {
+        window.location.href = '/account/signin/'; // Redirect to sign-in page
+        return;
+    }
+
+    // Proceed with bookmark toggle for authenticated users
+    fetch(`/toggle_bookmark/${slug}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'slug': slug })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.bookmarked) {
+            element.classList.remove('fa-regular');
+            element.classList.add('fa-solid');
+        } else {
+            element.classList.remove('fa-solid');
+            element.classList.add('fa-regular');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+document.addEventListener("DOMContentLoaded", function() {
+    // Assuming the user is authenticated; adjust as needed
+    updateUserBookmarkIcons();
+});
+
+function updateUserBookmarkIcons() {
+    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // Include CSRF token if needed for GET requests or ensure your view is exempt
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const bookmarkedSlugs = data.bookmarkedSlugs;
+        bookmarkedSlugs.forEach(slug => {
+            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+            if (bookmarkIcon) {
+                bookmarkIcon.classList.remove('fa-regular');
+                bookmarkIcon.classList.add('fa-solid');
+            }
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
+  </script>
+
+<script src="{% static 'js/trialforum.js' %}"></script>  
+  </body>
+
+</html>

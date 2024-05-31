@@ -1,0 +1,26 @@
+.scrollToTop{
+    background: #c6cacd;
+    position: fixed;
+    bottom: 35px;
+    right: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #38444d;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .4s;
+}
+.scrollToTop.active{
+    bottom: 35px;
+    pointer-events:auto;
+    opacity: 1; 
+}
+html{
+    scroll-behavior: smooth;
+}

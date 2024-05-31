@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+{% block title %}
+    <title>Detail Forum</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Inline Action Links Styling */
+.inline-action-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6c757d; /* Pale color for the action links */
+}
+
+.inline-action-link {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.inline-action-link:hover {
+    color: #007bff; /* Brighter color on hover */
+}
+
+/* Separator Style */
+.separator {
+    color: #6c757d; /* Same pale color as links */
+}
+        /* Action Links Styling */
+.action-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.action-link{
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+.edit-action, .reply-action {
+    background-color: #28a745;
+}
+
+.edit-action:hover, .reply-action:hover {
+    background-color: #218838;
+}
+       .hide {
+            display: none;
+        } 
+        .delete{
+            cursor: pointer;
+            font-weight: 300;
+            font-size: small;
+            
+        }
+        .like-btn, .like-btn button{
+    color: black;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    text-decoration: none;  
+    border: none;
+    background: transparent;
+}
+
+.like-btn.liked {
+    background-color: #28a745; /* Green to indicate liked state */
+}
+
+.like-btn.liked:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+.date-posted {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 10px;
+
+}
+
+    </style>
+ {% endblock title %}
+
+ {% block content %}
+    <!--Forum Section-->
+    <div class="container-detail">
+        <!--navigation in forum-->
+        <div class="forum-navigate">
+            <span><!--<a href="#" onclick="goToLastVisitedPage()">--><a href ="{% url 'home' %}">Home</a> >> <a href="{{ post.Categories.all.0.get_url }}">{{ post.Categories.all.0 }}</a> >> <a href="{{ post.get_url }}">{{ post.title }}</a></span>
+        </div>
+
+        <!--Topic Section-->
+        <div class="topic-container">
+            <div class="head-topic">
+                <div class="authors">Author</div>
+                <div class="content">Topic: {{post.title}} (Read {% get_hit_count for post %} Times)</div>
+            </div>
+
+            <div class="body-topic">
+                <div class="authors">
+                    <div class="username"><a href="">{{post.user.fullname|title}}</a></div>
+                        <!--<div>Role</div>
+                        <img src="{{post.user.profile_pic.url}}" >
+                        <div>Posts: <u>{{post.user.num_posts}}</u></div>
+                        <div>Points: <u>{{post.user.points}}</u></div>-->
+                </div>
+                <div class="content">
+                    {{post.content|safe}}
+                    <div class="date-posted">Posted on: {{ post.created_at|date:"F d, Y H:i" }}</div>
+                        <div class="inline-action-links">      
+                            <div class="comment">
+                                 
+                                {% if user.is_authenticated and post.user.user == user %}
+                                <p class="action-link comment-action" onclick="toggleVisibility('comment-area')">Comment</p>
+                                <span class="separator">|</span>
+                                <a href="{% url 'edit_post' post_id=post.id %}" class="inline-action-link">Edit Post</a>
+                                <span class="separator">|</span>
+                                <span class="inline-action-link delete-action" data-url="{% url 'post-delete' post_id=post.id %}" onclick="confirmDelete(this)">Delete Post</span>
+                                <span class="separator">|</span>
+                                <form action="{% url 'like_post' post_id=post.id %}" method="post" style="display: inline;" class="inline-action-link">
+                                    {% csrf_token %}
+                                    <button type="submit" class="like-btn" style="color: black; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; text-decoration: none;  
+                                    border: none; background: transparent; display: inline;" value="{{ post.id }}" name="post_id">Like</button>
+                                    </form>
+                                - Likes: {{ post.total_likes }}
+                                {% endif %}
+                            
+                            
+                            </div>
+                            
+                        </div>
+                    <!--Comment area-->
+                    {% if user.is_authenticated %}
+                    <form action="." method="post" class="hide" id="comment-area">
+                        {% csrf_token %}
+                        <div class="comment-input" id="comment-area">
+                            <textarea name="comment" placeholder="Write your comment"
+                            style="width: 100%; min-height: 100px; padding: 10px; margin-block: 10px; font-family: 'Poppins', sans-serif;">
+                            </textarea>
+                            <input type="submit" name="comment-form" value="Post Comment">
+                        </div> 
+                    </form>
+                    
+                    {% else %}
+                    <div class="inline-action-links">  
+                    <p onclick="promptLogin()" style="cursor: pointer;">Comment</p>
+                    <span class="separator">|</span>
+                    Likes: {{ post.total_likes }}
+                    </div>
+                    {% endif %}
+                </div> 
+            </div> 
+         
+    
+        
+    <!--Comments section-->
+    {% for comment in post.comments.all %}
+    <div class="reply-container" style="margin-left: 1%;">
+        <div class="body-topic">
+            <div class="authors">
+                <div class="username"><a href="#">{{ comment.user.fullname|title }}</a></div>
+            </div>
+            <div class="content" id="comment-content-{{ comment.id }}">
+                {{ comment.content }}
+                <br>
+                <div class="date-posted"> Posted on: {{ comment.created_at|date:"F d, Y H:i" }}</div> 
+                <div class="inline-action-links">
+                    {% if user.is_authenticated %}
+                    <div class="comment">
+                        <p onclick="toggleVisibility('comment{{ comment.id }}')" style="cursor: pointer;">Reply</p>
+                    </div>
+                    <span class="separator">|</span>
+                        {% if user.is_authenticated and comment.user.user == user %}
+                        <!-- Inline actions for edit, delete, and like -->
+                        <a href="{% url 'edit_comment' comment_id=comment.id %}" class="inline-action-link">Edit</a>
+                        <span class="separator">|</span>
+                        <span class="inline-action-link delete-action" data-url="{% url 'comment-delete' comment_id=comment.id %}" onclick="confirmDelete(this)">Delete</span>
+                        <span class="separator">|</span>
+                        <form action="{% url 'like_comment' comment_id=comment.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="like-btn">Like</button>
+                        </form>
+                        - Likes: {{ comment.likes.count }}
+                        {% endif %}
+                
+                </div>  
+                <form action="." method="post" class="hide" id="comment{{ comment.id }}">
+                    {% csrf_token %}
+                        <textarea class="reply-text-area" placeholder="Reply here" name="reply" 
+                            style="width: 100%; min-height: 100px; padding: 10px; margin-block: 10px; font-family: 'Poppins', sans-serif;">
+                        </textarea>
+                        <input type="submit" name="reply-form" value="Post Reply"
+                            style="padding: 10px; border-radius: 10px; cursor: pointer; font-family: 'Poppins', sans-serif;">
+                        <input type="hidden" name="comment-id" value="{{ comment.id }}">
+                    </form>
+                    {% else %}
+                    <div class="inline-action-links">
+                        <p onclick="promptLogin()" style="cursor: pointer;">Reply</p>
+                        <span class="separator">|</span>
+                        Likes: {{ comment.likes.count }}
+                    </div>  
+                    {% endif %}
+            </div>
+        </div>
+
+    </div>
+        <!--Reply section-->
+        {% for reply in comment.replies.all %}
+        <div class="reply-container" style="margin-left: 2%; ">
+            <div class="body-topic">
+                <div class="authors">
+                    <div class="username"><a href="">{{ reply.user.fullname|title }}</a></div>
+                </div>
+                <div class="content">
+                    {{ reply.content }}
+                    <br>
+                    <div class="date-posted">Posted on: {{ reply.created_at|date:"F d, Y H:i" }}</div>
+                        <div class="inline-action-links">
+                            {% if user.is_authenticated and reply.user.user == user %}
+                            <a href="{% url 'edit_reply' reply_id=reply.id %}">Edit Reply</a>
+                            <span class="separator">|</span>
+                            <div class="delete" data-url="{% url 'reply-delete' reply_id=reply.id %}" onclick="confirmDelete(this)">Delete</div>
+                            <span class="separator">|</span>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <form action="{% url 'like_reply' reply_id=reply.id %}" method="post" style="display: inline-block;">
+                                {% csrf_token %}
+                                <button type="submit" class="like-btn" value="{{ reply.id }}" name="reply_id">Like</button>
+                            
+                            </form>
+                            - Likes: {{ reply.likes.count }} 
+                            {% endif %}
+                            Likes: {{ reply.likes.count }} 
+                        </div>
+                    </div> 
+                </div>
+        {% endfor %}   
+    </div>
+    {% endfor %}
+</div>   
+</div>
+      
+</div>
+
+        <script>
+            function toggleVisibility(elementId) {
+                var element = document.getElementById(elementId);
+                if (element.classList.contains('hide')) {
+                    element.classList.remove('hide');
+                } else {
+                    element.classList.add('hide');
+                }
+            }
+            function promptLogin() {
+                alert("Please log in to comment or reply.");
+            }
+            function goToLastVisitedPage() {
+                const lastPage = sessionStorage.getItem('lastVisitedPage');
+                if (lastPage) {
+                    window.location.href = lastPage;
+                } else {
+                    window.location.href = "{% url 'home' %}"; // Fallback to home if no last page stored
+                }
+            }
+            function confirmDelete(element) {
+                var deleteUrl = element.getAttribute('data-url');
+                if(confirm('Are you sure you want to delete?')) {
+                    window.location.href = deleteUrl;
+                }
+            }
+            function toggleEditComment(button) {
+                var commentId = button.getAttribute('data-comment-id');
+                var contentDiv = document.getElementById('comment-content-' + commentId);
+                var editDiv = document.getElementById('comment-edit-' + commentId); // Ensure this ID matches your HTML structure
+
+                if (contentDiv && editDiv) {
+                    contentDiv.classList.toggle('hide');
+                    editDiv.classList.toggle('hide');
+                } else {
+                    console.error('Elements not found for comment ID:', commentId);
+                }
+            }
+            function toggleLike() {
+                var likeButton = document.getElementById("likeButton");
+                if (likeButton.classList.contains("liked")) {
+                    likeButton.classList.remove("liked");
+                    likeButton.textContent = "Like"; // Change to "Like" if it was "Liked" before
+                } else {
+                    likeButton.classList.add("liked");
+                    likeButton.textContent = "Liked"; // Change to "Liked" to show the post is liked
+                }
+            }
+        </script>   
+</div>
+{% endblock content %}

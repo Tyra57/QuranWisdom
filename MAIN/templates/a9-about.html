@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+    <title>About Us</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  body {
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+ /* About Section */
+.about {
+    padding: 60px 0 10px 0; /* Adds padding to the top and bottom */
+}
+.about-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items at the start */
+    flex-wrap: wrap;
+    gap: 20px; /* Adds space between flex items */
+}
+.about-content {
+    flex: 1;
+    min-width: 300px; /* Minimum width before wrapping */
+    padding: 20px;
+    text-align: left; /* Align text to the left for readability */
+}
+.about-content h1 {
+    font-size: 28px;
+    color: #004085;
+    margin-bottom: 15px;
+}
+.about-content p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px; /* Adds more space below paragraphs */
+}
+
+/* Research Background Section */
+.research {
+    padding: 60px 0;
+}
+.research-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color:  #eef2f7; 
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds shadow for depth */
+}
+.research-content {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    margin-right: 40px;
+}
+.research-content h1 {
+    font-size: 28px;
+    color: #004085;
+    margin-bottom: 15px;
+}
+.research-content p {
+    font-size: 16px;
+    color: #666;
+}
+.research-content img {
+    max-width: 100%;
+    height: auto;
+    margin-left: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds shadow for depth */
+}
+
+/* Our Panel Section */
+.panel-section {
+  background-color: #f4f4f4;
+    padding: 60px 0;
+    padding: 20px;
+    border-radius: 40px;
+    margin: 20px 150px 100px 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds shadow for depth */
+}
+.panel {
+
+    background-color: #f4f4f4;
+}
+/* Panel Section Consistency in Responsive Design */
+.panel-container-1, .panel-container-2, .panel-container-3 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px; /* Adjust based on your preference */
+    margin: auto;
+    padding: 20px;
+    /*margin-bottom: 20px;  Space between panel sections */
+}
+.panel-container-1, .panel-container-2 {
+    border-bottom: 2px solid #eaeaea; /* Subtle bottom border */
+    padding-bottom: 30px; /* Adds padding below the content, above the border */
+   /* Space between this and the next panel or content */
+}
+/* Panel Section Styling */
+.panel-content {
+    flex: 40%;
+    margin-right: 20px; /* Space between image and description */
+}
+.panel-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners for images */
+    margin-left: 70px; 
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adds shadow for depth */
+}
+.panel-content-text {
+    flex: 60%;
+}
+.panel-content-text h2, .panel-content p {
+  margin: 0 0 10px 0; /* Adds space below each element */
+}
+.panel-content-text h2 {
+    font-size: 22px;
+    color: #004085;
+    /*margin-bottom: 10px;*/
+}
+.panel-content-text p {
+    font-size: 16px;
+    color: #666;
+   
+}
+.title-panel {
+    font-size: 32px;
+    color: #004085;
+    background-color: #f4f4f4;
+    padding: 50px 0;
+    text-align: center;
+}
+/* Responsive Design for Mobile View */
+@media (max-width: 768px) {
+    .about-container, .research-container, .panel-container-1, .panel-container-2, .panel-container-3 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-content, .research-content, .panel-content-text {
+        width: 90%;
+        text-align: center;
+        padding: 15px; /* Ensures padding is consistent and content is not too wide */
+    }
+    .panel-section{
+      margin: 0;
+      border-radius: 0%;
+    }
+    .panel-content {
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .panel-content img {
+        width: 80%; /* Adjusts the width of the image for smaller screens */
+        max-width: 280px; /* Ensures the image is not too large */
+        margin-bottom: 20px; /* Adds space below the image before the text */
+        margin-right: 0; /* Resets any right margin that may have been set */
+    }
+
+    .panel-content-text h2, .panel-content-text p {
+        margin-bottom: 10px; /* Ensures consistent spacing below headings and paragraphs */
+    }
+    .research {
+    padding: 0;
+  }
+  .research-content{
+    margin-right: 0px;
+  }
+    .research-container {
+      margin:0;
+      border-radius: 0%;
+    }
+    .research-content img{
+      margin-left: 0px;
+    
+    }
+}
+
+/* Fix for Unnecessary Horizontal Scrolling */
+body, html {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+</style>
+{% endblock title %}
+
+{% block content %}
+
+
+  <!--About Section-->
+  <section class="about">
+    <div class="about-container">
+      <div class="about-content">
+        <h1>Understanding The Quran</h1>
+        <p>The Quran stands as the cornerstone of Islamic faith, a timeless scripture that encompasses the essence of divine guidance. Revealed to Prophet Muhammad (ﷺ) over a span of 23 years, the Quran is not merely a book; it is a comprehensive blueprint for life. Its verses (Ayahs) cover all aspects of human existence, from governance and social justice to personal conduct and spirituality.</p>
+      
+        <h1>About Quranic Wisdom</h1>
+        <p>Quranic Wisdom is a website that provides information about the stories in the Quran, the sciences in the Quran, and the prayers in the Quran. This website is designed to help Muslims understand the Quran better and to increase their knowledge about the Quran. The Quran is the holy book of Islam and it is the word of God. It is important for Muslims to read and understand the Quran in order to live a good life and to follow the teachings of Islam. QuranWisdom is a website that aims to help Muslims learn more about the Quran and to increase their knowledge about the teachings of Islam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!--Nur Athirah's background-->
+  <section class="research">
+    <div class="research-container">
+      <div class="research-content">
+        <img src="{% static 'assets/main/athirah.png' %}" style="height: 357px; width: 357px;" alt="athirah" width="500">
+      </div>
+      <div class="research-content">
+        <h1>Research Background</h1>
+        <p>Nur Athirah is a student at the International Islamic University of Malaysia. She is currently studying Information Technology and she is interested in web development. She created Quranic Wisdom as a project for her final year project. She is passionate about Islam and she wants to help Muslims learn more about the Quran. She hopes that Quranic Wisdom will be a useful resource for Muslims who want to increase their knowledge about the Quran and the teachings of Islam.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="panel-section">
+  <h1 class="title-panel" id="panel">Our Panel</h1>
+  <!--Our Panel In Research Background-->
+  <section class="panel">
+    <div class="panel-container-1" id="panel1">
+      <div class="panel-content-text">
+        <h2>Ahmad Kailani bin Zahari</h2>
+      <!--panel 1 background-->
+      <p>Ahmad Kailani bin Zahari holds a Diploma in Tahfiz Quran Wal Qiraat from Darul Quran JAKIM in 2007 to 2010, focusing on Quranic studies. He then earned a degree in Fiqh and Usul from the University of Mu'tah from 2010 to 2014, exploring Islamic jurisprudence. Beyond academics, Ahmad Kailani leads Raef Travel & Tours Sdn Bhd as CEO, where he specializes in organizing spiritual travel experiences. He also serves as a mutawif and freelance preacher, sharing his Islamic insights.</p>
+      </div>
+      <div class="panel-content">
+        <img src="{% static 'assets/main/abe kai.jpg' %}" style="height: 360px; width: 300px;" alt="panel" width="500">
+      </div>
+    </div>
+  </section>
+
+  <!--panel 2-->
+  <section class="panel">
+    <div class="panel-container-2" id="panel2">
+      <div class="panel-content-text">
+        <h2>Nurlina binti Abdullah</h2>
+        <p>Nurlina binti Abdullah has a professional dedication in the field of Islamic studies. She holds a Diploma in Tahfiz Quran Wal Dakwah, Darul Quran JAKIM from the year 2007, and further advanced her scholarly pursuits by obtaining a Bachelor's degree in Shariah, specializing in Fiqh and Usul Fiqh, from the University of Malaya (UM) between 2012 and 2017. Currently, Nurlina enriches the academic community as a respected lecturer at Darul Quran, where she continues to inspire and educate the next generation in the profound depths of Islamic knowledge and practice.</p>
+      </div>
+      <div class="panel-content">
+        <img src="{% static 'assets/main/ustazah lina1.png' %}" style="height: 360px; width: 300px;" alt="panel2" width="500">
+      </div>
+    </div>
+  </section>
+
+  <!--panel 3-->
+  <section class="panel">
+    <div class="panel-container-3" id="panel3">
+      <div class="panel-content-text">
+        <h2>Siti 'Aisyah Nabilah binti Zaaba</h2>
+        <p>Siti 'Aisyah Nabilah binti Zaaba has extensive background in Islamic studies and economics, beginning her academic journey with a Certificate in Tahfiz from DQ-UIAM (2007-2008), followed by foundational studies at IIUM (2009-2010). She graduated with a double degree in Islamic Economics and Islamic Revealed Knowledge and Heritage (IRK) from IIUM (2010-2014). Currently, she imparts her knowledge as a teacher at Sekolah Menengah Integrasi Sains Tahfiz MAIWP (SMISTA), blending Islamic teachings with contemporary education, and exemplifying the integration of Islamic values in modern academic disciplines. </p>
+      </div>
+      <div class="panel-content">
+        <img src="{% static 'assets\main\aisyah.png' %}" style="height: 360px; width: 300px;" alt="panel3" width="500">
+      </div>
+    </div>
+  </div>
+  </section>
+  {% endblock content %}

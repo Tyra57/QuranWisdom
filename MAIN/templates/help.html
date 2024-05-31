@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<link rel="stylesheet" href="{% static 'css\main.css' %}">
+<link rel="stylesheet" href="{% static 'css\nav.css' %}">
+<link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+<link rel="stylesheet" href="{% static 'css\faq.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<title>Help & Support</title>
+<style>
+   .nav-link{
+              color: #38444d;
+              margin-top: 50px;
+              margin-left: 100px;
+              margin-right: 100px;
+              display: flex;
+            } 
+            .nav-link i{
+              font-size: 20px;
+            }
+            .nav-link a{
+              color: #38444d;
+              text-decoration: none;
+              cursor: pointer;
+            }
+            .nav-link a:hover{
+              text-shadow: 2px 2px 8px #555;
+            }
+            .nav-link p{
+              display: inline-block;
+            }
+            @media screen and (max-width: 768px) {
+              .nav-link{
+                margin-left: 40px;
+                margin-right: 0;
+              }
+            } 
+.help-support-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.help-support-container h1, .faq-section h2, .contact-section h2, .additional-resources h2 {
+    color: #004085;
+    margin-bottom: 20px;
+}
+
+.faq-item, .contact-section form, .additional-resources ul {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.faq-item h3 {
+    margin-bottom: 10px;
+}
+
+.contact-section form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.contact-section form input, .contact-section form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.contact-section form button {
+    background-color: #004085;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-section form button:hover {
+    background-color: #002752;
+}
+.additional-resources{
+
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.additional-resources ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.additional-resources ul li a {
+    color: #004085;
+    text-decoration: none;
+}
+
+.additional-resources ul li a:hover {
+    text-decoration: underline;
+}
+
+</style>
+{% endblock title %}
+
+{% block content %}
+<!--nav link-->
+<div class="nav-link">
+    <div class="nav-link-content">
+      <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <p> <a href="{% url 'story' %}"> Help & Support</a></p>
+    </div> 
+  </div>
+
+<div class="help-support-container">
+   <!-- <h1>Help & Support</h1>-->
+        
+<section class="faq-section">
+    <h2 class="title-faq">Frequently Asked Questions (FAQs)</h2>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>What is Quran Wisdom?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>Quran Wisdom is a website that provides information about the stories and sciences in the Quran. It also provides a platform for users to ask questions and take quizzes.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>How can I ask a question?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>To ask a question, you can click on the "Ask a Question" tab on the navigation bar. Fill in the form with your name, email, and question. Click the "Submit" button to send your question.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>How can I take a quiz?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>To take a quiz, you can click on the "Quiz" tab on the navigation bar. Choose a quiz category and click the "Start Quiz" button. Answer the questions and click the "Submit" button to get your results.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>How can I contact Quran Wisdom?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>You can contact Quran Wisdom by sending an email to <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#000; font-size: 13px;">athirahzaaba00gmail.com</a> or by filling in the contact form on the "Contact Us" page.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>How can I contribute to Quran Wisdom?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>If you would like to contribute to Quran Wisdom, you can send us an email with your ideas, suggestions, or feedback. We welcome contributions from our users to help improve the website.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <div class="faq-question">
+        <h3>How can I support Quran Wisdom?</h3>
+  
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/> 
+        </svg>
+      </div>
+  
+      <div class="faq-answer">
+        <p>If you would like to support Quran Wisdom, you can share our website with your friends and family, follow us on social media, and provide feedback to help us improve the website.</p>
+      </div>
+    </div>
+  
+  </section>
+  <script src="{% static 'js\faq.js' %}"></script>
+ 
+    <div class="additional-resources">
+        <h2>Additional Resources</h2>
+        <p>Explore our comprehensive resources designed to help you get the most out of our platform:</p>
+        <br>
+        <ul>
+            <li><a href="">User Guide</a> - A detailed guide to help you navigate and utilize our platform effectively.</li>
+            <li><a href="">Video Tutorials</a> - Watch our step-by-step video tutorials for practical insights and tips.</li>
+            <li><a href="https://community.example.com">Community Forums</a> - Join discussions, share experiences, and connect with other users.</li>
+            <li><a href="https://support.example.com">Technical Support</a> - Get in touch with our support team for technical assistance.</li>
+            <li><a href="{% url 'faq' %}">FAQs</a> - Find answers to commonly asked questions for quick help.</li>
+            <li><a href="https://docs.example.com">Documentation</a> - Access our full documentation for in-depth information on all features.</li>
+            <li><a href="https://blog.example.com">Blog</a> - Read articles, updates, and tips from our team and community members.</li>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

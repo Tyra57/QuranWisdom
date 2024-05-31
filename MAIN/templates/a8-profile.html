@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+         html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+.bookmark {
+    flex: 1; /* Ensures content takes up the necessary space */
+}
+    </style>
+  {% endblock title %}
+
+  {% block content %}   
+      <div class="bookmark" style="padding: 100px 100px 100px 100px; margin-bottom: 65px;">
+          <h1>Your Bookmarks</h1>
+          <ul>
+              {% for bookmark in bookmarks %}
+                  <li>{{ bookmark.slug }} - <a href="{{ bookmark.content_page.url }}">View</a></li>
+              {% empty %}
+                  <li>No bookmarks found.</li>
+              {% endfor %}
+          </ul>
+
+      </div>    
+  {% endblock content %}

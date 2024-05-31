@@ -1,0 +1,294 @@
+body, html {
+  height: 100%;
+  margin: 0; 
+  animation: transitionIn 1s;
+}
+.intro{
+    margin: 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 60%;
+    background-color: #f1f1f1;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flex-container > div {
+    background-color: #f1f1f1;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    line-height: auto;
+    font-size: 16px;
+    
+  }
+  .featurette-divider {
+    margin: 4rem 0; /* Space out the Bootstrap <hr> more */
+
+  }
+  
+  /* Thin out the marketing headings */
+  /* rtl:begin:remove */
+  .featurette-heading {
+    letter-spacing: -.05rem;
+  
+  }
+  /* rtl:end:remove */
+  .row-home-main{
+    margin: 170px 100px 0px 100px;
+    
+  }
+  .home-content{
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    padding-top: 20px;
+    transition: 0.4s;
+  }
+  .home-content:hover{
+    background-color: #eae9e9;
+    transition-duration: .4s;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    font-size: 17px;
+  }
+  /* Left and right column */
+  .column.side {
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+    
+  }
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+    height: 333px;
+    text-align: center;
+    
+  }
+  /* Create three unequal columns that floats next to each other */
+ .column {
+    float: left;
+    justify-content: middle;
+    
+  }
+  /* Clear floats after the columns */
+  .row-home-main::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .column.side button{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+    font-family:"Poppins", sans-serif ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    
+  }
+  .home-content button:hover{
+    background-color: #555;
+    color: white;
+    
+  }
+  .panel{
+    width:100%;
+    background: #a1abb6;
+    padding: 10px 0px 70px 0px;
+  }
+  .panel .panel-container{
+    width:80%;
+    margin:auto;
+  }
+  .panel .panel-container .row{
+    width:60%;
+    margin:auto;
+  }
+  .panel .panel-container .row .title{
+    text-align: center;
+    margin-top: 40px;
+  }
+  .panel .panel-container .row .title h1{
+    font-size: 35px;
+    letter-spacing: 1.5px;
+    color: #38444d;
+  }
+  .panel .panel-container .row .title p{
+    font-size: 17px;
+    color: #4f4e4e;
+    margin: 30px 0px;
+  }
+  .panel .panel-container .panel-card{
+    width: 100%;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    margin-top: 50px;
+  }
+  .panel .panel-container .panel-card .card{
+    width: 100%;
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .panel .panel-container .panel-card .card:hover{
+    background-color: #eae9e9;
+    transition: .4s;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+  }
+  .panel .panel-container .panel-card .card .image-panel img{
+    width: 170px;
+    height: 210px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+  .panel .panel-container .panel-card .card .panel-content{
+    width: 100%;
+    text-align: center;
+  }
+  .panel .panel-container .panel-card .card .panel-content h3{
+    font-size: 20px;
+    color: #38444d;
+    margin-top: 10px;
+    letter-spacing: 1.4px;
+  }
+  .panel .panel-container .panel-card .card .panel-content h4{
+    font-size: 17px;
+    color: #4f4e4e;
+    margin-top: 10px;
+    letter-spacing: 1.4px;
+  }
+  .panel .panel-container .panel-card .card .panel-content p{
+    font-size: 15px;
+    color: #4f4e4e;
+    margin: 16px 0px;
+    line-height: 1.5;
+  }
+  .call-to-action{
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5));
+    height: 300px;
+  }
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 800px) {
+    .column.side, .column.middle {
+      width: 100%;
+     
+    }
+    .column.middle{
+      text-align: center;
+    }
+    .column.middle img{
+      width: 100%;
+      margin: auto;
+    }
+    .panel .panel-container .panel-card{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media screen and (max-width: 768px){
+    .panel .panel-container .panel-card{
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-aspect-ratio: 16/9){
+    .back-video{
+      width:100%;
+      height: auto;
+    }
+    .hero-text-main-page{
+      display: flex;
+    }
+    .flex-container{
+      display: flex;
+    }
+  }
+  @media (max-aspect-ratio: 16/9){
+    .back-video{
+      width:auto;
+      height: 100%;
+      display: flex;
+    }
+  }
+  .quiz-section{
+    margin: 20px 100px 20px 100px;
+    text-align: center;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+  }
+  .quiz-section a{
+    text-decoration: none;
+    color: black;
+  }
+  .quiz-section:hover{
+    background-color: #eae9e9;
+    transition-duration: .4s;
+    font-size: 17px;
+  }
+  .quiz-btn{
+    margin: 0px 50px 0px 50px;
+   
+  }
+  .quiz-section button{
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+    font-family:"Poppins", sans-serif ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin:10px 50px 0px 50px;
+    
+  }
+  .quiz-section button:hover{
+    background-color: #555;
+    color: white;
+  }
+
+  .wrapper-outer{
+    height: 100vh;
+    overflow: hidden;
+  }
+  .wrapper{
+    height: 100%;
+    overflow-x: hidden;
+    perspective: 1px;
+  }
+  .parallax {
+    /* The image used */
+    background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url("https://4kwallpapers.com/images/wallpapers/milky-way-starry-sky-night-mountains-lake-reflection-cold-5k-2880x1800-287.jpg");
+
+    /* Set a specific height */
+    min-height: 300px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .parallax h2{
+    text-align: center;
+    justify-content: center;
+    color:#fff;
+    font-size: 50px;
+    padding-top: 7%;
+  }

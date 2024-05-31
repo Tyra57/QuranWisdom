@@ -1,0 +1,68 @@
+{% load static %}
+{% load hitcount_tags %}
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search Forum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="shortcut icon" href="assets\logo\icon3.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    icon vendor
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+</head>
+<body>
+    Forum Section
+        <div class="container">
+            navigation
+            <div class="forum-navigate">
+                <span>Search: {{query}}  {{object|length}} Result(s) Found</span>
+            </div>
+                <div class="posts-table">
+                <div class="table-head">
+                    <div class="status">Status</div>
+                    <div class="subjects">Subjects</div>
+                    <div class="replies">Replies/Views</div>
+                    <div class="last-reply">Last Reply</div>
+                </div>
+                {% for post in onjects %}
+                <div class="table-row">
+                    <div class="status">
+                        <i class="fas fa-frown"></i>
+                    </div>
+                    <div class="subjects">
+                        <a href="{{post.get_url}}">{{post.title}}</a> <br>
+                        <span>Started by<b><a href="#"> {{post.user.fullname|title}}</a></b>.</span>
+                    </div>
+                    <div class="replies">
+                        {{post.num_comments}} comments <br>{% get_hit_count for post %} views
+                    </div>
+                    <div class="last-reply">
+                        {{post.last_reply.date|date}}
+                        <br>
+                        By <b><a href="#">{{post.last_reply.user.fullname|title}}</a></b>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            Pagination starts
+            {% if posts.is_paginated %}
+            <div class="pagination">
+                pages: {% for num_page in posts.paginator.page_range %} <a href="?page={{num_page}}">{{num_page}}</a> {% endfor %}
+            </div>
+             {% endif %}
+             pagination ends
+        </div>
+        </div>
+
+       
+
+        <script src="{% static 'js/trialforum.js' %}"></script>  
+</div>
+</body>-->

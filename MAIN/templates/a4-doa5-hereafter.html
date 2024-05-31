@@ -1,0 +1,346 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hereafter (Aakhirah)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\duacontent.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      .card-dua{
+        justify-content: center;
+        height:430px;
+        width: 430px;
+        display: flex;
+      }
+    </style>
+</head>
+
+<body>
+ <!--Navigation Bar-->
+ <nav>
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
+    </div>
+    <div class="toggle">
+        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
+    </div>
+      <ul class="menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+        <li><a href="{% url 'doa' %}">Dua'</a></li>
+        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
+        <li><a href="{% url 'quiz' %}">Quiz</a></li>
+        {% if user.is_authenticated %}
+        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
+        {% else %}
+        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
+        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
+        {% endif %}
+      </ul>
+    </nav>
+
+
+ <!--menu script-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    $(function(){
+        $(".toggle").on("click", function(){
+            if($(".menu").hasClass("active")){
+                $(".menu").removeClass("active");
+                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
+            }else{
+                $(".menu").addClass("active");
+                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
+            }
+        })
+    })
+  </script>
+<!--nav link-->
+<div class="nav-link">
+  <div class="nav-link-content">
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> <a href="{% url 'doa' %}"> Dua' </a><span><i class="fa-solid fa-chevron-right"></i></span> Hereafter (Aakhirah)</p>
+  </div> 
+</div>
+<hr class ="nav-line">
+<br>
+<!--bookmark and comment-->
+<div class="nav-to-right">
+  <div class="nav-to-right-content">
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'a4-doa5-hereafter')"></i></p>
+    <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
+  </div>
+</div>
+
+<!--Forum Section-->
+<div class="overlay" id="overlay">
+  <div class="container">
+      <div class="close">
+          <div class="close-button">
+              <i class="fas fa-times" onclick="off()"></i>
+          </div>         
+          <div class="subforum">
+
+          <!--Subforum search
+          <form action="" role="form" method="GET">
+              <div class="search-box">
+                  <div>
+                      <select name="search-box" id="">
+                      <option value="Everything">Everything</option>
+                      <option value="Titles">Titles</option>
+                      <option value="Descriptions">Descriptions</option>
+                      </select>
+                      <input type="text" name="q" placeholder="Search">
+                      <button type="submit" name="search"><i class="fas fa-search"></i></button>
+                  </div>
+              </div>
+          </form>-->
+
+          {% if user.is_authenticated %}
+            <div class ="create-post">
+              <button style="color:#38444d"><a href="{% url 'create_post' %}">Create Post</a></button>
+            </div>
+          {% endif %}
+
+          <div class="subforum-title">
+              <h1>Forum</h1>
+          </div>
+
+          {% for forum in forums %}
+          <div class="subforum-row">
+              <!--<div class="subforum-icon subforum-column center">
+                  <i class="fas fa-user"></i>
+              </div>-->
+              <div class="subforum-description subforum-column">
+                  <h1><a href="{{forum.get_url}}">{{forum.title}}</a></h1>
+                  <p>{{forum.description}}</p>
+              </div>
+              <div class="subforum-stats subforum-column center">
+                  <span>{{forum.num_posts}} Posts</span>
+              </div>
+              <div class="subforum-info subforum-column">
+                  <b><a href="{{forum.last_post.get_url}}">Last Post</a></b> by <a href="">{{forum.last_post.user.fullname|title}}</a>
+                  <br>
+                  on <small>{{forum.last_post.date|date}}</small>
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+  </div>
+
+   <!-- Forum Info -->
+<div class="forum-info">
+  <div class="chart">
+      Forum Statistic &nbsp;<i class="fa fa-bar-chart"></i>
+  </div>
+  <span><u>{{num_posts}}</u> Posts in <u>{{num_categories}}</u> Categories by <u>{{num_users}}</u> Members.</span><br>
+  {% if forums %}
+      <span>Latest post: <b><a href="{{last_post.get_url}}">{{last_post.title}}</a></b> on {{last_post.date|date}} By <a href="">{{last_post.user.fullname|title}}</a></span>.<br>
+      <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
+  {% endif %}
+</div>
+
+  <script>
+      function on() {
+        document.getElementById("overlay").style.display = "block";
+      }
+      
+      function off() {
+        document.getElementById("overlay").style.display = "none";
+      }
+      </script>
+
+<script src="{% static 'js/trialforum.js' %}"></script>           
+
+</div>
+</div>
+<!--ends forum-->
+
+      <!--Doa content-->
+      <div class="dua-content-container" style="margin-bottom: 50px;">
+ 
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">١ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ ٢ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ٣ مَـٰلِكِ يَوْمِ ٱلدِّينِ ٤ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ٥ ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ ٦ صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ ٧</p>
+            <p class="translation">1. In the name of Allah, the Entirely Merciful, the Especially Merciful.
+              2. Praise be to Allah, the Lord of all the worlds.
+              3. The Entirely Merciful, the Especially Merciful,
+              4. Sovereign of the Day of Recompense.
+              5. It is You we worship and You we ask for help.
+              6. Guide us to the straight path -
+              7. The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.</p>
+            <p class="verse">Al-Fatihah verse 1-7</p>
+          </div>
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">وَمِنْهُم مَّن يَقُولُ رَبَّنَآ ءَاتِنَا فِى ٱلدُّنْيَا حَسَنَةًۭ وَفِى ٱلْـَٔاخِرَةِ حَسَنَةًۭ وَقِنَا عَذَابَ ٱلنَّارِ ٢٠١</p>
+            <p class="translation">Yet there are others who say, “Our Lord! Grant us the good of this world and the Hereafter, and protect us from the torment of the Fire.”</p>
+            <p class="verse">Al-Baqarah verse 201</p>
+          </div>  
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">ٱلَّذِينَ يَقُولُونَ رَبَّنَآ إِنَّنَآ ءَامَنَّا فَٱغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ ٱلنَّارِ ١٦</p>
+            <p class="translation">who pray, “Our Lord! We have believed, so forgive our sins and protect us from the torment of the Fire.”</p>
+            <p class="verse">Ali-Imran verse 16</p>
+          </div>
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">رَّبَّنَآ إِنَّنَا سَمِعْنَا مُنَادِيًۭا يُنَادِى لِلْإِيمَـٰنِ أَنْ ءَامِنُوا۟ بِرَبِّكُمْ فَـَٔامَنَّا ۚ رَبَّنَا فَٱغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّـَٔاتِنَا وَتَوَفَّنَا مَعَ ٱلْأَبْرَارِ  ١٩٣
+              رَبَّنَا وَءَاتِنَا مَا وَعَدتَّنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ ٱلْقِيَـٰمَةِ ۗ إِنَّكَ لَا تُخْلِفُ ٱلْمِيعَادَ ١٩٤
+              </p>
+            <p class="translation">Our Lord! We have heard the caller to ˹true˺ belief, ˹proclaiming,˺ ‘Believe in your Lord ˹alone˺,’ so we believed. Our Lord! Forgive our sins, absolve us of our misdeeds, and join us with the virtuous when we die. Our Lord! Grant us what You have promised us through Your messengers and do not put us to shame on Judgment Day—for certainly You never fail in Your promise.”</p>
+            <p class="verse">Ali-Imran verse 193-194</p>
+          </div>
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">۞ رَبِّ قَدْ ءَاتَيْتَنِى مِنَ ٱلْمُلْكِ وَعَلَّمْتَنِى مِن تَأْوِيلِ ٱلْأَحَادِيثِ ۚ فَاطِرَ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ أَنتَ وَلِىِّۦ فِى ٱلدُّنْيَا وَٱلْـَٔاخِرَةِ ۖ تَوَفَّنِى مُسْلِمًۭا وَأَلْحِقْنِى بِٱلصَّـٰلِحِينَ ١٠١</p>
+            <p class="translation">“My Lord! You have surely granted me authority and taught me the interpretation of dreams. ˹O˺ Originator of the heavens and the earth! You are my Guardian in this world and the Hereafter. Allow me to die as one who submits and join me with the righteous.”</p>
+            <p class="verse">Yusuf verse 101</p>
+          </div>
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">وَٱلَّذِينَ يَقُولُونَ رَبَّنَا ٱصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ ۖ إِنَّ عَذَابَهَا كَانَ غَرَامًا ٦٥ إِنَّهَا سَآءَتْ مُسْتَقَرًّۭا وَمُقَامًۭا ٦٦</p>
+            <p class="translation">˹They are˺ those who pray, “Our Lord! Keep the punishment of Hell away from us, for its punishment is indeed unrelenting. It is certainly an evil place to settle and reside.”</p>
+            <p class="verse">Al-Furqan verse 65-66</p>
+          </div>
+        </div>
+
+        <div class="card-dua">
+          <div class ="dua-list">
+            <p class="ayah">وَٱلَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَٰجِنَا وَذُرِّيَّـٰتِنَا قُرَّةَ أَعْيُنٍۢ وَٱجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا ٧٤</p>
+            <p class="translation">˹They are˺ those who pray, “Our Lord! Bless us with ˹pious˺ spouses and offspring who will be the joy of our hearts, and make us models for the righteous.”</p>
+            <p class="verse">Al-Furqan verse 74</p>
+          </div>
+        </div>
+
+      <div class="card-dua">
+        <div class ="dua-list">
+          <p class="ayah">رَبِّ هَبْ لِى حُكْمًۭا وَأَلْحِقْنِى بِٱلصَّـٰلِحِينَ ٨٣
+            وَٱجْعَل لِّى لِسَانَ صِدْقٍۢ فِى ٱلْـَٔاخِرِينَ ٨٤
+            وَٱجْعَلْنِى مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ ٨٥
+            </p>
+          <p class="translation">“My Lord! Grant me wisdom, and join me with the righteous. Bless me with honourable mention among later generations. Make me one of those awarded the Garden of Bliss.</p>
+          <p class="verse">Ash-Shu’ara’ verse 83-85</p>
+        </div>
+      </div>
+
+      <div class="card-dua">
+        <div class ="dua-list">
+          <p class="ayah">فَتَبَسَّمَ ضَاحِكًۭا مِّن قَوْلِهَا وَقَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَـٰلِحًۭا تَرْضَىٰهُ وَأَدْخِلْنِى بِرَحْمَتِكَ فِى عِبَادِكَ ٱلصَّـٰلِحِينَ ١٩</p>
+          <p class="translation">So Solomon smiled in amusement at her words, and prayed, “My Lord! Inspire me to ˹always˺ be thankful for Your favours which You have blessed me and my parents with, and to do good deeds that please you. Admit me, by Your mercy, into ˹the company of˺ Your righteous servants.”</p>
+          <p class="verse">An-Naml verse 19</p>
+        </div>
+      </div>
+
+      <div class="card-dua" style=" height:440px;">
+        <div class ="dua-list">
+          <p class="ayah">وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ إِحْسَـٰنًا ۖ حَمَلَتْهُ أُمُّهُۥ كُرْهًۭا وَوَضَعَتْهُ كُرْهًۭا ۖ وَحَمْلُهُۥ وَفِصَـٰلُهُۥ ثَلَـٰثُونَ شَهْرًا ۚ حَتَّىٰٓ إِذَا بَلَغَ أَشُدَّهُۥ وَبَلَغَ أَرْبَعِينَ سَنَةًۭ قَالَ رَبِّ أَوْزِعْنِىٓ أَنْ أَشْكُرَ نِعْمَتَكَ ٱلَّتِىٓ أَنْعَمْتَ عَلَىَّ وَعَلَىٰ وَٰلِدَىَّ وَأَنْ أَعْمَلَ صَـٰلِحًۭا تَرْضَىٰهُ وَأَصْلِحْ لِى فِى ذُرِّيَّتِىٓ ۖ إِنِّى تُبْتُ إِلَيْكَ وَإِنِّى مِنَ ٱلْمُسْلِمِينَ ١٥</p>
+          <p class="translation">We have commanded people to honour their parents. Their mothers bore them in hardship and delivered them in hardship. Their ˹period of˺ bearing and weaning is thirty months. In time, when the child reaches their prime at the age of forty, they pray, “My Lord! Inspire me to ˹always˺ be thankful for Your favours which You blessed me and my parents with, and to do good deeds that please You. And instil righteousness in my offspring. I truly repent to You, and I truly submit ˹to Your Will˺.”</p>
+          <p class="verse">Al-Ahqaf verse 15</p>
+        </div>
+      </div>
+
+    </div>
+          
+ <!--scroll to top button-->
+ <a href="#" class="scrollToTop">
+  <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
+  <script src="{% static 'js\scroll.js' %}"></script>
+        <!--Footer Section-->
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
+      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
+    </div>
+    <div class="footer-content">
+      <h4>Quick Links</h4>
+        <ul class="list">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+          <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+          <li><a href="{% url 'doa' %}">Dua'</a></li>
+          <li><a href="{% url 'quiz' %}">Quiz</a></li>
+        </ul>
+    </div>
+    <div class="footer-content">
+      <h4>Follow Us</h4>
+        <ul class="social-icons">
+          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
+          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
+          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
+</footer> 
+
+<script>
+ 
+  function toggleBookmark(element, slug) {
+    fetch(`/toggle_bookmark/${slug}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'slug': slug })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.bookmarked) {
+            element.classList.remove('fa-regular');
+            element.classList.add('fa-solid');
+        } else {
+            element.classList.remove('fa-solid');
+            element.classList.add('fa-regular');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+  </script>
+
+</body>

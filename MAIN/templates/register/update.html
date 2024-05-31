@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  <style>
+    .login-box input {
+            width: 100%;
+            font-family: 'poppins', sans-serif;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box textarea {
+            width: 100%;
+            font-family: 'poppins', sans-serif;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box {
+          margin: 0 150px 100px 150px; 
+          padding: 40px; 
+          background: #dddddd00;
+        }
+        h1{
+         text-align: center; 
+         margin-block: 50px;
+        }
+        /*mobile view*/
+        @media (max-width: 768px){
+            .login-box{
+                margin: 0 10px 100px 10px;
+            }
+            h1{
+                margin: 50px 10px 50px 10px;
+            }
+
+        }
+  </style>
+ {% endblock title %}
+
+ {% block content %}  
+<h1>Hi {{user}}, Update Your Profile</h1>
+<form class="login-box" method="POST" action="." enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Update">
+</form>
+  {% endblock content %}

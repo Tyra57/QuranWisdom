@@ -1,0 +1,137 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css\signup.css' %}">
+  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  </head>
+  <style>
+    .login-box input {
+            width: 100%;
+            font-family: 'poppins', sans-serif;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box {
+          margin: 0 150px 100px 150px; 
+          padding: 40px; 
+          background: #dddddd00;
+        }
+        /*mobile view*/
+        @media (max-width: 768px){
+            .login-box{
+                margin: 0 10px 100px 10px;
+            }
+
+        }
+  </style>
+<body>
+  <!--Navigation Bar-->
+  <nav>
+    <div class="logo">
+      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
+    </div>
+    <div class="toggle">
+        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
+    </div>
+      <ul class="menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+        <li><a href="{% url 'doa' %}">Dua'</a></li>
+        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
+        <li><a href="{% url 'home' %}">Quiz</a></li>
+        {% if user.is_authenticated %}
+        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
+        {% else %}
+        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
+        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
+        {% endif %}
+      </ul>
+    </nav>
+  
+<!--menu script-->  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(function(){
+        $(".toggle").on("click", function(){
+            if($(".menu").hasClass("active")){
+                $(".menu").removeClass("active");
+                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
+            }else{
+                $(".menu").addClass("active");
+                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
+            }
+        })
+    })
+</script>
+<h1 style="text-align: center; margin-block: 50px;">Log In</h1>
+<form class="login-box" method="POST" action=".">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Sign In">
+    <br>
+    <div class="account" style="margin: 20px 0">
+        <p>Don't have an account? <span class="auth-text">Signup here</span> </p>
+    </div>
+</form>
+
+<script>
+$(document).ready(function(){
+     $(".auth-text").click(function(){
+     window.location.href = "{% url 'signup' %}";
+     })
+    });
+</script>
+
+ <!--scroll to top button-->
+ <a href="#" class="scrollToTop">
+    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
+    <script src="{% static 'js\scroll.js' %}"></script>
+
+
+
+<!--Footer Section-->
+<footer>
+  <div class="footer-container">
+    <div class="footer-content">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
+      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
+    </div>
+    <div class="footer-content">
+      <h4>Quick Links</h4>
+        <ul class="list">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'story' %}">About</a></li>
+          <li><a href="{% url 'story' %}">Stories In Quran</a></li>
+          <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
+          <li><a href="{% url 'doa' %}">Dua'</a></li>
+          <li><a href="{% url 'quiz' %}">Quiz</a></li>
+        </ul>
+    </div>
+    <div class="footer-content">
+      <h4>Follow Us</h4>
+        <ul class="social-icons">
+          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
+          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
+          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+        </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
+</footer>  
+</body>
+
+</html>

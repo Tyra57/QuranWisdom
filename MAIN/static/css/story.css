@@ -1,0 +1,149 @@
+.hero{
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)),url("https://www.aramcoexpats.com/media/3859/ar_stars-over-arabia.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    width: 100%;
+    min-height: 58vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 140px 0 60px 0;
+    color: #f0f0f0;
+}
+.hero h2{
+    margin: 0 0 10px 0;
+    font-size: 38px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.hero p {
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+  /* Responsive adjustments */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 100px 20px; /* Reduced padding and added side padding */
+    }
+    .hero h2 {
+        font-size: 32px; /* Smaller font size for h2 */
+    }
+    .hero p {
+        font-size: 16px; /* Smaller font size for paragraph */
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 28px; /* Further reduced font size for h2 */
+    }
+    .hero p {
+        font-size: 14px; /* Further reduced font size for paragraph */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 80px 15px; /* Adjusted padding for very small devices */
+    }
+    .hero h2 {
+        font-size: 24px; /* Smaller font size for h2 on very small devices */
+    }
+    .hero p {
+        font-size: 12px; /* Smaller font size for paragraph on very small devices */
+    }
+}
+.container-story{
+    position:relative;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-top: 1%;
+    
+    
+}
+.container-story .card-story{
+    width: 380px;
+    position: relative;
+    height: 250px;
+    background:#f0f0f0;
+    margin: 5px 17px;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-in-out;
+    margin-top: 4%;
+    border-radius: 10px;
+    
+}
+.container-story .card-story .story-card-img{
+    position: relative;
+    width: 290px;
+    height: 155px;
+    left:30px;
+    box-shadow: 0 5px 20px rbga (0,0,0,1.2);
+    text-align: center;
+    
+}
+.container-story .card-story .story-card-img img{
+    width: 290px;
+    border-radius: 10px;
+    height: 155px;
+}
+.story-card-img:hover {
+    transform: scale(1.05,1.05);
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-wrapper-story{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    font-family: 'popins', sans-serif;
+}
+.search-wrapper-story input{
+    width: 50%;
+    height: 40px;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 16px;
+    outline: none;
+    font-family: 'popins', sans-serif;
+}
+.search-wrapper-story input::placeholder{
+    font-family: 'popins', sans-serif;
+}
+.search-wrapper-story button{
+    height: 40px;
+    width: 40px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    margin-left: -40px;
+    cursor: pointer;
+}
+.search-wrapper-story button ion-icon{
+    font-size: 20px;
+    color: #000;
+}
+.search-wrapper-story button :hover{
+    color: #fff;
+    background: #38444d;
+}
+.search-story{
+    font-family: 'popins', sans-serif;
+}
+.search-story input::placeholder{
+    font-family: 'popins', sans-serif;
+}

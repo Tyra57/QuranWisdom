@@ -1,0 +1,507 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+  <script type="module" src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css\quizapptimer.css' %}">
+  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  <title>Quiz</title>
+  <style>
+    /* Start Quiz Button Styling*/
+.container-quiz{
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    height: auto; /* Change from fixed height to auto */
+    min-height: 90vh; /* Ensure it takes at least 90% of the viewport height */
+}
+.container-quiz .quiz-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+}
+.quiz-buttons .start-btn,
+.quiz-buttons .start-btn-2,
+.quiz-buttons .start-btn-3,
+.quiz-buttons .start-btn-4,
+.quiz-buttons .start-btn-5,
+.quiz-buttons .start-btn-6 {
+    flex: 1 0 30%; /* Grow to fill space, don't shrink, base width of 30% */
+    display: flex;
+    justify-content: center;
+    margin: 10px; /* Adjust spacing between buttons */
+}
+.container-quiz .quiz-buttons button{
+    padding: 50px;
+    font-size: 25px;
+    font-weight: 500;
+    outline: none;
+    background: #004085;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 7px #004085;
+    color:#fff;
+    /* Ensure buttons don't grow or shrink */
+    min-width: 150px; /* Minimum width */
+    width: 270px; /* Maximum width */
+    text-align: center; /* Ensure text is centered */
+}
+.quiz-buttons button:hover{
+    font-size: 25px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #004085;
+    border-radius: 6px;
+    color:#004085;
+    background: lightgrey;
+    transition: 0.3s;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-quiz {
+        padding: 20px; /* Adjust padding as needed */
+        min-height: auto; /* Adjust min-height for smaller devices */
+    }
+    .quiz-buttons .start-btn,
+    .quiz-buttons .start-btn-2,
+    .quiz-buttons .start-btn-3,
+    .quiz-buttons .start-btn-4,
+    .quiz-buttons .start-btn-5,
+    .quiz-buttons .start-btn-6 {
+        flex: 1 0 45%; /* Adjust base width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+  .container-quiz {
+        padding: 20px 10px; /* Reduced side padding for very small screens */
+        min-height: auto; /* Allows content to adjust based on its size */
+    }
+    .quiz-buttons .start-btn,
+    .quiz-buttons .start-btn-2,
+    .quiz-buttons .start-btn-3,
+    .quiz-buttons .start-btn-4,
+    .quiz-buttons .start-btn-5,
+    .quiz-buttons .start-btn-6 {
+        flex: 1 0 100%; /* Stack buttons vertically on very small screens */
+    }
+}
+  </style>
+ {% endblock title %}
+
+ {% block content %}  
+
+<!--Quiz button-->
+<div class="container-quiz">
+  <div class="quiz-buttons">
+    <!--Beginner Quiz button-->
+    <div class="start-btn"><button>General</button></div>
+
+    <!--Intermediate Quiz button-->
+    <div class="start-btn-2"><button>Stories</button></div>
+
+    <!--Advanced Quiz button-->
+    <div class="start-btn-3"><button>Sciences</button></div>
+
+    <!--Science Quiz button-->
+    <div class="start-btn-4"><button>Dua's (supplication)</button></div>
+
+    <!--Story Quiz button-->
+    <div class="start-btn-5"><button>Prophets</button></div>
+
+    <!--Dua Quiz button-->
+    <div class="start-btn-6"><button>The Companions</button></div>
+
+  </div>
+</div>
+  <!--Info Box-->
+  <div class="info-box">
+    <div class="info-title">
+      <span>Quiz Guide</span>
+    </div>
+    <div class="info-list">
+      <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+      <div class="info">2. Once you select your answer, it can't be undone.</div>
+      <div class="info">3. You can't select any option once time goes off.</div>
+      <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+      <div class="info">5. You'll get points on the basis of your correct answers.</div>
+    </div>
+    <div class="buttons">
+      <button class="quit">Exit Quiz</button>
+      <button class="restart">Continue</button>
+    </div>
+  </div>
+ <!--Info Box 2-->
+ <div class="info-box-2">
+  <div class="info-title">
+    <span>Quiz Guide</span>
+  </div>
+  <div class="info-list">
+    <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+    <div class="info">2. Once you select your answer, it can't be undone.</div>
+    <div class="info">3. You can't select any option once time goes off.</div>
+    <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+    <div class="info">5. You'll get points on the basis of your correct answers.</div>
+  </div>
+  <div class="buttons2">
+    <button class="quit">Exit Quiz</button>
+    <button class="restart">Continue</button>
+  </div>
+</div>
+ <!--Info Box 3-->
+ <div class="info-box-3">
+  <div class="info-title">
+    <span>Quiz Guide</span>
+  </div>
+  <div class="info-list">
+    <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+    <div class="info">2. Once you select your answer, it can't be undone.</div>
+    <div class="info">3. You can't select any option once time goes off.</div>
+    <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+    <div class="info">5. You'll get points on the basis of your correct answers.</div>
+  </div>
+  <div class="buttons3">
+    <button class="quit">Exit Quiz</button>
+    <button class="restart">Continue</button>
+  </div>
+</div>
+
+<!--Info Box 4-->
+<div class="info-box-4">
+  <div class="info-title">
+    <span>Quiz Guide</span>
+  </div>
+  <div class="info-list">
+    <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+    <div class="info">2. Once you select your answer, it can't be undone.</div>
+    <div class="info">3. You can't select any option once time goes off.</div>
+    <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+    <div class="info">5. You'll get points on the basis of your correct answers.</div>
+  </div>
+  <div class="buttons4">
+    <button class="quit">Exit Quiz</button>
+    <button class="restart">Continue</button>
+  </div>
+</div>
+
+<!--Info Box 5-->
+<div class="info-box-5">
+  <div class="info-title">
+    <span>Quiz Guide</span>
+  </div>
+  <div class="info-list">
+    <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+    <div class="info">2. Once you select your answer, it can't be undone.</div>
+    <div class="info">3. You can't select any option once time goes off.</div>
+    <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+    <div class="info">5. You'll get points on the basis of your correct answers.</div>
+  </div>
+  <div class="buttons5">
+    <button class="quit">Exit Quiz</button>
+    <button class="restart">Continue</button>
+  </div>
+</div>
+
+<!--Info Box 6-->
+<div class="info-box-6">
+  <div class="info-title">
+    <span>Quiz Guide</span>
+  </div>
+  <div class="info-list">
+    <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+    <div class="info">2. Once you select your answer, it can't be undone.</div>
+    <div class="info">3. You can't select any option once time goes off.</div>
+    <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+    <div class="info">5. You'll get points on the basis of your correct answers.</div>
+  </div>
+  <div class="buttons6">
+    <button class="quit">Exit Quiz</button>
+    <button class="restart">Continue</button>
+  </div>
+</div>
+
+  <!--Quiz Box 1-->
+  <div class="quiz-box">
+    <header>
+      <div class="title">Quranic Quiz</div>
+      <div class="timer">
+        <div class="time-text">Time Left</div>
+        <div class="timer-sec">15</div>
+      </div>
+      <div class="time-line"></div>
+    </header>
+    <section>
+      <div class="que-text">
+        <!--<span>What is the first Surah in the Quran?</span>-->
+      </div>
+      <div class="option-list">
+        <!--
+        <div class="option">
+          <span>Al-Fatiha</span>
+          <div class="icon tick"><ion-icon name="checkmark"></ion-icon></div>
+        </div>
+        <div class="option">
+          <span>Al-Baqarah</span>
+          <div class="icon cross"><ion-icon name="close"></ion-icon></div>
+        </div>
+        <div class="option">
+          <span>Al-Imran</span> 
+        </div>
+        <div class="option">
+          <span>Al-Nisa</span> 
+        </div>
+        -->
+      </div>
+    </section>
+    <!--Quiz Box Bottom-->
+    <div class="quiz-bottom">
+      <div class="total-que">
+        <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+      </div>
+      <button class="next-btn">Next Que</button>
+    </div>
+  </div>
+
+    <!--Quiz Box 2-->
+    <div class="quiz-box-2">
+      <header>
+        <div class="title">Quranic Quiz</div>
+        <div class="timer">
+          <div class="time-text">Time Left</div>
+          <div class="timer-sec">15</div>
+        </div>
+        <div class="time-line"></div>
+      </header>
+      <section>
+        <div class="que-text-2">
+          <!--<span>What is the first Surah in the Quran?</span>-->
+        </div>
+        <div class="option-list-2"></div>
+      </section>
+      <!--Quiz Box Bottom-->
+      <div class="quiz-bottom-2">
+        <div class="total-que-2">
+          <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+        </div>
+        <button class="next-btn-2">Next Que</button>
+      </div>
+    </div>
+
+      <!--Quiz Box 3-->
+      <div class="quiz-box-3">
+        <header>
+          <div class="title">Quranic Quiz</div>
+          <div class="timer">
+            <div class="time-text">Time Left</div>
+            <div class="timer-sec">15</div>
+          </div>
+          <div class="time-line"></div>
+        </header>
+        <section>
+          <div class="que-text-3">
+            <!--<span>What is the first Surah in the Quran?</span>-->
+          </div>
+          <div class="option-list-3"></div>
+        </section>
+        <!--Quiz Box Bottom-->
+        <div class="quiz-bottom-3">
+          <div class="total-que-3">
+            <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+          </div>
+          <button class="next-btn-3">Next Que</button>
+        </div>
+      </div>
+
+      <!--Quiz Box 4-->
+      <div class="quiz-box-4">
+        <header>
+          <div class="title">Quranic Quiz</div>
+          <div class="timer">
+            <div class="time-text">Time Left</div>
+            <div class="timer-sec">15</div>
+          </div>
+          <div class="time-line"></div>
+        </header>
+        <section>
+          <div class="que-text-4">
+            <!--<span>What is the first Surah in the Quran?</span>-->
+          </div>
+          <div class="option-list-4"></div>
+        </section>
+        <!--Quiz Box Bottom-->
+        <div class="quiz-bottom-4">
+          <div class="total-que-4">
+            <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+          </div>
+          <button class="next-btn-4">Next Que</button>
+        </div>
+      </div>
+
+      <!--Quiz Box 5-->
+      <div class="quiz-box-5">
+        <header>
+          <div class="title">Quranic Quiz</div>
+          <div class="timer">
+            <div class="time-text">Time Left</div>
+            <div class="timer-sec">15</div>
+          </div>
+          <div class="time-line"></div>
+        </header>
+        <section>
+          <div class="que-text-5">
+            <!--<span>What is the first Surah in the Quran?</span>-->
+          </div>
+          <div class="option-list-5"></div>
+        </section>
+        <!--Quiz Box Bottom-->
+        <div class="quiz-bottom-5">
+          <div class="total-que-5">
+            <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+          </div>
+          <button class="next-btn-5">Next Que</button>
+        </div>
+      </div>
+
+      <!--Quiz Box 6-->
+      <div class="quiz-box-6">
+        <header>
+          <div class="title">Quranic Quiz</div>
+          <div class="timer">
+            <div class="time-text">Time Left</div>
+            <div class="timer-sec">15</div>
+          </div>
+          <div class="time-line"></div>
+        </header>
+        <section>
+          <div class="que-text-6">
+            <!--<span>What is the first Surah in the Quran?</span>-->
+          </div>
+          <div class="option-list-6"></div>
+        </section>
+        <!--Quiz Box Bottom-->
+        <div class="quiz-bottom-6">
+          <div class="total-que-6">
+            <!--<span><p>1</p>of<p>5</p>Questions</span>-->
+          </div>
+          <button class="next-btn-6">Next Que</button>
+        </div>
+      </div>
+
+    <!--Result Box-->
+    <div class="result-box">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text">You've completed the Quiz!</div>
+      <div class="score-text">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+
+    <!--Result Box for second quiz-->
+    <div class="result-box-2">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text-2">You've completed the Quiz!</div>
+      <div class="score-text-2">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons-2">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+
+    <!--Result Box for third quiz-->
+    <div class="result-box-3">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text-3">You've completed the Quiz!</div>
+      <div class="score-text-3">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons-3">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+
+    <!--Result Box for fourth quiz-->
+    <div class="result-box-4">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text-4">You've completed the Quiz!</div>
+      <div class="score-text-4">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons-4">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+
+    <!--Result Box for fifth quiz-->
+    <div class="result-box-5">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text-5">You've completed the Quiz!</div>
+      <div class="score-text-5">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons-5">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+
+    <!--Result Box for sixth quiz-->
+    <div class="result-box-6">
+      <div class="icon">
+        <!--<i class="fas fa-crown"></i>-->
+        <ion-icon name="trophy"></ion-icon>
+      </div>
+      <div class="complete-text-6">You've completed the Quiz!</div>
+      <div class="score-text-6">
+      <!-- <span>Your Score: <p>1</p> out of <p>5</p></span>-->
+      </div>
+      <div class="buttons-6">
+        <button class="restart">Replay Quiz</button>
+        <button class="quit">Quit Quiz</button>
+      </div>
+    </div>
+<!--
+    <h2>Your Quiz Results</h2>
+    <ul>
+        {% for result in results %}
+        <li>{{ result.quiz_type }}: {{ result.score }} on {{ result.date_taken|date:"F d, Y" }}</li>
+        {% endfor %}
+    </ul>
+-->
+    <script src = "{% static 'js\quizapptimer.js' %}"></script>
+    <script src = "{% static 'js\question.js' %}"></script>
+  </main> 
+  {% endblock content %}

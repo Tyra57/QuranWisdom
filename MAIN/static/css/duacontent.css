@@ -1,0 +1,103 @@
+
+  .dua-list .translation{
+    border-top: 1px solid #747b8060;
+    border-bottom: 1px solid #747b8060;
+    padding: 10px 0;
+    font-size: 14px;
+    text-align: center;
+  }
+  .dua-list .ayah{
+    padding-bottom: 10px;
+    font-size: large;
+    text-align: center;
+  }
+  .dua-list .verse{
+    padding-top: 10px;
+    font-weight: 280;
+    font-size: 14px;
+    text-align: center;
+  }
+  .dua-content h1{
+    margin-bottom: 10px;
+  }
+
+  .reference h4{
+    color:#555;
+  }
+  
+  .reference p{
+    font-weight: 300;
+  }
+
+  hr .line{
+    border: 0;
+    height: 2px;
+    width: 100%;
+    margin: 15px 0 10px;
+  }
+  .nav-link{
+    color: #38444d;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 150px;
+    display: flex;
+  } 
+  .nav-link i{
+    font-size: 20px;
+  }
+  .nav-link a{
+    color: #38444d;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .nav-link a:hover{
+    text-shadow: 2px 2px 8px #555;
+  }
+  .nav-link p{
+    display: inline-block;
+  } 
+  .nav-to-right{
+    display: flex;
+    justify-content: flex-start;
+    color: #38444d;
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+  .nav-to-right i{
+    font-size: 23px;
+  }
+  .nav-to-right p:hover{
+    color: #fff;
+    background: #38444d;
+    border: 1px solid #7d95a7;
+    cursor: pointer;
+  }
+  .nav-to-right-content p{
+    padding: 11px;
+    background: #dddddd4f;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #38444d;
+  }
+  .nav-to-right-content button{
+    padding: 11px;
+    background: #dddddd4f;
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #38444d;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+  }
+  .nav-to-right button:hover{
+    color: #fff;
+    background: #38444d;
+    border: 1px solid #7d95a7;
+    cursor: pointer;
+  }
+.nav-line{
+  width: 300px;
+  margin-left: 150px;
+  margin-bottom: 40px;
+}

@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+    <title>Dua In Quran</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\dua.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+       
+  <style>
+    .nav-link{
+      color: #38444d;
+      margin-top: 50px;
+      margin-left: 100px;
+      margin-right: 100px;
+      display: flex;
+    } 
+    .nav-link i{
+      font-size: 20px;
+    }
+    .nav-link a{
+      color: #38444d;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-link a:hover{
+      text-shadow: 2px 2px 8px #555;
+    }
+    .nav-link p{
+      display: inline-block;
+    }
+    .search-wrapper-science input::placeholder{
+      font-family: 'poppins', sans-serif;
+    }
+    .hero .search-wrapper-science input[type="search-science"]{
+      width: 100%;
+      font-family: 'poppins', sans-serif;
+    }
+    @media screen and (max-width: 768px) {
+      .nav-link{
+        margin-left: 40px;
+        margin-right: 0;
+      }
+    }
+</style>
+    {% endblock title %}
+
+    {% block content %}   
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <h2><!--I'm <span>Jenny Wilson</span>--> Dua's</h2>
+        <p>Discover the deep wisdom of dua (supplication) in Quran.</p>
+        <!--search bar sciences-->
+        <div class="search-wrapper-science">
+          <input type="search-science" id="search-science" placeholder="Search...">
+          <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Hero Section -->
+<!--nav link-->
+<div class="nav-link">
+  <div class="nav-link-content">
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> <a href="{% url 'doa' %}"> Dua's In Quran </a></p>
+  </div> 
+</div>
+
+
+<!--Dua's Section-->
+<script>
+  // Define JSON data for dua
+
+   var duaData = [
+     {
+       "title": "Children",
+       "url": "{% url 'doa1' %}",
+       "image": "{% static 'assets/dua/children.png' %}"
+     },
+     {
+       "title": "Devotion",
+       "url": "{% url 'doa2' %}",
+       "image": "{% static 'assets/dua/pray.png' %}"
+     },
+     {
+       "title": "Guidance",
+       "url": "{% url 'doa3' %}",
+       "image": "{% static 'assets/dua/signpost.png' %}"
+     },
+     {
+       "title": "Healing",
+       "url": "{% url 'doa4' %}",
+       "image": "{% static 'assets/dua/healing.png' %}"
+     },
+     {
+       "title": "Hereafter (Aakhirah)",
+       "url": "{% url 'doa5' %}",
+       "image": "{% static 'assets/dua/heaven.png' %}"
+     },
+     {
+       "title": "Marriage",
+       "url": "{% url 'doa6' %}",
+       "image": "{% static 'assets/dua/marriage.png' %}"
+     },
+     {
+       "title": "Mercy",
+       "url": "{% url 'doa7' %}",
+       "image": "{% static 'assets/dua/open-hands.png' %}"
+     },
+     {
+       "title": "Parents",
+       "url": "{% url 'doa8' %}",
+       "image": "{% static 'assets/dua/family.png' %}"
+     },
+     {
+       "title": "Patience",
+       "url": "{% url 'doa9' %}",
+       "image": "{% static 'assets/dua/time.png' %}"
+     },
+     {
+       "title": "Protection",
+       "url": "{% url 'doa10' %}",
+       "image": "{% static 'assets/dua/protection.png' %}"
+     },
+     {
+       "title": "Repentance (Tawbah)",
+       "url": "{% url 'doa11' %}",
+       "image": "{% static 'assets/dua/praying.png' %}"
+     },
+     {
+       "title": "Righteous Company",
+       "url": "{% url 'doa12' %}",
+       "image": "{% static 'assets/dua/support.png' %}"
+     },
+     {
+       "title": "Sleeping",
+       "url": "{% url 'doa13' %}",
+       "image": "{% static 'assets/dua/slumber.png' %}"
+     },
+     {
+       "title": "Strength",
+       "url": "{% url 'doa14' %}",
+       "image": "{% static 'assets/dua/power.png' %}"
+     }
+
+   ];
+   document.addEventListener('DOMContentLoaded', function() {
+     // Function to generate HTML for Dua links
+ function generateDuaLinks(duaData) {
+   var html = '';
+   duaData.forEach(function(dua) {
+     html += '<div class="dua-link">';
+     html += '<a href="' + dua.url + '">';
+     html += '<div class="card-dua">';
+     html += '<p>' + dua.title + '</p>';
+     html += '<p><img src="' + dua.image + '"></p>';
+     html += '</div></a></div>';
+   });
+   return html;
+ }
+      // Function to perform search
+ function searchDua(query) {
+   var results = [];
+   query = query.toLowerCase();
+   
+   duaData.forEach(function(dua) {
+     if (dua.title.toLowerCase().includes(query)) {
+       results.push(dua);
+     }
+   });
+   return results;
+ }
+// Function to update display based on search results
+function updateDisplay(query) {
+   var searchResults = searchDua(query);
+   var duaContainer = document.querySelector('.container-dua'); // Consider renaming this class to something more generic or specific to Duas
+   duaContainer.innerHTML = generateDuaLinks(searchResults);
+ }
+
+ // Attach an event listener to the search input
+ var searchInput = document.getElementById('search-science'); // Consider renaming this ID to something more generic or specific to Duas
+ searchInput.addEventListener('input', function() {
+   var query = this.value; // Get the current value of the input field
+   updateDisplay(query); // Update the display based on the search query
+ });
+
+ // Initialize display with all Duas
+ updateDisplay("");
+});
+</script>
+
+<div class ="container-dua" style="margin-bottom: 50px;">
+
+
+</div>  
+
+{% endblock content %}

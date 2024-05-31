@@ -1,0 +1,184 @@
+@keyframes transitionIn {
+    fron{
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+    to{
+        opacity: 1;
+        transform: rotateX(0);
+    }
+}
+body {
+    background-image: url("../assets/bg/figure-pattern-wall.svg");
+    background-repeat: repeat;
+    animation: transitionIn 1s;
+}
+    .dark-mode {
+    background-image: url("https://img.freepik.com/free-photo/grungy-white-background-natural-cement-stone-old-texture-as-retro-pattern-wall-conceptual-wall-banner-grunge-material-construction_1258-82894.jpg?w=1380&t=st=1706329069~exp=1706329669~hmac=25463152b917ca9369f9418274f10c4d7a1408ae837110c6b0d7adcba7ae87fa");
+    background-repeat: repeat;
+    color: white;
+}
+.user-pic{
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 30px;
+    }
+    .user-menu{
+      position: relative;
+      cursor: pointer;
+    }
+    .sub-menu-wrap{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2; /* Ensure it's above other content */
+    display: none; /* Initially not displayed */
+    background-color: rgba(0, 0, 0, 0.185);
+    }    
+    .sub-menu-wrap.open-menu {
+        display: block; /* Show when 'open-menu' class is added */
+    }
+    .sub-menu{
+        background: #fff;
+        padding: 20px;
+        margin:10px;
+    }
+    .sub-menu-container{
+        right: 10px;
+        width: 320px;
+        float: right;
+        margin-top: 60px;
+    }
+    .user-info{
+        display: flex;
+        align-items: center;
+    }
+    .user-info h3{
+        font-weight: 500;
+    }
+    .user-info img{
+        width: 60px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    .user-info-link{
+      color: #525252;
+    }
+    .sub-menu hr{
+        border: 0;
+        height: 1px;
+        width: 100%;
+        background: #ccc;
+        margin: 15px 0 10px;
+    }
+    .sub-menu-link{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #525252;
+        margin: 12px 0;
+    }
+    .sub-menu-link p{
+        width: 100%;
+    }
+    .sub-menu-link img{
+        width: 40px;
+        background: #e5e5e5;
+        border-radius: 50%;
+        padding: 8px;
+        margin-right: 15px;
+    }
+    .sub-menu-link span{
+        font-size: 22px;
+        transform: transform 0.5s;
+    }
+    .sub-menu-link:hover span{
+        transform: translate(5px);
+    }
+    .sub-menu-link:hover p{
+        font-weight: 600;
+    }
+    footer {
+        background: #38444d;
+        padding-top: 50px;
+        color: #fff;
+    }
+    
+    .footer-container {
+        display: flex;
+        flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+        justify-content: space-around; /* Distributes space evenly */
+        max-width: 1200px; /* Maximum width of the footer container */
+        margin: auto;
+        padding: 0 20px; /* Adds padding on the sides */
+    }
+    
+    .footer-content {
+        flex: 1; /* Allows flexible growth */
+        min-width: 250px; /* Minimum width before wrapping */
+        padding: 20px;
+        box-sizing: border-box; /* Includes padding in the element's total width and height */
+    }
+    
+    .footer-content h4 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: lightblue;
+    }
+    
+    .footer-content p, .footer-content a {
+        color: #fff;
+        font-size: 14px;
+        line-height: 1.6; /* Improves readability */
+        text-align: left; /* Aligns text to the left */
+    }
+    
+    .footer-content ul {
+        padding: 0;
+        list-style: none; /* Removes default list styling */
+    }
+    
+    .footer-content .list li a {
+        color: #fff;
+        transition: color 0.3s ease; /* Smooth transition for hover effect */
+    }
+    
+    .footer-content .list li a:hover {
+        color: lightblue;
+    }
+    
+    .footer-content .social-icons li {
+        display: inline-block;
+        margin: 0 10px; /* Adds horizontal spacing */
+    }
+    
+    .footer-bottom {
+        background: #2c3e50; /* Slightly darker shade for contrast */
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 14px;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .footer-container {
+            justify-content: center; /* Centers content on smaller screens */
+        }
+    
+        .footer-content {
+            text-align: center; /* Centers text for a cleaner look */
+        }
+    
+        .footer-content p, .footer-content a {
+            text-align: center; /* Ensures text is centered */
+        }
+    
+        .footer-content .social-icons li {
+            margin: 5px; /* Reduces spacing for a tighter layout */
+        }
+    }

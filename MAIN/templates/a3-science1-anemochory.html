@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+    <title>Anemochory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+      @media screen and (max-width: 768px) {
+    .nav-to-right, .nav-line{
+      margin-left: 20px;
+    }
+    .nav-link{
+      margin-left: 20px;
+      margin-right: 0;
+    }
+  }
+</style>
+{% endblock title %}
+{% block content %}   
+<!--nav link-->
+<div class="nav-link">
+  <div class="nav-link-content">
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> <a href="{% url 'science' %}"> Sciences </a><span><i class="fa-solid fa-chevron-right"></i></span> Anemochory</p>
+  </div> 
+</div>
+<hr class ="nav-line">
+<br>
+<!--bookmark and comment-->
+<div class="nav-to-right">
+  <div class="nav-to-right-content">
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Science-Anemochory')" data-slug="Science-Anemochory"></i></p>
+    <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
+  </div>
+</div>
+
+<!--Forum Section-->
+<div class="overlay" id="overlay">
+  <div class="container">
+      <div class="close">
+          <div class="close-button">
+              <i class="fas fa-times" onclick="off()"></i>
+          </div>         
+          <div class="subforum">
+
+          {% if user.is_authenticated %}
+            <div class ="create-post">
+              <button style="color:#38444d"><a href="{% url 'create_post' %}">Create Post</a></button>
+            </div>
+          {% endif %}
+
+          <div class="subforum-title">
+              <h1>Forum</h1>
+          </div>
+
+          {% for forum in forums %}
+          <div class="subforum-row">
+              <!--<div class="subforum-icon subforum-column center">
+                  <i class="fas fa-user"></i>
+              </div>-->
+              <div class="subforum-description subforum-column">
+                  <h1><a href="{{forum.get_url}}">{{forum.title}}</a></h1>
+                  <p>{{forum.description}}</p>
+              </div>
+              <div class="subforum-stats subforum-column center">
+                  <span>{{forum.num_posts}} Posts</span>
+              </div>
+              <div class="subforum-info subforum-column">
+                  <b><a href="{{forum.last_post.get_url}}">Last Post</a></b> by <a href="">{{forum.last_post.user.fullname|title}}</a>
+                  <br>
+                  on <small>{{forum.last_post.created_at|date:"F d, Y H:i"}}</small>
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+  </div>
+
+   <!-- Forum Info -->
+<div class="forum-info">
+  <div class="chart">
+      Forum Statistic &nbsp;<i class="fa fa-bar-chart"></i>
+  </div>
+  <span><u>{{num_posts}}</u> Posts in <u>{{num_categories}}</u> Categories by <u>{{num_users}}</u> Members.</span><br>
+  {% if forums %}
+      <span>Latest post: <b><a href="{{last_post.get_url}}">{{last_post.title}}</a></b> on {{last_post.date|date}} By <a href="">{{last_post.user.fullname|title}}</a></span>.<br>
+      <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
+  {% endif %}
+</div>
+
+</div>
+</div>
+<!--ends forum-->
+
+      <!--Sciences content-->
+      <div class="sciences">
+
+        <h1>Anemochory</h1>
+        <img src="{% static 'assets\sciences\anemochory.jpg' %}" width="600" height="400"><br>
+        <h4>Quranic Verse</h4><br>
+        <p>وَأَرْسَلْنَا ٱلرِّيَـٰحَ لَوَٰقِحَ فَأَنزَلْنَا مِنَ ٱلسَّمَآءِ مَآءًۭ فَأَسْقَيْنَـٰكُمُوهُ وَمَآ أَنتُمْ لَهُۥ بِخَـٰزِنِينَ ٢٢</p>
+        <p>“We send fertilizing winds, and bring down rain from the sky for you to drink. It is not you who hold its reserves.”</p>
+        <br>
+        <h4>Scientific Insights</h4><br>
+        <p>Pollination is one of the processes of transferring pollen from anther to stigma. It can occur with the assistance of pollinating agents such as wind, animals, and water. Pollination by wind is called "Abiotic". This theory was first mentioned by Christian Konrad Sprengel in his book Das entdeckte Geheimnis der Natur im Bau und in der Befruchtung der Blumen (Berlin 1793) (1161 years after the death of the Prophet Muhammad (632 CE)).
+        </p><br>
+        <p>In Surah Al-Hijr: verse 22, the word used is "lawaaqih," the plural form of "laqih" from the word "laqaha," which means to marry or to impregnate. In this context, marrying/impregnating means the wind carries flower seeds from the anther to the stigma to be married or impregnated. It can be the transfer of seeds on the same plant or different plants.</p>
+        </div>
+        <div class="reference">
+        <h4>References:</h4>
+          <p>Mauseth, James D.Botany: An Introduction to Plant Biology.</p>
+          <p>Publisher: Jones & Bartlett, 2008</p>
+          <p>Siri Al-Quran Mendahului Sains (n.d)</p>
+        </div>
+
+<script>
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+  function toggleBookmark(element, slug) {
+    // Check if user is authenticated
+    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+
+    if (!isAuthenticated) {
+        window.location.href = '/account/signin/'; // Redirect to sign-in page
+        return;
+    }
+
+    // Proceed with bookmark toggle for authenticated users
+    fetch(`/toggle_bookmark/${slug}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'slug': slug })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.bookmarked) {
+            element.classList.remove('fa-regular');
+            element.classList.add('fa-solid');
+        } else {
+            element.classList.remove('fa-solid');
+            element.classList.add('fa-regular');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Function to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+document.addEventListener("DOMContentLoaded", function() {
+    // Assuming the user is authenticated; adjust as needed
+    updateUserBookmarkIcons();
+});
+
+function updateUserBookmarkIcons() {
+    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // Include CSRF token if needed for GET requests or ensure your view is exempt
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const bookmarkedSlugs = data.bookmarkedSlugs;
+        bookmarkedSlugs.forEach(slug => {
+            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+            if (bookmarkIcon) {
+                bookmarkIcon.classList.remove('fa-regular');
+                bookmarkIcon.classList.add('fa-solid');
+            }
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
+  </script>
+
+<script src="{% static 'js/trialforum.js' %}"></script>   
+{% endblock content %}

@@ -1,0 +1,967 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block title %}
+  <title>Quranic Wisdom</title>
+  <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  <!--icon vendor-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /*general*/
+    body, html {
+  height: 100%;
+  margin: 0; 
+  animation: transitionIn 1s;
+}
+    /*hero section*/
+  .hero-image {
+          background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5));
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          height:103%;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .back-video{
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          object-fit: cover; /* Cover the container without losing aspect ratio */
+        }
+        .hero-text-main-page {
+          text-align: center;
+          position: absolute;
+          top: 45%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #f2f2f2;
+          transition: 0.5s;
+          line-height: 1.6;
+          letter-spacing: 1.3px;
+        }
+        .hero-text-main-page h1{
+          transition: 0.5s;
+          font-size:70px;
+        }
+        .hero-text-main-page h2{
+          font-size: 30px;
+        }
+        .hero-text-main-page h1:hover{
+          -webkit-text-stroke: 2px #fff;
+          color: transparent;
+        }
+        /*dekstop responsive*/
+        @media screen and (max-width: 1300px){
+          .hero-text-main-page{
+            font-size: small;
+            position: absolute;
+            left: 50%;
+            width: 600px;
+            height: auto;
+            line-height: 1.5;
+            letter-spacing: 1.2px;
+            align-items: center;
+            transform: translate(-50%, -50%);
+          }
+          .back-video{
+            position: relative;
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Cover the container without losing aspect ratio */
+            z-index: -1; /* Ensure it stays in the background */
+          }
+          .hero-image{
+            height: 75%;
+          }
+          .hero-text-main-page h1{
+            font-size: 60px;
+          }
+          .hero-text-main-page h2{
+          font-size: 20px;
+        }
+        .clients-flex-container{
+          margin-top: 20%;
+
+        }
+        }
+
+        /*smarphones responsive*/
+        @media screen and (max-width: 600px){
+          .hero-text-main-page{
+            font-size: smaller;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 400px;
+            height: auto;
+            line-height: 1.5;
+            letter-spacing: 1.2px;
+            align-items: center;
+            transform: translate(-50%, -50%);
+          }
+          .back-video{
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Cover the container without losing aspect ratio */
+            z-index: -1;
+          }
+          .hero-image{
+            height: 60%;
+          }
+          .hero-text-main-page h1{
+            font-size: 35px;
+          }
+          .hero-text-main-page h2{
+          font-size: 20px;
+        }
+          .hero-text-main-page h1:hover{
+          -webkit-text-stroke: 1px #fff;
+          color: transparent;
+        }
+        .clients-flex-container{
+          margin-top: 20%;
+        }
+
+        }
+
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+/* About Section Styling */
+#about {
+  padding: 30px 0;
+  display: inline-block;
+  /*background: #f8f9fa;  Light grey background */
+}
+.about .container {
+  max-width: 100%; /* Adjust based on your preference */
+  margin: auto;
+  padding: 20px;
+}
+.about .flex-about{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#about .content h3 {
+  color: #496078; /* Bootstrap primary color for consistency */
+  font-weight: 500;
+  margin-bottom: 15px;
+  padding-left: 50px;
+}
+
+#about .content h2 {
+  color: #495057; /* Dark grey color */
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-left: 50px;
+  font-size: 40px;
+}
+
+#about .content p {
+  color: #3f4a53; /* Bootstrap secondary text color */
+  line-height: 2.0;
+  padding-left: 50px;
+  padding-right: 10px;
+}
+#about .content{
+  flex: 0 0 35%; /* 40% width */
+  max-width: 35%; /* 40% width */
+}
+.column-quran{
+  cursor: pointer;
+}
+.icon-boxes {
+  flex: 0 0 65%; /* 60% width */
+  max-width: 65%; /* 60% width */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+.column-quran .icon-box img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease; /* Smooth transition for the hover effect */
+}
+.column-quran .icon-box{
+  margin-bottom: 20px;
+  width: 430px;
+  height: 260px;
+  position: relative;
+  overflow: hidden; /* Ensure no overflow outside the box */
+  border-radius: 8px; 
+}
+.column-quran .icon-box .text-overlay {
+  position: absolute;
+  left: 10px; /* Adjust as needed */
+  bottom: 10px; /* Adjust as needed */
+  background: rgba(255,255,255,0.5); /* Semi-transparent background */
+  padding: 10px; /* Add some padding around the text */
+  border-radius: 5px; /* Optional: Adds rounded corners */
+  max-width: calc(100% - 20px); /* Ensure it doesn't overflow the icon-box */
+  width: 100%; /* Ensure it doesn't overflow the icon-box */
+  height: 95px;
+}
+
+.column-quran .icon-box h3, .column-quran .icon-box p {
+  color: #070606; /* Adjust text color for better visibility */
+  text-shadow: none; /* Remove text shadow as it may clash with the background */
+  margin: 0; /* Remove default margins */
+}
+
+.column-quran .icon-box h3 {
+  margin-bottom: 5px; /* Add some space between h3 and p */
+  font-size: 18px; /* Adjust font size as needed */
+}
+
+.column-quran .icon-box p {
+  font-size: 14px; /* Adjust font size as needed */
+}
+/* Pretty Hover Effect */
+.column-quran .icon-box:hover {
+  transform: scale(1.05); /* Slightly enlarge */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* "Lifting" effect */
+}
+.column-quran .icon-box:hover img {
+  transform: scale(1.1); /* Zoom in the image */
+}
+#about .content{
+  padding: 20px;
+}
+#about .icon-boxes .icon-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.button-read{
+  padding-left: 50px;
+  margin: 20px 0;
+}
+.read-more {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  background-color: #6c757d;
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+.read-more:hover {
+  background-color: #495057;
+}
+.read-more ion-icon {
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+  font-size: 17px;
+}
+
+.read-more:hover ion-icon{
+  transform: translateX(5px);
+}
+
+/* AOS animation overrides for custom timing */
+[data-aos="fade-up"] {
+  transition-duration: 1s;
+  transition-delay: 0.1s;
+}
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 600px) {
+  .column-quran .icon-box h3, .column-quran .icon-box p {
+    left: 5px;
+    bottom: 5px;
+    font-size: smaller; /* Adjust text size on smaller screens */
+  }
+  #about .content h2, #about .content p, #about .content h3, .button-read
+   {
+    width: 100%; /* Adjust width to 100% */
+    padding: 10px;
+  }
+}
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  #about .icon-boxes .icon-box {
+    margin-bottom: 30px;
+  }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #about .content, .icon-boxes {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+.main-search{
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  border-radius: 60px;
+  margin-top: 15px;
+}
+.main-search input::placeholder{
+  color: #dddddd8d;
+  font-family: 'poppins', sans-serif;
+}
+.main-search input{
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  color: #ddd;
+  font-family: 'poppins', sans-serif;
+}
+.main-search button{
+  background: transparent;
+  color: #fff;
+  border: 0;
+  outline: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px 20px;
+}
+.main-search button:hover{
+  background: #dddddd52;
+  
+}
+/*--------------------------------------------------------------
+# info quran Section
+--------------------------------------------------------------*/
+
+.info-row {
+  display: flex;
+  flex-flow: row wrap;
+  /*background-color: #f2f2f2ba;*/
+  background-color: #ddd;
+ /* background: #b7bec8; */
+  justify-content: space-evenly;
+  width: 90%;
+  border-radius: 50px;
+  margin: -6% auto 50px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for depth */
+  border: 1px solid #ffffff; /* Optional: Adds a solid white border */
+  position: relative; /* Ensures the z-index is applied correctly */
+  z-index: 10; /* Ensures the info-row appears above the hero section */
+  padding-top: 15px; /* Adds padding at the top */
+}
+.column-info {
+  display: flex; /* Enables Flexbox for content alignment */
+  flex-direction: column; /* Stacks content vertically */
+  width: 185px;
+  margin: 10px;
+  text-align: center;
+  height: 165px;
+  /*background: #6f7f9145;*/
+  font-size: 15px;
+  align-content: center;
+  border-radius: 10px;
+  align-items: center;
+  justify-content:center;
+  position: relative; /* This is necessary for the absolute positioning of the divider */
+}
+.column-info h1 {
+  font-size: 35px;
+  color: #38444d;
+  margin-top: 7px;
+  height: 40px; /* Fixed height for h1 to ensure consistency */
+  display: flex; /* Enables Flexbox for h1 */
+  align-items: center; /* Centers h1 content vertically */
+  justify-content: center; /* Centers h1 content horizontally */
+}
+
+.column-info p {
+  flex-grow: 1; /* Allows p to fill the available space */
+  display: flex; /* Enables Flexbox for p */
+  align-items: center; /* Centers p content vertically */
+  justify-content: center; /* Centers p content horizontally */
+  margin: 7px 0 10px 0; /* Adds margin for spacing */
+}
+.column-info p:hover, .column-info h1:hover{
+ transition: 0.5s;
+ color: #38444d;
+}
+.column-info::after {
+  content: "";
+  height: 100%; /* Adjust based on your needs */
+  width: 2px; /* Thickness of the divider */
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(124, 134, 147, 0.75), rgba(255,255,255,0)); /* Adjusted gradient direction to vertical */
+  position: absolute;
+  right: -18px; /* Adjust as needed to position the divider correctly */
+  /*top: 0;  Adjusted to align the divider to the top */
+}
+
+/* Use this to prevent the last item from having a divider */
+.column-info:last-child::after {
+  display: none;
+}
+/* Responsive adjustments for phone screens */
+@media screen and (max-width: 600px) {
+  .info-row {
+    width: 100%; /* Full width */
+    margin: -5% auto 17px auto; /* Adjusted bottom margin */
+    border-radius: 0; /* No border radius */
+    box-shadow: none; /* Optional: Removes shadow for a flat design */
+    border: none; /* Optional: Removes border */
+    justify-content: center; /* Centers the items if needed */
+  }
+
+  /* Adjust .column-info for phone screens */
+  .column-info {
+    width: 100%; /* Full width for each column */
+    margin: 25px 0; /* Adjusted margin for vertical spacing */
+    height: auto; /* Adjust height as necessary */
+    /* Additional adjustments as needed */
+    position: relative; /* Ensures pseudo-elements are positioned correctly */
+    /* Additional adjustments as needed */
+  }
+
+  /* Adjust the last-child pseudo-class for phone screens */
+  .column-info::after {
+    display: none; /* Hide the dividers on phone screens */
+  }
+  /* Introduce horizontal dividers */
+  .column-info:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: -10px; /* Position at the top of the element */
+    left: 0;
+    width: 100%; /* Full width */
+    height: 1px; /* Thickness of the divider */
+    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(108,123,142,0.75), rgba(255,255,255,0)); /* Horizontal gradient */
+  }
+}
+/*--------------------------------------------------------------
+# panel Section
+--------------------------------------------------------------*/
+
+.panel{
+    width:100%;
+    /*background: #a1abb6df;*/
+    background: #d3dbe1df;
+    padding: 10px 0px 70px 0px;
+  }
+  .panel .panel-container{
+    width:80%;
+    margin:auto;
+  }
+  .panel .panel-container .row{
+    width:60%;
+    margin:auto;
+  }
+  .panel .panel-container .row .title{
+    text-align: center;
+    margin-top: 40px;
+  }
+  .panel .panel-container .row .title h1{
+    font-size: 35px;
+    letter-spacing: 1.5px;
+    color: #38444d;
+  }
+  .panel .panel-container .row .title p{
+    font-size: 17px;
+    color: #4f4e4e;
+    margin: 30px 0px;
+  }
+  .panel .panel-container .panel-card{
+    width: 100%;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    margin-top: 50px;
+  }
+  .panel .panel-container .panel-card .card{
+    width: 100%;
+    display: flex;
+    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
+    border-radius: 25px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .panel .panel-container .panel-card .card:hover{
+    background-color: #eae9e9;
+    transition: .4s;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+    transform: matrix(1.1, 0, 0, 1.1, 0, 0);
+  }
+  .panel .panel-container .panel-card .card .image-panel img{
+    width: 170px;
+    height: 210px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+  .panel .panel-container .panel-card .card .panel-content{
+    width: 100%;
+    text-align: center;
+  }
+  .panel .panel-container .panel-card .card .panel-content h3{
+    font-size: 20px;
+    color: #38444d;
+    margin-top: 10px;
+    letter-spacing: 1.4px;
+  }
+  .panel .panel-container .panel-card .card .panel-content h4{
+    font-size: 17px;
+    color: #4f4e4e;
+    margin-top: 10px;
+    letter-spacing: 1.4px;
+  }
+  .panel .panel-container .panel-card .card .panel-content p{
+    font-size: 15px;
+    color: #4f4e4e;
+    margin: 16px 0px;
+    line-height: 1.5;
+  }
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .panel .panel-container .panel-card {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets and below */
+  }
+}
+
+@media (max-width: 768px) {
+  .panel .panel-container .panel-card {
+    grid-template-columns: 1fr; /* 1 column for mobile devices */
+  }
+}
+/*--------------------------------------------------------------
+# call to action Section
+--------------------------------------------------------------*/
+.call-to-action {
+  background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bmlnaHQlMjBza3l8ZW58MHx8MHx8fDA%3D");
+  min-height: 350px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.call-to-action h2 {
+  color: #fff;
+  font-size: 50px;
+  margin: 0;
+  padding: 20px 0 10px 0;
+}
+
+.call-to-action p {
+  color: #fff;
+  font-size: 18px;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+
+.cta-button {
+  display: inline-block;
+  background: rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #dddddd52;
+}
+/*responsive cta*/
+@media screen and (max-width: 600px){
+  .call-to-action h2{
+    font-size: 30px;
+  }
+  .call-to-action p{
+    font-size: 15px;
+  }
+}
+  </style>
+{% endblock title %}
+{% block content %} 
+   <!--hero section-->
+ <div class="hero-image">
+  <video autoplay loop muted plays-inline class="back-video">
+  <source src="{% static 'assets/main/video.mp4' %}" type="video/mp4">
+  </video>
+  <div class="hero-text-main-page">
+    <!--<img src="{% static 'assets/logo/logowhite.svg' %}" alt="Quranic Wisdom" style="width: 200px;">-->
+      <!--<h1>Discover The Quran</h1>-->
+      <h1>Discover The Quran</h1><br>
+      <h2>إِنَّا نَحْنُ نَزَّلْنَا ٱلذِّكْرَ وَإِنَّا لَهُۥ لَحَـٰفِظُونَ ٩</h2>
+      <br>
+    
+      <p>It is certainly We Who have revealed the Reminder, and it is certainly We Who will preserve it.</p>
+      <!--<p>Al-Quran is the Islam's sacred scripture. The Quran stands as a timeless beacon of guidance, wisdom, and divine revelation. Revealed to Prophet Muhammad (peace be upon him) over 1,400 years ago, it serves as a comprehensive guide for humanity, offering spiritual enlightenment, moral principles, and insights into various aspects of life. Explore its verses that transcend time and culture, offering solace, guidance, and a profound understanding of faith, morality, and the human condition</p>
+      --><br>
+      <!--search bar-->
+      <div action="" method="get" class="main-search">
+        <input type="text" placeholder="What are you looking for" >
+        <!--icon for search-->
+        <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+      </div>
+      <script>
+      var learnbtn = document.querySelector('.learnbtn');
+      learnbtn.addEventListener('click', function(){
+          scrollTo = document.querySelector('.flex-container').scrollIntoView({behavior: "smooth"});});
+      </script>
+    </div>
+  </div>
+    <!-- info quran Section -->
+    <section id="info-quran" class="info-row">
+
+      
+          <div class="column-info">
+            <h1>114</h1>
+            <p>Number of chapters or known as 'Surah'</p>
+          </div><!-- End Client Item -->
+          
+          <div class="column-info">
+            <h1>30</h1>
+            <p>Organized parts or known as 'Juz'</p>
+          </div><!-- End Client Item -->
+          
+          <div class="column-info">
+            <h1>6236</h1>
+            <p>Verses or known as 'Ayah'</p>
+          </div><!-- End Client Item -->
+          
+          <div class="column-info">
+            <h1>23</h1>
+            <p>Years of Revelation</p>
+          </div><!-- End Client Item -->
+          
+          <div class="column-info">
+            <h1>86</h1>
+            <p>Chapters revealed in Makkah or known as 'Makiyyah'</p>
+          </div><!-- End Client Item -->
+          
+          <div class="column-info">
+            <h1>28</h1>
+            <p>Chapters revealed in Madinah or known as 'Madaniyyah'</p>
+          </div><!-- End Client Item -->
+          
+
+
+    </section><!-- info quran Section -->
+ </div>
+
+<br>
+ <!-- About Section -->
+ <section id="about" class="about section">
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="flex-about">
+<!--
+      <div class="content">
+        <h3>About Us</h3>
+        <h2>Quranic Wisdom</h2>
+        <p>QuranWisdom is a website that provides information about the stories in the Quran, the sciences in the Quran, and the prayers in the Quran.</p>
+        <div class="button-read"><a href="#" class="read-more"><span>Read More</span><ion-icon name="arrow-forward-outline"></ion-icon></a></div>
+      </div>-->
+
+      <div class="content">
+        <h3>Quranic Wisdom</h3>
+        <h2>Al-Quran</h2>
+        <p>The Quran, Islam's holy scripture, is a divine revelation sent down to Prophet Muhammad (ﷺ) in 610 CE when he was 40 years old and continued until his passing in 632 CE.</p>
+        <div class="button-read"><a href="{% url 'about' %}" class="read-more"><span>Read More</span><ion-icon name="arrow-forward-outline"></ion-icon></a></div>
+      </div>
+
+      
+        <div class="icon-boxes">
+
+          <a href ="{% url 'story' %}" ><div class="column-quran" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <img src="{% static 'assets/main/story.jpg' %}">
+              <div class="text-overlay">
+              <h3>Stories In Quran</h3>
+              <p>Explore timeless stories from the Quran</p>
+              </div>
+            </div>
+          </div> </a><!-- End Icon Box -->
+
+          <a href ="{% url 'science' %}" ><div class="column-quran" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <img src="{% static 'assets/main/sciences.jpg' %}" style="height:260px">
+              <div class="text-overlay">
+              <h3>Sciences In Quran</h3>
+              <p>Discover verses in the Quran that reflect scientific knowledge</p>
+            </div></div>
+          </div></a> <!-- End Icon Box -->
+
+          <a href ="{% url 'doa' %}" ><div class="column-quran" data-aos="fade-up" data-aos-delay="400">
+            <div class="icon-box">
+              <img src="{% static 'assets/quiz/quizpic.png' %}" style="height:260px">
+              <div class="text-overlay">
+                <h3>Dua's In Quran</h3>
+                <p>Find solace and guidance in the Duas (supplications)</p>
+              </div> 
+            </div>
+          </div></a> <!-- End Icon Box -->
+
+          <a href ="{% url 'quiz' %}" ><div class="column-quran" data-aos="fade-up" data-aos-delay="400">
+            <div class="icon-box">
+              <img src="{% static 'assets/main/asbab.jpg' %}">
+              <div class="text-overlay">
+              <h3>Quranic Quiz</h3>
+              <p>Test your Quranic Knowledge</p>
+            </div></div>
+          </div></a> <!-- End Icon Box -->
+
+        </div>
+      
+
+    </div>
+  </div>
+
+</section><!-- /About Section -->
+
+<!--our panel section-->
+<div class="panel">
+  <div class="panel-container">
+      <div class="row">
+          <div class="title">
+              <a href="{% url 'about' %}"><h1>Our Panel In Research</h1>
+              <p>Our panel of experts is dedicated to providing you with accurate, insightful, and engaging content on the Quran's stories, sciences, and more. Meet our team of scholars, researchers, and educators who are committed to sharing the wisdom and beauty of the Quran with you.</p>
+          </div></a>
+      </div>
+      <a href="{% url 'about' %}">
+          <div class="panel-card">
+              <div class="card">
+                  <div class="image-panel">
+                      <img src="{% static 'assets/main/abe kai.jpg' %}" alt="panel1">
+                  </div>
+                  <div class="panel-content">
+                      <h3><b>Ahmad Kailani Bin Zahari</b></h3>
+                      <h4>Islamic Studies Scholar</h4>
+                      <p>Ahmad Kailani is an expertise in Islamic Jurisprudence and Quranic knowledge.</p>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="image-panel">
+                      <img src="{% static 'assets/main/ustazah lina1.png' %}" alt="panel2">
+                  </div>
+                  <div class="panel-content">
+                      <h3><b>Nurlina Binti Abdullah</b></h3>
+                      <h4>Quranic Studies Scholar</h4>
+                      <p>Nurlina's academic journey from memorizing the Quran to specializing in Fiqh and Usul Fiqh inspires her dedication to teaching and research in Quranic sciences.</p>
+                  </div>
+              </div>
+              <div class="card">
+                  <div class="image-panel">
+                      <img src="{% static 'assets\main\panel3.png' %}" alt="panel3">
+                  </div>
+                  <div class="panel-content">
+                      <h3><b>Siti 'Aisyah Nabilah binti Zaaba</b></h3>
+                      <h4>Islamic History Specialist</h4>
+                      <p>lorem ipsum dolor sit amet, consectetur adipisciing elit, sed do eiusmod tempor.</p>
+                  </div>
+              </div>
+      </div></a>
+  </div>
+</div>
+
+<!--end of panel section-->
+
+<!--call to action-->
+<div class="call-to-action">
+  <h2>Got Questions?</h2>
+  <p>Join our forum and get the answers you're looking for.</p>
+  <a href="{% url 'faq' %}" class="cta-button">Visit Forum</a>
+</div>
+<!--end of call to action-->
+
+
+<!--contact us-->
+<!--style for contact us-->
+<style>
+  .contact-content .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.contact-content .input-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-content .input-group input[type="text"] {
+  width: 48%; /* Adjusts the width to fit two inputs in one row */
+}
+  .faq-section {
+    margin-bottom: 50px;
+    max-height: 100vh;
+  }
+
+  .contact-container {
+  background-color: #a1abb6;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px; 
+}
+
+.contact-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.contact-content p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.contact-content .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 15%;
+}
+
+.contact-content .btn:hover {
+  background-color: #555;
+}
+.contact-content label{
+  font-family: 'poppins', sans-serif;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.contact-content textarea{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  }
+  .contact-content input[type="tel"]{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  }
+  .contact-content input[type="text"]{
+    display: inline-block;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'poppins', sans-serif;
+    margin-bottom: 10px;
+    left: 0;
+  }
+  .contact-content input[type="email"]{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  }
+  .contact-content button{
+    padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ddd;
+  border: 1px solid #38444d;
+  outline: 0;
+  cursor: pointer;
+  color:#38444d;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 15%;
+  margin-top: 10px;
+  }
+  button:hover{
+  background-color: #38444d;
+  color: white;
+  border: 1px solid #fff;
+  }
+  /* Adjust input fields to stack on smaller screens */
+@media screen and (max-width: 768px) {
+  .contact-content .input-group input[type="text"] {
+    width: 100%; /* Make input fields full width */
+    margin-bottom: 10px; /* Add margin to the bottom for spacing */
+  }
+
+  .contact-content .input-group {
+    flex-direction: column; /* Stack input fields vertically */
+  }
+
+  .contact-content button, .contact-content .btn{
+    width: 100%; /* Full width for the submit button */
+  }
+}
+
+/* Additional media query for very small screens */
+@media screen and (max-width: 480px) {
+  .contact-content {
+    padding: 0 10px; /* Reduce padding for very small screens */
+  }
+}
+</style>
+<div class="contact-container">
+  <div class="contact-content">
+    <h2>Contact Us</h2>
+    <!--contact through form-->
+    <p>If you have any questions or feedback, feel free to contact us by filling in the form below.</p>
+    <form method="post" action="{% url 'contact' %}">
+      {% csrf_token %}
+      <div class="form-row">
+        <label for="name">Name:</label>
+        <div class="input-group">
+          <input type="text" name="first_name" placeholder="First Name" required>
+          <input type="text" name="last_name" placeholder="Last Name" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for = "phone">Phone Number:</label>
+        <input type="tel" name="phone" placeholder="Your Phone Number" required>
+      </div>
+      <div class="form-row">
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-row">
+        <label for="message">Message:</label>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </form>
+    <div class="contact-content">
+      <!--contact thru email panel-->
+      <p style="margin-top: 40px;">Or directly email us</p>
+      <a href="mailto:athirahzaaba00gmail.com" class="btn">Email</a>
+    </div>
+  </div>
+</div>
+<!--end of contact us-->
+
+{% endblock content %}

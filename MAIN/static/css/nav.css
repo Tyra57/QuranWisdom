@@ -1,0 +1,96 @@
+
+*{
+    margin:0;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body{
+    font-family:"Poppins", sans-serif ;
+}
+
+a, a:hover {
+    text-decoration: none;
+  }
+
+nav{
+    background: #38444d;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    transition: top 0.3s;
+}
+
+nav a{
+    color: #fff;
+}
+
+nav a:hover{
+    color: lightblue;
+}
+
+.logo{
+    flex:1;
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.logo a:hover{
+    color:#fff;
+}
+
+.logo img{
+    margin-right: 10px;
+    cursor: pointer;
+    height: auto;
+    padding:10px 15px;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.menu li{
+    padding: 20px 15px;
+    font-size:16px;
+}
+.toggle{
+    font-size: 30px;
+    display: none;
+}
+.menu li.auth-icon{
+    display: inline-block;
+    font-size: 30px;
+    padding: 10px 15px 10px;
+}
+
+@media screen and (max-width: 1100px) {
+    nav{
+        display: block;
+        position: relative;
+        padding: 10px 15px;
+    }
+    .menu{
+        margin-top: 15px;
+        display: none;
+    }
+    .menu.active, .toggle{
+        display: block;
+    }
+    .menu li.auth-icon{
+        display: block;
+        font-size: 30px;
+        padding: 10px 15px 10px;
+        position: static;
+    }    
+    .toggle{
+        position: absolute;
+        right: 20px;
+        top: 10px;
+    }
+}

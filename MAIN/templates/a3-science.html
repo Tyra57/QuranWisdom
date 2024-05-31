@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% load static %}
+
+  {% block title %}
+  <title>Sciences In Quran</title>
+  <link rel="stylesheet" href="{% static 'css\main.css' %}">
+  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css\sciences.css' %}">
+  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+  <style>
+    .nav-link{
+      color: #38444d;
+      margin-top: 50px;
+      margin-left: 100px;
+      margin-right: 100px;
+      display: flex;
+    } 
+    .nav-link i{
+      font-size: 20px;
+    }
+    .nav-link a{
+      color: #38444d;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-link a:hover{
+      text-shadow: 2px 2px 8px #555;
+    }
+    .nav-link p{
+      display: inline-block;
+    }
+    .search-wrapper-science input::placeholder{
+      font-family: 'poppins', sans-serif;
+    }
+    .hero .search-wrapper-science input[type="search-science"]{
+      width: 100%;
+      font-family: 'poppins', sans-serif;
+    }
+    @media screen and (max-width: 768px) {
+      .nav-link{
+        margin-left: 40px;
+        margin-right: 0;
+      }
+    }
+</style>
+  {% endblock title %}
+
+  {% block content %}  
+
+ <!-- ======= Hero Section ======= -->
+ <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <h2><!--I'm <span>Jenny Wilson</span>--> Sciences In Quran</h2>
+        <p>Uncover the Quran's alignment with scientific knowledge and modern discoveries.</p>
+        <!--search bar sciences-->
+        <div class="search-wrapper-science">
+          <input type="search-science" id="search-science" placeholder="Search...">
+          <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Hero Section -->
+
+<!--nav link-->
+<div class="nav-link">
+  <div class="nav-link-content">
+    <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> <a href="{% url 'science' %}"> Sciences In Quran </a></p>
+  </div> 
+</div>
+
+<script>
+  // Define JSON data for science
+        var scienceData = [
+          {
+            "title": "Anemochory",
+            "chapter": "الحجر",
+            "verse": "Verse 22",
+            "url": "{% url 'science1' %}"
+          },
+          {
+            "title": "Celestial Bodies and Their Orbits",
+            "chapter": "الذاريات",
+            "verse": "Verse 7",
+            "url": "{% url 'science2' %}"
+          },
+          {
+            "title": "Cloud Layers",
+            "chapter": "النور",
+            "verse": "Verse 43",
+            "url": "{% url 'science3' %}"
+          },
+          {
+            "title": "Constellation Guide",
+            "chapter": "النحل",
+            "verse": "Verse 16",
+            "url": "{% url 'science4' %}"
+          },
+          {
+            "title": "Difficulty Breathing At Higher Altitude",
+            "chapter": "الأنعام",
+            "verse": "Verse 125",
+            "url": "{% url 'science5' %}"
+          },
+          {
+            "title": "Embryology",
+            "chapter": "المؤمنون",
+            "verse": "Verse 14",
+            "url": "{% url 'science6' %}"
+          },
+          {
+            "title": "Honey As a Cure",
+            "chapter": "النحل",
+            "verse": "Verse 69",
+            "url": "{% url 'science7' %}"
+          },
+          {
+            "title": "Male Chromosome Determines Gender",
+            "chapter": "النجم",
+            "verse": "Verse 45-46",
+            "url": "{% url 'science8' %}"
+          },
+          {
+            "title": "Milk Production In Livestock",
+            "chapter": "النحل",
+            "verse": "Verse 66",
+            "url": "{% url 'science9' %}"
+          },
+          {
+            "title": "Mountains as Stabilizing Pegs of the Earth's Surface",
+            "chapter": "النبإ",
+            "verse": "Verse 6-7",
+            "url": "{% url 'science10' %}"
+          },
+          {
+            "title": "Ozone Layer As a Shield",
+            "chapter": "الأنبياء",
+            "verse": "Verse 32",
+            "url": "{% url 'science11' %}"
+          },
+          {
+            "title": "The Pain Receptor",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science12' %}"
+          },
+          {
+            "title": "Plant Diversity According to Location and Climate",
+            "chapter": "عبس",
+            "verse": "Verse 26",
+            "url": "{% url 'science13' %}"
+          },
+          {
+            "title": "Ratio Of Land and Water on Earth's Surface",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science14' %}"
+          },
+          {
+            "title": "Role of Wind in Signaling the Arrival of Rain",
+            "chapter": "الفرقان",
+            "verse": "Verse 48",
+            "url": "{% url 'science15' %}"
+          },
+          {
+            "title": "Separation Between Different Types of Seas",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science16' %}"
+          },
+          {
+            "title": "The Complexity of the Universe Compared to Human Creation",
+            "chapter": "غاغر",
+            "verse": "Verse 57",
+            "url": "{% url 'science17' %}"
+          },
+          {
+            "title": "The Concept of Black Holes",
+            "chapter": "الطارق",
+            "verse": "Verse 1-3",
+            "url": "{% url 'science18' %}"
+          },
+          {
+            "title": "The Creation of All Things in Pairs",
+            "chapter": "يس",
+            "verse": "Verse 36",
+            "url": "{% url 'science19' %}"
+          },
+          {
+            "title": "The Darkness of the Deep Sea",
+            "chapter": "النور",
+            "verse": "Verse 40",
+            "url": "{% url 'science20' %}"
+          },
+          {
+            "title": "The Discovery of DNA and Genetic Information",
+            "chapter": "الفرقان",
+            "verse": "Verse 54",
+            "url": "{% url 'science21' %}"
+          },
+          {
+            "title": "The Discovery of Internal Waves in the Ocean",
+            "chapter": "النور",
+            "verse": "Verse 40",
+            "url": "{% url 'science22' %}"
+          },
+          {
+            "title": "The Expansion of The Universe",
+            "chapter": "الذاريات",
+            "verse": "Verse 47",
+            "url": "{% url 'science23' %}"
+          },
+          {
+            "title": "The Geopolymer Theory of the Pyramids' Construction",
+            "chapter": "القصص",
+            "verse": "Verse 38",
+            "url": "{% url 'science24' %}"
+          },
+          {
+            "title": "The Origin of Life from Water",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science25' %}"
+          },
+          {
+            "title": "The Process of Rain Formation",
+            "chapter": "الروم",
+            "verse": "Verse 48",
+            "url": "{% url 'science26' %}"
+          },
+          {
+            "title": "The Role of the Prefrontal Cortex in Cognitive Functions",
+            "chapter": "العلق",
+            "verse": "Verse 15-16",
+            "url": "{% url 'science27' %}"
+          },
+          {
+            "title": "The Rotation of Earth on Its Axis",
+            "chapter": "النمل",
+            "verse": "Verse 88",
+            "url": "{% url 'science28' %}"
+          },
+          {
+            "title": "The Seven Layers of the Earth",
+            "chapter": "الطلاق",
+            "verse": "Verse 12",
+            "url": "{% url 'science29' %}"
+          },
+          {
+            "title": "The Sun and The Moon Have Separate Orbits",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science30' %}"
+          },
+          {
+            "title": "The Sun's Light and the Moon's Reflection",
+            "chapter": "النساء",
+            "verse": "Verse 56",
+            "url": "{% url 'science31' %}"
+          },
+          {
+            "title": "The Universe's Origin from Smoke and the Big Bang",
+            "chapter": "فصلت",
+            "verse": "Verse 11",
+            "url": "{% url 'science32' %}"
+          },
+          {
+            "title": "Wind Helps Formation of Rain",
+            "chapter": "الحجر",
+            "verse": "Verse 22",
+            "url": "{% url 'science33' %}"
+          }
+        ];
+        document.addEventListener('DOMContentLoaded', function() {
+        // Function to generate HTML for science links
+        function generateScienceLinks(scienceList) {
+          var html = '';
+          scienceList.forEach(function(science) {
+            html += '<div class="science-link">';
+            html += '<a href="' + science.url + '">';
+            html += '<div class="card-sciences">';
+            html += '<p>' + science.title + '</p>';
+            html += '<p>' + science.chapter + '</p>';
+            html += '<p>' + science.verse + '</p>';
+            html += '</div></a></div>';
+          });
+          return html;
+        }
+        // Function to perform search
+        function searchScience(query) {
+          var results = [];
+          query = query.toLowerCase();
+          
+          scienceData.forEach(function(science) {
+            if (science.title.toLowerCase().includes(query) || science.chapter.toLowerCase().includes(query) || science.verse.toLowerCase().includes(query)) {
+              results.push(science);
+            }
+          });
+
+          return results;
+        }
+        // Attach an event listener to the search input
+  var searchInput = document.getElementById('search-science');
+  searchInput.addEventListener('input', function() {
+    var query = this.value; // Get the current value of the input field
+    updateDisplay(query); // Update the display based on the search query
+  });
+
+        // Function to update display based on search results
+        function updateDisplay(query) {
+          var searchResults = searchScience(query);
+          var scienceContainer = document.querySelector('.container-sciences');
+          scienceContainer.innerHTML = generateScienceLinks(searchResults);
+        }
+
+        // Example usage:
+        updateDisplay(""); // Display all science links by default
+      });
+  </script>
+<div class ="container-sciences" style="margin-bottom: 50px;">
+
+  
+
+</div>  
+
+{% endblock content %}
