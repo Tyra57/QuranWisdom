@@ -4,7 +4,7 @@
 Nur Athirah binti Zaaba (2011156)
 
 ## Project Title 
-### Quranic Wisdom
+Quranic Wisdom Web Application
 
 ## Project ID
-### SD222
+SD222
