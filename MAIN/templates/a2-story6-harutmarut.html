@@ -1,63 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Harut and Marut</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
+    <style>
+      .sidenav{
+   width: 200px;
+   position: fixed;
+   height: 100%;
+   left: 0;
+   top: 806px;
+   z-index: 2;
+   overflow-x: hidden;
+ }
+ .sidenav a{
+   padding: 10px 0px 10px 30px;
+   text-decoration: none;
+   font-size: 14px;
+   color: #38444d;
+   display: block;
+ }
+ .sidenav a:hover{
+   color: #004085;
+ }
+ .story1{ 
+   padding: 50px 150px 100px 60px;
+   margin-left: 200px;
+   align-items: center;
+   text-align: justify;
+ }
+ .story1 .h4{
+   text-align: center;
+ }
+ .story1 .p{
+   text-align: justify;
+ }
 
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
-
+ hr .line{
+   border: 0;
+   height: 2px;
+   width: 100%;
+   margin: 15px 0 10px;
+ }
+.toggle-story {
+ display: none;
+}
+ /* Adjustments for mobile view */
+ @media screen and (max-width: 768px) {
+   .sidenav {
+     display: none;
+   }
+ /* Adjust content padding to not overlap with the sidenav */
+ .story1 {
+   padding: 20px;
+   margin-bottom: 60px; /* Add space at the bottom for sidenav */
+   margin-left: 0;
+ }
+}
+@media screen and (max-width: 768px) {
+   .nav-to-right, .nav-line{
+     margin-left: 20px;
+   }
+   .nav-link{
+     margin-left: 20px;
+     margin-right: 0;
+   }
+ }
+   </style>
+   {% endblock title %}
+   {% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -71,7 +87,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Story-Harut-and-Marut')" data-slug="Story-Harut-and-Marut"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -145,17 +161,7 @@
         <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
     {% endif %}
   </div>
-  
-    <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
-        
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        </script>
-  
+
   <script src="{% static 'js/trialforum.js' %}"></script>           
   
   </div>
@@ -163,110 +169,241 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://images.immediate.co.uk/production/volatile/sites/7/2016/01/GettyImages-567940171-04e94eb.jpg?quality=90&resize=600,400);">
   <h1>Harut and Marut</h1>
 </div>
-
-      <!--Story of Luqman content-->
+<div class="sidenav"> 
+  <ul>
+    <a href="#intro">Introduction to Harut and Marut</a>
+    <a href="#magic">Discovery and Misuse of Magic</a>
+    <a href="#role">The Role of Solomon (Sulaiman) and Misconceptions</a>
+    <a href="#ring">Sulaiman's Ring and the Deception of Devils</a>
+    <a href="#spread">Preservation and Spread of Magic</a>
+    <a href="#impact">Magic and Its Impact on Society</a>
+    <a href="#notes">Footnotes</a>
+    <a href="#ref">References</a>
+  </ul>
+</div>
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Harut and Marut</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
+      <h4 id="intro">Introduction to Harut and Marut</h4><br>
+      <p>وَٱتَّبَعُوا۟ مَا تَتْلُوا۟ ٱلشَّيَـٰطِينُ عَلَىٰ مُلْكِ سُلَيْمَـٰنَ ۖ وَمَا كَفَرَ سُلَيْمَـٰنُ وَلَـٰكِنَّ ٱلشَّيَـٰطِينَ كَفَرُوا۟ يُعَلِّمُونَ ٱلنَّاسَ ٱلسِّحْرَ وَمَآ أُنزِلَ عَلَى ٱلْمَلَكَيْنِ بِبَابِلَ هَـٰرُوتَ وَمَـٰرُوتَ ۚ وَمَا يُعَلِّمَانِ مِنْ أَحَدٍ حَتَّىٰ يَقُولَآ إِنَّمَا نَحْنُ فِتْنَةٌۭ فَلَا تَكْفُرْ ۖ فَيَتَعَلَّمُونَ مِنْهُمَا مَا يُفَرِّقُونَ بِهِۦ بَيْنَ ٱلْمَرْءِ وَزَوْجِهِۦ ۚ وَمَا هُم بِضَآرِّينَ بِهِۦ مِنْ أَحَدٍ إِلَّا بِإِذْنِ ٱللَّهِ ۚ وَيَتَعَلَّمُونَ مَا يَضُرُّهُمْ وَلَا يَنفَعُهُمْ ۚ وَلَقَدْ عَلِمُوا۟ لَمَنِ ٱشْتَرَىٰهُ مَا لَهُۥ فِى ٱلْـَٔاخِرَةِ مِنْ خَلَـٰقٍۢ ۚ وَلَبِئْسَ مَا شَرَوْا۟ بِهِۦٓ أَنفُسَهُمْ ۚ لَوْ كَانُوا۟ يَعْلَمُونَ ١٠٢وَلَوْ أَنَّهُمْ ءَامَنُوا۟ وَٱتَّقَوْا۟ لَمَثُوبَةٌۭ مِّنْ عِندِ ٱللَّهِ خَيْرٌۭ ۖ لَّوْ كَانُوا۟ يَعْلَمُونَ ١٠٣</p>
+      <br>
+      <p>Allah the Almighty says: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us). "And from these (angels) people learn that by which they cause separation between man and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter. And how bad indeed was that for which they sold their own selves, if they but knew. And if they had believed and guarded themselves from evil and kept their duty to Allah, far better would have been the reward from their Lord, if they but knew!}. (Al-Baqarah, 102, 103)</p> 
+      <br>
+      <hr class="line">
+      <br>
+      <h4 id="magic">Discovery and Misuse of Magic</h4><br>
+      <p>Narrated Al-`Ufi in his interpretation on the authority of Ibn `Abbas (May Allah be pleased with him) pertaining to Allah's Statement {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us).”...} When Sulaiman lost his kingdom, great numbers from among mankind and the jinn renegaded and followed their lusts. But, when Allah restored to Sulaiman his kingdom and the renegade came to follow the Straight Path once again, Sulaiman seized their holy scriptures which he buried underneath his throne. Shortly after, Sulaiman (Peace be upon him) died. In no time, the men and the Jinn uncovered the buried scriptures and said: This was a book revealed by Allah to Sulaiman who hid it from us. They took it as their religion and Allah the Almighty revealed His Saying: {And when there came to them a Messenger from Allah confirming what was with them, a party of those who were given the Scripture threw away the Book of Allah behind their backs as if they did not know!}. (Al-Baqarah, 101) and they followed what the devils gave out, i.e. musical instruments, play and all that blocks the remembrance of Allah.</p>
+      <br>
+      <hr class="line">
+      <br>
+      <h4 id="role">The Role of Solomon (Sulaiman) and Misconceptions</h4><br>
+      <p>Narrated Ibn Abu Hatim: I was told by Abu Sa' id Al-Ashaj after Abu Usamah after Al-A' mash after Al-Minhal after Sa'id Ibn Jubair after Ibn `Abbas (May Allah be pleased with him) as saying: Asif was Sulaiman's scribe. He knew the Greatest Name of Allah and used to write what he was ordered to by Sulaiman, then, bury it underneath the throne. After Sulaiman's death, the devils got it out and wrote between each two lines magical and blasphemous things. They said: "this is what Sulaiman used to apply and act upon." The ignorant among the people regarded Sulaiman as a disbeliever and continued to insult him till Muhammad (Peace be upon him) was sent with the Glorious Qur'an that reads: {They followed what the, Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved}.</p>
+      <br>
+      <p>Narrated Ibn Jarir: I was told by Al-Qasim after Hussein Ibn Al-Hajjaj after Abu Bakr after Shahr Ibn Hawshab2 as saying: The devils used to write sorcery down when Sulaiman was absent. "They wrote: whosoever wants to do such and such, he should stand facing the sun and say such and such. And, whosoever wants to do such and such, he should stand giving his back to the sun and say such and such." They wrote this in a book titled: "This is what has been written by Asif Ibn Barkhiya by the order of King Sulaiman Ibn Dawud: from the treasures of knowledge." Then, they buried it under Sulaiman's throne. When Sulaiman died, Satan established himself as an orator and said: "O people! Sulaiman was not a prophet; he was only a sorcerer! Go and seek his sorcery in his dwellings and luggage." And he led them to the buried "treasure". The people said: "By Allah! Sulaiman was a sorcerer who subjected us through his magic." The believers from among them said: "Nay, he was a faithful Prophet." When Prophet Muhammad (Peace be upon him) was sent and he mentioned Dawud and Sulaiman, the Jews said: "Muhammad confounds the truth with falsehood: he puts Sulaiman with the Prophets while he was just a sorcerer who was carried by the wind. Thereupon, Allah the Almighty revealed: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marutbut neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us). "And from these (angels) people learn that by which they cause separation between man and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter. And how bad indeed was that for which they sold their own selves, if they but knew}.</p>
+      <br>
+      <p>Narrated Ibn Jarir: I was told by Muhammad Ibn`Abdel A`la As-San`ani that he was told by Al-Mu`tamir Ibn Sulaiman who said: I heard ` Imran Ibn Jarir who narrated from Abu Majliz as saying: Sulaiman (Peace be upon him) took from every living creature a covenant. So when any person gets afflicted with anything, he (Sulaiman) asks Allah with that covenant and the person recovers. Unfortunately, the people added to this sorcery and magic and said: this is what Sulaiman Ibn Dawud used to act upon. Thereupon, Allah the Almighty revealed His Saying: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did lot disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came town at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us)." And from these (angels) people earn that by which they cause separation between man and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter. And how bad indeed was that for which they sold their own selves, if they but knew}.</p>
+      <br>
+      <hr class="line">
+      <br>
+      <h4 id="ring">Sulaiman's Ring and the Deception of Devils</h4><br>
+      <p>Narrated Ibn Jarir: I was told by Abu As-Sa'ib Salamah Ibn Junadah As- Sawa'i after Abu Mu`awiyah after Al-A`mash after Al-Minhal after Sa`id Ibn Jubair on the authority of Ibn `Abbas (May Allah be pleased with him) as saying: When Sulaiman wanted to answer the call of nature or to make love with any of his wives, he used to give his ring to a woman called Al-Jaradah. When Allah the Almighty wanted to afflict Sulaiman, he gave his ring to that woman. Afterwards, Satan came to her in the form of Sulaiman and took the ring from her. When Satan put the ring on, all mankind, the jinn and Devils submitted to him. Then, Sulaiman came seeking his ring from her and she said: "You are a liar, you are not Sulaiman." Thus, Sulaiman knew that it was a test from Allah the Almighty. Upon this, the devils were free to do whatever they wished. So, they wrote down books of black magic and blasphemy which they buried underneath the throne of Sulaiman. After Sulaiman's death, they uncovered these books and said to the people: Verily, Sulaiman used to prevail with the help of these books. Consequently, the people declared their innocence of Sulaiman and declared him to be a disbeliever till the advent of Prophet Muhammad (Peace be upon him) who came with the Qur'anic Verse that reads: {Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved}. Then, Ibn Jarir said: I was told by Ibn Hamid after Jarir after Husain Ibn `Abdur Rahman after `Imran as saying: While we were with Ibn `Abbas (May Allah be pleased with them), a man came and Ibn `Abbas asked him: Where do you come from? The man said: from Iraq. Ibn `Abbas asked: which city? The man said: Kufa. Ibn `Abbas asked: What is the latest news there? The man said: I left them talking about `Ali's departing for them. Ibn `Abbas (May Allah be pleased with him) said: how dare you say so! If we felt that (he is departing us for the people of Kufa), we would not marry his women, or divide his properties among us. However, I will tell you the truth: the angels used to descend on the clouds and mention this or that matter decreed in the Heaven. The devils listen stealthily to such a matter, come down to inspire the soothsayers with it, and the latter would add to it one hundred lies of their own. The people believe in them and regard them trustworthy. Allah the Almighty informed Sulaiman with the matter and enabled him to bury these lies under his throne. After his death, one of the devils said: I can lead you to  Sulaiman's dearest and most precious treasure. It is under his throne. Consequently, they uncovered it and said: this is magic. Afterwards, it continued to be copied and acted upon and what the Iraqi people practice nowadays is nothing but its remnants. Allah the Almighty revealed: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us). " And from these (angels) people learn that by which they cause separation between man, and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter}.</p>
+      <br>
+      <hr class="line"><br>
+      <h4 id="spread">Preservation and Spread of Magic</h4><br>
+      <p>As-Sadiy said: Allah's Saying: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved}, i.e. the devils used to listen stealthily to the talks of the angels concerning what happens to those on earth: death, unseen matters or divine ordainments. Then, they come down to inspire the soothsayers with it and the latter would tell the people with it. The people believe in them and regard them trustworthy. Time after time, the soothsayers trusted the devils who later on used to add to each word one-hundred lies of their own. The people started to write down these matters and it circulated among the Children of Israel that the Jinn know the Unseen. Sulaiman moved quickly and gathered all these writings and put them in a chest and buried it under his throne. All the devils who tried to even approach the chest were burnt alive. Sulaiman declared that he would behead anyone who claims that the devils know the Unseen. After Sulaiman's death and that of the godly-scholars who knew it well, a devil came in the form of a human being to the people and said: I will lead you to an everlasting treasure that will never run out. He ordered them to dig under Sulaiman's throne and he took a side. He said to them: kill me if you find nothing. They dug it and found these writings. Thereupon, the devil said: Only with this magic, Sulaiman could overcome mankind, the Jinn and birds. Then, he flew away. It was rumored and circulated that Sulaiman had been a sorcerer. The Children of Israel kept these writings and disputed with Prophet Muhammad (Peace be upon him) regarding them. But Allah the Almighty revealed to him His Saying: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved}.</p>
+      <br>
+      <p>Narrated Ar-Rabi' Ibn Anas: the Jews used to ask Prophet Muhammad (Peace be upon him) about matters from the Torah, and every time they ask  him, Allah reveals to him that with which he defeats and overcomes them. Thereupon, they said: Muhammad knows what has been revealed to us better than we do! Then, they asked him about sorcery and Allah revealed His Statement: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut}. And He informed His Prophet Muhammad (Peace be upon him) that the devils wrote a book about sorcery and soothsaying and buried it under Sulaiman's throne. Verily, Sulaiman was not knowledgeable about the Unseen. When he died, the devils got that magic out and deceived the people by saying: this is the knowledge which Sulaiman used to secretly keep from you. Prophet Muhammad (Peace be upon him) informed the Jews of that narration and they went out lowering their heads defeated and humiliated.</p>
+      <br>
+      <p>Mujahid said pertaining to Allah's Statement: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut}, the devils used to listen stealthily to the discussions of the angels and add to what they heard two hundred lies. Then, Sulaiman seized what they wrote and after his death they regained it and taught it to the people, it was nothing but black magic.</p>
+      <br>
+      <p>Sa'id Ibn Jubair said: Sulaiman used to look for and capture the magic of the devils and keep it buried under his throne. The devils could not reach it and thus they inspired to the people that it is the knowledge with which Sulaiman was able to overcome the Jinn, the wind, etc., and that it is buried under his own throne. Afterwards, the people got it out and practiced it. Later, the people of the Hejaz said: Sulaiman used to practice sorcery. Upon this, Allah the Almighty revealed His Saying: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut}. Muhammad Ibn Ishaq Ibn Yasar said: when the devils knew of the death of Sulaiman, they wrote down types of sorcery (magic) as thus: to fulfill such and such matters, practice such and such (procedures). They gathered all these in a book and sealed it with a ring bearing the inscription found on Sulaiman's ring and titled it with: This is what was written by Asif Ibn Barkhiya by order of King Sulaiman Ibn Dawud. Then, they buried it under the throne (of Sulaiman). After some time, the Children of Israel got it out and said: Verily, Sulaiman ruled over us only with this and they diffused sorcery among the people. When Prophet Muhammad (Peace be upon him) mentioned Sulaiman Ibn Dawud as one of the former Messengers sent by Allah the Almighty, the Jews in Madinah said: Amazingly Muhammad claims that Sulaiman Ibn Dawud was a  Prophet, by Allah, he was nothing but a sorcerer. Thereupon, Allah the Almighty revealed His Saying: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon). Sulaiman did not disbelieve, but the Shayatin (devils) disbelieved, teaching men magic and such things that came down at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us)." And from these (angels) people learn that by which they cause separation between man and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter. And how bad indeed was that for which they sold their own selves, if they but knew).</p>
+      <br>
+      <hr class="line"><br>
+      <h4 id="impact">Magic and Its Impact on Society</h4><br>
+      <p>Narrated Ibn Abu Hatim: I was told by `Isam Ibn Rawwad after Adam after Al-Mas`udi after Ziyad the freed slave of Ibn Mus` ab after Al-Hasan pertaining to Allah's Statement: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon)}, as saying: one-third of poetry, one-third of sorcery (magic), and one-third of soothsaying. And, he said: I was told by AI-Hasan Ibn Ahmed after Ibrahim Ibn `Abdullah Ibn Bshshar Al-Wasiti after Surur Ibn Al-Mughirah after `Abbad Ibn Mansur after Al- Hasan pertaining to Allah's Statement: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon)}, as saying: they were the Jews who followed what they gave out in the lifetime of Sulaiman (Peace be upon him). Prior to that the people knew sorcery, but it was only followed in the lifetime of Sulaiman.</p>  
+      <br>
+      <p>That was a summary of the sayings and narrations of the godly earlier scholars concerning this and it is obvious that there is no clear contradiction between any of them, may Allah guide us all to the Right and Straight Path of His!</p>
+      <br>
+      <p>Allah's Statement: {They followed what the Shayatin (devils) gave out (falsely of the magic) in the lifetime of Sulaiman (Solomon)}, i.e. the Jews who were given an earlier Divine Scripture gave their backs to it and rejected Prophet Muhammad (Peace be upon him) and followed {what the  Shayatin (devils) gave out (falsely of the magic)},what the Shayatin (devils) gave out (falsely of the magic), i.e. what was narrated and related by the devils {in the lifetime of Sulaiman (Solomon)}.</p>  
+      <br>
+      <p>It is true that magic existed before the time of Sulaiman Ibn Dawud (Peace be upon them) because magicians were found in the lifetime of Musa (Moses) (Peace be upon him) and that Sulaiman came after Musa (Peace be upon them both). Allah the Almighty says: {Have you not thought about the group of the Children of Israel after (the time of) Musa (Moses)? When they said to a Prophet of theirs, "Appoint for us a king and we will fight in Allah's Way." He said, "Would you then refrain from fighting, if fighting was prescribed for you?" They said, "Why should we not fight in Allah's Way while we have been driven out of our homes and our children (families have been taken as captives)?" But when fighting was ordered for them, they turned away, all except a few of them. And Allah is All-Aware of the Zalimun (polytheists and wrong-doers)}. (Al- Baqarah, 246) then, Allah mentioned the story in which, {and Dawud (David) killed Jalut (Goliath), and Allah gave him [Dawud (David)] the kingdom [after the death of Talut (Saul) and Samuel] and Al-Hikmah (Prophethood), and taught him of that which He willed}. (Al-Baqarah, 251) and, the people of Salih who existed before Ibrahim (Peace be upon him) said to their Prophet Salih: {You are only of those bewitched!}. (Ash-Shu' ara', 153)</p>
+      <br>
+      Allah the Almighty says: {and such things that came down at Babylon to the two angels, Harut and Marut but neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us)." And from these (angels) people learn that by which they cause separation between man and his wife), i.e. the Jew falsely claimed that Allah Almighty revealed magic on the tongues of Gabriel and Michael to Sulaiman Ibn Dawud, but Allah belied them and showed their falsehood. Moreover, Allah informed His Messenger Muhammad (Peace be upon him) that neither Gabriel, nor Michael has descended with magic and He declared the innocence of Sulaiman (Peace be upon him) from sorcery and black magic. Allah told the whole people that magic is nothing but the work of devils who teach it to the people in Babylon. And, that the two men who used to teach it to the people there were called Harut and Marut.
 
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
+      <br>
 
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+The Related Hadith (And Comments)
+<br>
+Narrated Imam Ahmed (May Allah rest his soul) in his Musnad: I was told by Yahya Ibn Bakir after Zuhair Ibn Muhammad after Musa Ibn Iubair after Nafi after `Abdullah Ibn `Umar (May Allah be pleased with them) that he heard Allah's Messenger (Peace be upon him) as saying: "When Adam (Peace be upon  him) was put down on earth, the angels said: 0 Lord! {Will You place therein those who will make mischief therein and shed blood, -while we glorify You with praises and thanks and sanctify You}. (Al-Baqarah, 30) They continued: Our Lord! We obey You more than man does. Allah the Almighty said to them: Appoint two angels from amongst you to descend to earth. The angels said: Our Lord! (We chose) Harut and Marut. They went down to earth where the flower appeared to them in the form of the most beautiful woman on earth. They asked her to have sexual intercourse with them. But, she said: only after you disbelieve in Allah. They refused and she went away for a while. Then, she came back holding a child in her arms and they asked her for the second time. She said: first, you must kill this boy. They refused to and she went away for a while and then, came back holding a glass of wine. They asked her for the third time. She said: First, you must drink this glass of wine. They drank the wine, committed adultery with her and finally killed the boy. When they restored their conscience, the woman said: By Allah! After you had drunk the wine, you committed all that which you refused to do at first. Thereupon, they were given the choice between receiving the torment of this like or that of the Hereafter. They' chose that of the present life."
+
+<br>
+
+(Narrated by Imam Ahmed) The same was narrated by Abu Hatim Ibn Hibban in his Sahih after Al-Hasan after Sufyan after Abu Bakr Ibn Abu Shaibah after Yahya Ibn Bakir. However, this Hadith is an Unfamiliar3 one from this Chain of Transmission.
+
+ 
+<br>
+All its narrators are trustworthy but the one named Musa Ibn Iubair.
+
+<br>
+
+Very Important:
+
+<br>
+
+Many scholars and transmitters narrated various stories and narrations pertaining to the story of Harut and Marut, but all the details they mentioned could be traced down to the narrations made by the Children of Israel. However, there is not a single Hadith or Narration that can be traced down to Prophet Muhammad (Peace be upon him), the infallible one who says nothing but the truth. In addition, the text of the Glorious Qur'an does not relate this story in details, and thus we believe in what is mentioned in the Glorious Qur'an as it is without any increase or decrease. Finally, Allah knows best!
+
+<br>
+
+Allah Almighty says: {But neither of these two taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us) "}, Ibn 'Abbas (May Allah be pleased with him) said: they used to warn anyone who came to them to learn magic and say to him: {We are only for trial, so disbelieve not (by learning this magic from us)}, that they knew what is good, bad, belief and disbelief and thus they knew that magic is of disbelief. Ibn 'Abbas (May Allah be pleased with him) continued: if they could not dissuade him, they told him to go to such and such place. There he could find Satan who teaches him. The same time one is taught magic, his belief (symbolized as light) gets out of his body and he could see it flying away in the sky. Upon this, he would say: woe to me! In addition: Al- Hasan Al-Basri said: the two angels were sent with magic to teach the people as a test for them and Allah took their covenant that they do not teach anybody {till they had said, "We are only for trial, so disbelieve not (by learning this magic from us)"}. (Narrated by Ibn Abu Hatim)
+
+<br>
+
+Narrated Qatadah: The Covenant was taken from them that they don't teach anyone till they say: {We are only for trial, so disbelieve not (by learning this magic from us)}. Moreover, As-Sadiy said: they used to warn anyone who came to them to learn magic and say to him: {We are only for trial, so disbelieve not (by learning this magic from us)}. But, if he insisted, they would say: Go to that pile of ashes and "squeeze the lemon thereon". If the man goes and does what he was ordered, he would see a light coming out of that ashes and flies till it reaches the sky -verily, this is belief. Instead, there would come a black object that would look like smokes and enters his ears and the whole of his body -verily, this is Allah's Wrath. After that, the man tells them of what happened and they consequently teaches him magic. This is the interpretation of Allah's Saying: {But neither of these two (angels) taught anyone (such things) till they had said, "We are only for trial, so disbelieve not (by learning this magic from us)." And from these (angels) people learn that by which they cause separation between man and his wife, but they could not thus harm anyone except by Allah's Leave. And they learn that which harms them and profits them not. And indeed they knew that the buyers of it (magic) would have no share in the Hereafter. And how bad indeed was that for which they sold their own selves, if they but knew}.
+
+ 
+<br>
+In the interpretation of this Qur'anic Verse, Sunaid Ibn Hajjaj narrates after Ibn Juraij his saying: there is no one who practices magic but a disbeliever. As for the word "trial", it means a test and an ordeal. Some scholars found a textual proof in this Verse that whosoever practices magic; he becomes a disbeliever. This is supported by the Prophetic Hadith that has been narrated by Al-Hafiz Abu Bakr Al-Bazzar after Muhammad Ibn Al-Muthanna after Mu'awiyah after Al- A'mash after Ibrahim after Hammam on the authority of 'Abdullah as saying: "Whosoever attends himself to (or comes to) a soothsayer or a magician and believes in what he says: he will become a disbeliever in what has been sent to Muhammad (Peace be upon him) ". (An Authentic Hadith)
+
+ 
+<br>
+Allah the Almighty says: {And from these (angels) people learn that by which they cause separation between man and his wife}, i.e. the people learns from Harut and Marut the magic by which they cause separation between man and his wife though they (the man and his wife) have some kind of affinity and passion. This is caused by cunning of the devils as transmitted in Imam Muslim's Sahih from the Hadith narrated by Jabir Ibn 'Abdullah that the Prophet (Peace be upon him) says: "Iblis places his throne upon water; he then sends detachments (for creating dissension); the nearer to him in rank are those who are most notorious in creating dissension. One of them comes and says: I did so and so. And he says: You have done nothing. Then one amongst them comes and says: I did not spare so and so until I sowed the seed of discord between a husband and a wife. The Satan goes near him and says: 'You have done well. "Al-A'mash said: "He then embraces him." The dissension between a husband and his wife can be created through magic in that the devil let each one of them imagine something bad -a view, or manner, etc. about the other.
+
+<br>
+
+Allah the Almighty says: {But they could not thus harm anyone except by Allah's Leave}, Abu Sufyan Ath-Thawri said: they could not thus harm anyone except by Allah's Decree. In addition, Muhammad Ibn Ishaq said: they could not thus harm anyone except in case Allah enables them to do so.
+
+ 
+<br>
+Al-Hasan Al-Basri (May Allah be pleased with him) said: {But they could not thus harm anyone except by Allah's Leave}, i.e. whomsoever Allah wants to be affected, he will be affected. And, whomsoever Allah does not want to be affected, he will not be affected. In addition, they cannot harm anyone except by Allah's Leave and Decree.
+
+ <br>
+
+Allah the Almighty says: {And they learn that which harms them and profits them not}, i.e. they learn that which harms their religion and faith and profits them not. Allah says: {And indeed they knew that the buyers of it (magic) would have no share in the Hereafter}, i.e. the Jews who took magic instead of following Prophet Muhammad (Peace be upon him) knew that anyone who did as what they have done, he would have not share in the Hereafter. Allah Almighty says: {And how bad indeed was that for which they sold their own selves, if they but knew. And if they had believed and guarded themselves from evil and kept their duty to Allah, far better would have been the reward from their Lord, if they but knew!}, that they took magic instead of following Prophet Muhammad (Peace be upon him), {And if they had believed and guarded themselves from evil and kept their duty to Allah, far better would have been the reward from their Lord} , i. e. if they had believed in Allah and His Messengers and did not violate His Boundaries, they would have received a far better reward from Allah Almighty. This is compatible with Allah's Saying that reads: {But those who had been given (religious) knowledge said: "Woe to you! The Reward of Allah (in the Hereafter) is better for those who believe and do  righteous good deeds, and this none shall attain except those who are As Sabirun (the patient in following the truth) "}. (Al-Qasas, 80)
+
+ <br>
+
+Some scholars found textual proof that a magician is a disbeliever in the Qur'anic Verse that reads: {And if they had believed and guarded themselves from evil and kept their duty to Allah}. Other scholars viewed that a magician is not a disbeliever, but his neck must be cut off. `Amr Ibn Dianr narrated from Bajabla Ibn `Abdah as saying: `Umar Ibn Al-Khattab ordered every magician and witch to be killed. Thereupon, they killed three witches. In addition, it is true that the Mother of the Faithful, Hafsah was bewitched by a maid. Consequently, Hafsah ordered that she had to be killed. Moreover, Imam Ahmed Ibn Hanbal said: it was transmitted from three of the Prophet's Companions that a magician must be killed. Besides, At-Tirmidhi narrated from Isma'il Ibn Muslim after Al-Hasan after Jundub Al-Azdi as saying: Allah's Messenger (Peace be upon him) says: "The Prescribed Penalty set for a magician is a blow with the sword.”
+<br>
+It was narrated that Al-Walid Ibn 'Uqbah had a magician who used to make shows before him. He used to cut off a man's head, then calls it to get back to its proper place. The people said: Glory be to Allah! The magician revives the dead. However, a man from the pious migrants saw him and intended something. The next day he came and cut the magician's head and said: if he is truthful, he can revive himself! And, he recited Allah's Statement that reads: {Will you submit to magic while you see it}. (Al-Anbiya', 4) Consequently, Al-Walid raged because the migrant did not ask for his permission first (to kill the magician), he imprisoned him for a while, then set him free. Allah knows best!
+
+ <br>
+
+Imam Abu Bakr Al-Khallal said: One of the princes used to have a magician who makes shows of his magic and one day Jundub came and killed him saying: I believe he was a magician.      
+<br>
+<hr class="line"><br>      
+<h4 id="notes">Footnotes:</h4>
+      <p>2 Shahr Ibn Hawshab is a Weak (i.e. not trustworthy) Narrator.
+<br>
+        3 The Unfamiliar Hadith: That is narrated only by one narrator even if he were in one class. Many scholars name the Unfamiliar Hadith as (the Single). (Translator)</p>
+          <p>Stories of The Quran, by Ibn Kathir</p>
         <br>
-        <h4>References:</h4>
+          <h4 id="ref">References:</h4>
           <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-  </body>
-
-</html>
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
+        }
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
+            }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
+        });
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}
