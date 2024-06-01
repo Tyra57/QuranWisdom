@@ -1,97 +1,64 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Cloud Layers</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-</head>
-
-<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
-  <!--Navigation Bar-->
-  <nav>
-   <div class="logo">
-     <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-   </div>
-   <div class="toggle">
-       <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-   </div>
-     <ul class="menu">
-       <li><a href="{% url 'home' %}">Home</a></li>
-       <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-       <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-       <li><a href="{% url 'doa' %}">Dua'</a></li>
-       <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-       <li><a href="{% url 'quiz' %}">Quiz</a></li>
-       {% if user.is_authenticated %}
-       <!-- <div class="user-menu">  -->
-     <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
-   
-     <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
-       <div class="sub-menu-container">
-         <div class="sub-menu">
-           <!--close icon-->
-             <div class="close-button">
-               <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
-             </div>   
-             
-             <a href="{% url 'profile' %}" class="user-info-link"> 
-               <div class="user-info">
-                 <img src="{% static 'assets\usermenuimg\user.png' %}">
-                 <h3>Nur Athirah</h3>
-             </div>
-             </a>
-             
-             <hr>
-           
-             <a href="{% url 'update_profile' %}" class="sub-menu-link">
-               <img src="{% static 'assets\usermenuimg\profile.png' %}">
-               <p>Edit Profile</p>
-               <span></span>
-             </a>
-               
-             <a href="#" class="sub-menu-link">
-               <img src="{% static 'assets\usermenuimg\setting.png' %}">
-               <p>Settings & Privacy</p>
-               <span></span>
-             </a>
-               
-             <a href="#" class="sub-menu-link">
-               <img src="{% static 'assets\usermenuimg\help.png' %}">
-               <p>Help & Support</p>
-               <span></span>
-             </a>
-               
-             <a href="{% url 'logout' %}" class="sub-menu-link">
-               <img src="{% static 'assets\usermenuimg\logout.png' %}">
-               <p>Logout</p>
-               <span></span>
-             </a>
-         </div>
-       </div>
-     </div>
-       {% else %}
-       <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-       <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-       {% endif %}
-     </ul>
-   </nav>
-  
- <!--menu script-->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- <script src="{% static 'js\main.js' %}"></script>
-
-
+    <style>
+      .sciences img{
+        width: 600px;
+        height: 345px;
+      }
+      .sciences{ 
+        padding: 50px 150px 50px 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: justify;
+      }
+      .reference{
+        display: flex;
+        flex-direction: column;
+        padding: 0px 100px 100px 150px;
+      }
+      .sciences h1{
+        margin-bottom: 10px;
+      }
+    
+      .reference h4{
+        color:#555;
+      }
+      
+      .reference p{
+        font-weight: 300;
+      }
+    
+          @media screen and (max-width: 768px) {
+        .nav-to-right, .nav-line{
+          margin-left: 20px;
+        }
+        .nav-link{
+          margin-left: 20px;
+          margin-right: 0;
+        }
+        .sciences{
+          padding: 50px 20px 50px 20px;
+        }
+        .sciences img{
+          width: 350px;
+          height: 200px;
+        }
+        .reference{
+          padding: 0px 20px 100px 20px;
+        }
+      }
+      </style>
+      {% endblock title %}
+    {% block content %}  
 
 <!--nav link-->
 <div class="nav-link">
@@ -190,140 +157,102 @@
       <div class="sciences">
 
         <h1>Cloud Layers</h1>
-        <img src="https://scied.ucar.edu/sites/default/files/styles/extra_large/public/images/SkySci_.cloud_chart_1.png.webp?itok=1haaurF1" width="600" height="345"><br>
+        <img src="https://scied.ucar.edu/sites/default/files/styles/extra_large/public/images/SkySci_.cloud_chart_1.png.webp?itok=1haaurF1"><br>
         <h4>Quranic Verse</h4><br>
-        <p>إِنَّ ٱلَّذِينَ كَفَرُوا۟ بِـَٔايَـٰتِنَا سَوْفَ نُصْلِيهِمْ نَارًۭا كُلَّمَا نَضِجَتْ جُلُودُهُم بَدَّلْنَـٰهُمْ جُلُودًا غَيْرَهَا لِيَذُوقُوا۟ ٱلْعَذَابَ ۗ إِنَّ ٱللَّهَ كَانَ عَزِيزًا حَكِيمًۭا ٥٦</p>
-        <p>“Surely those who reject Our signs, We will cast them into the Fire. Whenever their skin is burnt completely, We will replace it so they will ˹constantly˺ taste the punishment. Indeed, Allah is Almighty, All-Wise.”</p>
+        <p>أَلَمْ تَرَ أَنَّ ٱللَّهَ يُزْجِى سَحَابًۭا ثُمَّ يُؤَلِّفُ بَيْنَهُۥ ثُمَّ يَجْعَلُهُۥ رُكَامًۭا فَتَرَى ٱلْوَدْقَ يَخْرُجُ مِنْ خِلَـٰلِهِۦ وَيُنَزِّلُ مِنَ ٱلسَّمَآءِ مِن جِبَالٍۢ فِيهَا مِنۢ بَرَدٍۢ فَيُصِيبُ بِهِۦ مَن يَشَآءُ وَيَصْرِفُهُۥ عَن مَّن يَشَآءُ ۖ يَكَادُ سَنَا بَرْقِهِۦ يَذْهَبُ بِٱلْأَبْصَـٰرِ ٤٣</p>
+        <p>“Do you not see that Allah drives clouds? Then He brings them together, then He makes them into a mass, and you see the rain emerge from within them. And He sends down from the sky, from mountains (of clouds) within it, hail, striking with it whom He wills and turning it away from whom He wills. The flash of its lightning almost takes away the eyesight. ”</p>
         <br>
         <h4>Scientific Insights</h4><br>
-        <p>The sensation of pain is felt by the Nociceptor receptors, which are located in the "free-nerve endings" section. This type of receptor is found in the epidermal layer of the skin (cutaneous nociceptor), the cornea of the eye, internal organs (such as the heart, kidneys, etc.), muscles, joints, excretory organs (urinary system), and several other places. In-depth studies have found that these receptors are more abundant in the epidermal layer of the skin compared to other organs. Charlees Scott Sherrington discovered these receptors in 1906 (1274 years after the passing of the Prophet Muhammad (632)).Prof Tagata Tagasone, the head of the Anatomy and Embryology department at Shiang Mai University, Thailand, embraced Islam during the 8th Saudi Medical Convention (1-3 November 1983) in Riyadh after studying the verses of the Quran below and being amazed, acknowledging the truth of the Quran.</p>
+        <p>The classification of cloud types was introduced by Luke Howard in 1802 to facilitate weather forecasting. Initially, Howard identified only 5 categories of clouds, but over the years, this classification was expanded by various meteorologists to include 10 categories (Ludwig Kaemtz-1840, Emilien Renou-1855, Philip Weilbach-1880, and several meteorologists-1881), 1170 years after the death of Prophet Muhammad (PBUH). </p> 
       </div>
         <div class="reference">
         <h4>References:</h4>
-          <p>Sherrington C., The Integrative Action of the Nervous System. Oxford: Oxford University Press (1906)</p>
+          <p>Office National Meteorologique (1932).</p>
+          <p>International Atlas of Clouds and of States of the Sky. Paris</p>
           <p>Siri Al-Quran Mendahului Sains (n.d)</p>
         </div>
       
-      <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-          <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-  function toggleBookmark(element, slug) {
-    // Check if user is authenticated
-    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
-
-    if (!isAuthenticated) {
-        window.location.href = '/account/signin/'; // Redirect to sign-in page
-        return;
-    }
-
-    // Proceed with bookmark toggle for authenticated users
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
             }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
-    }
-    return cookieValue;
-}
-document.addEventListener("DOMContentLoaded", function() {
-    // Assuming the user is authenticated; adjust as needed
-    updateUserBookmarkIcons();
-});
-
-function updateUserBookmarkIcons() {
-    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            // Include CSRF token if needed for GET requests or ensure your view is exempt
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        const bookmarkedSlugs = data.bookmarkedSlugs;
-        bookmarkedSlugs.forEach(slug => {
-            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
-            if (bookmarkIcon) {
-                bookmarkIcon.classList.remove('fa-regular');
-                bookmarkIcon.classList.add('fa-solid');
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
         });
-    })
-    .catch(error => console.error('Error:', error));
-}
-  </script>
-
-<script src="{% static 'js/trialforum.js' %}"></script>   
-  </body>
-
-</html>
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+          </script>
+        
+        <script src="{% static 'js/trialforum.js' %}"></script>   
+        {% endblock content %}

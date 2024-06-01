@@ -1,13 +1,7 @@
-
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Children</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets/logo/icon3.svg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
@@ -15,6 +9,11 @@
     <link rel="stylesheet" href="{% static 'css\duacontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+      .card-dua{
+        justify-content: center;
+        height:270px;
+        display: flex;
+      }
         .dua-content-container{ 
           padding: 50px 100px 50px 100px;
           position:relative;
@@ -41,11 +40,7 @@
           display: flex;
           flex-direction: column;
         }
-      .card-dua{
-        justify-content: center;
-        height:270px;
-        display: flex;
-      }
+      
       /*mobile view*/
       @media screen and (max-width: 768px){
         .dua-content-container{
@@ -66,50 +61,8 @@
       }
       }
     </style>
-</head>
-
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
+{% endblock title %}
+{% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -123,7 +76,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Science-Anemochory')" data-slug="Science-Anemochory"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Doa-Children')" data-slug="Doa-Children"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -241,44 +194,10 @@
           </div>
         </div>
           
- <!--scroll to top button-->
- <a href="#" class="scrollToTop">
-  <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-  <script src="{% static 'js\scroll.js' %}"></script>
-        <!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-          <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-          <li><a href="{% url 'doa' %}">Dua'</a></li>
-          <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
+        
 
 <script>
-  function on() {
+function on() {
     document.getElementById("overlay").style.display = "block";
   }
   
@@ -286,6 +205,15 @@
     document.getElementById("overlay").style.display = "none";
   }
   function toggleBookmark(element, slug) {
+    // Check if user is authenticated
+    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+
+    if (!isAuthenticated) {
+        window.location.href = '/account/signin/'; // Redirect to sign-in page
+        return;
+    }
+
+    // Proceed with bookmark toggle for authenticated users
     fetch(`/toggle_bookmark/${slug}/`, {
         method: 'POST',
         headers: {
@@ -322,6 +250,32 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    // Assuming the user is authenticated; adjust as needed
+    updateUserBookmarkIcons();
+});
+
+function updateUserBookmarkIcons() {
+    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // Include CSRF token if needed for GET requests or ensure your view is exempt
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const bookmarkedSlugs = data.bookmarkedSlugs;
+        bookmarkedSlugs.forEach(slug => {
+            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+            if (bookmarkIcon) {
+                bookmarkIcon.classList.remove('fa-regular');
+                bookmarkIcon.classList.add('fa-solid');
+            }
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}
   </script>
 
-</body>
+{% endblock content %}

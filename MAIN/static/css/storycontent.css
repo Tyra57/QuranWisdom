@@ -1,4 +1,65 @@
+@media screen and (max-width: 768px) {
+  .nav-to-right, .nav-line{
+    margin-left: 20px;
+  }
+  .nav-link{
+    margin-left: 20px;
+    margin-right: 0;
+  }
+}
+.sidenav{
+  width: 200px;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 806px;
+  z-index: 2;
+  overflow-x: hidden;
+}
+.sidenav a{
+  padding: 10px 0px 10px 30px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #38444d;
+  display: block;
+}
+.sidenav a:hover{
+  color: #004085;
+}
+.story1{ 
+  padding: 50px 150px 100px 60px;
+  margin-left: 200px;
+  align-items: center;
+  text-align: justify;
+}
+.story1 .h4{
+  text-align: center;
+}
+.story1 .p{
+  text-align: justify;
+}
 
+hr .line{
+  border: 0;
+  height: 2px;
+  width: 100%;
+  margin: 15px 0 10px;
+}
+.toggle-story {
+display: none;
+}
+/* Adjustments for mobile view */
+@media screen and (max-width: 768px) {
+  .sidenav {
+    display: none;
+  }
+/* Adjust content padding to not overlap with the sidenav */
+.story1 {
+  padding: 20px;
+  margin-bottom: 60px; /* Add space at the bottom for sidenav */
+  margin-left: 0;
+}
+}
   .parallax {
     /* The image used */
     

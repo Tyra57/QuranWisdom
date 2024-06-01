@@ -1,95 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Gog and Magog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
+    <style>
+       .sidenav{
+    width: 200px;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 806px;
+    z-index: 2;
+    overflow-x: hidden;
+  }
+  .sidenav a{
+    padding: 10px 0px 10px 30px;
+    text-decoration: none;
+    font-size: 14px;
+    color: #38444d;
+    display: block;
+  }
+  .sidenav a:hover{
+    color: #004085;
+  }
+  .story1{ 
+    padding: 50px 150px 100px 60px;
+    margin-left: 200px;
+    align-items: center;
+    text-align: justify;
+  }
+  .story1 .h4{
+    text-align: center;
+  }
+  .story1 .p{
+    text-align: justify;
+  }
 
-<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
-  <!--Navigation Bar-->
-  <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <!-- <div class="user-menu">  -->
-      <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
-    
-      <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
-        <div class="sub-menu-container">
-          <div class="sub-menu">
-            <!--close icon-->
-              <div class="close-button">
-                <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
-              </div>   
-              
-              <a href="{% url 'profile' %}" class="user-info-link"> 
-                <div class="user-info">
-                  <img src="{% static 'assets\usermenuimg\user.png' %}">
-                  <h3>Nur Athirah</h3>
-              </div>
-              </a>
-              
-              <hr>
-            
-              <a href="{% url 'update_profile' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\profile.png' %}">
-                <p>Edit Profile</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\setting.png' %}">
-                <p>Settings & Privacy</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\help.png' %}">
-                <p>Help & Support</p>
-                <span></span>
-              </a>
-                
-              <a href="{% url 'logout' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\logout.png' %}">
-                <p>Logout</p>
-                <span></span>
-              </a>
-          </div>
-        </div>
-      </div>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-   
-  <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% static 'js\main.js' %}"></script>
-  <!--end of nav bar-->
+  hr .line{
+    border: 0;
+    height: 2px;
+    width: 100%;
+    margin: 15px 0 10px;
+  }
+.toggle-story {
+  display: none;
+}
+  /* Adjustments for mobile view */
+  @media screen and (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  /* Adjust content padding to not overlap with the sidenav */
+  .story1 {
+    padding: 20px;
+    margin-bottom: 60px; /* Add space at the bottom for sidenav */
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+    .nav-to-right, .nav-line{
+      margin-left: 20px;
+    }
+    .nav-link{
+      margin-left: 20px;
+      margin-right: 0;
+    }
+  }
+    </style>
+    {% endblock title %}
+    {% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -170,242 +154,169 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://upload.wikimedia.org/wikipedia/commons/4/49/Wauquelin-histoire-bnf-fr9342-fol131v-peuple-de-gog-et-magog.jpg);">
   <h1>Gog and Magog</h1>
 </div>
-<style>
-  .sidenav{
-    width: 200px;
-    position: fixed;
-    height: 100%;
-    left: 0;
-    top: 806px;
-    z-index: 2;
-    overflow-x: hidden;
-  }
-  .sidenav a{
-    padding: 10px 0px 10px 30px;
-    text-decoration: none;
-    font-size: 14px;
-    color: #38444d;
-    display: block;
-  }
-  .sidenav a:hover{
-    color: #004085;
-  }
-  .story1{ 
-    padding: 50px 150px 100px 60px;
-    margin-left: 200px;
-    align-items: center;
-    text-align: justify;
-  }
-  .story1 .h4{
-    text-align: center;
-  }
-  .story1 .p{
-    text-align: justify;
-  }
 
-  hr .line{
-    border: 0;
-    height: 2px;
-    width: 100%;
-    margin: 15px 0 10px;
-  }
-</style>
 <div class="sidenav"> 
   <ul>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">The Deception of Satan</a></li>
-    <li><a href="#">The Fall</a></li>
-    <li><a href="#">The Dream and the King's Justice</a></li>
-    <li><a href="#">The Final Temptation and Punishment</a></li>
-    <li><a href="#">A Lesson on Faith and Deception</a></li>
-    <li><a href="#">References</a></li>
+    <a href="#intro">Introduction to Gog and Magog</a>
+    <a href="#dhul-qarnain-barrier">Dhul-Qarnain's Barrier</a>
+    <a href="#nature-origin-gog-magog">Nature and Origin of Gog and Magog</a>
+    <a href="#eschatological-role-gog-magog">Eschatological Role of Gog and Magog</a>
+    <a href="#barrier-condition">The Barrier's Condition</a>
+    <a href="#scholarly-interpretations-gog-magog">Scholarly Interpretations and Views</a>
+    <a href="#ref">References</a>
   </ul>
 </div>
-      <!--Story of Luqman content-->
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Gog and Magog</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+        <h4 id="intro">Introduction to Gog and Magog</h4><br>
+        <p>قَالُوا۟ يَـٰذَا ٱلْقَرْنَيْنِ إِنَّ يَأْجُوجَ وَمَأْجُوجَ مُفْسِدُونَ فِى ٱلْأَرْضِ فَهَلْ نَجْعَلُ لَكَ خَرْجًا عَلَىٰٓ أَن تَجْعَلَ بَيْنَنَا وَبَيْنَهُمْ سَدًّۭا ٩٤ قَالَ مَا مَكَّنِّى فِيهِ رَبِّى خَيْرٌۭ فَأَعِينُونِى بِقُوَّةٍ أَجْعَلْ بَيْنَكُمْ وَبَيْنَهُمْ رَدْمًا ٩٥ ءَاتُونِى زُبَرَ ٱلْحَدِيدِ ۖ حَتَّىٰٓ إِذَا سَاوَىٰ بَيْنَ ٱلصَّدَفَيْنِ قَالَ ٱنفُخُوا۟ ۖ حَتَّىٰٓ إِذَا جَعَلَهُۥ نَارًۭا قَالَ ءَاتُونِىٓ أُفْرِغْ عَلَيْهِ قِطْرًۭا ٩٦ فَمَا ٱسْطَـٰعُوٓا۟ أَن يَظْهَرُوهُ وَمَا ٱسْتَطَـٰعُوا۟ لَهُۥ نَقْبًۭا ٩٧ قَالَ هَـٰذَا رَحْمَةٌۭ مِّن رَّبِّى ۖ فَإِذَا جَآءَ وَعْدُ رَبِّى جَعَلَهُۥ دَكَّآءَ ۖ وَكَانَ وَعْدُ رَبِّى حَقًّۭا ٩٨</p>
         <br>
-        <h4>References:</h4>
+        <p>Allah the Almighty says: {They said: "0 Dhul-Qarnain! Verily Ya'juj and Ma 'juj (Gog and Magog) are doing great mischief in the land. Shall we then pay you a tribute in order that you might erect a barrier between us and them?" He said: "That (wealth, authority and power) in which my Lord had established me is better (than your tribute). So help me with strength (of men), I will erect between you and them a barrier. "Give me pieces (blocks) of iron;" then, when he had filled up the gap between the two mountain-cliffs, he said: "Blow;" then when he had made them (red as) fire, he said: "Bring me molten copper to pour over them." So they (Ya 'juj and Ma 'juj (Gog and Magog)] could not scale it or dig through it. (Dhul-Qarnain) said: "This is a mercy from my Lord, but when the Promise of my Lord comes, He shall level it down to the ground. And the Promise of my Lord is ever true"}. (Al-Kahf, 94-98)</p>
+        <br>
+        <hr class ="line"><br>
+        <h4 id="dhul-qarnain-barrier">Dhul-Qarnain's Barrier</h4><br>
+        <p>حَتَّىٰٓ إِذَا فُتِحَتْ يَأْجُوجُ وَمَأْجُوجُ وَهُم مِّن كُلِّ حَدَبٍۢ يَنسِلُونَ ٩٦</p>
+        <br>
+        <p>And, {Until, when Ya'juj and Ma'juj (Gog and Magog) are let loose (from their barrier), and they swoop downfrom every mound}. (Al- Anbiya', 96)</p>
+        <br>
+        <hr class ="line"><br>
+        <h4 id="nature-origin-gog-magog">Nature and Origin of Gog and Magog</h4><br>
+        <p>No doubt; "Gog and Magog are from among the children of Adam (Peace be upon him). In proof of this, comes the Hadith that is transmitted in the two Sahihs (Bukhari and Muslim) from Al-A'mash, after Abu Salih, after Abu Sa' id Al- Khudri who narrated the Prophet (Peace be upon him) to have said: "Allah will say (on the Day of Resurrection), 'O Adam!' Adam will reply, 'Labbaik wa Sa'daik, and all the good is in Your Hand.' Allah will say: 'Bring out the people of the fire.' Adam will say: 'O Allah! How many are the people of the Fire?' Allah will reply: 'From every one thousand, take out nine-hundred and ninety-nine.' At that time children will become hoary headed, every pregnant female will have a miscarriage, and one will see mankind as drunken, yet they will not be drunken, but dreadful will be the Wrath of Allah."</p>
+        <br>
+        <hr class ="line"><br>
+        <h4 id="eschatological-role-gog-magog">Eschatological Role of Gog and Magog</h4><br>
+        <p>The Companions of the Prophet (Peace be upon him) asked, "O Allah's Messenger! Who is that (excepted) one?" He said, "Rejoice with glad tidings; one person will be from you and one thousand will be from Gog and Magog." The Prophet (Peace be upon him) further said, "By Him in Whose Hands my life is, hope that you will be one-fourth of the people of Paradise." We shouted, "Allahu Akbar!" He added, "I hope that you will be one-third of the people of Paradise.We shouted, "Allahu Akbar!" He said, "I hope that you will be half of the people of Paradise." We shouted, "Allahu Akbar!" He further said, "You (Muslims) (compared with non Muslims) are like a black hair in the skin of a white ox or like a white hair in the skin of a black ox (i.e. your number is very small as compared with theirs)." (Al-Bukhari and Muslim)</p>
+        <br>
+        <p>This Hadith denotes the numerousness of their numbers and that they are a hundred-fold the number of all mankind. Moreover, they are from among the offspring of Nuh (Noah (Peace be upon him)) in particular for Allah the Almighty informs us in His Glorious Qur'an that Nuh (Peace be upon him) invoked Him against the people of the earth saying: {And Nuh (Noah) said: "My Lord! Leave not one of the disbelievers on the earth!} (Nuh, 26) And, Allah the Almighty Himself says: {Then We saved him and those with him in the ship}. (Al-'Ankabut, 15) And, {And, his progeny, them We made the survivors}. (As-Saffat, 77) This is in addition to the Hadith transmitted in Imam Ahmed's Musnad and the Sunan of Abu Dawud that mentioned: that there were three sons born to Nuh (Peace be upon him): Shell, Ham and Japheth. Shem was the father of the Arabs; Ham was the father of the Sudan; and Japheth was the father of the Turk.7 Moreover, Gog and Magog are just a part of the Turk from among the Mangols who were stronger and spread mischief in the land. Some people claimed that Gog and Magog were created out of the semen of Adam (Peace be upon him) that mixed with the earth and thus they were not from Eve. But, this claim -which was held by Sheik Abu Zakariya An-Nawawi in his explanation of Sahih Muslim and by other scholars who declared it to be weak and strange -is too weak. As, there is not any proof on this and moreover, it contradicts the obvious text of the Glorious Qur'an -mentioned earlier -that all mankind of today are from the offspring of Nuh (Peace be upon him). In addition, some people claimed that they (Gog and Magog) are of different shapes and figures: some are as tall as palm-trees, some are too short, and some take one of their ears as a bed and the other as a cover or blanket. However, all these claims are groundless and cannot stand the slightest refutation. But, the correct view is that: they are from among the children of Adam (Peace be upon him) and that they bear the same qualities and shapes. Allah's Prophet (Peace be upon him) said: "Allah created Adam, making him 60 cubits tall. When He created him, He said to him, "Go and greet that group of angels, and listen to their reply, for it will be your greeting (salutation) and the greeting (salutations of your offspring. " So, Adam said (to the angels), As- Salamu 'Alaikum (i.e. Peace be upon you). The angels said, "As-Salamu' Alaika wa Rahmatu-l-lahi" (i. e. Peace and Allah's Mercy be upon you). Thus the angels added to Adam's salutation the expression, 'Wa Rahmatu-l-lah.' Any person who will enter Paradise will resemble Adam (in appearance and figure). People have been decreasing in stature since Adam's creation." This Hadith blocks the way before those who falsely claim things that are groundless.</p>
+        <br>
+        <p>A Very Important Question:</p>
+        <br>
+        <p>If it is said: How does the previously-mentioned Hadith -that was agreed upon - denote that they will be treated as ransom for the Believers on the Day of Resurrection and that they will enter Hellfire, while no Messengers were sent to them and Allah the Almighty says: {And We never punish until We have sent a Messenger (to give warning)} ? (Al-Isra, 15)</p>
+        <br>
+        <p>The answer is that: They will never be punished until they are given warning. Thereupon, if they were existing before the time of Prophet Muhammad (Peace be upon him) and Messengers were sent to them, thus, they were given warning. And, if no Messengers were sent to them, they would be treated as "People of the Fitrah" and those to whom the Message of Islam did not reach or be conveyed. However, it is indicated by the Hadith transmitted by some of the Companions of the Prophet (Peace be upon him) that he said: "Those and the like will be tested on the pathways of the Resurrection: and whoever responds to the caller, he will enter Paradise. And, whoever refuses, he will enter the Fire." However, testing them neither necessitates their salvation, nor contradicts with the saying that they will enter Hell-fire. For Allah the Almighty reveals to His Prophet (Peace be upon him) what He wills of the Unseen, and hence, He informed him that they will be from among the people of Hell and that their nature denies the truth and submission thereto, as they do not respond to the caller till the Day of Judgment. This indicates that, they would be more stubborn in rejecting the truth if they were to come to know it in this present life. In the pathways of Resurrection, some of those who used to belie the truth in the present life will submit themselves to the truth. Almighty Allah says: {And if you only could see when the Mujrimun (criminals, disbelievers, polytheists, sinners) shall hang their heads before their Lord (saying): "Our Lord! We have now seen and heard, so send us back (to the world), that we will do righteous good deeds. Verily! We now believe with certainty "}. (As-Sajdah, 12) However, the Prophetic Hadith indicating that the Prophet (Peace be upon him) invited them on the Night Journey to embrace Islam and they refused, this Hadith is an invented and fabricated one. The one who fabricated it was the liar, Amr Ibn As-Subh.</p>
+        <br>
+        <hr class ="line"><br>
+        <h4 id="barrier-condition">The Barrier's Condition</h4><br>
+        <p>The (Dam) Barrier:</p>
+        <br>
+        <p>It was mentioned earlier that Dhul-Qarnain has built it out of iron and copper and elevated it to a very high point that is equal to the very lofty mountains. However, there is no on earth an equal building in terms of loftiness or benefiting to mankind. Imam Al-Bukhari transmitted in his Sahih the following Hadith saying: A man told the Prophet (Peace be upon him) that he had seen the dam (of Gog and Magog). The Prophet (Peace be upon him) asked: How did you find it?' the man said: (I found it like Al-Burd Al-Muhabbar (stripped garments).' The Prophet (Peace be upon him) said: You have seen it like that. '" In Ibn Jarir's exegesis of the Qur'an, a slight different narration was reported by Qatadah who said: ('I was told that a man said: (0 Allah's Messenger! I have seen the dam of Gog and Magog. 'The Prophet (Peace be upon him) said: (describe it to me. The man said: 'It looked like stripped garments, with red and black stripes.' The Prophet (Peace be upon him) said: 'You have seen it. '"</p>
+        <br>
+        <p>It was mentioned that the Caliph, Al-Wathiq sent some messengers with messages to different kings to allow them travelling from one country to another till they reach the dam and stand on its reality. When they came back to the Caliph, they described it to him saying that it has a huge door with many locks. It is a very high and tight building and that the remnants of its building materials and tools are kept there in a tower. Also, there are still guards keeping an eye on it. They added that its location is on the northern-east side of the earth. It was also said that their land is very spacious and that they live on farming and hunting and that their numbers are countless.</p>
+        <br>
+        <p>How can we compromise between the Qur'anic Verse that reads: {So they (Ya'juj and Ma'juj (Gog and Magog)) could not scale it or dig through it}. (Al-Kahf, 97) and the Prophetic Hadith that is transmitted by Imam Al- Bukhari and Imam Muslim on the authority of Mother of the Believers, Zainab Bint Jahsh (May Allah be pleased with her) as saying: That the Prophet (Peace be upon him) once came to her in a state of fear and said: ('None has the right to be worshipped but Allah. Woe unto the Arabs from a danger that has come near. An opening has been made in the wall of Gog and Magog like this," making a circle with his thumb and index finger. Zainab Bint lahsh said: ('0 Allah's Messenger! Shall we be destroyed even though there are pious persons among us?" He said: "Yes, when the evil persons will increase." And in another narration: The Prophet (Peace be upon him) said: "Allah has made an opening in the wall of the Gog and Magog (people) like this, and he made with his hand (with the help of his fingers)." (Al-Bukhari and Muslim)</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="scholarly-interpretations-gog-magog">Scholarly Interpretations and Views</h4><br>
+        <p>The answer is that: this means one of two things: the first is that this is an indication of the opening of gates of evil and turmoil and hence, this is a mere example set for us. The second view considers this as narrating a concrete matter for His Statement, {So they (Ya'juj and Ma'juj (Gog and Magog)] could not scale it or dig through it}, i.e. at their time for the sentence is in the past tense, the matter which does not contradict the possibility of its taking place in the future with the Permission of Allah the Almighty. But, as for the other Hadith that is narrated by Imam Ahmed in his Musnad that the Prophet (Peace be upon him) said: "Verily, Gog and Magog dig through the dam every day, till they could see the sun rays (through it), their leader would say: 'Go back and you will finish it tomorrow. ' On the next day, they find it as strong as before. Till when their appointed term comes and Allah desires to send them against mankind, they dig it till they could see the sun rays (through it) and their leader says: 'Go back and you will finish it tomorrow, if Allah wills!' On the next day, they find it as they had left the day before and they dig through it and come against mankind. They will drink (every drop of water they pass by). The people will resort to strongholds. And, Gog and Magog will throw their arrows towards the sky. When they come back to them stained with what looks like blood, they will say: 'we have defeated the people on earth and those in the heaven as well.’ Then, Allah the Almighty sends against them worms in their necks that kill them all. Allah's Messenger (Peace be upon him) said: 'By Whom in Whose Hand Muhammed's soul rests! Living creatures of the earth would go fat and be thankful due to eating their flesh and (drinking their) blood." Imam Ahmed transmitted it also on the authority of Hasan Ibn Musa after Sufyan after Qatadah. At-Tirmidhi transmitted the same Hadith on the authority of Abu, Awanah after Qatadah, then he said: it is a Strange Hadith that reached us from none but this Chain of Transmission.</p>
+        <br>
+        <h4 id="ref">References:</h4>
           <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-  function toggleBookmark(element, slug) {
-    // Check if user is authenticated
-    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
-
-    if (!isAuthenticated) {
-        window.location.href = '/account/signin/'; // Redirect to sign-in page
-        return;
-    }
-
-    // Proceed with bookmark toggle for authenticated users
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
         }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
             }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
-    }
-    return cookieValue;
-}
-document.addEventListener("DOMContentLoaded", function() {
-    // Assuming the user is authenticated; adjust as needed
-    updateUserBookmarkIcons();
-});
-
-function updateUserBookmarkIcons() {
-    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            // Include CSRF token if needed for GET requests or ensure your view is exempt
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        const bookmarkedSlugs = data.bookmarkedSlugs;
-        bookmarkedSlugs.forEach(slug => {
-            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
-            if (bookmarkIcon) {
-                bookmarkIcon.classList.remove('fa-regular');
-                bookmarkIcon.classList.add('fa-solid');
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
         });
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-  var initialTop = $('.sidenav').css('top'); // Store the initial top value
-  $(window).scroll(function() {
-    var scroll = $(window).scrollTop(); // Get current scroll position
-    $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
-  });
-});
-</script>
-  </body>
-
-</html>
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}

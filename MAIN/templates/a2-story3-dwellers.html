@@ -1,96 +1,26 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Dwellers of The Town</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
-
-<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
-  <!--Navigation Bar-->
-  <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <!-- <div class="user-menu">  -->
-      <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
-    
-      <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
-        <div class="sub-menu-container">
-          <div class="sub-menu">
-            <!--close icon-->
-              <div class="close-button">
-                <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
-              </div>   
-              
-              <a href="{% url 'profile' %}" class="user-info-link"> 
-                <div class="user-info">
-                  <img src="{% static 'assets\usermenuimg\user.png' %}">
-                  <h3>Nur Athirah</h3>
-              </div>
-              </a>
-              
-              <hr>
-            
-              <a href="{% url 'update_profile' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\profile.png' %}">
-                <p>Edit Profile</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\setting.png' %}">
-                <p>Settings & Privacy</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\help.png' %}">
-                <p>Help & Support</p>
-                <span></span>
-              </a>
-                
-              <a href="{% url 'logout' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\logout.png' %}">
-                <p>Logout</p>
-                <span></span>
-              </a>
-          </div>
-        </div>
-      </div>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-   
-  <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% static 'js\main.js' %}"></script>
-  <!--end of nav bar-->
-
+    <style>
+      @media screen and (max-width: 768px) {
+    .nav-to-right, .nav-line{
+      margin-left: 20px;
+    }
+    .nav-link{
+      margin-left: 20px;
+      margin-right: 0;
+    }
+  }
+</style>
+{% endblock title %}
+{% block content %}  
 
 <!--nav link-->
 <div class="nav-link">
@@ -171,12 +101,12 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://images.squarespace-cdn.com/content/v1/57b9b98a29687f1ef5c622df/1473084050234-0VJSL3SOZRQ7SXYWW2GR/old+dubai);">
   <h1>Dwellers of The Town</h1>
 </div>
 
 <style>
-  .sidenav{
+ .sidenav{
     width: 200px;
     position: fixed;
     height: 100%;
@@ -214,199 +144,189 @@
     width: 100%;
     margin: 15px 0 10px;
   }
+.toggle-story {
+  display: none;
+}
+  /* Adjustments for mobile view */
+  @media screen and (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  /* Adjust content padding to not overlap with the sidenav */
+  .story1 {
+    padding: 20px;
+    margin-bottom: 60px; /* Add space at the bottom for sidenav */
+    margin-left: 0;
+  }
+}
 </style>
 <div class="sidenav"> 
   <ul>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">The Deception of Satan</a></li>
-    <li><a href="#">The Fall</a></li>
-    <li><a href="#">The Dream and the King's Justice</a></li>
-    <li><a href="#">The Final Temptation and Punishment</a></li>
-    <li><a href="#">A Lesson on Faith and Deception</a></li>
-    <li><a href="#">References</a></li>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#messengers">Messengers Sent</a></li>
+    <li><a href="#rejection">People's Rejection</a></li>
+    <li><a href="#support">Support from a Man</a></li>
+    <li><a href="#martyr">Martyrdom and Paradise</a></li>
+    <li><a href="#punish">Divine Punishment</a></li>
+    <li><a href="#ref">References</a></li>
   </ul>
 </div>
 
       <!--Story of Luqman content-->
       <div class="story1">
 
-        <h4>Introduction to Dwellers of The Town</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+        <h4 id="intro">Introduction to Dwellers of The Town</h4><br>
+        <p>وَٱضْرِبْ لَهُم مَّثَلًا أَصْحَـٰبَ ٱلْقَرْيَةِ إِذْ جَآءَهَا ٱلْمُرْسَلُونَ ١٣ إِذْ أَرْسَلْنَآ إِلَيْهِمُ ٱثْنَيْنِ فَكَذَّبُوهُمَا فَعَزَّزْنَا بِثَالِثٍۢ فَقَالُوٓا۟ إِنَّآ إِلَيْكُم مُّرْسَلُونَ ١٤ قَالُوا۟ مَآ أَنتُمْ إِلَّا بَشَرٌۭ مِّثْلُنَا وَمَآ أَنزَلَ ٱلرَّحْمَـٰنُ مِن شَىْءٍ إِنْ أَنتُمْ إِلَّا تَكْذِبُونَ ١٥ قَالُوا۟ رَبُّنَا يَعْلَمُ إِنَّآ إِلَيْكُمْ لَمُرْسَلُونَ ١٦ وَمَا عَلَيْنَآ إِلَّا ٱلْبَلَـٰغُ ٱلْمُبِينُ ١٧ قَالُوٓا۟ إِنَّا تَطَيَّرْنَا بِكُمْ ۖ لَئِن لَّمْ تَنتَهُوا۟ لَنَرْجُمَنَّكُمْ وَلَيَمَسَّنَّكُم مِّنَّا عَذَابٌ أَلِيمٌۭ ١٨ قَالُوا۟ طَـٰٓئِرُكُم مَّعَكُمْ ۚ أَئِن ذُكِّرْتُم ۚ بَلْ أَنتُمْ قَوْمٌۭ مُّسْرِفُونَ ١٩ وَجَآءَ مِنْ أَقْصَا ٱلْمَدِينَةِ رَجُلٌۭ يَسْعَىٰ قَالَ يَـٰقَوْمِ ٱتَّبِعُوا۟ ٱلْمُرْسَلِينَ ٢٠ ٱتَّبِعُوا۟ مَن لَّا يَسْـَٔلُكُمْ أَجْرًۭا وَهُم مُّهْتَدُونَ ٢١ وَمَا لِىَ لَآ أَعْبُدُ ٱلَّذِى فَطَرَنِى وَإِلَيْهِ تُرْجَعُونَ ٢٢ ءَأَتَّخِذُ مِن دُونِهِۦٓ ءَالِهَةً إِن يُرِدْنِ ٱلرَّحْمَـٰنُ بِضُرٍّۢ لَّا تُغْنِ عَنِّى شَفَـٰعَتُهُمْ شَيْـًۭٔا وَلَا يُنقِذُونِ ٢٣ إِنِّىٓ إِذًۭا لَّفِى ضَلَـٰلٍۢ مُّبِينٍ ٢٤ إِنِّىٓ ءَامَنتُ بِرَبِّكُمْ فَٱسْمَعُونِ ٢٥ قِيلَ ٱدْخُلِ ٱلْجَنَّةَ ۖ قَالَ يَـٰلَيْتَ قَوْمِى يَعْلَمُونَ ٢٦ بِمَا غَفَرَ لِى رَبِّى وَجَعَلَنِى مِنَ ٱلْمُكْرَمِينَ ٢٧ ۞ وَمَآ أَنزَلْنَا عَلَىٰ قَوْمِهِۦ مِنۢ بَعْدِهِۦ مِن جُندٍۢ مِّنَ ٱلسَّمَآءِ وَمَا كُنَّا مُنزِلِينَ ٢٨ إِن كَانَتْ إِلَّا صَيْحَةًۭ وَٰحِدَةًۭ فَإِذَا هُمْ خَـٰمِدُونَ ٢٩</p> 
         <br>
-        <h4>References:</h4>
+        <p>Allah the Almighty says: {And put forward to them a similitude: the (story of the) dwellers of the town, when there came Messengers to them. When We sent to them two Messengers, they belied them both; so We reinforced them with a third, and they said: "Verily we have been sent to you as Messengers." They (people of the town) said: "You are only human beings like ourselves and the Most Gracious (Allah) has revealed nothing. You are only telling lies." The Messengers said: "Our Lord knows that we have been sent as Messengers to you." And our duty is only to convey plainly (the Message)." They (people) said: "For us, we see an evil omen from you: if you cease not, we will surely stone you, and a painful torment will touch you from us."They (Messengers) said: "Your evil omens be with you! (Do you call it "evil omen") because you are admonished? Nay, but you are a people Musrifun (transgressing all bounds by committing all kinds of great sins, and by disobeying Allah). And there came a man running from the farthest part of the town. He said: "O my people! Obey the Messengers. " “Obey those who ask no wages of you (for themselves), and who are rightly guided. "And why should I not worship Him (Allah Alone) Who has created me and to Whom you shall be returned." "Shall I take besides Him alihah (gods)? If the Most Gracious (Allah) intends me any harm, their intercession will be of no use for me whatsoever, nor can they save me?" "Then verily, I should be in plain error." “Verily! I have believed in your Lord, so listen to me!" It was said (to him when the disbelievers killed him): "Enter Paradise." He said: "Would that my people knew. "That my Lord (Allah) has forgiven me, and made me of the honored ones!" And We sent not against his people after him a host from the heaven, nor was it needful for Us to send (such a thing). It was but one Saihah (shout) and lo! They (all) were still (silent, dead, destroyed)}. (Ya-Sin, 13-29)</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="messengers">Messengers Sent</h4>
+        <br>
+        <p>Abdullah Ibn 'Abbas, Ka'b Al-Ahbar and Wahb Ibn Munabih and many others narrated a story of a town called Antioch (Antakiyah), governed by the king Antikhis Ibn Antikhis. This king used to observe idol worship. Allah Almighty sent him three Messengers whom he severely belied. The Messengers were: Sadiq, Masduq and Shalom</p>
+        <br>
+        <p>It is evidently apparent that they were Messengers sent by Allah the Almighty. Qatadah claimed them to be messengers sent by Jesus Christ. The same view was held by Ibn Jarir after Wahb after Ibn Sulaiman after Shu' aib Al- Jiba'i who added that: those messengers were called: Shimon, Jonah and Paul and the town was called Antioch. This view is groundless because the people of Antioch when received three of the disciples of Jesus Christ (Peace be upon him) -were the first to believe in him at that very time. Thereupon, Antioch was one of the first four towns in which there first existed Christian Patriarchs. These four towns were Antioch, Jerusalem, Alexandria and Rome. However, the people of these towns were not destroyed, whereas the people of the aforementioned town in the Qur'anic verses were totally annihilated, following the killing of their companion whom Allah sent to admonish them. Allah the Almighty says: {It was but one Saihah (shout) and lo! They (all) were still (silent, dead and destroyed)}. (Ya-Sin, 29) There is no contradiction between the two interpretations, if the case was that the three Messengers of Allah were sent to the earlier dwellers of Antioch and that they were belied, the matter which incurred complete destruction. Then, their land was re-inhabited and during the lifetime of Jesus (Peace be upon him) the new dwellers believed in his three messengers.</p>
+        <br>
+        <p>The claim that the story mentioned in the Glorious Qur'an is that of the messengers of Jesus (Peace be upon him) is very absurd and groundless. Obviously, the context shows that they, the Messengers were sent by Allah the Almighty.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="rejection">People's Rejection</h4>
+        <br>
+        <p>Allah the Almighty says: {And put forward to them a similitude} i.e. for your people 0 Muhammad (Peace be upon him). {The (story of the) dwellers of the town, when there came Messengers to them. When We sent to them two Messengers, they belied them both, so We reinforced them with a third} i.e. We supported them with a third Messenger, {and they said: Verily we have been sent to you as Messengers}. The people of the town said that the Messengers were only human beings and they set aside the idea that Allah Almighty might send human beings as His Messengers to mankind. The Messengers asserted that Allah knows that they have been sent to them and that if they lie to Him, He would certainly give them the severest of all punishment. They added: {our duty is only to convey plainly (the Message)} i.e. what they were sent with and that guidance and misleading are in the Hand of Allah the Almighty Alone. {They (people) said: For us, we see an evil omen from you} i.e. from what you have brought us. {If you cease not, we will surely stone you} with bad words and stones as well; {and a painful torment will touch you from us} i.e. they threatened them with afflicting humiliation (bad words) and killing (stoning to death). {They (Messengers) said: Your evil omens be with you!} i.e. they will badly affect you. {(Do you call it "evil omen ") because you are admonished?} i.e. because we reminded you with guidance and invited you to it you threatened us with killing and afflicting humiliation. {Nay, but you are a people Musrifun} i.e. you transgress all bounds by committing all kinds of sinful deeds, and by disobeying Allah.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="support">Support from a Man</h4>
+        <br>
+        <p>Allah the Almighty says: {And there came a man running from the farthest part of the town} to support the Messengers and to declare his faith in them. {He said: 0 my people! Obey the Messengers. Obey those who ask no wages of you (for themselves), and who are rightly guided} i.e. they invite you to the absolute truth without asking wages or reward for themselves of you. Then he invited them to worship Allah Alone, and not to worship other than Him that can do nothing in this present life or in the Hereafter. {Then verily, I should be in plain error} i.e. if I abandoned the worship of Allah and worshipped anything else besides Him.</p>
+        <br>
+        <p>Then, the believing man said to the three Messengers: {Verily! I have believed in your Lord, so listen to me!}, i.e. you should listen to my statement and bear witness to this before your Lord. Or, 0 my people! Listen to my declaration of faith of these Messengers. Thereupon, the people killed him either by stoning him to death, or biting, or making one sudden assault against him. Narrated Ibn Ishaq after some of his counterparts on the authority of `Abdullah Ibn Mas’ud that the people stepped over his body till they broke his neck.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="martyr">Martyrdom and Paradise</h4>
+        <br>
+        <p>Narrated Ath-Thawri after `Asim Al-Ahwal after Abu Majlaz his saying: The name of that believing man was Habib Ibn Murriy who was said to be a carpenter, or rope-maker, or shoe-maker. It is also said that he used to observe his religious rituals in an isolated cave. `Abdullah Ibn `Abbas (May Allah be pleased with him) said: He was Habib, the carpenter who was afflicted with leprosy. He was charitable, but killed at the end at the hands of his own people. Then, Allah the Almighty says: {Enter Paradise} i.e. when he was killed by his people, Allah Almighty admitted him into Paradise. When he saw of the pleasures and joys therein, he said: {Would that my people knew? That my Lord (Allah) has forgiven me, and made me of the honoured ones!}, i.e. to believe in what I have believed in and thus gain what I have just obtained. Ibn `Abbas (May Allah be pleased with him) said: He advised his people during his life saying: {O my people! Obey the Messengers}, and after his death {Would that my people knew? That my Lord (Allah) has forgiven me, and made me of the honoured ones!}. In addition, Qatadah said: The believer always gives counselling because of what he sees of the rewards granted by Allah {Would that my people knew? That my Lord (Allah) has forgiven me, and made me of the honoured ones!}, i.e. he wished that his people would know the honour Allah bestowed on him. Qatadah added: By Allah! Allah did not admonish or even blame those people after killing him (the believing man) {It was but one Saihah (shout) and lo! They (all) were still (silent, dead, destroyed)}. Allah the Almighty says: {And We sent not against his people after him a host from the heaven, nor was it needful for Us to send (such a thing)}, i.e. it was not needful for Allah the Almighty to send against them a host from the heaven to avenge the Messengers.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="punish">Divine Punishment</h4>
+        <br>
+        <p>Mujahid and Qatadah said: This means that Allah did not send them another Message. Ibn Jarir said: The first interpretation looks more proper because Allah the Almighty says after this: {nor was it needful for Us to send (such a thing)}, i.e. Allah was not in need to send such a thing to punish them when they belied His Messengers and killed His godly man, {It was but one Saihah (shout) and lo! They (all) were still (silent, dead, destroyed)}.</p>
+        <br>
+        <p>Interpreters said: Allah the Almighty sent Gabriel (Peace be upon him) who maintained a grasp on their town's gate and made a single shout {one Saihah (shout) and lo! They (all) were still (silent, dead, destroyed)}, i.e. they turned to be silent, motionless and dead.</p>
+        <br>
+        <p>Finally, all these indicate that the town mentioned in the Qur'anic verses was not Antioch because the people of Antioch believed in Allah and followed the messengers of Jesus (Peace be upon him). Moreover, Antioch was said to be the first town to declare faith in Jesus (Peace be upon him).</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="ref">References:</h4>
           <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-  function toggleBookmark(element, slug) {
-    // Check if user is authenticated
-    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
-
-    if (!isAuthenticated) {
-        window.location.href = '/account/signin/'; // Redirect to sign-in page
-        return;
-    }
-
-    // Proceed with bookmark toggle for authenticated users
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
         }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
             }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
-    }
-    return cookieValue;
-}
-document.addEventListener("DOMContentLoaded", function() {
-    // Assuming the user is authenticated; adjust as needed
-    updateUserBookmarkIcons();
-});
-
-function updateUserBookmarkIcons() {
-    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            // Include CSRF token if needed for GET requests or ensure your view is exempt
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        const bookmarkedSlugs = data.bookmarkedSlugs;
-        bookmarkedSlugs.forEach(slug => {
-            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
-            if (bookmarkIcon) {
-                bookmarkIcon.classList.remove('fa-regular');
-                bookmarkIcon.classList.add('fa-solid');
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
         });
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-  var initialTop = $('.sidenav').css('top'); // Store the initial top value
-  $(window).scroll(function() {
-    var scroll = $(window).scrollTop(); // Get current scroll position
-    $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
-  });
-});
-</script>
-  </body>
-
-</html>
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}

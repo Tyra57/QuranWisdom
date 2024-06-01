@@ -1,96 +1,26 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Dzul Qarnain</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
-
-<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
-  <!--Navigation Bar-->
-  <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <!-- <div class="user-menu">  -->
-      <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
-    
-      <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
-        <div class="sub-menu-container">
-          <div class="sub-menu">
-            <!--close icon-->
-              <div class="close-button">
-                <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
-              </div>   
-              
-              <a href="{% url 'profile' %}" class="user-info-link"> 
-                <div class="user-info">
-                  <img src="{% static 'assets\usermenuimg\user.png' %}">
-                  <h3>Nur Athirah</h3>
-              </div>
-              </a>
-              
-              <hr>
-            
-              <a href="{% url 'update_profile' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\profile.png' %}">
-                <p>Edit Profile</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\setting.png' %}">
-                <p>Settings & Privacy</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\help.png' %}">
-                <p>Help & Support</p>
-                <span></span>
-              </a>
-                
-              <a href="{% url 'logout' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\logout.png' %}">
-                <p>Logout</p>
-                <span></span>
-              </a>
-          </div>
-        </div>
-      </div>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-   
-  <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% static 'js\main.js' %}"></script>
-  <!--end of nav bar-->
-
+    <style>
+      @media screen and (max-width: 768px) {
+    .nav-to-right, .nav-line{
+      margin-left: 20px;
+    }
+    .nav-link{
+      margin-left: 20px;
+      margin-right: 0;
+    }
+  }
+</style>
+    {% endblock title %}
+    {% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -170,7 +100,7 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://lh3.googleusercontent.com/ci/AL18g_QPKXRiOA-3dgOxdRtnVJgQP3azEmOKo2XxPcDVheeCDaMzH02_sFPqyZJcLK6D8C5c89B7B1I=s1200);">
   <h1>Dzul Qarnain</h1>
 </div>
 <style>
@@ -212,200 +142,233 @@
     width: 100%;
     margin: 15px 0 10px;
   }
+.toggle-story {
+  display: none;
+}
+  /* Adjustments for mobile view */
+  @media screen and (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  /* Adjust content padding to not overlap with the sidenav */
+  .story1 {
+    padding: 20px;
+    margin-bottom: 60px; /* Add space at the bottom for sidenav */
+    margin-left: 0;
+  }
+}
 </style>
 <div class="sidenav"> 
   <ul>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">The Deception of Satan</a></li>
-    <li><a href="#">The Fall</a></li>
-    <li><a href="#">The Dream and the King's Justice</a></li>
-    <li><a href="#">The Final Temptation and Punishment</a></li>
-    <li><a href="#">A Lesson on Faith and Deception</a></li>
-    <li><a href="#">References</a></li>
+    <a href="#introduction-dhul-qarnain">Introduction to Dhul-Qarnain</a>
+    <a href="#washeaprophet?">Was Dhul-Qarnain a Prophet?</a>
+    <a href="#whyheiscalled">Why was he called "Dhul-Qarnain" (i.e. Owner of the two horns)?</a>
+    <a href="#name">What's his Name?</a>
+    <a href="#journeys-dhul-qarnain">Dhul-Qarnain is Seeking the Eye of Life</a>
+    <a href="#encounter-yajuj-majuj">Encounter with Yajuj and Majuj</a>
+    <a href="#construction-barrier">Construction of the Barrier</a>
+    <a href="#identity">Identity and Historical Context</a>
+    <a href="#ref">References</a>
   </ul>
 </div>
-      <!--Story of Luqman content-->
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Dzul Qarnain</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+        <h4 id="introduction-dhul-qarnain">Introduction to Dhul-Qarnain</h4><br>
+        <p>٨٣ إِنَّا مَكَّنَّا لَهُۥ فِى ٱلْأَرْضِ وَءَاتَيْنَـٰهُ مِن كُلِّ شَىْءٍۢ سَبَبًۭا ٨٤ فَأَتْبَعَ سَبَبًا ٨٥ حَتَّىٰٓ إِذَا بَلَغَ مَغْرِبَ ٱلشَّمْسِ وَجَدَهَا تَغْرُبُ فِى عَيْنٍ حَمِئَةٍۢ وَوَجَدَ عِندَهَا قَوْمًۭا ۗ قُلْنَا يَـٰذَا ٱلْقَرْنَيْنِ إِمَّآ أَن تُعَذِّبَ وَإِمَّآ أَن تَتَّخِذَ فِيهِمْ حُسْنًۭا ٨٦ قَالَ أَمَّا مَن ظَلَمَ فَسَوْفَ نُعَذِّبُهُۥ ثُمَّ يُرَدُّ إِلَىٰ رَبِّهِۦ فَيُعَذِّبُهُۥ عَذَابًۭا نُّكْرًۭا ٨٧ وَأَمَّا مَنْ ءَامَنَ وَعَمِلَ صَـٰلِحًۭا فَلَهُۥ جَزَآءً ٱلْحُسْنَىٰ ۖ وَسَنَقُولُ لَهُۥ مِنْ أَمْرِنَا يُسْرًۭا ٨٨ ثُمَّ أَتْبَعَ سَبَبًا ٨٩ حَتَّىٰٓ إِذَا بَلَغَ مَطْلِعَ ٱلشَّمْسِ وَجَدَهَا تَطْلُعُ عَلَىٰ قَوْمٍۢ لَّمْ نَجْعَل لَّهُم مِّن دُونِهَا سِتْرًۭا ٩٠ كَذَٰلِكَ وَقَدْ أَحَطْنَا بِمَا لَدَيْهِ خُبْرًۭا ٩١ ثُمَّ أَتْبَعَ سَبَبًا ٩٢ حَتَّىٰٓ إِذَا بَلَغَ بَيْنَ ٱلسَّدَّيْنِ وَجَدَ مِن دُونِهِمَا قَوْمًۭا لَّا يَكَادُونَ يَفْقَهُونَ قَوْلًۭا ٩٣ قَالُوا۟ يَـٰذَا ٱلْقَرْنَيْنِ إِنَّ يَأْجُوجَ وَمَأْجُوجَ مُفْسِدُونَ فِى ٱلْأَرْضِ فَهَلْ نَجْعَلُ لَكَ خَرْجًا عَلَىٰٓ أَن تَجْعَلَ بَيْنَنَا وَبَيْنَهُمْ سَدًّۭا ٩٤ قَالَ مَا مَكَّنِّى فِيهِ رَبِّى خَيْرٌۭ فَأَعِينُونِى بِقُوَّةٍ أَجْعَلْ بَيْنَكُمْ وَبَيْنَهُمْ رَدْمًا ٩٥ ءَاتُونِى زُبَرَ ٱلْحَدِيدِ ۖ حَتَّىٰٓ إِذَا سَاوَىٰ بَيْنَ ٱلصَّدَفَيْنِ قَالَ ٱنفُخُوا۟ ۖ حَتَّىٰٓ إِذَا جَعَلَهُۥ نَارًۭا قَالَ ءَاتُونِىٓ أُفْرِغْ عَلَيْهِ قِطْرًۭا ٩٦ فَمَا ٱسْطَـٰعُوٓا۟ أَن يَظْهَرُوهُ وَمَا ٱسْتَطَـٰعُوا۟ لَهُۥ نَقْبًۭا ٩٧ قَالَ هَـٰذَا رَحْمَةٌۭ مِّن رَّبِّى ۖ فَإِذَا جَآءَ وَعْدُ رَبِّى جَعَلَهُۥ دَكَّآءَ ۖ وَكَانَ وَعْدُ رَبِّى حَقًّۭا ٩٨</p>
         <br>
-        <h4>References:</h4>
+        <p>Allah the Almighty says: {And they ask you about Dhul-Qarnain. Say: "I shall recite to you something of his story." Verily, We established him in the earth, and We gave him the means of everything. So he followed a way. Until, when he reached the setting place of the sun, he found it setting in a spring of black muddy (or hot) water. And he found near it a people. We (Allah) said (by inspiration): "O Dhul-Qarnain! Either you punish them, or treat them with kindness." He said: "As for him (a disbeliever in the Oneness of Allah) who does wrong, we shall punish him, and then- he will be brought back unto his Lord, Who will punish him with a terrible torment (Hell)."But as for him who believes (in Allah's Oneness) and works righteousness he shall have the best reward, (Paradise), and we (Dhul-Qarnain) shall speak unto him mild words (as instructions)." Then he followed another way. Until, when he came to the rising place of the sun, he found it rising on a people for whom We (Allah) had provided no shelter against the sun. So (it was)! And We knew all about him (Dhul-Qarnain). Then he followed (another) way. Until, when he reached between two mountains, he found, before (near) them (those two mountains), a people who scarcely understood a word. They said: "O Dhul-Qarnain! Verily Yajuj and Majuj (Gog and Magog) are doing great mischief in the land. Shall we then pay you a tribute in order that you might erect a barrier between us and them?" He said: "That (wealth, authority and power) in which my Lord had established me is better (than your tribute). So help me with strength (of men),] will erect between you and them a barrier. "Give me pieces (blocks) of iron;" then, when he had filled up the gap between the two mountain-cliffs, he said: "Blow;" then when he had made them (red as) fire, he said: "Bring me molten copper to pour over them." So they (Yajuj and Majuj (Gog and Magog))) could not scale it or dig through it. Dhul- Qarnain) said: "This is a mercy from my Lord, but when the Promise of my Lord comes, He shall level it down to the ground. And the Promise of my Lord is ever true."} (Al-Kahf, 83-98)</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="washeaprophet?">Was Dhul-Qarnain a Prophet?</h4><br>
+        <p>Allah the Almighty praised Dhul-Qarnain in the Glorious Quran for his justice. He ruled over the easts and wests and many regions where he subjected their peoples and ruled them with perfect justice. The most likely opinion is that he was just a king.</p>
+        <br>
+        <p>Also, he was said to be a Prophet, or a Messenger. However, the most unlikely opinion thereof was that he was an Angel. The latter was narrated after the Leader of the Faithful, Umar Ibn Al-Khattab (May Allah be pleased with him) who heard a man calling another saying: 0 Dhul-Qarnain! He (Umar) said: Shut up! Was it not enough with you to name yourselves after the Prophets, that you take names after those of the Angels?"</p>
+        <br>
+        <p>It is reported that Abdullah Ibn Amr said: Dhul-Qarnain was a Prophet. Conversely, Abu Hurairah narrated that Allah's Messenger (Peace be upon him) said: "I do not know whether Tubba was a cursed one or not? And, I do not know whether Hudud (the Prescribed Penalties) are expiatory for their people or not? And, I do not know whether Dhul-Qarnain was a Prophet or not?" (This Hadith is Odd and Strange).</p>
+        <br>
+        <p>In other narration, Ibn Abbas (May Allah be pleased with him) transmitted a report that goes to the saying that Dhul-Qarnain was a good king whose work was praised in Allah's Book (the Glorious Quran); he was made victorious; and Al-Khadir was his minister, leader of his army, and his consultant.</p>
+        <br>
+        <p>Al-Azraqi and others mentioned that Dhul-Qarnain embraced Islam at the hands of Ibrahim (Abraham) (Peace be upon him) and that he circumambulated around the Ka bah with him and his son, Ismail (Peace be upon them). Also, it was narrated after Ubaid Ibn Umair and his son, Abdullah and others: that Dhul-Qarnain set out on foot to perform Pilgrimage. Upon hearing this, Ibrahim (Peace be upon him) welcomed him and invoked Allah for his sake and gave him advice as well. In addition, Allah the Almighty subjugated for Dhul-Qarnain the clouds to carry him wherever he wished. Allah knows best!</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="whyheiscalled">Why was he called "Dhul-Qarnain" (i.e. Owner of the two horns)?</h4><br>
+        <p>This is a controversial issue, that there is not a definite known reason behind this. Some said: he had something on his head that looked like two horns. Wahb Ibn Munabih said: He had two horns of brass on his head. (This interpretation is very weak)</p>
+        <br>
+        <p>Some scholars from among the People of the Book (Christians and Jews) said: This is because he ruled over Persian and Roman territories. It was also said: that he reached the first ray of the rising sun on the east and that on the west and he ruled over all that was in between. (The latter opinion is more likely true, which is the saying of Az-Zuhari)</p>
+        <br>
+        <p>Al-Hasan Al-Basri said: He had two braids of hair that he used to fold up and thus was called "Dhul-Qarnain". And, Ishaq Ibn Bishr narrated that the grandfather of Umar Ibn Shuaib said: Dhul Qarnain, once, invited a tyrant king to the way of Allah. The king hit him on the head and broke one of his horns. Dhul-Qarnain invited him again and the tyrant broke the second horn. Thus, he was called "Dhul-Qarnain".</p>
+        <br>
+        <p>Narrated Ath-Thawri that Ali Ibn Abu Talib (May Allah be pleased with him) was once asked about Dhul-Qarnain. He replied saying: He was a rightly-guided and pious man. He invited his people to Allah, but they hit him on his horn (side of the head) and he was killed. Allah the Almighty resurrected him and he invited them again, again they hit him on his second horn and he was killed (for the second time). Allah the Almighty revived him and thus he was called "Dhul- Qarnain". In other narrations, it was narrated by Abu At-Tufail after Ali Ibn Abu Talib that he said: He was neither a Prophet, nor a Messenger, nor an Angel, but was a godly, pious worshipper.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="name">What's his Name?</h4><br>
+        <p>Scholars disagreed regarding his name. Az Zubair Ibn Bakkar narrated after Abdullah Ibn, Abbas (May Allah be pleased with him): His name was Abdullah IbnAd-Dahhak Ibn Mad; or Musab Ibn Abdullah Ibn Qinan Ibn Mansur Ibn Abdullah Ibn Al-Azd Ibn Ghauth Ibn Nabt Ibn Malik Ibn Zaid Ibn Kahlan Ibn Saba Ibn Qahtan.</p>
+        <br>
+        <p>It has been narrated in a Hadith that he was from the tribe of Himyar and that his mQther was Roman, and he was called the Philosopher for the excellence of his mentality. However, As-Suhaili said: his name was Marzaban Ibn Marzabah. This was mentioned by Ibn Hisham who mentioned in another location that his name was: As-Sab Ibn Dhi Maraid who was the grandfather of the Tababiah and it was him who gave the verdict to the benefit of Ibrahim (Peace be upon him) pertaining to the well of As-Sab.</p>
+        <br>
+        <p>It was said: He was Afridun Ibn Asfiyan who killed Ad-Dahhak. Al-Qass Ibn Sa idah Al-Iyadi said in his famous sermon: 0 folk of Ayad Ibn As-Sab! Dhul- Qarnain ruled over the west. and east, subjugated the Jinn and mankind, and he lived for two thousand years. However, all this was just like a twinkle of the eye.</p>
+        <br>
+        <p>Ad-Daraqutni and Ibn Makula mentioned that his name was Hirmis, or Hirwis Ibn Qitun Ibn Rumi Ibn Lanti Ibn Kashaukhin Ibn Yunan Ibn Yafith Ibn Nuh (Noah (Peace be upon him)), and Allah knows best!</p>
+        <br>
+        <p>Ishaq Ibn Bishr narrated after Said Ibn Bashir on the authority of Qatadah as saying: Alexander was (called) Dhul-Qarnain, his father was the first Caesar, and he was from among the offspring of Sam Ibn Nuh (Noah (Peace be upon him)).</p>
+        <br>
+        <p>At this conjecture one should distinguish between two people who were called Dhul-Qarnain. The first is our pious Dhul-Qarnain while the second is Alexander Ibn Philips Ibn Masrim Ibn Hirmis Ibn Maitun Ibn Rumi Ibn Lanti Ibn Yunan Ibn Yafith Ibn Yunah Ibn Sharkhun Ibn Rumah Ibn Sharfat Ibn Tufil Ibn Rumi Ibn AI-As far Ibn Yaqz Ibn Al-lis Ibn Ishaq Ibn Ibrahim (Peace be upon him). This lineage was stated by Al-Hafiz Ibn Asakir in his Tarikh (History). Moreover, he was the Macedonian, Greek, Egyptian leader who established Alexandria and basing on whom the Romans set their Calendar. He came after the first Dhul-Qarnain with a very long time. This was three hundred years before Jesus (Peace be upon him). His minister was the famous Philosopher Artatalis. Moreover, he was the one who killed Dara Ibn Dara, and subjugated the Persian kings and seized their lands. We only drew the readers attention to this because many people think that the two men called "Dhul-Qarnain" are me, which is a big mistake for there were great differences between both. The first was a godly, pious, righteous worshipper of Allah the Almighty, and he was a just king whose minister was the pious man, Al-Khadlr. Moreover, some scholars stated that he was a Prophet as well. Whereas, the latter was a polytheist whose minister was a philosopher as mentioned earlier. In addition, the time elapsed between them both was more than two thousand years. Hence, none can miss the great differences and variance between both of them but an ignorant idiot who know nothing at all!</p>
+        <br>
+        <p>Allah's Saying: {And they ask you about Dhul-Qarnain} was revealed because the people of Quraish asked the Jews of something about which they would ask the Prophet Muhammad (Peace be upon him) to test his knowledge. The Jews told them: Ask him about a man who traveled through the earth, and about some young men who set out and no one knew what happened to them? Thereupon, Allah the Almighty revealed the stories of the Owners of the Cave and that of Dhul-Qarnain. Thus, He said: {Say: I shall recite to you something of his story}, i.e. enough and sufficient news about him and his status. Then, He said: {Verily, We established him in the earth, and We gave him the means of everything}, i.e. Allah the Almighty expanded his kingdom and provided him with what might enable him to gain what he wished to. Narrated Qutaibah that Ali Ibn Abu Talib was once asked about Dhul- Qarnain: how could he reach the east and west? Ali replied: The clouds wert subjugated for him, the means (of everything) were provided to him, and he was given extension pertaining to the light. Ali added: Do you want me to go on? The man became silent and thereupon, Ali (May Allah be pleased with him) became silent.</p>
+        <br>
+        <p>Narrated Abu Ishaq As-Subaii after Amr Ibn Abdullah Al-Wadai: "I heard Muawiyah as saying: four persons ruled over the earth: Sulaiman Ibn Dawud the Prophet (Peace be upon them), Dhul-Qarnain, a man from the people of Hulwan, and another man. Someone said: was it Al-Khadir? Muawiyah said: No."</p>
+        <br>
+        <p>Az-Zubair Ibn Bakkar narrated that Sufyan Ath Thawri said: I have come to know that four persons ruled over the whole earth: two of them were believers and the other two were disbelievers. The believing two were: Prophet Sulaiman and Dhul-Qarnain. And, the disbelieving two were: Namrud and Bikhtinassar." The same was narrated by Sa id Ibn Bashir.</p>
+        <br>
+        <p>Narrated Ishaq Ibn Bishr after Said Ibn Abu Urubah after Qatadah after Al-Hasan as saying: "Dhul-Qarnain was a king after Namrud. He was a pious, righteous Muslim who travelled through the east and west. Allah the Almighty prolonged his life and granted him victory over the enemies and to ge1 hold of their properties. He conquered the land, subjugated the people and travelled through the earth till he reached the east and west. Allah the Almighty says: {And they ask you about Dhul-Qarnain. Say: "I shall recite to you something of his story." Verily, We established him in the earth, and We gave him the means of everything}, i.e. knowledge of seeking the means of fulfilling things. Ibn Ishaq said: Muqatil claimed that he used to conquer the lands and collect treasures, and used to offer the people two choices: whether they embrace his religion and follow him, or they be killed.</p>
+        <br>
+        <p>Ibn Abbas, Mujahid, Said Ibn Jubair, Ikrimah, Ubaid Ibn Yala, As-Sadiy, Qatadah and Ad-Dahhak said: {and We gave him the means of everything}, i.e. knowledge. Qatadah and Matar Al-Warraq said: This means landmarks, locations, milestones and traces of the land. Abdur Rahman Ibn laid Ibn Aslam said: this means languages as he used not to conquer a people but he first speaks with them in their own language. The most possible and true explanation is that he knew all means through which he could fulfil his need or desire. As he used to take from every conquered region the provisions that enabled him to seize the next region, and so on.</p>
+        <br>
+        <p>Some scholars from among the People of the Book (Christians and Jews) mentioned that he spent one thousand and six hundred years travelling through the land inviting people to the worship of Allah the Almighty Who has no partner in His Dominion. But, it seems that there is some exaggeration in specifying that lengthy period, and Allah knows best!</p>
+        <br>
+        <p>Allah's statement {So he followed a way. Until, when he reached the setting place of the sun} i.e. he reached the place that no one can ever overpass, and he stood on the edge of the western ocean called Oqyanus wherein the islands called Al-Khalidat "The Eternal Ones". There, he could watch the setting of the sun. {He found it setting in a spring of black muddy (or hot) water}, i.e. the sea or ocean, as one who stands ashore sees the sun as if it rises from and sets in the sea. For this he said {he found it}, i.e. as he thought.</p>
+        <br>
+        <p>Imam Ahmed narrated after Yazid Ibn Hamn after Al-Awwam Ibn Haushab as saying: I was told by a freed-slave of Abdullah Ibn Amr after Abdullah as saying: Allah's Messenger (Peace be upon him) looked at the sun when it sat and said: "In Allah's blazing fire. Were it not for its prevention by Allah's Command, it would burn all that is on earth." (This Hadith is very Strange and Odd and surely it is not an Authentic one)</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="journeys-dhul-qarnain">Dhul-Qarnain is Seeking the Eye of Life</h4><br>
+        <p>Ibn Asakir reported a lengthy narration in which: Dhul-Qarnain had a friend from among the Angels called Ranaqil. Dhul-Qarnain asked him: Do you know the place on earth called "the Eye of Life"? The Angel described to him its location. Dhul-Qarnain set out seeking it appointing Al-Khadir as his harbinger. Al-Khadir came upon it in the land of darkness and he drank thereof. But, Dhul- Qarnain did not make it. However, Dhul-Qarnain met with a group of Angels in a palace there and he was given a stone. When he returned to his army, he asked the scholars who put it on a scale and put on the other one thousand stones of the like (weight and shape). However, the scale containing the first stone tilted. He, then, asked Al-Khadir who put on the other scale a single stone and a handful of dry dust. Al-Khadirs scale tilted this time. He then commented saying: "This is like the son of Adam, he is never satisfied till he is buried (covered with dust)". Thereupon, the scholars prostrated themselves before him as a sign of respect and honor; and Allah knows best!</p>
+        <br>
+        <p>Then, Allah the Almighty informs us that Dhul-Qarnain gave verdicts pertaining to the people of that region {We (Allah) said (by inspiration): "0 Dhul- Qarnain! Either you punish them, or treat them with kindness." He said: "As for him (a disbeliever , in the Oneness of Allah) who does wrong, we shall ! punish him, and then he will be brought back unto his Lord, Who will punish him with a terrible torment (Hell)} i.e. he tastes the torment in this present life and in the Hereafter. He began with the torment of the present life for its more difficult in the sight of the disbeliever. {But as for him who believes (in Allah's Oneness) and works righteousness he shall have the best reward, (Paradise), and we (Dhul-Qarnain) shall speak unto him mild words (as instructions)} where he started with the reward of the Hereafter which is most important and he added thereto kindness, i.e. justice, knowledge and faith. Allah the Almighty says {Then he followed another way}, i.e. he followed a way to return back from the west to the east. Some say that it took him twelve years to return to the east. {Until, when he came to the rising place of the sun, he found it rising on a people for whom We (Allah) had provided no shelter against the sun}, i.e. they do not have houses or any shelters to save them from the blazing sun. Some scholars say: they used to resort to trenches dug in the earth to shelter then from the burning rays of the sun. Then, Allah the Almighty says: {So (it was)! And We knew all about him (Dhul-Qarnain)}, i.e. Allah knows all about his affairs; He preserves and keeps him during his travels through the land from the west to the east and vice versa.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="encounter-yajuj-majuj">Encounter with Yajuj and Majuj</h4><br>
+        <p>It was narrated after Ubaid Ibn Umair, his son Abdullah and others that Dhul- Qarnain performed Pilgrimage on foot. Upon hearing that, Ibrahim (Peace be upon him) met him and on their meeting he invoked Allah for his sake, and advised him. It was said also that he was brought a horse to ride, but he said: I do not ride (on the back of horses) in a land wherein Prophet Ibrahim (Peace be upon him). Hence, Allah the Almighty subjugated for him the clouds, and Ibrahim (Peace be upon him) gave him the glad tidings pertaining to this. The clouds used to carry him anywhere he wished for. Allah the Almighty says: {then, he followed (another) way. Until, when he reached between two mountains, he found, before (near) them (those two mountains), a people who scarcely understood a word}, i.e. they were ignorant. It was said that they were the Turk,6 cousins of Gog and Magog. However, they told him that Gog and Magog wronged them and practiced mischief in their land. </p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="construction-barrier">Construction of the Barrier</h4><br>
+        <p>They offered him a tribute for that he builds a barrier (dam) preventing them from raiding over them. He refused to take the tribute they offered him finding sufficiency in that which Allah the Almighty has given him, so {He said: "That (wealth, authority and power) in which my Lord had established me is better (than your tribute)}. Then, he asked them to bring him men and tools to erect the barrier between them. Gog and Magog could only reach them from that place located between two mountain-cliffs. The other paths were either vast seas, or high mountains. Consequently, he erected it using iron and molten copper: he put iron instead of bricks and molten copper instead of clay. Allah the Almighty commented, {So they (Gog and Magog) could not scale it} with escalators, {or dig through it} with axes or picks. {(Dhul-Qarnain) said: "This is a mercy from my Lord} i.e. Allah the Almighty decreed this to be a mercy from Him to His slaves that they no longer assaulted by Gog and Magog. {But when the Promise of my Lord comes} i.e. the time He decided for them (Gog and Magog) to demolish it and get out attacking mankind near the Last Hour, {He shall level it down to the ground} this will inevitably take place. As He says {And the Promise of my Lord is ever true}, and {Until, when Gog and Magog are let loose (from their barrier), and they swoop down from every mound. And the true promise (Day of Resurrection) shall draw near (of fulfillment). Then (when mankind is resurrected from their graves), you shall see the eyes of the disbelievers fixedly staring in horror. (They will say): Woe to us! We were indeed heedless of this nay, but we were Zalimun (polytheists and wrongdoers)}. (Al- Anbiya, 96, 97) Allah the Almighty says: {We shall leave them to surge like waves"on one another} i.e. on the day Gog and Magog will come out, {and the Trumpet will be blown, and We shall collect them (the creatures) all together}.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="identity">Identity and Historical Context</h4>
+        <br>
+        <p>Narrated Abu Dawud At- Tyalisi after Ath-Thawri saying: I have been informed that the first human being to shake hands (with someone else) was Dhul-Qarnain. Moreover, it was narrated on the authority of Kab Al-Ahbar that he said to Muawiyah: Dhul-Qarnain on his death-bed told his mother, after his death, to prepare food and gather the women of the city and invite them to eat save anyone who lost any of her children (she should not eat thereof). The mother did as she asked, and none of them stretched a hand towards the food. She said: Glory be to Allah! Did you all lost children? They answered: By Allah! Yes we did. And, this was a great condolence for her.</p>
+        <br>
+        <p>Ishaq mentioned after Bishr Ibn Abdullah Ibn Ziyad after some of the People of the Book (Christians and Jews) the will of Dhul-Qarnain, an eloquent and lengthy advice, and that he died at the age of three thousand years. (This is very odd and strange)</p>
+        <br>
+        <p>Ibn Asakir said: I was informed that he lived for about thirty-six years. Others said: he lived for thirty-two years and that he came seven hundred and forty years after Dawud (David) (Peace be upon him). He came after Adam (Peace be upon him) with five thousand and one hundred eighty-one years and that his reign lasted for sixteen years. But, that which he related is true as for the Macedonian Alexander and not our Dhul-Qarnain. He thus mixed the former with the latter and this is perfectly wrong.</p>
+        <br>
+        <p>Among those who mixed them and declared both to be just one, was Imam Abdul Malik Ibn Hisham (Narrator of the Prophets Biography), which was denied and rejected by Al-Hafiz Abu Al-Qasim As-Suhaili. He severely refuted his sayings and set clear boundaries between the two persons as mentioned earlier. He said: May be some of the former kings called themselves "Dhul-Qarnain" following the example of the first true one; and Allah knows best!</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="ref">References:</h4>
           <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-  function toggleBookmark(element, slug) {
-    // Check if user is authenticated
-    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
-
-    if (!isAuthenticated) {
-        window.location.href = '/account/signin/'; // Redirect to sign-in page
-        return;
-    }
-
-    // Proceed with bookmark toggle for authenticated users
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
         }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
             }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
-    }
-    return cookieValue;
-}
-document.addEventListener("DOMContentLoaded", function() {
-    // Assuming the user is authenticated; adjust as needed
-    updateUserBookmarkIcons();
-});
-
-function updateUserBookmarkIcons() {
-    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            // Include CSRF token if needed for GET requests or ensure your view is exempt
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        const bookmarkedSlugs = data.bookmarkedSlugs;
-        bookmarkedSlugs.forEach(slug => {
-            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
-            if (bookmarkIcon) {
-                bookmarkIcon.classList.remove('fa-regular');
-                bookmarkIcon.classList.add('fa-solid');
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
         });
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-  var initialTop = $('.sidenav').css('top'); // Store the initial top value
-  $(window).scroll(function() {
-    var scroll = $(window).scrollTop(); // Get current scroll position
-    $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
-  });
-});
-</script>
-  </body>
-
-</html>
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}

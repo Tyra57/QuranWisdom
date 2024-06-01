@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
   {% block title %}
     <title>Barsisa The Worshipper (The Renegade)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
@@ -170,13 +164,13 @@
 
     <div class="sidenav" id="sidenav"> 
     
-      <a href="#">Introduction</a>
-      <a href="#">The Deception of Satan</a>
-      <a href="#">The Fall</a>
-      <a href="#">The Dream and the King's Justice</a>
-      <a href="#">The Final Temptation and Punishment</a>
-      <a href="#">A Lesson on Faith and Deception</a>
-      <a href="#">References</a>
+      <a href="#intro">Introduction</a>
+      <a href="#deception">The Deception of Satan</a>
+      <a href="#fall">The Fall</a>
+      <a href="#dream">The Dream and the King's Justice</a>
+      <a href="#final">The Final Temptation and Punishment</a>
+      <a href="#lesson">A Lesson on Faith and Deception</a>
+      <a href="#ref">References</a>
      
     </div>
 
@@ -184,9 +178,7 @@
       <!--Story of Luqman content-->
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Introduction to Barsisa The Worshipper (The Renegade)</h4>
+        <h4 id="intro">Introduction to Barsisa The Worshipper (The Renegade)</h4>
         <br>
         <p>كَمَثَلِ ٱلشَّيْطَـٰنِ إِذْ قَالَ لِلْإِنسَـٰنِ ٱكْفُرْ فَلَمَّا كَفَرَ قَالَ إِنِّى بَرِىٓءٌۭ مِّنكَ إِنِّىٓ أَخَافُ ٱللَّهَ رَبَّ ٱلْعَـٰلَمِينَ ١٦ فَكَانَ عَـٰقِبَتَهُمَآ أَنَّهُمَا فِى ٱلنَّارِ خَـٰلِدَيْنِ فِيهَا ۚ وَذَٰلِكَ جَزَٰٓؤُا۟ ٱلظَّـٰلِمِينَ ١٧</p>
         <br>
@@ -194,39 +186,39 @@
         <br><br>
         <hr class ="line">
         <br>
-        <h4>The Deception of Satan</h4>
+        <h4 id="deception">The Deception of Satan</h4>
         <br>
         Ibn Jarir said that 'Abdullah Ibn Mas'ud interpreted the Qur'anic Verse that reads: {(Their allies deceived them) like Shaitan (Satan), when he says to man: "Disbelieve in Allah." But when (man) disbelieves in Allah, Shaitan (Satan) says: "I am free of you, I fear Allah, the Lord of the 'Alamin (mankind, jinn and all that exists)!" So the end of both will be that they will be in the Fire, abiding therein. Such is the recompense of the Zalimun (i.e. polytheists, wrong-doers, disbelievers in Allah and in His Oneness)}. (Al-Hashr, 16, 17)
         <br><br>
         <hr class ="line">
         <br>
-        <h4>The Fall</h4>
+        <h4 id="fall">The Fall</h4>
         <br>
         Ibn Masud (May Allah be pleased with him) said: Once upon a time, there was a woman grazing sheep and goats. She had four brothers. She (for some reason) used to spend the night at a monk's cell. The monk committed adultery with her and she got pregnant. Satan came to him and said: Kill the woman and then bury her for you are a reputable and highly respected man (i.e. don't risk your own reputation for such a simple woman). The monk killed her and then buried her. 
         <br><br>
         <hr class ="line">
         <br>
-        <h4>The Dream and the King's Justice</h4>
+        <h4 id="dream">The Dream and the King's Justice</h4>
         <br>
         Thereupon, Satan visited her four brothers in a dream while they were asleep and said to them: the monk committed adultery with your sister, and because she got pregnant, he killed her and buried her in such-and-such location. In the morning, one of them said: "By Allah! Last night I dreamt of something and I do not know whether to relate it to you or just keep it to myself?" They said: Relate it to us. He did so and one of them said: By Allah! I saw the same dream.
         Another said the same. And the fourth one said the same thing. They agreed on that there must be something serious about that dream. They went to the king and appealed for his help against the monk. The king's troops came to arrest him and he was taken away. 
         <br><br>
         <hr class ="line">
         <br>
-        <h4>The Final Temptation and Punishment</h4>
+        <h4 id="final">The Final Temptation and Punishment</h4>
         <br>
         On the way, Satan came to the monk (and whispered in his ears): I set you up. No one else can save you from this. Prostrate yourself before me just for once and in return, I will save you from this. Thereupon, the monk prostrated himself before Satan. When they presented themselves before the king, Satan said to him: I am free of you! Finally, the monk was killed.
         <br><br>
         <hr class ="line">
         <br>
-        <h4>A Lesson on Faith and Deception</h4>
+        <h4 id="lesson">A Lesson on Faith and Deception</h4>
         <br>
         The same story was narrated by the Leader of the Believers, Ali Ibn Abu Talib (May Allah be pleased with him) in another wording. Ibn Jarir said: I was told by Khallad Ibn Aslam, on the authority of An-Nadr Ibn Shamil after Shu'bah, after Abu Ishaq, after Abdullah Ibn Nahik saying: I heard 'Ali as saying: A monk worshipped Allah Alone for sixty years. Satan exerted himself to seduce him, but could not. He went to a woman and touched her with evil (maddened her). The woman had brothers whom were visited by Satan who told them to take her to that monk to receive treatment and cure. They took her to the monk and he treated her. Afterwards, she stayed for a while at his cell (house). One day, he was attracted to her and he committed adultery with her. She got pregnant and he killed her (to conceal his first crime). Her brothers came (after knowing the matter) and Satan appeared again for the monk and said: I am your friend, I did not find a solution or way to mislead you, but (finally) I set you up. So, obey me and I will save you from this. Prostrate yourself before me and you will be saved. The monk did so. Then, Satan said: {"I am free of you, I fear Allah, the Lord of the Alamin (mankind, jinn and all that exists)! "} . (Al-Hashr ,16)
         This is the interpretation of Allah's Saying: {(Their allies deceived them) like Shaitan (Satan), when he says to man: "Disbelieve in Allah." But when (man) disbelieves in Allah, Shaitan (Satan) says: "I am free of you, I fear Allah, the Lord of the" Alamin (mankind, jinn and all that exists)!" So the end of both will be that they will be in the Fire, abiding therein. Such is the recompense of the Zalimun (i.e. polytheists, wrong-doers, disbelievers in Allah and in His Oneness)}. (Al-Hashr, 16, 17)
         <br><br>
         <hr class ="line">
         <br>
-        <h4 class="ref">References:</h4>
+        <h4 id="ref" class="ref">References:</h4>
           <p class ="ref">Stories of The Quran, by Ibn Kathir</p>
       </div>
 
@@ -242,6 +234,16 @@ function toggleSidenav() {
   }
 }
 </script>
+<script>
+  $(document).ready(function() {
+    var initialTop = $('.sidenav').css('top'); // Store the initial top value
+    $(window).scroll(function() {
+      var scroll = $(window).scrollTop(); // Get current scroll position
+      $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+    });
+  });
+  </script>
+
 <script>
   function on() {
     document.getElementById("overlay").style.display = "block";
@@ -323,14 +325,7 @@ function updateUserBookmarkIcons() {
     .catch(error => console.error('Error:', error));
 }
 </script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-  var initialTop = $('.sidenav').css('top'); // Store the initial top value
-  $(window).scroll(function() {
-    var scroll = $(window).scrollTop(); // Get current scroll position
-    $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
-  });
-});
-</script>
 {% endblock content %}

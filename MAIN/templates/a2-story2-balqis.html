@@ -1,95 +1,26 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Balqis (Queen of Saba)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
     <link rel="stylesheet" href="{% static 'css\forum.css' %}">
     <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
-
-<body data-user-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}">
-  <!--Navigation Bar-->
-  <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <!-- <div class="user-menu">  -->
-      <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()">
-    
-      <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
-        <div class="sub-menu-container">
-          <div class="sub-menu">
-            <!--close icon-->
-              <div class="close-button">
-                <i class="fas fa-times" onclick="offMenu()" style ="cursor:pointer"></i>
-              </div>   
-              
-              <a href="{% url 'profile' %}" class="user-info-link"> 
-                <div class="user-info">
-                  <img src="{% static 'assets\usermenuimg\user.png' %}">
-                  <h3>Nur Athirah</h3>
-              </div>
-              </a>
-              
-              <hr>
-            
-              <a href="{% url 'update_profile' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\profile.png' %}">
-                <p>Edit Profile</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\setting.png' %}">
-                <p>Settings & Privacy</p>
-                <span></span>
-              </a>
-                
-              <a href="#" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\help.png' %}">
-                <p>Help & Support</p>
-                <span></span>
-              </a>
-                
-              <a href="{% url 'logout' %}" class="sub-menu-link">
-                <img src="{% static 'assets\usermenuimg\logout.png' %}">
-                <p>Logout</p>
-                <span></span>
-              </a>
-          </div>
-        </div>
-      </div>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-   
-  <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="{% static 'js\main.js' %}"></script>
-  <!--end of nav bar-->
+    <style>
+      @media screen and (max-width: 768px) {
+    .nav-to-right, .nav-line{
+      margin-left: 20px;
+    }
+    .nav-link{
+      margin-left: 20px;
+      margin-right: 0;
+    }
+  }
+</style>
+{% endblock title %}
+{% block content %}  
 
 <!--nav link-->
 <div class="nav-link">
@@ -171,8 +102,8 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/view-castle-with-nature-landscape_23-2150743900.jpg?t=st=1716424941~exp=1716428541~hmac=cce2db9ca5f8c69c09e61c2e05236c196f6048ce8dfd5f5b464037b4769191af&w=1060);">
-  <h1>Balqis (Queen of Saba)</h1>
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://t3.ftcdn.net/jpg/05/84/21/24/360_F_584212408_rbdxocO3d9Unz8sF4acp2GGbT4XbNg4s.jpg);">
+  <h1>Balqis<br>(Queen of Saba)</h1>
 </div>
 <style>
   .sidenav{
@@ -180,10 +111,9 @@
     position: fixed;
     height: 100%;
     left: 0;
-    top: 600px;
+    top: 806px;
     z-index: 2;
     overflow-x: hidden;
-    background-color: #fff;
   }
   .sidenav a{
     padding: 10px 0px 10px 30px;
@@ -199,6 +129,7 @@
     padding: 50px 150px 100px 60px;
     margin-left: 200px;
     align-items: center;
+    text-align: justify;
   }
   .story1 .h4{
     text-align: center;
@@ -213,211 +144,208 @@
     width: 100%;
     margin: 15px 0 10px;
   }
+.toggle-story {
+  display: none;
+}
+  /* Adjustments for mobile view */
+  @media screen and (max-width: 768px) {
+    .sidenav {
+      display: none;
+    }
+  /* Adjust content padding to not overlap with the sidenav */
+  .story1 {
+    padding: 20px;
+    margin-bottom: 60px; /* Add space at the bottom for sidenav */
+    margin-left: 0;
+  }
+}
 </style>
-<div class="sidenav"> 
+<div class="sidenav" id="sidenav"> 
   <ul>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">Balqis</a></li>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">Introduction</a></li>
-    <li><a href="#">Introduction</a></li>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#bird">Discovery by the Hoopoe Bird</a></li>
+    <li><a href="#letter">Sulaiman's Letter to Bilqis</a></li>
+    <li><a href="#response">Bilqis's Consultation and Response</a></li>
+    <li><a href="#gift">Sulaiman's Rejection of the Gift</a></li>
+    <li><a href="#visit">Bilqis's Visit to Sulaiman</a></li>
+    <li><a href="#submission">Bilqis's Submission to Allah</a></li>
+    <li><a href="#after">Aftermath and Reflections</a></li>
+    <li><a href="#ref">References</a></li>
   </ul>
 </div>
       <!--Story of Luqman content-->
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Introduction to Balqis (Queen of Saba)</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
+        <h4 id="intro">Introduction to Balqis (Queen of Saba)</h4>
+        <br>
+        <p>وَتَفَقَّدَ ٱلطَّيْرَ فَقَالَ مَا لِىَ لَآ أَرَى ٱلْهُدْهُدَ أَمْ كَانَ مِنَ ٱلْغَآئِبِينَ ٢٠ لَأُعَذِّبَنَّهُۥ عَذَابًۭا شَدِيدًا أَوْ لَأَا۟ذْبَحَنَّهُۥٓ أَوْ لَيَأْتِيَنِّى بِسُلْطَـٰنٍۢ مُّبِينٍۢ ٢١ فَمَكَثَ غَيْرَ بَعِيدٍۢ فَقَالَ أَحَطتُ بِمَا لَمْ تُحِطْ بِهِۦ وَجِئْتُكَ مِن سَبَإٍۭ بِنَبَإٍۢ يَقِينٍ ٢٢ إِنِّى وَجَدتُّ ٱمْرَأَةًۭ تَمْلِكُهُمْ وَأُوتِيَتْ مِن كُلِّ شَىْءٍۢ وَلَهَا عَرْشٌ عَظِيمٌۭ ٢٣ وَجَدتُّهَا وَقَوْمَهَا يَسْجُدُونَ لِلشَّمْسِ مِن دُونِ ٱللَّهِ وَزَيَّنَ لَهُمُ ٱلشَّيْطَـٰنُ أَعْمَـٰلَهُمْ فَصَدَّهُمْ عَنِ ٱلسَّبِيلِ فَهُمْ لَا يَهْتَدُونَ ٢٤ أَلَّا يَسْجُدُوا۟ لِلَّهِ ٱلَّذِى يُخْرِجُ ٱلْخَبْءَ فِى ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضِ وَيَعْلَمُ مَا تُخْفُونَ وَمَا تُعْلِنُونَ ٢٥ ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ رَبُّ ٱلْعَرْشِ ٱلْعَظِيمِ ۩ ٢٦ ۞ قَالَ سَنَنظُرُ أَصَدَقْتَ أَمْ كُنتَ مِنَ ٱلْكَـٰذِبِينَ ٢٧ ٱذْهَب بِّكِتَـٰبِى هَـٰذَا فَأَلْقِهْ إِلَيْهِمْ ثُمَّ تَوَلَّ عَنْهُمْ فَٱنظُرْ مَاذَا يَرْجِعُونَ ٢٨ قَالَتْ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ إِنِّىٓ أُلْقِىَ إِلَىَّ كِتَـٰبٌۭ كَرِيمٌ ٢٩ إِنَّهُۥ مِن سُلَيْمَـٰنَ وَإِنَّهُۥ بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ ٣٠ أَلَّا تَعْلُوا۟ عَلَىَّ وَأْتُونِى مُسْلِمِينَ ٣١ قَالَتْ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ أَفْتُونِى فِىٓ أَمْرِى مَا كُنتُ قَاطِعَةً أَمْرًا حَتَّىٰ تَشْهَدُونِ ٣٢ قَالُوا۟ نَحْنُ أُو۟لُوا۟ قُوَّةٍۢ وَأُو۟لُوا۟ بَأْسٍۢ شَدِيدٍۢ وَٱلْأَمْرُ إِلَيْكِ فَٱنظُرِى مَاذَا تَأْمُرِينَ ٣٣ قَالَتْ إِنَّ ٱلْمُلُوكَ إِذَا دَخَلُوا۟ قَرْيَةً أَفْسَدُوهَا وَجَعَلُوٓا۟ أَعِزَّةَ أَهْلِهَآ أَذِلَّةًۭ ۖ وَكَذَٰلِكَ يَفْعَلُونَ ٣٤ وَإِنِّى مُرْسِلَةٌ إِلَيْهِم بِهَدِيَّةٍۢ فَنَاظِرَةٌۢ بِمَ يَرْجِعُ ٱلْمُرْسَلُونَ ٣٥ فَلَمَّا جَآءَ سُلَيْمَـٰنَ قَالَ أَتُمِدُّونَنِ بِمَالٍۢ فَمَآ ءَاتَىٰنِۦَ ٱللَّهُ خَيْرٌۭ مِّمَّآ ءَاتَىٰكُم بَلْ أَنتُم بِهَدِيَّتِكُمْ تَفْرَحُونَ ٣٦ ٱرْجِعْ إِلَيْهِمْ فَلَنَأْتِيَنَّهُم بِجُنُودٍۢ لَّا قِبَلَ لَهُم بِهَا وَلَنُخْرِجَنَّهُم مِّنْهَآ أَذِلَّةًۭ وَهُمْ صَـٰغِرُونَ ٣٧ قَالَ يَـٰٓأَيُّهَا ٱلْمَلَؤُا۟ أَيُّكُمْ يَأْتِينِى بِعَرْشِهَا قَبْلَ أَن يَأْتُونِى مُسْلِمِينَ ٣٨ قَالَ عِفْرِيتٌۭ مِّنَ ٱلْجِنِّ أَنَا۠ ءَاتِيكَ بِهِۦ قَبْلَ أَن تَقُومَ مِن مَّقَامِكَ ۖ وَإِنِّى عَلَيْهِ لَقَوِىٌّ أَمِينٌۭ ٣٩ قَالَ ٱلَّذِى عِندَهُۥ عِلْمٌۭ مِّنَ ٱلْكِتَـٰبِ أَنَا۠ ءَاتِيكَ بِهِۦ قَبْلَ أَن يَرْتَدَّ إِلَيْكَ طَرْفُكَ ۚ فَلَمَّا رَءَاهُ مُسْتَقِرًّا عِندَهُۥ قَالَ هَـٰذَا مِن فَضْلِ رَبِّى لِيَبْلُوَنِىٓ ءَأَشْكُرُ أَمْ أَكْفُرُ ۖ وَمَن شَكَرَ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ رَبِّى غَنِىٌّۭ كَرِيمٌۭ ٤٠ قَالَ نَكِّرُوا۟ لَهَا عَرْشَهَا نَنظُرْ أَتَهْتَدِىٓ أَمْ تَكُونُ مِنَ ٱلَّذِينَ لَا يَهْتَدُونَ ٤١ فَلَمَّا جَآءَتْ قِيلَ أَهَـٰكَذَا عَرْشُكِ ۖ قَالَتْ كَأَنَّهُۥ هُوَ ۚ وَأُوتِينَا ٱلْعِلْمَ مِن قَبْلِهَا وَكُنَّا مُسْلِمِينَ ٤٢ وَصَدَّهَا مَا كَانَت تَّعْبُدُ مِن دُونِ ٱللَّهِ ۖ إِنَّهَا كَانَتْ مِن قَوْمٍۢ كَـٰفِرِينَ ٤٣ قِيلَ لَهَا ٱدْخُلِى ٱلصَّرْحَ ۖ فَلَمَّا رَأَتْهُ حَسِبَتْهُ لُجَّةًۭ وَكَشَفَتْ عَن سَاقَيْهَا ۚ قَالَ إِنَّهُۥ صَرْحٌۭ مُّمَرَّدٌۭ مِّن قَوَارِيرَ ۗ قَالَتْ رَبِّ إِنِّى ظَلَمْتُ نَفْسِى وَأَسْلَمْتُ مَعَ سُلَيْمَـٰنَ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ ٤٤</p>
+        <br>
+        <p>Allah the Almighty says:
 
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
+          {He inspected the birds, and said: "What is the matter that I see not the hoopoe? Or is he among the absentees? "I will surely punish him with a severe torment, or slaughter him, unless he brings me a clear reason." But the hoopoe stayed not long: he (came up and) said: "I have grasped (the knowledge of a thing) which you have not grasped and I have come to you from Saba' (Sheba) with true news." "I found a woman ruling over them: she has been given all things that could be possessed by any ruler of the earth, and she has a great throne. I found her and her people worshipping the sun instead of Allah, and Shaitan (Satan) has made their deeds fair-seeming to them, and has barred them from (Allah's) Way: so they have no guidance." [As Shaitan (Satan) has barred them from Allah's Way] so they do not worship (prostrate themselves before) Allah, Who brings to light what is hidden in the heavens and the earth, and knows what you conceal and what you reveal. Allah, La ilaha illa Huwa (none has the right to be worshipped but He), the Lord of the Supreme Throne! [Sulaiman (Solomon)] said: "We shall see whether you speak the truth or you are (one) of the liars."Go you with this letter of mine, and deliver it to them, then draw back from them, and see what (answer) they return." She said: "O chiefs! Verily! Here is delivered to me a noble letter. "Verily it is from Sulaiman (Solomon), and verily, it (reads): In the Name of Allah, the Most Gracious, the Most Merciful: "Be you not exalted against me, but come to me as Muslims (true believers who submit to Allah with full submission). She said: "O chiefs! Advise me in (this) case of mine. I decide no case till you are present with me (and give me your opinions)." They said: "We have great strength, and great ability for war, but it is for you to command: so think over what you will command." She said: "Verily kings, when they enter a town (country), they despoil it and make the most honorable amongst its people the lowest. And thus they do. "But verily! I am going to send him a present, and see with what (answer) the Messengers return." So when (the messengers with the present) came to Sulaiman (Solomon), he said: "Will you help me in wealth? What Allah has given me is better than that which He has given you! Nay, you rejoice in your gift!" [Then Sulaiman (Solomon) said to the chief of her messengers who brought the present]: "Go back to them. We verily shall come to them with hosts that they cannot resist, and we shall drive them out from there in disgrace, and they will be abased." He said: "O chiefs! Which of you can bring me her throne before they come to me surrendering themselves in obedience?" AIfrit (strong one) from the jinn said: I will bring it to you before you rise from your place (council). And verily, I am indeed strong, and trustworthy for such work." One with whom was knowledge of the Scripture said: "I will bring it to you within the twinkling of an eye!" Then when he [Sulaiman (Solomon)] saw it placed before him, he said: "This is by the Grace of my Lord -to test me whether I am grateful or ungrateful! And whoever is grateful, truly, his gratitude is for (the good of) his own self, and whoever is ungrateful, (he is ungrateful only for the loss of his own self. Certainly my Lord is Rich (Free of all needs), Bountiful." He said: "Disguise her throne for her that we may see whether she will be guided (to recognize her throne), or she will be one of those not guided." So when she came, it was said (to her): "Is your throne like this?" She said: "(It is) as though it were the very same." And [Sulaiman (Solomon)] said: "Knowledge was bestowed on us before her, and we were submitted to Allah (in Islam as Muslims before her)." And that which she used to worship besides Allah has prevented her (from Islam), for she was ofa disbelieving people. It was said to her: "Enter As-Sarh" (a glass surface with water underneath it or a palace): but when she saw it, she thought it was a pool, and she (tucked up her clothes) uncovering her legs. (Sulaiman (Solomon)) said: "Verily, it is a Sarh (a glass surface with water underneath it or a palace)." She said: "My Lord! Verily, I have wronged myself, and I submit [in Islam, together with Sulaiman (Solomon)] to Allah, the Lord of the Alamin (mankind, jinn and all that exists)}. (An-Naml. 20-44)</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="bird">Discovery by the Hoopoe Bird</h4>  
+        <br>
+        <p>One day, Sulaiman (Peace be upon him) wanted the hoopoe, he missed him and did not find him in his appointed position so, he said: {What is the matter that I see not the hoopoe? Or is he among the absentees?} i.e. he is not here, or I cannot see him. {I will surely punish him with a severe torment} Sulaiman (Peace be upon him) threatened that he would punish him with some kind of penalty; {or slaughter him, unless he brings me a clear reason} i.e. a clear excuse that may save him from my punishment. Allah the Almighty says: {But the hoopoe stayed not long} i.e. his absence was not so long, then {he (came up and) said} to Sulaiman (Peace be upon him) {I have grasped (the knowledge of a thing) which you have not grasped} i.e. I got to know that which you did not; {and I have come to you from Saba' (Sheba) with true news}. That {I found a woman ruling over them: she has been given all things that could be possessed by any ruler on earth, and she has a great throne}, he is describing the status of the kings and rulers of Sheba in the Yemen: they had a mighty and glorious kingdom along with strong and competent troops. During that period, their king died and left no heirs but a daughter whom they raised as their queen.
+          <br><br>Ath-Thalabi and others mentioned that after her father's death, the people appointed a man under whose rule corruption and mischief prevailed. She proposed to him in marriage and he married her. At their first night together she gave him wine till he got drunk and then she beheaded him and hanged his head on her door. Thereupon, the people raised her over the throne as their queen. She was Bilqis Bint As-Sairah. Her father was called Al-Hudhad, or Shurahil Ibn Dhi Jadan Ibn As-Sairah Ibn Al-Harith Ibn Qais Ibn Saifi Ibn Saba' Ibn Yashjub Ibn Ya rub Ibn Qahtan. Her father was one of the noblest kings. He refused to get married to Yemeni women. It is said that he got married to a woman from the Jinn whose name was Raihanah Bint As-Sakan who gave birth to that woman whose name is Balqamah, to be known later as Bilqis.
+          <br><br>Ath-Thalabi transmitted on the authority of Said Ibn Bashir on the authority of Qatadah after An-Nadr Ibn Anas after Bashir Ibn Nahik, after Abu Hurairah that Allah's Messenger (Peace be upon him) said: "One of Bilqis 's parents was from among the jinn." (This is a strange Hadith in whose Chain of Transmission there is some kind of Weakness).
+          <br><br>Ath-Thalabi said: I was told by Abu Abdullah Ibn Qabhunah on the authority of Abu Bakr Ibn Jarjah after Abu Bakrah as saying: Once, Bilqis was mentioned before Allah's Messenger (Peace be upon him) who said: "Such people as ruled by a lady will never be successful." (That sub-Narrator, Ismail Ibn Muslim is Meccan and he is regarded by the Scholars of Hadith as Weak, i.e. not an authentic narrator).
+          <br><br>It is mentioned in Sahih Al-Bukhari from the narration of Auf on the authority of Al-Hasan, after Abu Bakra that: When Allah's Messenger (Peace be upon him) was informed that the Persians had crowned the daughter of Khusrau as their ruler, he said, "Such people as ruled by a lady will never be successful." (Sahih Al-Bukhari)
+          <br><br>And, his saying: {She has been given all things} that could be possessed by any ruler of the earth, {and she has a great throne} i.e. the chair she sits on was ornamented and studded with various jewels, pearls, gold and other magnificent things. Then, he mentioned their disbelief in Allah the Almighty and their worship of the sun instead of Allah and the deceivement of Satan to them by making their deeds look fair-seeming in their eyes, and barring them from Allah's Way, {So they do not worship (prostrate themselves before) Allah, Who brings to light what is hidden in the heavens and the earth, and knows what you conceal and what you reveal} i.e. He knows all secrets and revealed matters whether material or immaterial. {Allah, La ilaha illa Huwa (none has the right to be worshipped but He), the Lord of the Supreme Throne!} i.e. the Greatest Throne which none from among His creatures ever has.
         </p>
         <br>
-        <h4>References:</h4>
-          <p>Stories of The Quran, by Ibn Kathir</p>
+        <hr class="line">
+        <br>
+        <h4 id="letter">Sulaiman's Letter to Bilqis</h4>
+        <br>
+        <p>Thereupon, Sulaiman sent the hoopoe with a letter calling them to obey Allah and His Messenger, to repent and submit themselves to his kingship and power. He sent them: {Be you not exalted against me} i. e. do not let your pride prevent you from obeying me, {but come to me as Muslims} i.e. true believers who submit to Allah with full submission. The hoopoe dropped the letter near her and waited to see what she was going to do.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="response">Bilqis's Consultation and Response</h4>
+        <br>
+        <p>However, she gathered the nobles, princes and ministers to have mutual consultation, {She said: "O chiefs! Verily! Here is delivered to me a noble letter}, then she first read its title {Verily it is from Sulaiman (Solomon)}, then she read the rest thereof {and verily, it (reads): In the Name of Allah, the Most Gracious, the Most Merciful: Be you not exalted against me, but come to me as Muslims (true believers who submit to Allah with full submission)}. Then she sought their advice in a very polite manner {She said: 0 chiefs! Advise me in (this) case of mine. I decide no case till you are present with me} i.e. that you give me your opinions, {They said: We have great strength, and great ability for war}, i.e. we can afford war and all it needs of strength, materials, etc. so if you want this choice, we are well prepared thereto {but it is for you to command: so think over what you will command}, hence, they showed full obedience to her and after showing and displaying their abilities before her they left the matter in her hands to see what should be done. Verily, her opinion was wiser and better than theirs as she knew that the sender of the letter was not to be resisted, fooled, or even deceived. {She said: Verily kings, when they enter a town (country), they despoil it and make the most honorable amongst its people the lowest. And thus they do}, i.e. she explains to them that if that king overpowers this kingdom of theirs, she would be the one who receives the severest of punishment and degradation. {But verily! I am going to send him a present, and see with what (answer) the Messengers return} she wanted to bribe Sulaiman with presents and gifts knowing that Sulaiman (Peace be upon him) would not accept from them but Islam, as she and her people were disbelievers while he and his troops are far stronger than them all.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="gift">Sulaiman's Rejection of the Gift</h4>
+        <br>
+        <p>For this {When (the messengers with the present) came to Sulaiman (Solomon), he said: Will you help me in wealth? What Allah has given me is better than that which He has given you! Nay, you rejoice in your gift!} Then Sulaiman (Solomon) said to the chief of her messengers who brought the present {Go back to them. We verily shall come to them with hosts that they cannot resist, and we shall drive them out from there in disgrace, and they will be abased} i.e. go back with your gifts for what I have been granted by Allah is far better than these properties, riches and presents with which you rejoice and be filled with arrogance and pride over your own people. {We verily shall come to them with hosts that they cannot resist} i.e. troops that are irresistible and cannot be defeated or encountered, and moreover we shall drive them out from their land, properties and wealth {in disgrace, and they will be abased} i.e. dragging shame, abasement and destruction.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="visit">Bilqis's Visit to Sulaiman</h4>
+        <br>
+        <p>When they heard the news, they rushed declaring their full submission and perfect obedience and willingness to accompany their queen in her leaving for meeting Sulaiman (Peace be upon him). When he (Peace be upon him) heard of their coming and their intention to present themselves before his hand, he said to those (Jinn) from among his present hosts if they would bring him her throne before she manage to come: {AIfrit (strong one) from the jinn said: I will bring it to you before you rise from your place (council). And verily, I am indeed strong, and trustworthy for such work) i.e. before you finish your ruling council. It was said that he used to run the affairs of the Banu Israel from the beginning of the day till the noon. {Verily, I am indeed strong, and trustworthy for such work} i.e. I am strong enough to bring the throne to you, and at the same time I am to be entrusted with what it contains of the precious jewels and pearls. But {One with whom was knowledge of the Scripture said} i.e. Asif Ibn Barkhiya who was Sulaiman's maternal cousin, said it was one of the believers from among the Jinn who knew the Greatest Name of Allah the Almighty. It is also said that he was one from among the scholars of the Banu Israel. Moreover, it was said to be Sulaiman himself, which is very strange and odd opinion and which As-Suhaili described to be out of context. A fourth opinion held that it was Gabriel (Peace be upon him). {I will bring it to you within the twinkling of an eye!} i.e. before you send a messenger to the farthest place on earth and he comes back to you. It was also said: before the farthest person you can see reaches you; or before your sight gets weary of starring at some point and your eye closes; or before you regain your sight if you look to the farthest place your sight can reach then you close your eye, (which is the most likely interpretation). {Then when he [Sulaiman (Solomon)) saw it placed before him} i.e. when he saw the throne of Bilqis brought and placed before him, in this too short period, from the Yemen to Jerusalem, {he said: "This is by the Grace of my Lord -to test me whether I am grateful or ungrateful!} i.e. this is by the Grace of Allah lam granted and His Grace all people are granted testing them whether they are grateful or ungrateful. {And whoever is grateful, truly, his gratitude is for (the good of) his own self} i.e. the benefit of this returns onto himself, {and whoever is ungrateful, (he is ungrateful only for the loss of his own self. Certainly my Lord is Rich (Free of all needs), Bountiful} i.e. He is neither in need of thanking of the thankful, nor is He harmed by disbelief of the disbelievers.</p>
+        
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="submission">Bilqis's Submission to Allah</h4>
+        <br>
+        <p>Then, Sulaiman (Peace be upon him) ordered her throne to be altered and disguised to test her mentality and understanding, saying {that we may see whether she will be guided (to recognize her throne), or she will be one of those not guided. So when she came, it was said (to her): Is your throne like this? She said: (It is) as though it were the very same}, this is due to her understanding and clear insight that she set aside the possibility that it was her own throne for she has just left it far away in the Yemen, and that she did not know that there is any who can do this marvellous act of removing it to Jerusalem.</p>
+        <br>
+        <p>Allah the Almighty says pertaining to Sulaiman (Peace be upon him) and his people {And (Sulaiman (Solomon)) said: Knowledge was bestowed on us before her, and we were submitted to Allah (in Islam as Muslims before her). And that which she used to worship besides Allah has prevented her (from Islam), for she was of a disbelieving people} i.e. worshipping the sun to whom she used to prostrate herself and her people instead of Allah the Almighty in follow of the religion of her fathers and ancestors with no evidence or proof of this. Sulaiman (Peace be upon him) previously ordered a Sarh (a glass surface with water underneath in which there are various sorts of fish and other seacreatures) to be built. Afterwards, Bilqis was ordered to enter the Sarh while Sulaiman (Peace be upon him) was sitting on his throne, {But when she saw it, she thought it was a pool, and she (tucked up her clothes) uncovering her legs. (Sulaiman (Solomon)) said: "Verily, it is a Sarh (a glass surface with water underneath it or a palace)." She said: "My Lord! Verily, I have wronged myself, and I submit [in Islam, together with Sulaiman (Solomon)). to Allah, the Lord of the" Alamin (mankind, jinn and all that exists)}.
+        </p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="after">Aftermath and Reflections</h4>
+        <br>
+        <p>It was said: That when Sulaiman (Peace be upon him) wanted to marry her he asked mankind about a way of removing the hair from her legs, and they mentioned the razor, but she feared thereof. Then, he (Peace be upon him) consulted the Jinn who made the bath for him. Thus, he was the first to enter the bath. At-Thalabi and others said: When Sulaiman married her he returned the kingdom of Yemen to her and he used to visit her there and stay for three days a month then comes back to Jerusalem on the flying carpet. In addition, he ordered the Jinn to build him three palaces in the Yemen: Ghamdan, Salhin and Bitun. And, Allah knows best!</p>
+        <br>
+        <p>Ibn Ishaq transmitted after some scholars on the authority of Wahb Ibn Munabih that Sulaiman (Peace be upon him) did not marry her, but he got her married to the king of Ramadan and let her ruling over the Yemen again, and he (Peace be upon him) subjected to her the king of the Jinn in Yemen to build her the aforementioned three palaces. This narration is not authenticated like the previous one, and Allah knows best!</p>
+        <br><br>
+        <hr class ="line">
+        <br>
+        <h4 id="ref" class="ref">References:</h4>
+          <p class ="ref">Stories of The Quran, by Ibn Kathir</p>
       </div>
-
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-
-  <script>
-      const scrollToTop = document.querySelector(".scrollToTop");
-      $(document).ready(function() {
-        var initialTop = $('.sidenav').css('top'); // Store the initial top value
-        $(window).scroll(function() {
-          var scroll = $(window).scrollTop(); // Get current scroll position
-          $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
-        });
-      });
-      
-
-  </script>   
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
   
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }function toggleBookmark(element, slug) {
-    // Check if user is authenticated
-    const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
-
-    if (!isAuthenticated) {
-        window.location.href = '/account/signin/'; // Redirect to sign-in page
-        return;
-    }
-
-    // Proceed with bookmark toggle for authenticated users
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
         }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
             }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         }
-    }
-    return cookieValue;
-}
-document.addEventListener("DOMContentLoaded", function() {
-    // Assuming the user is authenticated; adjust as needed
-    updateUserBookmarkIcons();
-});
-
-function updateUserBookmarkIcons() {
-    fetch('/get_user_bookmarks/', { // Adjusted to the correct path
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            // Include CSRF token if needed for GET requests or ensure your view is exempt
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        const bookmarkedSlugs = data.bookmarkedSlugs;
-        bookmarkedSlugs.forEach(slug => {
-            const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
-            if (bookmarkIcon) {
-                bookmarkIcon.classList.remove('fa-regular');
-                bookmarkIcon.classList.add('fa-solid');
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
         });
-    })
-    .catch(error => console.error('Error:', error));
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-window.addEventListener("scroll", () => {
-    if (window.pageYOffset > 100) {
-        scrollToTop.classList.add("active");
-    } else {
-        scrollToTop.classList.remove("active");
-    }
-});
-</script>
-  </body>
-
-</html>
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}

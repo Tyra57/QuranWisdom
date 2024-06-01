@@ -1,13 +1,7 @@
-
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Strength</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
@@ -19,52 +13,55 @@
         justify-content: center;
         height:450px;
         display: flex;
+      } .dua-content-container{ 
+          padding: 50px 100px 50px 100px;
+          position:relative;
+          width: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          margin-top: 1%;
+        }
+        .dua-content-container .card-dua{
+          width: 380px;
+          background:#f0f0f0;
+          margin: 5px 17px;
+          padding: 30px 15px;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          transition: 0.3s ease-in-out;
+          margin-top: 4%;
+          border-radius: 10px;
+        }
+        .dua-list{
+          display: flex;
+          flex-direction: column;
+        }
+      
+      /*mobile view*/
+      @media screen and (max-width: 768px){
+        .dua-content-container{
+          flex-direction: column;
+          padding: 20px; /* Adjust padding for mobile */
+        }
+        .card-dua{
+          width: 100%; /* Full width for mobile view */
+          margin: 10px 0; /* Adjust margin for spacing between cards */
+          height: auto;
+        }
+        .nav-to-right, .nav-line{
+        margin-left: 20px;
+      }
+      .nav-link{
+        margin-left: 20px;
+        margin-right: 0;
+      }
       }
     </style>
-</head>
-
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
+{% endblock title %}
+{% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -78,7 +75,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'a4-doa14-strength')"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Doa-Strength')" data-slug="Doa-Strength"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -152,17 +149,6 @@
       <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
   {% endif %}
 </div>
-
-  <script>
-      function on() {
-        document.getElementById("overlay").style.display = "block";
-      }
-      
-      function off() {
-        document.getElementById("overlay").style.display = "none";
-      }
-      </script>
-
 <script src="{% static 'js/trialforum.js' %}"></script>           
 
 </div>
@@ -234,82 +220,87 @@
         </div>
 
       </div>
-          
- <!--scroll to top button-->
- <a href="#" class="scrollToTop">
-  <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-  <script src="{% static 'js\scroll.js' %}"></script>
-        <!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-          <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-          <li><a href="{% url 'doa' %}">Dua'</a></li>
-          <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
+   
 <script>
- 
-  function toggleBookmark(element, slug) {
-    fetch(`/toggle_bookmark/${slug}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 'slug': slug })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.bookmarked) {
-            element.classList.remove('fa-regular');
-            element.classList.add('fa-solid');
-        } else {
-            element.classList.remove('fa-solid');
-            element.classList.add('fa-regular');
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Function to get CSRF token from cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+  function on() {
+      document.getElementById("overlay").style.display = "block";
     }
-    return cookieValue;
-}
-  </script>
-
-</body>
+    
+    function off() {
+      document.getElementById("overlay").style.display = "none";
+    }
+    function toggleBookmark(element, slug) {
+      // Check if user is authenticated
+      const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+  
+      if (!isAuthenticated) {
+          window.location.href = '/account/signin/'; // Redirect to sign-in page
+          return;
+      }
+  
+      // Proceed with bookmark toggle for authenticated users
+      fetch(`/toggle_bookmark/${slug}/`, {
+          method: 'POST',
+          headers: {
+              'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 'slug': slug })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.bookmarked) {
+              element.classList.remove('fa-regular');
+              element.classList.add('fa-solid');
+          } else {
+              element.classList.remove('fa-solid');
+              element.classList.add('fa-regular');
+          }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+  
+  // Function to get CSRF token from cookies
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+      // Assuming the user is authenticated; adjust as needed
+      updateUserBookmarkIcons();
+  });
+  
+  function updateUserBookmarkIcons() {
+      fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              // Include CSRF token if needed for GET requests or ensure your view is exempt
+          },
+      })
+      .then(response => response.json())
+      .then(data => {
+          const bookmarkedSlugs = data.bookmarkedSlugs;
+          bookmarkedSlugs.forEach(slug => {
+              const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+              if (bookmarkIcon) {
+                  bookmarkIcon.classList.remove('fa-regular');
+                  bookmarkIcon.classList.add('fa-solid');
+              }
+          });
+      })
+      .catch(error => console.error('Error:', error));
+  }
+    </script>
+  
+  {% endblock content %}
