@@ -1,62 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Owners of the Elephants</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
+    <style>
+      .sidenav{
+   width: 200px;
+   position: fixed;
+   height: 100%;
+   left: 0;
+   top: 806px;
+   z-index: 2;
+   overflow-x: hidden;
+ }
+ .sidenav a{
+   padding: 10px 0px 10px 30px;
+   text-decoration: none;
+   font-size: 14px;
+   color: #38444d;
+   display: block;
+ }
+ .sidenav a:hover{
+   color: #004085;
+ }
+ .story1{ 
+   padding: 50px 150px 100px 60px;
+   margin-left: 200px;
+   align-items: center;
+   text-align: justify;
+ }
+ .story1 .h4{
+   text-align: center;
+ }
+ .story1 .p{
+   text-align: justify;
+ }
 
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
+ hr .line{
+   border: 0;
+   height: 2px;
+   width: 100%;
+   margin: 15px 0 10px;
+ }
+.toggle-story {
+ display: none;
+}
+ /* Adjustments for mobile view */
+ @media screen and (max-width: 768px) {
+   .sidenav {
+     display: none;
+   }
+ /* Adjust content padding to not overlap with the sidenav */
+ .story1 {
+   padding: 20px;
+   margin-bottom: 60px; /* Add space at the bottom for sidenav */
+   margin-left: 0;
+ }
+}
+@media screen and (max-width: 768px) {
+   .nav-to-right, .nav-line{
+     margin-left: 20px;
+   }
+   .nav-link{
+     margin-left: 20px;
+     margin-right: 0;
+   }
+ }
+   </style>
+   {% endblock title %}
+   {% block content %}  
 
 <!--nav link-->
 <div class="nav-link">
@@ -71,7 +88,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Story-Owners-of-the-Elephants')" data-slug="Story-Owners-of-the-Elephants"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -145,17 +162,7 @@
         <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
     {% endif %}
   </div>
-  
-    <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
-        
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        </script>
-  
+
   <script src="{% static 'js/trialforum.js' %}"></script>           
   
   </div>
@@ -163,110 +170,214 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://iqna.ir/files/en/news/2023/8/12/141504_408.jpg);">
   <h1>Owners of the Elephants</h1>
 </div>
 
-      <!--Story of Luqman content-->
+<!--sidenav-->
+<div class="sidenav">
+  <a href="#story1">Introduction to Owners of the Elephants</a>
+  <a href="#story2">Abraha's Intentions and the Construction of the Church</a>
+  <a href="#story3">The Arabs' Reaction and Abraha's Vow</a>
+  <a href="#story4">Abraha's March Towards Mecca</a>
+  <a href="#story5">The Journey to Mecca and the Incident of Abu Rughal</a>
+  <a href="#story6">Abraha's Army Seizes the Camels</a>
+  <a href="#story7">Abdul Muttalib's Negotiation with Abraha</a>
+  <a href="#story8">The Divine Intervention</a>
+  <a href="#story9">Aftermath and Significance</a>
+  <a href="#story10">Reflection and Supplication</a>
+  <a href="#story12">References</a>
+</div>
+ 
       <div class="story1">
-
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Introduction to Owners of the Elephants</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid:  was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned  the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+        <h4 id="story1">Introduction to Owners of the Elephants</h4>
         <br>
-        <h4>References:</h4>
-          <p>Stories of The Quran, by Ibn Kathir</p>
+        <p>Allah the Almighty says:
+
+          {Have you (O Muhammad (Peace be upon him)) not seen how your Lord dealt with the owners of the Elephant? [The Elephant army which came from Yemen under the command of Abraha Al-Ashram intending to destroy the Kabah at Makkah]. Did He not make their plot go astray? And He sent against them birds, in flocks. Striking them with stones of Sijjil (baked clay). And He made them like (an empty field on stalks (of which the corn has been eaten up by cattle)}. (Al-fil, 1-5)</p>
+        <br>
+        <p>At -Tabari said: The first one to tame elephants was Ifridun Ibn Athqiyan who killed Ad- Dahhaq. He was the first to use saddle for horses. But, the first one to tame and ride on horses was Tahmuris, the third king on earth. It is also said that Isma'il Ibn Ibrahim (Peace be upon them) was the first to ride horses. It is probably that he was the first one to ride on them from among the Arabs, and Allah knows the best.</p>
+        <br>
+        <hr class="line">
+        <br>
+        <h4 id="story2">Abraha's Intentions and the Construction of the Church</h4>
+        <br>
+        <p>It is said: Though the elephant is so huge, he fears from cats. Thereupon, some warlords, during their fight against the Indians, brought some cats to the battlefield the matter that forced the elephants to bolt.</p>
+        <br>
+        <p>Ibn Ishaq said: the governor or viceroy, Abraha Al-Ashram built a huge and very lofty church, and wrote to the king of Abyssinia, Negus that "I have built you a church that is unprecedented, and I am intending to divert pilgrimage from Mecca to Abyssinia".</p>
+        <br>
+        <p>Al-Suhaili said: Abraha Al-Ashram subjugated the Yemenites to build that mean church and forced them to taste several sorts of humiliation. He used to cut off the hand of the one who comes late for labor till the sun rises. He took many valuable things from the palace of Bilqis to add thereto. He took marbles, precious stones, and valuable luggage. Moreover, he erected gold and silver crosses, built ebony and ivory pulpits, and raised the church's stature and expanded its width. Afterwards, when Abraha was killed, whosoever tried to take anything out of its body or ornaments, the Jinn were reluctant and hesitant to do him harm. For, it was built above the burial of two idols called Kuaib and his wife, the height of which was about sixty cubits. So, the Yemenites left it untouched till the era of Al-Saffah, the first Abbaside Caliph. He, Al-Saffah, sent a group of pious scholars of will firm who totally demolished it, and it was destroyed then till the present day.</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story3">The Arabs' Reaction and Abraha's Vow</h4><br>
+        <p>Ibn Ishaq said: When the Arabs heard of the letter of Abraha sent to Negus, a man from Kinanah got angry. He set out till he reached the church where he urinated on its walls. Nobody noticed him, and upon that he returned home safely. The news reached Abraha who asked about the doer. He was answered: this was done by one of those Arabs who perform pilgrimage to the Kabah at Mecca when he heard of your declared intention that you would divert pilgrimage from their Sacred House to your (recently-built) church. He (the Arab) got angry and came to excrete therein declaring it to be unqualified (to the event).</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story4">Abraha's March Towards Mecca</h4><br>
+        <p>Upon hearing this, Abraha burst with rage and took oath that he would demolish the Kabah. Then, he ordered the Abyssinians (Christians) to get prepared for war. He led a big expedition against Mecca accompanying an elephant or elephants in his train. The Arabs heard of the news and they were terrified, but they decided to fight him when the news was affirmed that he intended to destroy the Sacred House. A man from among the noblemen of Yemen called Dhu Nafar set out for him accompanied with his own clan and those who answered his call to fight against Abraha. The two parties met, Dhu Nafar and his followers were defeated and he himself was taken as a prisoner of 'war. He was then brought before Abraha who was about to kill him, but Dhu Nafar said: "O king! Don't kill me, I may be of any use to you." Abraha did not kill him and he kept him tied up in custody. Then Abraha went on intending what he set out for. He arrived at the land of Khatham where he encountered with Nufail Ibn Habib Al-Khath' ami who was leading his two tribes -Shahran and Nahis- along with his followers from among the Arabs. Nufail was defeated and taken as a prisoner of war to be brought before Abraha. Abraha intended to kill him, but Nufail said: "O king! Don't kill me. I may guide you to the destination you desire. Here you are! My pledge of allegiance. Abraha set him free and took him as a guide. When they passed by Ta'if, there came to him Mas' ud Ibn Mu' tab Ibn Malik Ibn Ka' b Ibn Amr Ibn Sa'd Ibn Auf Ibn Thaqif along with his followers who said: "O king! We are nothing but your slaves, we listen and obey, no hostility is ever there between you and us, and our House is not that which you want -i.e. Al-Lat - you only want the House in Mecca. Hence, we send with you someone who leads you thereto.</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story5">The Journey to Mecca and the Incident of Abu Rughal</h4><br>
+        <p>Ibn Ishaq said: Al-Lat was a 'sacred' House in Taif, it was to them just as the Ka' bah was to the rest of the Arabs. They sent a man called Abu Rughal to show him (Abraha) the way to Mecca. They went on till they arrived at a place called Al-Maghmas where Abu Rughal died. Abu Rughal was buried there and afterwards, the Arabs used to stone his grave. However, I mentioned on the Story of Thamud that Abu Rughal was among the train of Abraha and that he sheltered himself with the Sacred House (Ka' bah) and when he came out, a stone hit him and he was dead. The Prophet (Peace be upon him) told his Companions: "As a sign on this, he was buried with two branches of gold". They dug and verily, they found them. To compromise between this and the narration of Ibn Ishaq I say: the later Abu Rughal had the same name as his higher ancestor whose grave used to be stoned by the Arabs. Moreover, the people used to stone his grave as they stone that of the former.</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story6">Abraha's Army Seizes the Camels</h4><br>
+        <p>Ibn Ishaq said: When Abraha arrived at Al-Maghmas, he sent a man called Al-Aswad Ibn Maqsud with a cavalry dispatch. Al-Aswad seized some of the Arab's property which included two hundred camels that belonged to Abdul Muttalib, the Prophet's uncle, who was, then, the principal man among the nobility. Upon this, Quraish, Kinanah and Hudhail decided to fight against Abraha, but they comprehended that they cannot afford that and thus quitted the idea. Then, Abraha sent Hanatah Al-Himiari to Mecca ordering him to ask about the chief of the people and tell him: "I (the king) did not come to fight against you, 1 only came to destroy the Sacred House. If you do not stand in our way, we will not harm any of you all. Abraha added to his messenger: And if he showed his desire not. to fight, bring him to me.'</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story7">Abdul Muttalib's Negotiation with Abraha</h4><br>
+        <p>When Hanatah entered Mecca, he asked about its chief and master. He was told: it is Abdul Muttalib Ibn Hashim. He saw him and thus delivered the message. Abdul Muttalib said: "By Allah! We do not intend to fight. Really we cannot afford it. This is the Sacred House of Allah and His Khalil (friend) Ibrahim (Peace be upon him), only Him Alone can protect it if He wills to." Upon hearing this, Hanatah said: "Come with me to meet with him (Abraha), he ordered me to do so." Abdul Muttalib set out for him accompanied with some of his sons till they approached the camp. He asked about Dhu Nafar who was a friend of his. He entered upon him in his prison and said: "O Dhu Nafar! Can't you do anything for us in this plight of ours?" Dhu Nafar said: "What can a prisoner do while waiting for death to come either in the morning of at night? All that 1 can do is to send to the stableman of the elephant, Anis, who is a friend of mine to recommend you, say a good word of you, intercede for you before him, and to seek permission for you to meet with Abraha." Abdul Muttalib said: "That's enough with me." Dhu Nafar sent to Anis saying: Verily, Abdul Muttalib is the chief of the Quraishites, he is generous to both humans and animals and the king (Abraha) seized two hundred camels that belong to him. So, seek permission for him to meet Abraha and do whatever you see useful for him. Anis said: Surely, 1 will do. Anis presented himself before Abraha and then said: O king! The chief of Quraish is here and wants to present himself before you,so give him permission to, please! Abraha gave his consent. Abdul Muttalib was very handsome and grand and when seen by Abraha, Abraha showed great respect and was highly impressed. So, he refused to make him sit lowly in front of him, and also disliked to let the Abyssinians see him allowing him to sit on his own chair (throne). Consequently, he descended from above his chair and sat besides him on the rich carpet. Then, he said to his interpreter: Ask him what does he want? However, Abraha was surprised to hear from Abdul Muttalib through the interpreter that all he wanted was a compensation for his two hundred camels, but did not ask him to leave the Kabah alone.</p>
+        <br>
+        <p>When Abraha expressed surprise, Abdul Muttalib answered: "I am the master of the camels, whereas the Kabah house of worship has its lord to defend it". Abraha said: No one can defend it from me. Abdul Muttalib said: You are on your own! Finally, Abraha gave him the camels back.</p>
+        <br>
+        <p>Ibn Ishaq said: It is said that when Abdul Muttalib entered upon Abraha he was accompanied with Yamur Ibn Nafaah Ibn Adiy Ibn Ad-Dail Ibn Bakr Ibn Abd Manah Ibn Kinanah the chief of the Banu Bakr tribe and Khuwailid Ibn Wailah the chief of the Hudhail tribe who offered Abraha one-third of the properties of Tihamah district in return for his going back and leaving the Kabah alone. But, Abraha refused their offer. Ibn Ishaq added: "I am not certain about the authenticity of this!"</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story8">The Divine Intervention</h4><br>
+        <p>When Abdul Muttalib returned home he told the Quraishites about what happened between him and Abraha and ordered them to evacuate Mecca and move to the mountains. Then, he accompanied with some men stood holding the ring of the Ka 'bah' s door invoking Allah and seeking His Aid against Abraha and his troops.</p>
+        <br>
+        <p>Ibn Ishaq said: then, Abdul Muttalib let the door's ring and set out with his companions to the mountains seeking shelter and awaiting for what would happen next. In the morning, Abraha got prepared to enter Mecca, and got his elephant and troops prepared. The elephant's name was Mahmoud. When he was directed towards Mecca, Nufail Ibn Habib came near him and whispered in his ear: Kneel down Mahmoud and go back home safe, you are in Allah's Sacred Town. He let go his ear and the elephant kneeled down.</p>
+        <br>
+        <p>As-Suhaili said: this means that the elephant fell to the ground, as elephants do not kneel down. It is said: that some elephants might kneel down just as camels. And, Allah Knows Best.</p>
+        <br>
+        <p>Nufail Ibn Habib went away and climbed up the mount till he was far and safe. The Abyssinians beat the elephant forcing him to stand up to his feet, but he refused. They hit his head with axe-like weapons, but he refused. They tried their best to force him to stand up to his feet, but they could not. They directed his face back towards the Yemen and he stood up and ran thereto. They directed him towards the Sham (Syria) and then towards the east and he stood up to his feet and ran thereto. They again directed him towards Mecca, but he refused. Thereupon, Allah the Almighty sent upon them birds from the seaside resembling hawks. Each bird held three stones: one in his beak and two in his two legs. The stones were like chick-peas and lentils, and none from among the Abyssinians was hit by a stone, but he was killed. Moreover, the birds did not hit them all. The rest of them fled away seeking the way they first came from and asking about Nufail Ibn Habib to guide them back to Yemen.</p>
+        <br>
+        <p>Ibn Ishaq said: the Abyssinians fled away while death pursuing them on every path and in every way and Abraha was hit with a stone as well. They carried him and his body began to tear up part after part till they reached Sanaa. After a short while, his chest cracked (as claimed by historians) and he died.</p>
+        <br>
+        <p>Ibn Ishaq said: I have been told by Yaqub Ibn 'Utbah that that year was the first in which measles, small-box, and bitter trees such as colocynth and African rue appeared in the Arab Peninsula.</p>
+        <br>
+        <p>Ibn Ishaq said: When Allah the Almighty sent His Prophet Muhammad (Peace be upon him), He reminded the Quraishites with His Grace and Favor bestowed on them through defeating the Abyssinians and defying them saying: {Have you (O Muhammad (Peace be upon him)) not seen how your Lord dealt with the owners of the Elephant? [The Elephant army which came from Yemen under the command of Abraha Al-Ashram intending to destroy the Kabah at Makkah]. Did He not make their plot go astray? And He sent against them birds, (Ababil) in flocks. Striking them with stones of Sijjil (baked clay). And He made them like (an empty field of) stalks (of which the corn has been eaten up by cattle)}.</p>
+        <br>
+        <p>Then, Ibn Hisham and Ibn Ishaq started to interpret this Surah and the next stated as follows: Ibn Hisham said: The word "Ababil" means "in flocks", though the Arabs never used that word before the Revelation of the Glorious Quran. But as for the word "Sijjil", I was told by Yunus An-Nahwi and Abu' Ubaidah that it was used by the Arabs to mean: solid and strong. Moreover, some interpreters claimed that this word was originally two in Persian, but the Arabs rendered them a single word that is "Sinj" and "lil". 'Sinj' means stone and lil' stands for clay and hard stones consist of these two materials, stone and clay. He added, “Assf” stands for leaves. Al-Kasa'i said: I have heard some grammarians saying: "The singular form of Ababil' (flock) is Abil'. Besides, many of our early scholars said: Ababil' are flocks of birds gathering group after group from here and there.</p>
+        <br>
+        <p>Narrated Abdullah Ibn Abbas (May Allah be pleased with them): Their beaks were like those of the birds and their legs were like those of the dogs. In addition, Ikrimah transmitted: their heads were like those of the lions and they came from the seaside and their color was green. Also, Ubaid Ibn Umair said: they were marine black birds, holding stones in their beaks and legs. Abdullah Ibn Abbas (May Allah be pleased with him) said also: they looked like the Phoenix, and the smallest stone they carried was equal to the head of a human being and other stones were equal to camels. The same view was held by Yunus Ibn Bakir after Ibn Ishaq. Some interpreters said: The stones were too small. Allah knows best!</p>
+        <br>
+        <p>Ibn Abu Hatim said: Abu Zarah told us on the authority of Muhammad Ibn Abdullah Ibn Abu Shaibah after Muawiyah after Al-A'mash after Abu Sufyan after 'Ubaid Ibn 'Umair saying: When Allah the Almighty wanted to destroy the owners of the elephant He sent against them birds in flocks from the seaside resembling hawks, each one of them carried three stones: one in his beak and two in his two legs. They flew over till they were directly above the .army, then they screamed and let go of the stones. The stones used to cut off or crack whom they hit from his head to his toes. In addition, Allah the Almighty sent a severe wind that hit the stones and added to their speed and strength, the matter that caused the majority of the army to perish.</p>
+        <br> 
+        <hr class="line"><br>
+        <h4 id="story9">Aftermath and Significance</h4><br>
+        <p>Ibn Ishaq said as stated earlier that not all of them were hit by the stones. Rather, some of them managed to return to the Yemen and related to their people what had happened to them and to the whole army. And Abraha himself was hit with the stones and was carried till he reached the Yemen where he died, may Allah the Almighty damn him!</p>
+        <br>
+        <p>Narrated Ibn Ishaq saying: I was told by Abdullah Ibn Abu Bakr after Samurah after A'ishah (May Allah be pleased with her) that she said: "I have seen the rider and stableman of the elephant at Mecca blind, crippled and asking the people to feed them up." However, it was mentioned earlier that the stableman was called Anis, but the rider was unidentified. Allah knows best!</p>
+        <br>
+        <p>In his Tafsir (interpretation), An-Naqqash mentioned that the flood carried away their dead bodies and threw them into the sea. At the same year of this great incident, Prophet Muhammad (Peace be upon him) was born. Some scholars say that it took place two years' prior to his (Peace be upon him) birth.</p>
+        <br>
+        <p>Then, Ibn Ishaq cited the poetry the Arabs composed pertaining to that great incident in which Allah the Almighty made victorious His Sacred House which He wanted to grant honor, dignity, purification and respect through sending His Messenger Muhammad (Peace be upon him) and the Legislation He sends with him. One of the fundamental pillars of this Legislation is the Prayer whose Qiblah direction would be made to the honourable Kabah. That which Allah the Almighty did to the owners of the elephant was never for the sake of the Quraishites themselves. As the Christians who were represented in the Abyssinians were really nearer to the Ka' bah than the polytheists of Quraish, but the victory was granted to the Sacred House itself in preparation for the advent of Prophet Muhammad (Peace be upon him).</p>
+        <br>
+        <p>Added Ibn Ishaq and others: After the death of Abraha, the Abyssinians were ruled by his son, Yaksum, then by his brother, Masruq Ibn Abraha who was their last king.</p>
+        <br>
+        <p>The incident of the elephant took place in Al-Muharram, 882 according to the Roman Calendar. Following the death of Abraha and his succeeding two sons, the Abyssinian rule over the Yemen came to an end, the church built by Abraha was deserted. No one could even approach it for it was built over the burial place of two idols -that of Kuaib and his wife. The two idols were made of wood, their height was about sixty cubits and they were touched with the jinn. For this very reason, no one could take the risk to come near the church or to take anything of its building or ornaments fearing the evils of the jinn. It stayed deserted till the time of the first Abbaside Caliph, As-Saffah whom the news of the riches found inside the church reached. He sent his ruler over the Yemen, Al-Abbas Ibn Ar-Rabi' to destroy it and bring him all the precious objects he might find there.</p>
+        <br>  
+        <hr class="line"><br>
+        <h4 id="story10">Reflection and Supplication</h4><br>
+        <p>Finally, one should raise his hands to Allah the Almighty and supplicate, saying: "O Allah! All the Praises are for You; You are the Light of the Heavens and the Earth. And all the Praises are for You; You are the Keeper of the Heavens and the Earth. All the Praises are for You; You are the Lord of the Heavens and the Earth and whatever is therein. You are the Truth, and Your Promise is the Truth, and Your Speech is the Truth, and meeting You is the Truth, and Paradise is the Truth and Hell (Fire) is the Truth and all the prophets are the Truth and the Hour is the Truth. O Allah! I surrender to You, and believe in You, and depend upon You, and repent to You, and in Your cause I fight and with Your orders I rule. So please forgive my past and future sins and those sins which I did in secret or in public. It is You Whom I worship, None has the right to be worshipped except You."</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="story12">References</h4><br>
+        <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-  </body>
-
-</html>
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
+        }
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
+            }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
+        });
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}
