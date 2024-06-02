@@ -1,63 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Habil and Qabil</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
+    <style>
+      .sidenav{
+   width: 200px;
+   position: fixed;
+   height: 100%;
+   left: 0;
+   top: 806px;
+   z-index: 2;
+   overflow-x: hidden;
+ }
+ .sidenav a{
+   padding: 10px 0px 10px 30px;
+   text-decoration: none;
+   font-size: 14px;
+   color: #38444d;
+   display: block;
+ }
+ .sidenav a:hover{
+   color: #004085;
+ }
+ .story1{ 
+   padding: 50px 150px 100px 60px;
+   margin-left: 200px;
+   align-items: center;
+   text-align: justify;
+ }
+ .story1 .h4{
+   text-align: center;
+ }
+ .story1 .p{
+   text-align: justify;
+ }
 
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
-
+ hr .line{
+   border: 0;
+   height: 2px;
+   width: 100%;
+   margin: 15px 0 10px;
+ }
+.toggle-story {
+ display: none;
+}
+ /* Adjustments for mobile view */
+ @media screen and (max-width: 768px) {
+   .sidenav {
+     display: none;
+   }
+ /* Adjust content padding to not overlap with the sidenav */
+ .story1 {
+   padding: 20px;
+   margin-bottom: 60px; /* Add space at the bottom for sidenav */
+   margin-left: 0;
+ }
+}
+@media screen and (max-width: 768px) {
+   .nav-to-right, .nav-line{
+     margin-left: 20px;
+   }
+   .nav-link{
+     margin-left: 20px;
+     margin-right: 0;
+   }
+ }
+   </style>
+   {% endblock title %}
+   {% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -71,7 +87,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Story-Habil-and-Qabil')" data-slug="Story-Habil-and-Qabil"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -146,16 +162,6 @@
     {% endif %}
   </div>
   
-    <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
-        
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        </script>
-  
   <script src="{% static 'js/trialforum.js' %}"></script>           
   
   </div>
@@ -166,107 +172,178 @@
 <div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
   <h1>Habil and Qabil</h1>
 </div>
-
-      <!--Story of Luqman content-->
+<div class="sidenav"> 
+  <ul>
+    <a href="#intro">The First Crime on Earth</a>
+    <a href="#murder">The Murder of Abel</a>
+    <a href="#after">The Aftermath of the Murder</a>
+    <a href="#sorrow">The Punishment of Cain and Adam's Sorrow</a>
+    <a href="#progeny">The Progeny of Adam and Eve</a>
+    <a href="#reflection">Reflections on Creation and Humanity</a>
+    <a href="#notes">Footnotes</a>
+    <a href="#ref">References</a>
+  </ul>
+</div>
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Habil and Qabilt</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
+         <h4 id="intro">The First Crime on Earth</h4><br>
+        <p>Allah the Almighty says:
+
+          {And (O Muhammad (Peace be upon him» recite to them (the Jews) the story of the two sons of Adam (Habil and Qabil) in truth; when each offered a sacrifice (to Allah), it was accepted from the one but not from the other. The latter said to the former: "I will surely kill you." The former said: "Verily, Allah accepts only from those who are Al-Muttaqun (the pious)." "If you do stretch your hand against me to kill me, I shall never stretch my hand against you to kill you: for I fear Allah, the Lord of the `Alamin (mankind, jinn, and all that exists)." "Verily, I intend to let you draw my sin on yourself as well as yours, then you will be one of the dwellers of the Fire; and that is the recompense of the alimin (polytheists and wrong-doers);" So the Nafs (self) of the other (latter one) encouraged him and made fair-seeming to him the murder of his brother; he murdered him and became one of the losers; Then Allah sent a crow who scratched the ground to show him to hide the dead body of his brother; He (the murderer) said: "Woe to me! Am I not even able to be as this crow and to hide the dead body of my brother?" Then he became one of those who regretted}. (Al-Ma'idah, 27-31)</p>
           Narrated Al-Amash after Mujahid: Luqman was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
           <br>
+          <p>Narrated As-Sadiy on the authority of Abu Malik and Abu Salih after Ibn 'Abbas (May Allah be pleased with him) and on the authority of Ibn Mas`ud and other Companions that Adam (Peace be upon him) used to get the male brought by one birth married to the female brought by the other. Hence, it was supposed that Abel would get married to Cain's sister who was better and more beautiful than anyone else. At the same time, Cain wanted to keep her for himself. Adam (Peace be upon him) ordered him to allow' Abel to marry her, but he totally refused. Then, Adam (Peace be upon him) ordered both (Abel and Cain) to offer a sacrifice to Allah Almighty. Meanwhile, Adam set forth towards Mecca to perform Pilgrimage. Just before leaving, Adam tried to entrust (the affairs of) his children to the heavens, the earth and finally to the mountains, but all declined to shoulder the (heavy) trust. Thereupon, Cain accepted the trust and after Adam went away they (Abel and Cain) offered their sacrifices to Allah. Abel offered a fat she-goat, while Cain offered a bundle of bad plants. Later, a fire came down from heaven and consumed the sacrifice offered by Abel and left untouched that of Cain. Cain became livid with rage and said to his brother: I will kill you so as not to marry my sister, Abel said: {Verily, Allah accepts only from those who are Al-Muttaqun (the pious)}.</p>
           Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
           <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
+          <hr class="line"><br>  
+          <h4 id="murder">The Murder of Abel</h4>
           <br>
-          One day Abu Ad-Darda mentioned Luqman the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
+          <p>'Abdullah Ibn `Amr (May Allah be pleased with both of them) said: By Allah! The murdered (Abel) was stronger (than the murderer, Cain), but he refused to stretch his hand against his brother to kill him due to his piety and God-fearing. Abu Ja`far Al-Baqir mentioned that Adam (Peace be upon him) was present there when they offered their sacrifices. After Abel's sacrifice was accepted, Cain said to his father, Adam: "It was accepted only from him because you invoked Allah for his sake." And, he secretly intended something against his brother. One day, Abel was late and Adam sent Cain to look for him. The two brothers met and Cain said: "Your sacrifice was accepted and mine was not." Abel said: "{Verily, Allah accepts only from those who are Al-Muttaqun (the pious)}." Cain got angry and hit his brother with an iron rod and Abel fell dead at once.</p>
           <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
+          <p>It was said: Cain killed Abel by throwing a rock at his head while he was asleep. It was also said: Cain choked Abel violently and bit him to death as beasts do. However, Abel's saying when Cain threatened to kill him: {If you do stretch your hand against me to kill me, I shall never stretch my hand against you to kill you: for I fear Allah, the Lord of the" Alamin (mankind, jinn, and all that exists)} (Al-Ma'idah, 28) indicated his good morals and ethics, his fear from Allah, and perfect piety that he may harm his brother, in contrast with the odious deed intended by his brother, Cain. For this, Abu Bakrah (May Allah be pleased with him) reported Allah's Messenger (Peace be upon him) as saying: "'When two Muslims confront each other and the one amongst them attacks his brother with a weapon, both of them get into Hell-Fire.' He (Ahnaf, one of the sub-narrators) said: 'I said, or it was said: Messenger of Allah! It may be the case of one who kills, but what about the slain (why he would be put in Hell-Fire)?' Thereupon, he (Peace be upon him) said: 'He also intended to kill his companion. "</p>
+          <hr class="line"><br> 
+          <h4 id="after">The Aftermath of the Murder</h4><br>
+          <p>Allah the Almighty says: {Verily, I intend to let you draw my sin (on yourself) as well as yours, then you will be one of the denizens of the Fire; and that is the recompense of the Zalimun (polytheists and wrong-doers)}. (Al-Ma'idah, 29) i.e. I do not intend to fight against you though I am myself far stronger and tougher than you are, but you will {draw my sin on yourself as well as yours}, i.e. you will bear the sin of murdering me along with your previous sins.1</p>
           <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
+          <p>Narrated Imam Ahmed, Abu Dawud and At-Tirmidhi on the authority of Sa'd Ibn Abu Waqqas his statement upon the ordeal of `Uthman Ibn `Affan that reads: I testify that Allah's Messenger (Peace be upon him) said: "There will be soon a period of turmoil in which the one who sits will be better than one who stands and the one who stands will be better than one who walks and the one who walks will be better than one who runs." Someone said: 'Allah's Messenger! What is your opinion if someone entered my home and stretched his hand to kill me?' Allah's Messenger (Peace be upon him) said: 'Be just like the son of Adam (Abel). "Narrated by Ibn Mardwiyah after Hudhaifah Ibn Al- Yaman in another wording as saying: "Be just like the best of Adam's two sons."</p>
           <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
+          <p>Imam Ahmed transmitted after Mu`awiyah and Waki` their saying: We were told by Al- A ` mash on the authority of `Abdullah Ibn Murrah after Masruq after `Abdullah Ibn Mas`ud (May Allah be pleased with him) as saying: The Prophet (Peace be upon him) said, "None (no human being) is killed or murdered (unjustly), but a part of responsibility for the crime is laid on the first son of Adam who invented the tradition of killing (murdering on earth). " (Ahmed's Musnad)</p>
           <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
+          <p>However, there is a cave, called the "Blood Cave", in a mountain located to the northern part of Syria. It is thought to be the scene of the crime where Cain killed his brother Abel. The people living there came to know this through the People of the Book (Christians and Jews) and only Allah Almighty knows the validity or realness of this. .Al-Hafiz Ibn `Asakir mentioned in the biography of Ahmed Ibn Katheer that "He (Ahmed) saw in a dream Allah's Messenger (Peace be upon him), Abu Bakr, `Umar and Abel. Ahmed came to know from Abel -who took an oath of that- it was his own blood (that was spilt there (in that very cave)). Abel said that he had asked Allah Almighty to make the invocations and supplications offered in that place acceptable. Allah accepted his own invocations and His Messenger, Muhammad (Peace be upon him) believed in that and said: I (Allah's Messenger), Abu Bakr and `Umar used to visit that place every Thursday. "However, it is to be stated that this narration represents only a vision. Even if it were true, no religious ruling can ever be based on such a thing; and Allah knows best!</p>
           <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
+          <p>Allah Almighty says: {Then, Allah sent a crow who scratched the ground to show him how to hide the dead body of his brother. He (the murderer) said: "Woe to me! Am I not even able to be as this crow and to hide the dead body of my brother? "Then he became one of those who regretted}. (Al-Ma'idah, 31) Some interpreters said: "After Cain had killed his brother, he carried him on his back for a full year (not knowing what to do with his brother's corpse!)." Others said: He carried him on his back for one hundred years till Allah Almighty sent two crows who fought against one another. One of them was killed. The murderer scratched the ground to hide the body of the dead crow. Seeing him doing that, Cain said: Woe to me! Am I not even able to do as this crow and to hide the dead body of my brother? Then, he buried the body of his dead brother and covered it with earth.</p>
           <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
+          <hr class="line"><br>
+          <h4 id="sorrow">The Punishment of Cain and Adam's Sorrow</h4><br>
+          <p>Historians said: Adam became very sick at heart and felt great sorrow for his dead son, Abel. Mujahid said: Cain was brought punishment very soon afterwards. On the same day he killed his brother, Abel, his foot was tied up to his thighbone and his face was forcibly directed up to the sun disk. His face used to go where the sun goes as a way of punishment and penalty in return for what he had done to his own brother. Allah's Messenger (Peace be upon him) said: "There is no sin more recurring punishment (very rapidly) in the present life, along with what awaits for its doer in the Hereafter, than transgression and severing the ties of relationship."</p>
           <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
+          <hr class="line"><br>
+          <h4 id="progeny">The Progeny of Adam and Eve</h4>
           <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
+          <p>Imam Abu Ja'far mentioned in his Tarikh "History" on the authority of some people who had said: Eve gave birth to forty children through twenty births. Ibn Ishaq viewed the same and he mentioned their names in detail. However, nothing is sure of their names or numbers. Only Allah knows best and no one else can know their exact number! Others said: there were one hundred and twenty births, in each one a male and a female were born. The first among them were Cain and his sister Qalimah, and the last ones were `Abdul Mughith and his sister Ummul Mughith. Then, humans increased in number and spread into the earth. Allah Almighty says: {O mankind! Be dutiful to your Lord, Who created you from a single person (Adam), and from him (Adam) He created his wife [Hawwa (Eve)], and from them both He created many men and women; and fear Allah through Whom you demand (your mutual rights), and (do not cut the relations of) the wombs (kinship). Surely, Allah is Ever an All-Watcher over you}. (An-Nisa', 1)</p>
           <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
+          <p>Historians said: Adam did not die till he saw from among his progeny and offspring four hundred thousand persons (400.000). Only Allah knows best!</p>
           <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+          <hr class="line"><br>
+          <h4 id="reflection">Reflections on Creation and Humanity</h4><br>
+          <p>Allah, the Almighty says: {It is He Who has created you from a single person (Adam), and (then) He has created from him his wife [Hawwa' (Eve)], in order that he might enjoy the pleasure of living with her. When he had sexual relation with her, she became pregnant and she carried it about lightly. Then when it became heavy, they both invoked Allah, their Lord (saying): "If You give us a Salih (good in every aspect) child, we shall indeed be among the grateful." But when He gave them a Salih (good in every aspect) child, they ascribed partners to Him (Allah) in that which He has given to them. High be Allah, Exalted above all that they ascribe as partners to Him}. (Al-A'raf, 189, 190) Adam was mentioned first to draw the attention of the reader of the Qur'an, then whom was mentioned second was the whole race of mankind.</p>
+          <br>
+          <p>This is done by way of mentioning the whole race of mankind after mentioning the forefather thereof; Allah the Almighty says: {And indeed We created man (Adam) out of an extract of clay (water and earth). Thereafter We made him (the offspring of Adam) as a Nutfah (mixed drops of the male and female sexual discharge and lodged it) in a safe lodging (Womb of the woman)}. (Al-Mu'minun, 12, 13); and in: {And indeed We have adorned the nearest heaven with lamps, and We have made such lamps (as) missiles to drive away the Shayatin (devils)}. (Al-Mulk, 5) Where it is well-known that the "lamps as missiles" are not the same as lamps of adornment, but He turned from a single category or person to the whole race. Adam (Peace be upon him) was. the father of mankind. He was created by the Hand of Allah Who breathed out of His Soul into him, Who made the Angels prostrate themselves before him, Who taught him names of everything, and Who made him dwell in His spacious Paradise. Narrated Ibn Hibban in his Sahih on the authority of Abu Dharr his saying: "I said, 0 Allah's Messenger! How many were the Prophets of Allah?' He (Peace be upon him) said: 'One hundred twenty-four thousands.' I said: 'O Allah's Messenger! How many were the Messengers among them?' He (Peace be upon him) said: 'Three hundred and thirteen, a great number!' I said: 'O Allah's Messenger! Who was the first among them? 'He (Peace be upon him) said: 'Adam.' I said: 'O Allah's Messenger! Was he a Prophet sent with a Message?' He (Peace be upon him) said: 'Yes, Allah the Almighty created him with His Hand, then, breathed into him out of His Soul, then, He fashioned him (in a very proper manner). "</p>
+          <br>
+          <p>In the Night Journey Hadith that can be found in the two Sahihs Al-Bukhari and Muslim Prophet Muhammad (Peace be upon him) said: "So the gate was opened and we went over the nearest heaven and there we saw a man sitting with some people on his right and some on his left. When he looked towards his right, he laughed and when he looked towards his left he wept. Then he said, 'Welcome! 0 pious Prophet and pious son!' I asked Gabriel: 'Who is he?' He replied: 'He is Adam and the people on his right and left are the souls of his offspring. Those on his right are the people of Paradise and those on his left are the people of Hell and when he looks towards his right he laughs and when he looks towards his left he weeps. " (Al-Bukhari and Muslim)</p>
+          <br>
+          <p>Regarding the Prophetic Hadith that reads: "Then, I passed by Yusuf (Joseph) and I found him to be granted half of beauty."Some scholars explained that it means that he was given half of the beauty Adam was granted. Indeed, this is very suitable and convincing! That Allah, the Almighty created Adam, fashioned him by His Hand and breathed into him out of His Soul, for all these Allah the Almighty must have created the best of all things. It was narrated on the authority of `Abdullah Ibn 'Umar and' Abdullah Ibn 'Amr that: When Allah the Almighty created Paradise, the Angels said: "'Our Lord! Make this for us for You created for mankind the present world in which they eat and drink.' Allah the Almighty said: 'By My Glory and Loftiness! I will not equalize between the pious from among those whom I created with My Hand, and those whom When I said "Be ", they were!" It was narrated in the two Sahihs -Bukhari and Muslim that Abu Hurairah (May Allah be pleased with him) reported Allah's Messenger (Peace be upon him) as saying: Allah, the Exalted and Glorious created Adam in His own image with His length of sixty cubits, and as He created him He told him to greet that group, and that was a party of angels sitting there, and listen to the response that they give him, for it would form his greeting and that of his offspring. Adam then addressed them: Peace be upon you! They (the angels) said: May there be peace upon you and the Mercy of Allah, and they made an addition of "Mercy of Allah ". So he who would get into Paradise would get in the form of Adam, his length being sixty cubits, then the people who followed him continued to diminish in size up to this day. "(Al-Bukhari and Muslim)</p>
+          <br>
+          <hr class="line"><br>
+          <h4 id="notes">Footnotes:</h4> 
+          <p>1 As for the Prophetic Hadith that was transmitted by some other narrators that reads: "The killer will bear all sins of the slain", no one even knows its degree of validity: whether it be Authentic, Good, or even Weak. It cannot be found in any of the Prophetic Hadith Compilations.</p>
         <br>
-        <h4>References:</h4>
+        <hr class="line"><br>
+        <h4 id="ref">References:</h4><br>
           <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-  </body>
-
-</html>
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
+        }
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
+            }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
+        });
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}
