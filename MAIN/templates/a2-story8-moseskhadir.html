@@ -1,63 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
+  {% block title %}
     <title>Moses and Al-Khadir</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
-    <link rel="shortcut icon" href="{% static 'assets\logo\icon3.svg' %}" type="image/x-icon">
-  <link rel="stylesheet" href="{% static 'css\main.css' %}">
-  <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
-  <link rel="stylesheet" href="{% static 'css\forum.css' %}">
-  <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="{% static 'css\storycontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-</head>
+    <style>
+      .sidenav{
+   width: 200px;
+   position: fixed;
+   height: 100%;
+   left: 0;
+   top: 806px;
+   z-index: 2;
+   overflow-x: hidden;
+ }
+ .sidenav a{
+   padding: 10px 0px 10px 30px;
+   text-decoration: none;
+   font-size: 14px;
+   color: #38444d;
+   display: block;
+ }
+ .sidenav a:hover{
+   color: #004085;
+ }
+ .story1{ 
+   padding: 50px 150px 100px 60px;
+   margin-left: 200px;
+   align-items: center;
+   text-align: justify;
+ }
+ .story1 .h4{
+   text-align: center;
+ }
+ .story1 .p{
+   text-align: justify;
+ }
 
-<body>
- <!--Navigation Bar-->
- <nav>
-    <div class="logo">
-      <a href="{% url 'home' %}"><img src="{% static 'assets\logo\logo.svg' %}" alt="logo" width="300" ></a>
-    </div>
-    <div class="toggle">
-        <a href ="#"><ion-icon name="menu-outline"></ion-icon></a>
-    </div>
-      <ul class="menu">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-        <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-        <li><a href="{% url 'doa' %}">Dua'</a></li>
-        <li><a href="{% url 'faq' %}">Ask a Question</a></li>
-        <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        {% if user.is_authenticated %}
-        <li class="auth-icon"><a href="{% url 'logout' %}"><ion-icon name="log-out-outline"></ion-icon></a></li>
-        {% else %}
-        <li class="auth-icon"><a href="{% url 'signup' %}"><ion-icon name="person-outline"></ion-icon></a></li>
-        <!--<li class="auth-icon"><a href="{% url 'signin' %}"><ion-icon name="person-circle-outline"></ion-icon></a></li>-->
-        {% endif %}
-      </ul>
-    </nav>
-
- <!--menu script-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script>
-    $(function(){
-        $(".toggle").on("click", function(){
-            if($(".menu").hasClass("active")){
-                $(".menu").removeClass("active");
-                $(this).find("a").html("<ion-icon name='menu-outline'></ion-icon>");
-            }else{
-                $(".menu").addClass("active");
-                $(this).find("a").html("<ion-icon name='close-outline'></ion-icon>");
-            }
-        })
-    })
-  </script>
-
+ hr .line{
+   border: 0;
+   height: 2px;
+   width: 100%;
+   margin: 15px 0 10px;
+ }
+.toggle-story {
+ display: none;
+}
+ /* Adjustments for mobile view */
+ @media screen and (max-width: 768px) {
+   .sidenav {
+     display: none;
+   }
+ /* Adjust content padding to not overlap with the sidenav */
+ .story1 {
+   padding: 20px;
+   margin-bottom: 60px; /* Add space at the bottom for sidenav */
+   margin-left: 0;
+ }
+}
+@media screen and (max-width: 768px) {
+   .nav-to-right, .nav-line{
+     margin-left: 20px;
+   }
+   .nav-link{
+     margin-left: 20px;
+     margin-right: 0;
+   }
+ }
+   </style>
+   {% endblock title %}
+   {% block content %}  
 <!--nav link-->
 <div class="nav-link">
   <div class="nav-link-content">
@@ -71,7 +87,7 @@
 <!--bookmark and comment-->
 <div class="nav-to-right">
   <div class="nav-to-right-content">
-    <p><i class="fa-regular fa-bookmark"></i></p>
+    <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Story-Moses-and-Al-Khadir')" data-slug="Story-Moses-and-Al-Khadir"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -145,17 +161,7 @@
         <span>Check <a href="{% url 'latest_posts' %}">the latest posts</a> .</span><br>
     {% endif %}
   </div>
-  
-    <script>
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
-        
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        </script>
-  
+
   <script src="{% static 'js/trialforum.js' %}"></script>           
   
   </div>
@@ -163,110 +169,225 @@
   <!--ends forum-->
 
 <!--image content parallax-->
-<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://img.freepik.com/free-photo/father-daughter-sitting-grass-park-enjoying-sunset-together_342744-975.jpg?t=st=1714442381~exp=1714445981~hmac=07935bba937cfc85ac352b3dd6b87815b0274c0f6cfda8c7d9d760147ea19ad9&w=900);">
+<div class="parallax" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.5)), url(https://png.pngtree.com/thumb_back/fw800/background/20240204/pngtree-two-arab-men-riding-camels-in-the-desert-night-landscape-for-image_15586197.png);">
   <h1>Moses and Al-Khadir</h1>
 </div>
+<div class="sidenav"> 
+  <ul>
+    <a href="#intro">Introduction to Moses and Al-Khadir</a>
+    <a href="#quest">The Quest Begins</a>
+    <a href="#meeting">Meeting Al-Khadir</a>
+    <a href="#ship">The Damaged Ship</a>
+    <a href="#boy">The Slain Boy</a>
+    <a href="#wall">The Repaired Wall</a>
+    <a href="#lessons">Clarifications and Lessons</a>
+    <a href="#ancestors">The Righteousness of Ancestors</a>
+    <a href="#summary">Is Al-Khadir Still Alive?</a>
+    <a href="#notes">Footnotes</a>
+    <a href="#ref">References</a>
+  </ul>
+</div>
 
-      <!--Story of Luqman content-->
       <div class="story1">
 
-        <!--<h1>Story of Luqman</h1>
-        <img src="assets\story\storyofluqman.jpg" width="600" height="345"><br>-->
-        <h4>Introduction to Moses and Al-Khadir</h4><br>
-        <p>وَلَقَدْ ءَاتَيْنَا لُقْمَـٰنَ ٱلْحِكْمَةَ أَنِ ٱشْكُرْ لِلَّهِ ۚ وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِۦ ۖ وَمَن كَفَرَ فَإِنَّ ٱللَّهَ غَنِىٌّ حَمِيدٌۭ ١٢ وَإِذْ قَالَ لُقْمَـٰنُ لِٱبْنِهِۦ وَهُوَ يَعِظُهُۥ يَـٰبُنَىَّ لَا تُشْرِكْ بِٱللَّهِ ۖ إِنَّ ٱلشِّرْكَ لَظُلْمٌ عَظِيمٌۭ ١٣ وَوَصَّيْنَا ٱلْإِنسَـٰنَ بِوَٰلِدَيْهِ حَمَلَتْهُ أُمُّهُۥ وَهْنًا عَلَىٰ وَهْنٍۢ وَفِصَـٰلُهُۥ فِى عَامَيْنِ أَنِ ٱشْكُرْ لِى وَلِوَٰلِدَيْكَ إِلَىَّ ٱلْمَصِيرُ ١٤ وَإِن جَـٰهَدَاكَ عَلَىٰٓ أَن تُشْرِكَ بِى مَا لَيْسَ لَكَ بِهِۦ عِلْمٌۭ فَلَا تُطِعْهُمَا ۖ وَصَاحِبْهُمَا فِى ٱلدُّنْيَا مَعْرُوفًۭا ۖ وَٱتَّبِعْ سَبِيلَ مَنْ أَنَابَ إِلَىَّ ۚ ثُمَّ إِلَىَّ مَرْجِعُكُمْ فَأُنَبِّئُكُم بِمَا كُنتُمْ تَعْمَلُونَ ١٥ يَـٰبُنَىَّ إِنَّهَآ إِن تَكُ مِثْقَالَ حَبَّةٍۢ مِّنْ خَرْدَلٍۢ فَتَكُن فِى صَخْرَةٍ أَوْ فِى ٱلسَّمَـٰوَٰتِ أَوْ فِى ٱلْأَرْضِ يَأْتِ بِهَا ٱللَّهُ ۚ إِنَّ ٱللَّهَ لَطِيفٌ خَبِيرٌۭ ١٦ يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ ١٧ وَلَا تُصَعِّرْ خَدَّكَ لِلنَّاسِ وَلَا تَمْشِ فِى ٱلْأَرْضِ مَرَحًا ۖ إِنَّ ٱللَّهَ لَا يُحِبُّ كُلَّ مُخْتَالٍۢ فَخُورٍۢ ١٨ وَٱقْصِدْ فِى مَشْيِكَ وَٱغْضُضْ مِن صَوْتِكَ ۚ إِنَّ أَنكَرَ ٱلْأَصْوَٰتِ لَصَوْتُ ٱلْحَمِيرِ ١٩</p>
-       <br>
-          Narrated Al-Amash after Mujahid:  was a black huge slave, thicklipped, and crackedfooted. 'Umar Ibn Qais said: " was a black slave, thick-lipped and cracked-footed. It happened while he was preaching some people, a man came to him and said: aren't you the one who used to look after the sheep with me at such and such place? Luqman said: yes, I am! The man said: then, what made you of that position? Luqman said: telling the truth and keeping silent regarding what does not concern me." (This Hadith was narrated by Ibn Jarir after lbn Hamid after Al-Hakam) <br>
-          <br>
-          Ibn Abu Hatim said: I was told by Abu Zarah that he was told by Safwan after Al- W alid after Abdur Rahman Ibn Abu Yazid Ibn Jabir who said: "Allah the Almighty raised Luqman's status for his wisdom. A man used to know him saw him and said: Aren't you the slave of so and so who used to look after my sheep not so long in the past? Luqman said: yes! The man said: What raised you to this high state I see? Luqman said: the Divine Decree, repaying the trust, telling the truth and discarding what does not concern me." <br>
-          <br>
-          Narrated Ibn Wahb: I was told by Abdullah Ibn Ayyash Al-Fityani after Umar, the freed slave of Afrah as saying: "A man came to Luqman, the wise and asked: Are you Luqman? Are you the slave of so and so? He said: "Yes!" The man said: You are the black shepherd! Luqman said: As for my black color, it is obviously apparent, so what makes you so astonished? The man said: You became frequently visited by the people who pleasingly accept your judgments! Luqman said: O cousin! If you do what I am telling you, you will be like this. The man said: What is it? Luqman said: Lowering my gaze, watching my tongue, eating what is lawful, keeping my chastity, undertaking my promises, fulfilling my commitments, being hospitable to guests, respecting my neighbors, and discarding what does not concern me. All these made me the one you are looking at." <br>
-          <br>
-          One day Abu Ad-Darda mentioned  the wise and said: He was not granted wisdom because of wealth, children, lineage, or given habits, but he was self-restrained, taciturn, deep-thinking, and he never slept during the day. In addition, no one has ever seen him spitting, clearing his throat, squeezing the lemon, answering the call of nature, bathing, observing trivialities, or foolishly laughing. He was very eloquent and well-versed. He did not weep or cry when all his children died. Finally, he used to frequent the princes and men of authority to mediate and think thoroughly and find admonition. So, because of all these he was granted that great wisdom.<br>
-          <br>
-          Some people claimed that he was offered Prophethood, and that he feared not to be able to carry out its requirements and obligations. Thus, he chose to have wisdom for it is easier this cannot be totally true and Allah knows best! Ikrimah also narrated that: Luqman was a Prophet. <span>1</span><br>
-        
-          However, the majority of scholars are of the view that he was a wise man and not a Prophet. Moreover, he was mentioned in the Glorious Qur'an and was highly praised by Allah the Almighty Who narrates his advice to his own son in which he says: {O my son! Join not in worship others with Allah. Verily, joining others in worship with Allah is a great Zulm (wrong) indeed}, so he forbade his son and warned him against joining others in worship with Allah. Imam Al-Bukhari said: I was told by Qutaibah after Jarir after Al-Amash after Ibrahim after Alqamah after Abdullah as saying: "When the Verse: {It is those who believe and do not confuse their belief with wrong (i.e. joining others in worship with Allah} (Al-Anam, 82) was revealed, we said: "O Allah's Messenger! Who is there amongst us who has not done wrong to himself?" He (Peace be upon him) replied: "It is not as you say, for 'wrong' in the Verse and' do not confuse their belief with wrong' means 'SHIRK' (i.e. joining others in worship with Allah). Haven't you heard Luqman's saying to his son, {O my son! Join not others in worship with Allah, verily joining others in worship with Allah is a great wrong indeed}." (Luqman, 13) <br>
-          <br>
-       
-          Then, Allah informs us of His advice to mankind to take care of parents. He states their rights on the children and orders us to be kind with them even if they were polytheists. But, one should not obey them if they invite him to join others in worship with Allah. Then Allah resumes Luqman's advice to his son saying: {O my son! If it be (anything) equal to the weight of a grain of mustard seed, and though it be in a rock, or in the heavens or in the earth, Allah will bring it forth. Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}, i.e. he forbids him to do wrong to the people even in the slightest way, for Allah will bring it forth and bring him to account on the Day of Resurrection. Allah Almighty says: {Surely! Allah wrongs not even of the weight of an atom (or a small ant)} (An-Nisa', 4O) and, {And We shall set up balances of justice on the Day of Resurrection, then none will be dealt with unjustly in anything. And if there be the weight of a mustard seed, We will bring it. And Sufficient are We to take account} (Al-Anbiya', 47) and, he told him if that wrong deed was equal to the weight of a grain of mustard seed, or if it was in a solid rock, or in the heavens or in the earth, Allah will bring it forth for He knows its exact place, {Verily, Allah is Subtle (in bringing out that grain), Well-Aware (of its place)}. Allah Almighty also says: {And with Him are the keys of the Ghaib (all that is hidden), none knows them but He. And He knows whatever there is in the land and in the sea; not a leaf falls, but He knows it. There is not a grain in the darkness of the earth nor anything fresh or dry, but is written in a Clear Record} (Al-Anam, 59) and, {And there is nothing hidden in the heaven and the earth but it is in a Clear Book (i.e. Al-Lauh Al-Mahfuz)} (An-Naml, 75) and, {the All-Knower of the Unseen, it will come to you; not even the weight of an atom (or a small ant) or less than that or greater escapes His Knowledge in .the heavens or in the earth but it is in a Clear Book (Al-Lauh Al-Mahfuz)} (Saba', 3).<br>
-          <br>
-          As-Sadiy claimed that the rock mentioned in the Verse is that which lies beneath the seventh earth. But, this claim is totally rejected for the word "rock" is indefinite and if his claim were true, it would be "the rock". So, "rock" here means any rock whatever and not a particular one. Narrated Abu Sa'id Al- Khudri after Prophet Muhammad (Peace be upon him) as saying: "If any of you performs deeds in a solid rock that has no door or hole, his deeds, whatever they are, will come out (to the public)." <br>
-          <br>
-          <h4>The Importance of Prayer and Moral Conduct</h4><br><hr class ="line">
-          Then, Luqman said: {O my son! Aqim-As- Sa.lah (perform As-Salah)}, i.e. perform it properly and in due time. Then, he said: {enjoin (on people) Al-Ma'ruf (Islamic Monotheism and all that is good), and forbid (people) from Al-Munkar (i.e. disbelief in the Oneness of Allah, polytheists of all kinds and all that is evil and bad)}, i.e. with your full power, with your hand, tongue and if you could not, let it be with your heart (i.e. reject and resent it).<br> 
-          <br>
-          <h4>Guidance on Patience and Humility</h4><br><hr class ="line">
-          Then, he advised him to observe patience saying: {and bear with patience whatever befalls you}, for if one enjoins what is good and forbids the evil, he will probably regarded as enemy to certain people (but, the final reward would surely be his). For this, he commanded him to observe patience. {Verily, these are some of the important commandments (ordered by Allah with no exemption)} that are inevitable and cannot be neglected.<br>
-          <br>
-          Allah the Almighty says: {And turn not your face away from men with pride}, narrated Ibn Abbas, Mujahid, Ikrimah, Said Ibn Jubair, Ad-Dahhak, Yazid Ibn Al-Asam, Abu Al-Jawza' and others: This means one shouldn't be showy or arrogant.<br>
-          <br>
-          Allah the Almighty says: {nor walk in insolence through the earth. Verily, Allah likes not any arrogant boaster}, here, Luqman forbids his son to strut in his walk. Allah the Almighty says: {And walk not on the earth with conceit and arrogance. Verily, you can neither rend nor penetrate the earth, nor can you attain a stature like the mountains in height}. (Al Isra, 37) i.e. you will neither be able to tread the whole earth, nor penetrate it with your fast walking or strong footsteps, nor will you be as high as mountains with your showing-off or arrogance. So, know yourself well, for you are only a human being (created to worship Allah Alone). The Prophetic Hadith states: "While a man was walking, dragging his dress with pride, he was caused to be swallowed by the earth and will go on sinking in it till the Day of Resurrection." (Transmitted by Imam Al-Bukhari in his Sahih) Another Prophetic Hadith states that: "Beware dragging your dress with pride, for this is boastfulness which is not loved (liked) by Allah " Allah the Almighty says: {Verily, Allah likes not any arrogant boaster}.<br>
-          <br>
-          <h4>Moderation and Humble Speech</h4><br><hr class ="line">
-          After Luqman forbids his son to walk boastfully, he orders him to be moderate in his walking, saying: {And be moderate (or show no insolence) in your walking}, i.e. do not walk fast or too slow, rather take a course inbetween, {And the (faithful) slaves of the Most Gracious (Allah) are those who walk on the earth in humility and sedateness, and when the foolish address them (with bad words) they reply back with mild words of gentleness}. (Al-Furqan, 63) Then, Luqman says: {and lower your voice}, i.e. if you talk, do not raise your voice very loudly because the braying of the ass is the harshest of all voices.<br>
-          <br>
-        
-          Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "When you hear the crowing of cocks, ask for Allah's Blessings for (their crowing indicates that) they have seen an angel. And when you hear the braying of donkeys, seek Refuge with Allah from Satan for (their braying indicates) that they have seen a Satan." (Transmitted by Imam Al-Bukhari in his Sahih). For this, it is forbidden to raise one's voice needlessly. But, raising the voice with the Adhan (the Call to Prayer) and in the battlefield is permitted.<br>
-          Said said: I heard Qatadah as saying: It was said to Luqman: How did you prefer wisdom to Prophethood when you were enabled to choose between them? He said: If Allah were to assign me with Prophethood, I would accept it and try hard to win His Pleasure, but He enabled me to choose. I feared of being too weak for Prophethood, so I chose wisdom. <br>
-          <br>
-          This narration is not perfectly authentic or sound for that sub-narrator, Said Ibn Bashir, is not a trustworthy one. However, many from among our earlier scholars, foremost among whom were: Mujahid, Said Ibn Al-Musayyb and Ibn Abbas (May Allah be pleased with him) were of the viewpoint that Allah's Statement that reads: {And indeed We bestowed upon Luqman Al- Hikmah (wisdom)}, means: discretion and religious understanding. Thereupon, he was not a Prophet and nothing has been revealed to him Al-Wahi (Divine Inspiration). <br>
-          
-      </p><br><h4>Footnotes:</h4> <p>
-
-          1. This narration is very weak for the sub-narrator, Al-Jafi is mentioned by Imams Al-Bukhari and An-Nasa'i among the Weak Narrators. <br>
-
-          9. This narration has a weak sub-narrator in its chain, i.e. Qazah Ibn Suwaid Ibn Hujair AI-Bahili (as mentioned in An-Nasa'i's Weak and Rejected Narrators)
-        </p>
+        <h4 id="intro">Introduction to Moses and Al-Khadir</h4><br>
+        <p> وَإِذْ قَالَ مُوسَىٰ لِفَتَىٰهُ لَآ أَبْرَحُ حَتَّىٰٓ أَبْلُغَ مَجْمَعَ ٱلْبَحْرَيْنِ أَوْ أَمْضِىَ حُقُبًۭا ٦٠ فَلَمَّا بَلَغَا مَجْمَعَ بَيْنِهِمَا نَسِيَا حُوتَهُمَا فَٱتَّخَذَ سَبِيلَهُۥ فِى ٱلْبَحْرِ سَرَبًۭا ٦١ فَلَمَّا جَاوَزَا قَالَ لِفَتَىٰهُ ءَاتِنَا غَدَآءَنَا لَقَدْ لَقِينَا مِن سَفَرِنَا هَـٰذَا نَصَبًۭا ٦٢ قَالَ أَرَءَيْتَ إِذْ أَوَيْنَآ إِلَى ٱلصَّخْرَةِ فَإِنِّى نَسِيتُ ٱلْحُوتَ وَمَآ أَنسَىٰنِيهُ إِلَّا ٱلشَّيْطَـٰنُ أَنْ أَذْكُرَهُۥ ۚ وَٱتَّخَذَ سَبِيلَهُۥ فِى ٱلْبَحْرِ عَجَبًۭا ٦٣ قَالَ ذَٰلِكَ مَا كُنَّا نَبْغِ ۚ فَٱرْتَدَّا عَلَىٰٓ ءَاثَارِهِمَا قَصَصًۭا ٦٤ فَوَجَدَا عَبْدًۭا مِّنْ عِبَادِنَآ ءَاتَيْنَـٰهُ رَحْمَةًۭ مِّنْ عِندِنَا وَعَلَّمْنَـٰهُ مِن لَّدُنَّا عِلْمًۭا ٦٥ قَالَ لَهُۥ مُوسَىٰ هَلْ أَتَّبِعُكَ عَلَىٰٓ أَن تُعَلِّمَنِ مِمَّا عُلِّمْتَ رُشْدًۭا ٦٦ قَالَ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا ٦٧ وَكَيْفَ تَصْبِرُ عَلَىٰ مَا لَمْ تُحِطْ بِهِۦ خُبْرًۭا ٦٨ قَالَ سَتَجِدُنِىٓ إِن شَآءَ ٱللَّهُ صَابِرًۭا وَلَآ أَعْصِى لَكَ أَمْرًۭا ٦٩ قَالَ فَإِنِ ٱتَّبَعْتَنِى فَلَا تَسْـَٔلْنِى عَن شَىْءٍ حَتَّىٰٓ أُحْدِثَ لَكَ مِنْهُ ذِكْرًۭا ٧٠ فَٱنطَلَقَا حَتَّىٰٓ إِذَا رَكِبَا فِى ٱلسَّفِينَةِ خَرَقَهَا ۖ قَالَ أَخَرَقْتَهَا لِتُغْرِقَ أَهْلَهَا لَقَدْ جِئْتَ شَيْـًٔا إِمْرًۭا ٧١ قَالَ أَلَمْ أَقُلْ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا ٧٢ قَالَ لَا تُؤَاخِذْنِى بِمَا نَسِيتُ وَلَا تُرْهِقْنِى مِنْ أَمْرِى عُسْرًۭا ٧٣ فَٱنطَلَقَا حَتَّىٰٓ إِذَا لَقِيَا غُلَـٰمًۭا فَقَتَلَهُۥ قَالَ أَقَتَلْتَ نَفْسًۭا زَكِيَّةًۢ بِغَيْرِ نَفْسٍۢ لَّقَدْ جِئْتَ شَيْـًۭٔا نُّكْرًۭا ٧٤ ۞ قَالَ أَلَمْ أَقُل لَّكَ إِنَّكَ لَن تَسْتَطِيعَ مَعِىَ صَبْرًۭا ٧٥ قَالَ إِن سَأَلْتُكَ عَن شَىْءٍۭ بَعْدَهَا فَلَا تُصَـٰحِبْنِى ۖ قَدْ بَلَغْتَ مِن لَّدُنِّى عُذْرًۭا ٧٦ فَٱنطَلَقَا حَتَّىٰٓ إِذَآ أَتَيَآ أَهْلَ قَرْيَةٍ ٱسْتَطْعَمَآ أَهْلَهَا فَأَبَوْا۟ أَن يُضَيِّفُوهُمَا فَوَجَدَا فِيهَا جِدَارًۭا يُرِيدُ أَن يَنقَضَّ فَأَقَامَهُۥ ۖ قَالَ لَوْ شِئْتَ لَتَّخَذْتَ عَلَيْهِ أَجْرًۭا ٧٧ قَالَ هَـٰذَا فِرَاقُ بَيْنِى وَبَيْنِكَ ۚ سَأُنَبِّئُكَ بِتَأْوِيلِ مَا لَمْ تَسْتَطِع عَّلَيْهِ صَبْرًا ٧٨ أَمَّا ٱلسَّفِينَةُ فَكَانَتْ لِمَسَـٰكِينَ يَعْمَلُونَ فِى ٱلْبَحْرِ فَأَرَدتُّ أَنْ أَعِيبَهَا وَكَانَ وَرَآءَهُم مَّلِكٌۭ يَأْخُذُ كُلَّ سَفِينَةٍ غَصْبًۭا ٧٩ وَأَمَّا ٱلْغُلَـٰمُ فَكَانَ أَبَوَاهُ مُؤْمِنَيْنِ فَخَشِينَآ أَن يُرْهِقَهُمَا طُغْيَـٰنًۭا وَكُفْرًۭا ٨٠ فَأَرَدْنَآ أَن يُبْدِلَهُمَا رَبُّهُمَا خَيْرًۭا مِّنْهُ زَكَوٰةًۭ وَأَقْرَبَ رُحْمًۭا ٨١ وَأَمَّا ٱلْجِدَارُ فَكَانَ لِغُلَـٰمَيْنِ يَتِيمَيْنِ فِى ٱلْمَدِينَةِ وَكَانَ تَحْتَهُۥ كَنزٌۭ لَّهُمَا وَكَانَ أَبُوهُمَا صَـٰلِحًۭا فَأَرَادَ رَبُّكَ أَن يَبْلُغَآ أَشُدَّهُمَا وَيَسْتَخْرِجَا كَنزَهُمَا رَحْمَةًۭ مِّن رَّبِّكَ ۚ وَمَا فَعَلْتُهُۥ عَنْ أَمْرِى ۚ ذَٰلِكَ تَأْوِيلُ مَا لَمْ تَسْطِع عَّلَيْهِ صَبْرًۭا ٨٢</p>
+        <p>(Al-Kahf, 60-82)</p>
         <br>
-        <h4>References:</h4>
-          <p>Stories of The Quran, by Ibn Kathir</p>
+        <hr class="line"><br>
+        <h4 id="quest">The Quest Begins</h4><br>
+        <p>Allah, the Almighty says: {And (remember) when Musa (Moses) said to his boy-servant: "I will not give up (travelling) until I reach the junction of the two seas or (until) I spend years and years in travelling." But when they reached the junction of the two seas, they forgot their fish, and it took its way through the sea as in a tunnel. So when they had passed further on (beyond that fixed place), Musa (Moses) said to his boy-servant: "Bring us our morning meal; truly, we have suffered much fatigue in this, our journey." He said: "Do you remember when we betook ourselves to the rock? I indeed forgot the fish,; none but Shaitan (Satan) made me forget to remember it, it took its course into the sea in a strange (way)!"</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="meeting">Meeting Al-Khadir</h4><br>
+        <p> [Musa (Moses)] said: "That is what we have been seeking;" So they went back retracing their footsteps; Then they found one of Our slaves, on whom We had bestowed mercy from Us, and whom We had taught knowledge from Us; Musa (Moses) said to him (Al-Khadir): "May I follow you so that you teach me something of that knowledge (guidance and true path) which you have been taught (by Allah)?" He (Al-Khadir) said: "Verily you will not be able to have patience with me! And how can you have patience about a thing which you know not;" Musa (Moses) said: "If Allah wills, you will find me patient, and I will not disobey you in aught;" He (Al-Khadir) said: "Then, if you follow me, ask me not about anything till I myself mention of it to you;"</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="ship">The Damaged Ship</h4><br>
+        <p>So they both proceeded, till, when they embarked the ship, he (Al-Khadir) scuttled it; Musa (Moses) said: "Have you scuttled it in order to drown its people? Verily, you have committed a thing Imr (a Munkar -evil, bad, dreadful thing); " He (Al-Khadir) said: "Did I not tell you, that you would not be able to have patience with me?" [Musa (Moses)] said: "Call me not to account for what I forgot, and be not hard upon me for my affair (with you);"</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="boy">The Slain Boy</h4><br>
+        <p>Then they both proceeded, till they met a boy, and he (Al-Khadir) killed him; Musa (Moses) said: "Have you killed an innocent person who had killed none? Verily, you have committed a thing Nukr (a great Munkar prohibited, evil, dreadful thing)!" (Al- Khadir) said: "Did I not tell you that you can have no patience with me?" [Musa (Moses)] said: "If I ask you anything after this, keep me not in your company, you have received an excuse from me; "</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="wall">The Repaired Wall</h4><br>
+        <p>Then they both proceeded, till, when they came to the people of a town, they asked them for food, but they refused to entertain them; Then they found therein a wall about to collapse and he (Al-Khadir) set it up straight; (Musa (Moses)] said: If you had wished, surely, you could have taken wages for it!" (Al-Khadir) said: "This is the parting between me and you, I will tell you the interpretation of (those)things over which you were unable to hold patience. As for the ship, it belonged to Masakin (poor people) working in the sea. So I wished to make a defective damage in it, as there was a king behind them who seized every ship by force. And as for the boy, his parents were believers, and we feared lest he should oppress them by rebellion and disbelief. So we intended that their Lord should change him for them for one better in righteousness and nearer to mercy. And as for the wall, it belonged to two orphan boys in the town; and there was under it a treasure belonging to them; and their father was a righteous man, and your Lord intended that they should attain their age of full strength and take out their treasure as a mercy from your Lord. And I did them not of my own accord. That is the interpretation of those (things) over which you could not hold patience}.</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="lessons">Clarifications and Lessons</h4><br>
+        <p>Some of the People of the Book said: the one who met Al-Khadir was Musa Ibn Misha Ibn Yusuf Ibn Ya ub Ibn Ishaq Ibn Ibrahim, father of the Prophets. But, the most authentic view is that he was Musa Ibn Imran, the Prophet sent by Allah to the Children of Israel.</p>
+        <br>
+        <p>Narrated Imam Al-Bukhari: I was told by Al-Hamidi after Sufyan after Amr Ibn Dinar after Said Ibn Jubair as saying: I said to Ibn Abbas: "Nauf AI-Bakali claims that Moses (the companion of AI-Khadir) was not the Moses of Banu Israel but he was another Moses." Ibn Abbas (May Allah be pleased with him) remarked that the enemy of Allah (Nauj) was a liar. Narrated Ubai bin Ka b: The Prophet (Peace be upon him) said: "Once Prophet Moses stood up and addressed Banu Israel. He was asked: "Who is the most learned man amongst the people?" He said: "I am the most learned." Allah admonished Moses as he did not attribute absolute knowledge to Him (Allah). So Allah inspired to him, "At the junction of the two seas there is a slave of mine who is more learned than you." Moses said: "O my Lord! How can I meet him?" Allah Almighty said: "Take a fish in a large basket (and proceed) and you will find him at the place where you will lose the fish." So Moses set out along with his (servant) boy, Yusha bin Nun and carried a fish in a large basket till they reached a rock, where they laid their heads (i. e. lay down) and slept. The fish came out of the basket and it took its way into the sea as in a tunnel. So it was an amazing thing for both Moses and his (servant) boy. They proceeded for the rest of that night and the following day. When the day broke, Moses said to his (servant) boy: {Bring us our early meal. No doubt, we have suffered much fatigue in this journey}. Moses did not get tired till he passed the place about which he was told. There the (servant) boy told Moses: {Do you remember when we betook ourselves to the rock, I indeed forgot the fish}. Moses remarked: {That is what we have been seeking. So they went back retracing their footsteps}, till they reached the rock. There they saw a man covered with a garment (or covering himself with his own garment). Moses greeted him. Al- Khadir replied saying: "How do people greet each other in your land?" Moses said: "I am Moses." He asked: "The Moses of Banu Israel?" Moses replied in the affirmative and added: "May I follow you so that you teach me of that knowledge which you have been taught." Al-Khadir replied: "Verily! You will not be able to remain patient with me, 0 Moses! I have some of the knowledge of Allah which He has taught me and which you do not know, while you have some knowledge which Allah has taught you which I do not know." Moses said: "Allah willing, you will find me patient and I will not disobey you in aught. So both of them set out walking along the seashore, as they did not have a boat. In the meantime a boat passed by them and they requested the crew of the boa(. to take them on board. The crew recognized Al-Khadir and took them on board without fare. Then a sparrow came and stood on the edge of the boat and dipped its beak once or twice in the sea. Al-Khadir said: "O Moses! My knowledge and your knowledge have not decreased Allah's knowledge except as much as this sparrow has decreased the water of the sea with its beak." Al-Khadir went to one of the planks of the boat and plucked it out. Moses said: "These people gave us a free lift but you have broken their boat and scuttled it so as to drown its people." Al-Khadir replied: "Didn't I tell you that you will not be able to remain patient with me." Moses said: "Call me not to account for what I forgot." The first (excuse) of Moses was that he had forgotten. Then they proceeded further and found a boy playing with other boys. Al-Khadir took hold of the boy's head from the top and plucked it out with his hands (i.e. killed him). Moses said: "Have you killed an innocent soul who has killed none." AI-Khadir replied: "Did I not tell you that you cannot remain patient with me?" Then they both proceeded till when they came to the people of a town, they asked them for food, but they refused to entertain them. Then they found there a wall on the point of collapsing. Al-Khadir repaired it with his own hands. Moses said: "If you had wished, surely you could have taken wages for it." Al-Khadir replied: "This is the parting between you and me." The Prophet (Muhammad (Peace be upon him)) added: "May Allah be Merciful to Moses! Would that he could have been more patient to learn more about his story with Al-Khadir." (Sahih Al-Bukhari)</p>
+        <br>
+        <p>Allah the Almighty says: {And as for the wall, it belonged to two orphan boys in the town}, As Suhaili said: they were Asram and Sarim sons of Kashih. {And there was under it a treasure belonging to them}, i.e. the treasure was gold, or some kind of knowledge. However, the most likely view is that it was some kind of knowledge inscribed on a golden board.</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="ancestors">The Righteousness of Ancestors</h4><br>
+        <p>Allah's Saying: {And their father was a righteous man}, i.e. their seventh or tenth grandfather. However, this proves that the righteousness of the father benefits his own children and their children.</p>
+        <br>
+        <p>Allah's Saying: {as a mercy from your Lord}, this is a textual proof that Al-Khadir was a Prophet and that he did not do anything out of his own desire but as ordered by Allah the Almighty.</p>
+        <br>
+        <p>Al-Khadir's Name, Lineage and Prophethood: Is He Still Alive?</p>
+        <br>
+        <p>The real name, lineage and status of Al-Khadir are controversial. This can be added to the very important question: is he still alive?</p>
+        <br>
+        <p>Al-Hafiz Ibn Asakir said: He is said to be Al-Khadir son of Adam. Ibn Qutaibah said: His name was Balya or Aylya Ibn Malakan Ibn Faligh Ibn Abir Ibn Shalikh Ibn Arfakhshdh Ibn Sam Ibn Noah (Peace be Upon him).</p>
+        <br>
+        <p>Ismail Ibn Abu Uwais said: His name was Al-Muamir Ibn Malik Ibn Abdullah Ibn Nasr Ibn Lazd.</p>
+        <br>
+        <p>Others said: He is Khadrun Ibn Amyaiyl Ibn Al-afiz Ibn AI-Iys Ibn Ishaq Ibn Prophet Ibrahim (Peace be upon him). There are so many other views pertaining to his name and lineage.</p>
+        <br>
+        <p>Imam Al-Bukhari said: I was told by Muhammad Ibn Sa'id Al-Asbahani after Ibn Al-Mubarak after Muamir after Hammam on the authority of Abu Hurairah (May Allah be pleased with him) that the Prophet (Peace be upon him) said: "Al- Khadir was named so because he sat over a barren white land, it turned green with plantation after (his sitting over It)."</p>
+        <br>
+        <p>Qabisah narrated on the authority of Ath-Thauri after Mansur after Mujahid as saying: Al-Khadir was named so because everything around him used to turn into green when he stands for prayer. It was stated earlier that Moses and Yusha (Peace be upon them) went back retracing their footsteps, till they reached the rock. There they saw a man covered with a green garment (or covering himself with his own garment). Moses greeted him. Al-Khadir replied saying: "How do people greet each other in your land?" Moses said: "I am Moses." He asked: "The Moses of Banu Israel?" Moses replied in the affirmative and added: "May I follow you so that you teach me of that knowledge which you have been taught... etc."</p>
+        <br>
+        <p>The Story Indicated His Prophethood in Four Aspects:</p>
+        <br>
+        <p>First:</p><br>
+        <p>Allah the Almighty says: {Then they found one of Our slaves, on whom We had bestowed mercy from Us, and whom We had taught knowledge from Us}. (Al-Kahf, 65)</p>
+        <br>
+        <p>Second:</p><br>
+        <p>Moses says to Al-Khadir: {Musa (Moses) said to him (Al-Khadir): "May I follow you so that you teach me something of that knowledge (guidance and true path) which you have been taught (by Allah)?" He (Al-Khadir) said: "Verily you will not be able to have patience with me! And how can you have patience about a thing which you know not." Musa (Moses) said: "If Allah wills, you will find me patient, and I will not disobey you in aught." He (Al-Khadir) said: "Then, if you follow me, ask me not about anything till I myself mention of it to you"). (Al-Kahf, 66-70) So, were he not a Prophet, Moses would not address him that way, and he would not answer Moses that way as well. Moses sought his company because he wanted to get some of the knowledge Al-Khadir was given by Allah and that which Moses did not get. Were Al-Khadir anything but a Prophet, he would not be infallible. Thus, Moses would not be keen to accompany him because Moses himself was an honorable Prophet and an infallible Messenger. Were Al-Khadir anything but a Prophet, Moses would not take the trouble of searching for him for eighty years. When Moses met with Al-Khadir, Moses highly respected him and followed him submissively to gain as much as possible of his divine knowledge.</p>
+        <br>
+        <p>Third:</p><br>
+        <p>Al-Khadir intentionally killed the boy. He would not do that without an inspiration from Allah Almighty ordering him to. This incident can stand as a separate proof that Al-Khadir was a Prophet. It can stand as well, as a proof that he was infallible. Al-Khadir killed the boy because he was inspired that the boy would be a disbeliever when he grows up and that his parents would follow him due to their earnest love for him. So he killed him to save the faith of the parents. This indicated that he was an infallible Prophet.</p>
+        <br>
+        <p>Fourth:</p><br>
+        <p>When Al-Khadir interpreted and explained for Moses the actions he took and clarified everything to him he added: {As a mercy from your Lord. And I did them not of my own accord}, i.e. I did not do that out of my desire, instead, I was ordered to by divine inspiration. All these indicated his Prophethood and infallibility.</p>                     
+        <br>
+        <hr class="line"><br>
+        <h4 id="summary">Is Al-Khadir Still Alive?</h4><br>
+        <p>The majority of scholars said: "Al-Khadir is still alive because he was the one who buried Adam (Peace be upon him) after the Deluge and thus he was affected by the invocation of Adam that he who buries him will live long." Some people said: "he is still alive because he drank of the spring of life."</p>
+        <br>
+        <p>There are so many narrations and stories on which those who viewed the existence of Al-Khadir today based their opinion. But, all the narrations and Hadiths pertaining to that issue are weak and invented and those who narrated them are not infallible.</p>
+        <br>
+        <p>Abdur Razzaq said: I was told by Mu' amir that Abu Sa'id AI-Khudri said: "One day Allah's Messenger (Peace be upon him) narrated to us a long narration about Ad-Dajjal and among the things he narrated to us, was: 'Ad-Dajjal will come, and he will be forbidden to enter the mountain passes of Medina. He will encamp in one of the salt areas neighbouring Medina and there will appear to him a man who will be the best or one of the best of the people. He will say: 'I testify that you are Ad-Dajjal whose story Allah's Messenger has told us. 'Ad Dajjal will say (to his audience): 'Look, if I kill this man and then give him life, will you have any doubt about my claim?' They will reply: 'No.' Then Ad Dajjal will kill that man and then will make him alive. The man will say: 'By Allah, now I recognize you more than ever! 'Ad-Dajjal will then try to kill him (again) but he will not be given the power to do so. ", Mu'amir said: I was told that the man who stands against the Dajjal is Al-Khadir and that his neck on that day would be covered with brass.</p>
+        <br>
+        <p>Sheikh Abu Al-Faraj Ibn Al-Jawzi refuted all these Hadiths and proved them all to be invented, and he proved the Chains of Transmission of the narrations and stories of the Prophet's Companions and followers to be weak and fallible. Indeed, Ibn Al-Jawzi was very powerful and authentic in doing so.</p>
+        <br>
+        <p>As for those who claimed Al-Khadir to be dead such as Imam Al-Bukhari, Abu Al-Husain Ibn Al-Munadi and sheik Abu Al-Faraj Ibn Al-Jawzi, they held as their textual proofs what follows: Allah the Almighty says: {And We granted not to any human being immortality before you (O Muhammad (Peace be upon him»: then if you die, would they live forever?}. (Al-Anbyia', 34) So if Al-Khadir was a human being, he would be affected by this ruling: he is mortal, he must die. Allah the Almighty says: {And (remember) when Allah took the Covenant of the Prophets, saying: "Take whatever I gave you from the Book and Hikmah (understanding of the Laws of Allah), and afterwards there will come to you a Messenger (Muhammad (Peace be upon him» confirming what is with you; you must, then, believe in him and help him." Allah said: "Do you agree (to it) and will you take up My Covenant (which I conclude with you)?" They said: "We agree." He said: "Then bear witness; and I am with you among the witnesses (for this)"). (Al 'Imran, 81) Ibn 'Abbas (May Allah be pleased with him) said: Allah took the Covenant of all the Prophets to believe in Muhammad and support him if he appears during their lifetimes. In addition, they should take the Covenant of all their own nations to believe in him and support him in the same way. Thereupon, were Al-Khadir a Prophet or a Wali (protector or guardian), he would be involved in that Covenant and that were he alive during the lifetime of Prophet Muhammad (Peace be upon him), he would follow him and present himself before him paying allegiance and absolute faith.</p>
+        <br>
+        <p>Imam Ahmed narrated: I was told by Shuraih Ibn An-Nu'man after Hashim after Mujalid after AshShi'bi after Jabir Ibn 'Abdullah that the Prophet (Peace be upon him) said: "By Him in Whose Hand my soul is! Were Moses alive, he would do nothing but follow me." This is the decisive view which the earlier Qur'anic Verse indicates that all Prophets -if they happen to live during the lifetime of Prophet Muhammad -are ordered to follow him and practice his own Shariah. On the Night Journey, he (Peace be upon him) was raised far above them all.5 When they descended to Jerusalem and the time for Prayer was due, he (Peace be upon him) was ordered to lead them all (in Prayer). This showed that he is the greatest Imam and the last Prophet who is most honored and respected (May Allah grant him and them all mercy).</p>
+        <br>
+        <p>Thereupon, if Al-Khadir were alive, he would be joining forces with Prophet Muhammad (Peace be upon him), and he would follow his religion in every minute detail. This is Prophet Isa (Jesus (Peace be upon him)) when he will descends by the end of time, he will rule over the whole world in accordance with this honorable legislation of Prophet Muhammad (Peace be upon him). However, there is nothing to certify that Al-Khadir has met together with Prophet Muhammad (Peace be upon him) in a single day or even witnessed any fight with him against the polytheists or the infidels. On the day on which the Battle of Badr was fought, the Messenger of Allah (Peace be upon him) cast a glance at the infidels, and they were one thousand (1000) while his own Companions were three hundred and nineteen (319). Allah's Prophet (Peace be upon him) turned (his face) towards the Qiblah. Then, he stretched his hands and began his supplication to his Lord: 'O Allah! Accomplish for me what Thou hast promised to me. 0 Allah! Bring about what Thou hast promised to me. 0 Allah! If this small band of Muslims is destroyed, Thou will not be worshipped on this earth.' He (Peace be upon him) continued his supplication to his Lord, stretching his hands, facing the Qiblah, until his mantle slipped down from his shoulders. So Abu Bakr (May Allah be pleased with him) came to him, picked up his mantle and put it on his shoulders. Then he (Abu Bakr) embraced him from behind and said: 0 Prophet of Allah! This prayer of yours to your Lord will suffice you, and He will fulfil for you what He has promised you. So Allah, the Glorious and Exalted, revealed (the Qur'anic verse): {(Remember) when you sought help of your Lord and He answered you (saying): I will help you with a thousand of the angels each behind the other (following one another) in succession}. (Al-Anfal, 9) So Allah helped him with angels." (Sahih Muslim) However, this' small band of Muslims' consisted, then, of the chiefs from among the Muslims and the angels, foremost among whom was Jibril (Gabriel (Peace be upon him)). Thus, if Al-Khadir were alive, his presence, then, would be the best thing he could ever do. Narrated Al-Qadi Abu Yala Muhammad Ibn Al-Husain Al- Fara' Al-Hanbali: Some people asked some of our companions about Al-Khadir, was he dead? They answered: "Yes."</p>
+        <br>
+        <p>Some people claim that Al-Khadir was present during all these past events but no one could see him because he was invisible. Obviously, this claim is groundless and is based only on illusions. Indeed, if he was still alive during the lifetime of Prophet Muhammad (Peace be upon him), he would certainly join him in his fight against the polytheists of the tribe of Quraish. See the following Hadith: Narrated Sa'd (May Allah be pleased with him): "On the Day of Uhud I saw on the right side of Allah's Messenger (Peace be upon him) and on his left side two persons dressed in white clothes and whom I did not see before nor after that, and they were Gabriel and Michael (may Allah be pleased with both of them)." (Sahih Muslim)</p>
+        <br>
+        <p>In addition, 'Abdullah Ibn Umar (May Allah be pleased with both of them) said: "Once the Prophet (Peace be upon him) led us in the Isha' (Night) Prayer during the last days of his life and after finishing it (the Prayer) (with Taslim, i.e. final salutation) he said: 'Do you realize (the importance of) this night? Nobody present on the surface of the earth tonight will be living after the completion of one hundred years from this night. ", (Sahih Al-Bukhari) And, Abdullah Ibn Umar (May Allah be pleased with both of them) narrated: "Allah's Messenger (Peace be upon him) led us in the Isha' (Night) Prayer at the latter part of the night and when he had concluded it by salutations he stood up and said: 'Have you seen this night of yours? At the end of one hundred years after this (night) none would survive on the surface of the earth (from among my Companions).' Ibn Umar said: People were (not understanding) these words of the Messenger of Allah (Peace be upon him) which had been uttered pertaining to one hundred years. Allah's Messenger (Peace be upon him) in fact meant (by these words) that on that day none from amongst those who had been living upon the earth (from amongst his Companions) would survive (after one hundred years) and that would be the end of this generation." (Sahih Muslim) And, Jabir Ibn Abdullah (May Allah be pleased with him) reported: "I heard Allah's Messenger (Peace be upon him) as saying this one month before his death: 'You asked me about the Last Hour whereas its knowledge is with Allah. I, however, take an oath and say that none upon the earth, the created beings (from amongst my Companions), would survive at the end of one hundred years." This Hadith has been narrated on the authority of Ibn Juraij with the same chain of transmitters, but there is no mention of the words: "one month before his death." (Sahih Muslim) So, even if Al-Khadir were alive during the lifetime of Prophet Muhammad (Peace be upon him), he would, then, be dead in accordance with these above-mentioned Hadiths. And, Allah knows best!</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="notes">Footnotes:</h4>
+        <p>4. Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "Allah forgives my followers those (evil deeds) their own selves may whisper or suggest to them as long as they do not act (on it) or speak." (Sahih Al-Bukhari) Narrated Abu Hurairah (May Allah be pleased with him): The Prophet (Peace be upon him) said: "If somebody eats something forgetfully while he is fasting, then he should complete his fast, for Allah has made him eat and drink." (Sahih Al-Bukhari)
+          <br>
+          5. I.e. Near Sidrat-ul-Muntaha (a lote-tree of the utmost boundary over the seventh heaven beyond which none can pass). (Translator)</p>
+        <br>
+        <hr class="line"><br>
+        <h4 id="ref">References:</h4>
+        <p>Stories of The Quran, by Ibn Kathir</p>
       </div>
-     <!--scroll to top button-->
-  <a href="#" class="scrollToTop">
-    <ion-icon name="chevron-up-circle-outline"></ion-icon></a>
-    <script src="{% static 'js\scroll.js' %}"></script> 
-     
-<!--Footer Section-->
-<footer>
-  <div class="footer-container">
-    <div class="footer-content">
-      <h4>Contact Us</h4>
-      <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
-      <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
-    </div>
-    <div class="footer-content">
-      <h4>Quick Links</h4>
-        <ul class="list">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'story' %}">Stories In Quran</a></li>
-            <li><a href="{% url 'science' %}">Sciences In Quran</a></li>
-            <li><a href="{% url 'doa' %}">Dua'</a></li>
-            <li><a href="{% url 'quiz' %}">Quiz</a></li>
-        </ul>
-    </div>
-    <div class="footer-content">
-      <h4>Follow Us</h4>
-        <ul class="social-icons">
-          <li><a href="https://www.facebook.com/nurathirah.zaaba/"><ion-icon name="logo-facebook"></ion-icon></a></li>
-          <li><a href="https://www.instagram.com/ch0cbby/"><ion-icon name="logo-instagram"></ion-icon></a></li>
-          <li><a href="https://www.linkedin.com/in/nur-athirah-a6b69b238/"><ion-icon name="logo-linkedin"></ion-icon></a></li>
-        </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2023 QuranWisdom | Designed by Athirah Zaaba</p>
-</footer> 
-
-<script>
-  function on() {
-    document.getElementById("overlay").style.display = "block";
-  }
-  
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
-</script>
-  </body>
-
-</html>
+      <script>
+        function toggleSidenav() {
+          var sidenav = document.getElementById("sidenav");
+          if (sidenav.style.display === "block") {
+            sidenav.style.display = "none";
+          } else {
+            sidenav.style.display = "block";
+          }
+        }
+        </script>
+        <script>
+          $(document).ready(function() {
+            var initialTop = $('.sidenav').css('top'); // Store the initial top value
+            $(window).scroll(function() {
+              var scroll = $(window).scrollTop(); // Get current scroll position
+              $('.sidenav').css('top', Math.max(0, parseInt(initialTop) - scroll)); // Adjust top based on scroll
+            });
+          });
+          </script>
+          
+        <script>
+          function on() {
+            document.getElementById("overlay").style.display = "block";
+          }
+          
+          function off() {
+            document.getElementById("overlay").style.display = "none";
+          }
+          function toggleBookmark(element, slug) {
+            // Check if user is authenticated
+            const isAuthenticated = document.body.getAttribute('data-user-authenticated') === 'true';
+        
+            if (!isAuthenticated) {
+                window.location.href = '/account/signin/'; // Redirect to sign-in page
+                return;
+            }
+        
+            // Proceed with bookmark toggle for authenticated users
+            fetch(`/toggle_bookmark/${slug}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Function to get CSRF token
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'slug': slug })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    element.classList.remove('fa-regular');
+                    element.classList.add('fa-solid');
+                } else {
+                    element.classList.remove('fa-solid');
+                    element.classList.add('fa-regular');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Assuming the user is authenticated; adjust as needed
+            updateUserBookmarkIcons();
+        });
+        
+        function updateUserBookmarkIcons() {
+            fetch('/get_user_bookmarks/', { // Adjusted to the correct path
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Include CSRF token if needed for GET requests or ensure your view is exempt
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                const bookmarkedSlugs = data.bookmarkedSlugs;
+                bookmarkedSlugs.forEach(slug => {
+                    const bookmarkIcon = document.querySelector(`i[data-slug="${slug}"]`);
+                    if (bookmarkIcon) {
+                        bookmarkIcon.classList.remove('fa-regular');
+                        bookmarkIcon.classList.add('fa-solid');
+                    }
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {% endblock content %}
