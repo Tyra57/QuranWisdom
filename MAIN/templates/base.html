@@ -30,7 +30,7 @@
         <li><a href="{% url 'quiz' %}">Quiz</a></li>
         {% if user.is_authenticated %}
         <!-- <div class="user-menu">  -->
-      <img src="{% static 'assets\usermenuimg\user.png' %}" class="user-pic" onclick="onMenu()" style="margin-right:20px">
+      <img src="{% static 'assets\usermenuimg\user.svg' %}" class="user-pic" onclick="onMenu()" style="margin-right:20px">
     
       <div class="sub-menu-wrap" id="subMenu" onclick="offMenu()">
         <div class="sub-menu-container">
@@ -42,7 +42,7 @@
               
               <a href="{% url 'profile' %}" class="user-info-link"> 
                 <div class="user-info">
-                  <img src="{% static 'assets\usermenuimg\user.png' %}">
+                  <img src="{% static 'assets\usermenuimg\user3.svg' %}" >
                   {% if user.is_authenticated %}
                     <h3>{{user}}</h3>
                   {% else %}
