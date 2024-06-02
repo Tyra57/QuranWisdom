@@ -301,11 +301,13 @@
 .main-search{
   width: 100%;
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
   border-radius: 60px;
   margin-top: 15px;
+  background: rgba(255, 255, 255, 0.3);
+}
+.main-search .row{
+  display: flex;
+  align-items: center;
 }
 .main-search input::placeholder{
   color: #dddddd8d;
@@ -335,6 +337,40 @@
   background: #dddddd52;
   
 }
+.result-search{
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  max-width: 700px; 
+  max-height: 200px;
+  overflow-y: scroll;
+  display: none;
+  z-index: 1050;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.result-search ul{
+  list-style: none;
+  padding: 0;
+  color: #fff;
+  text-decoration: none;
+}
+.result-search ul li{
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+}
+.result-search ul li:hover{
+  background: #dddddd52;
+}
+.result-search a{
+  color: #fff;
+  text-decoration: none;
+}
+
 /*--------------------------------------------------------------
 # info quran Section
 --------------------------------------------------------------*/
@@ -611,16 +647,16 @@
       <!--<p>Al-Quran is the Islam's sacred scripture. The Quran stands as a timeless beacon of guidance, wisdom, and divine revelation. Revealed to Prophet Muhammad (peace be upon him) over 1,400 years ago, it serves as a comprehensive guide for humanity, offering spiritual enlightenment, moral principles, and insights into various aspects of life. Explore its verses that transcend time and culture, offering solace, guidance, and a profound understanding of faith, morality, and the human condition</p>
       --><br>
       <!--search bar-->
-      <div action="" method="get" class="main-search">
-        <input type="text" placeholder="What are you looking for" >
-        <!--icon for search-->
-        <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+      <div class="main-search">
+        <div class="row">
+          <input type="text" id="input-box" placeholder="What are you looking for" >
+          <!--icon for search-->
+          <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        </div>  
+        <div class="result-search">
+          
+        </div>
       </div>
-      <script>
-      var learnbtn = document.querySelector('.learnbtn');
-      learnbtn.addEventListener('click', function(){
-          scrollTo = document.querySelector('.flex-container').scrollIntoView({behavior: "smooth"});});
-      </script>
     </div>
   </div>
     <!-- info quran Section -->
@@ -963,5 +999,131 @@
   </div>
 </div>
 <!--end of contact us-->
+<script>
+  let availableKeywords = [
+    'Stories In Quran',
+    'Sciences In Quran',
+    'Dua In Quran',
+    'Quranic Quiz',
+    'Quranic Wisdom',
+    'Al-Quran', 
+    'Our Panel In Research', 
+    'Got Questions?', 
+    'Contact Us',  
+    {keyword:'Strength', url: "{% url 'doa14' %}"}, 
+    {keyword:'Sleeping', url: "{% url 'doa13' %}"}, 
+    {keyword:'Righteous Company', url: "{% url 'doa12' %}"}, 
+    {keyword:'Repentance', url: "{% url 'doa11' %}"}, 
+    {keyword:'Protection', url: "{% url 'doa10' %}"},
+    {keyword:'Patience', url: "{% url 'doa9' %}"}, 
+    {keyword:'Parents', url: "{% url 'doa8' %}"}, 
+    {keyword:'Mercy', url: "{% url 'doa7' %}"}, 
+    {keyword:'Marriage', url: "{% url 'doa6' %}"}, 
+    {keyword:'Hereafter', url: "{% url 'doa5' %}"}, 
+    {keyword:'Healing', url: "{% url 'doa4' %}"},
+    {keyword:'Guidance', url: "{% url 'doa3' %}"}, 
+    {keyword:'Devotion', url: "{% url 'doa2' %}"}, 
+    {keyword:'Children', url: "{% url 'doa1' %}"}, 
+    'Wind Helps Formation of Rain',
+    'The Universe\'s Origin from Smoke and the Big Bang', 
+    'The Sun\'s Light and the Moon\'s Reflection',
+    'The Sun and The Moon Have Separate Orbits', 
+    'The Seven Layers of the Earth',
+    'The Rotation of Earth on Its Axis', 
+    'The Role of the Prefrontal Cortex in Cognitive Functions',
+    'The Process of Rain Formation', 
+    'The Origin of Life from Water',
+    'The Geopolymer Theory of the Pyramids\' Construction', 
+    'The Expansion of The Universe',
+    'The Discovery of Internal Waves in the Ocean', 
+    'The Discovery of DNA and Genetic Information',
+    'The Darkness of the Deep Sea', 
+    'The Creation of All Things in Pairs',
+    'The Concept of Black Holes', 
+    'The Complexity of the Universe Compared to Human Creation',
+    {keyword:'Separation Between Different Types of Seas', url: "{% url 'science16' %}"}, 
+    {keyword:'Role of Wind in Signaling the Arrival of Rain', url: "{% url 'science15' %}"},
+    {keyword:'Ratio Of Land and Water on Earth\'s Surface', url: "{% url 'science14' %}"}, 
+    {keyword:'Plant Diversity According to Location and Climate', url: "{% url 'science13' %}"},
+    {keyword:'The Pain Receptor', url: "{% url 'science12' %}"}, 
+    {keyword:'Ozone Layer As a Shield', url: "{% url 'science11' %}"}, 
+    {keyword:'Mountains as Stabilizing Pegs of the Earth\'s Surface', url: "{% url 'science10' %}"},
+    {keyword:'Milk Production In Livestock', url: "{% url 'science9' %}"}, 
+    {keyword:'Male Chromosome Determines Gender', url: "{% url 'science8' %}"}, 
+    {keyword:'Honey As a Cure', url: "{% url 'science7' %}"},
+    {keyword:'Embryology', url: "{% url 'science6' %}"}, 
+    {keyword:'Difficulty Breathing At Higher Altitude', url: "{% url 'science5' %}"}, 
+    {keyword:'Constellation Guide', url: "{% url 'science4' %}"}, 
+    {keyword:'Cloud Layers', url: "{% url 'science3' %}"},
+    {keyword:'Celestial Bodies and Their Orbits', url: "{% url 'science2' %}"}, 
+    {keyword:'Anemochory', url: "{% url 'science1' %}"},
+    'Uzair (Ezra)', 
+    'The Sabbath Breakers',
+    'The Believer and The Disbeliever', 
+    'Story of The Heifer', 
+    'Story of Saba', 
+    'Story of Qorun (Korah)',
+    'Story of Luqman', 
+    'People of The Garden',
+    'People of The Ditch',
+    {keyword:'People of The Cave', url: "{% url 'story10' %}"},
+    {keyword:'Owners of the Elephants', url: "{% url 'story9' %}"}, 
+    {keyword:'Moses and Al-Khadir', url: "{% url 'story8' %}"}, 
+    {keyword:'Habil and Qabil', url: "{% url 'story7' %}"}, 
+    {keyword:'Harut and Marut', url: "{% url 'story6' %}"},
+    {keyword:'Gog and Magog', url: "{% url 'story5' %}"}, 
+    {keyword:'Dzul Qarnain', url: "{% url 'story4' %}"}, 
+    {keyword:'Dwellers of The Town', url: "{% url 'story3' %}"}, 
+    {keyword:'Balqis (Queen of Saba)', url: "{% url 'story2' %}"},
+    {keyword:'Barsisa The Worshipper', url: "{% url 'story1' %}"}
+    
+  ]
+  const resultSearch = document.querySelector('.result-search');
+  const inputBox = document.getElementById('input-box');
+  
+  inputBox.onkeyup = function() {
+    let result = [];
+    let input = inputBox.value;
+    if (input.length) {
+        result = availableKeywords.filter(item => {
+            // Check if the item is an object and compare the keyword property
+            if (typeof item === 'object') {
+                return item.keyword.toLowerCase().includes(input.toLowerCase());
+            } else {
+                // Handle plain text keywords
+                return item.toLowerCase().includes(input.toLowerCase());
+            }
+        });
+    }
+    display(result);
+    resultSearch.style.display = result.length ? "block" : "none";
+};
 
+  function display(result){
+    const content = result.map(item => {
+        // Check if the item is an object with a URL
+        if (typeof item === 'object' && item.url) {
+            return `<li><a href="${item.url}">${item.keyword}</a></li>`;
+        } else {
+            // For plain text keywords, just display the text without a link
+            return `<li>${item}</li>`;
+        }
+    }).join('');
+    resultSearch.innerHTML = content ? `<ul>${content}</ul>` : '';
+  }
+
+ function selectInput(list){
+    inputBox.value = list.innerHTML;
+    resultSearch.innerHTML = "";
+    resultSearch.style.display = "none";
+ }
+
+  // Hide result-search when clicking outside
+  document.addEventListener('click', function(event) {
+      if (!inputBox.contains(event.target) && !resultSearch.contains(event.target)) {
+          resultSearch.style.display = "none";
+      }
+  });
+
+</script>
 {% endblock content %}

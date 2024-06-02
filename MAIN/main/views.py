@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 #from . import candy
+from django.core.exceptions import MultipleObjectsReturned
 
 def home(request):
 
@@ -54,22 +55,28 @@ def detail(request, slug):
     #author = Author.objects.get(user=request.user)
 
     if request.user.is_authenticated and "comment-form" in request.POST:
-        # Only attempt to get or create the Author object if the user is authenticated
-        author, created = Author.objects.get_or_create(user=request.user)
+        try:
+            author, created = Author.objects.get_or_create(user=request.user)
+        except MultipleObjectsReturned:
+            # Handle the exception, for example, by selecting the first author instance
+            author = Author.objects.filter(user=request.user).first()
+        
         comment = request.POST.get("comment")
         new_comment, created = Comment.objects.get_or_create(user=author, content=comment)
-        #post.comments.add(new_comment.id)
         post.comments.add(new_comment)
 
-    if "reply-form" in request.POST and "reply-form" in request.POST:
-        author, created = Author.objects.get_or_create(user=request.user)
+    if "reply-form" in request.POST:
+        try:
+            author, created = Author.objects.get_or_create(user=request.user)
+        except MultipleObjectsReturned:
+            author = Author.objects.filter(user=request.user).first()
+        
         reply = request.POST.get("reply")
         comment_id = request.POST.get("comment-id")
         comment_obj = Comment.objects.get(id=comment_id)
-        new_reply, created = Reply.objects.get_or_create(user=author, content=reply)
-        #comment_obj.replies.add(new_reply.id)
-        comment_obj.replies.add(new_reply)
-        
+        new_reply, created = Reply.objects.get_or_create(user=author, content=reply, comment=comment_obj)
+        # No need to manually add the reply to the comment_obj.replies as get_or_create does this automatically
+            
     context = {
         'post': post,
         'total_likes': total_likes,

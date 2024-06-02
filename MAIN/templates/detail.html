@@ -53,16 +53,15 @@
 .edit-action:hover, .reply-action:hover {
     background-color: #218838;
 }
-       .hide {
-            display: none;
+.hide {
+    display: none;
         } 
-        .delete{
-            cursor: pointer;
-            font-weight: 300;
-            font-size: small;
-            
-        }
-        .like-btn, .like-btn button{
+.delete{
+    cursor: pointer;
+    font-weight: 300;
+    font-size: small;
+}
+.like-btn, .content.like-btn button{
     color: black;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
@@ -117,22 +116,26 @@
                     <div class="date-posted">Posted on: {{ post.created_at|date:"F d, Y H:i" }}</div>
                         <div class="inline-action-links">      
                             <div class="comment">
-                                 
-                                {% if user.is_authenticated and post.user.user == user %}
-                                <p class="action-link comment-action" onclick="toggleVisibility('comment-area')">Comment</p>
-                                <span class="separator">|</span>
-                                <a href="{% url 'edit_post' post_id=post.id %}" class="inline-action-link">Edit Post</a>
-                                <span class="separator">|</span>
-                                <span class="inline-action-link delete-action" data-url="{% url 'post-delete' post_id=post.id %}" onclick="confirmDelete(this)">Delete Post</span>
-                                <span class="separator">|</span>
-                                <form action="{% url 'like_post' post_id=post.id %}" method="post" style="display: inline;" class="inline-action-link">
-                                    {% csrf_token %}
-                                    <button type="submit" class="like-btn" style="color: black; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; text-decoration: none;  
-                                    border: none; background: transparent; display: inline;" value="{{ post.id }}" name="post_id">Like</button>
+                                {% if user.is_authenticated %}
+                                    <p class="action-link comment-action" onclick="toggleVisibility('comment-area')">Comment</p>
+                                
+                                
+                                    {% if user.is_authenticated and post.user.user == user %}
+                                        <span class="separator">|</span> 
+                                        <a href="{% url 'edit_post' post_id=post.id %}" class="inline-action-link">Edit Post</a>
+                                        <span class="separator">|</span>
+                                        <span class="inline-action-link delete-action" data-url="{% url 'post-delete' post_id=post.id %}" onclick="confirmDelete(this)">Delete Post</span>
+                                        
+                                    
+                                    {% endif %}
+                                    <span class="separator">|</span>
+                                    <form action="{% url 'like_post' post_id=post.id %}" method="post" style="display: inline;" class="inline-action-link">
+                                        {% csrf_token %}
+                                        <button type="submit" class="like-btn" style="color: black; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; text-decoration: none;  
+                                        border: none; background: transparent; display: inline;" value="{{ post.id }}" name="post_id">Like</button>
                                     </form>
-                                - Likes: {{ post.total_likes }}
+                                    - Likes: {{ post.total_likes }}
                                 {% endif %}
-                            
                             
                             </div>
                             
@@ -184,12 +187,13 @@
                         <span class="separator">|</span>
                         <span class="inline-action-link delete-action" data-url="{% url 'comment-delete' comment_id=comment.id %}" onclick="confirmDelete(this)">Delete</span>
                         <span class="separator">|</span>
-                        <form action="{% url 'like_comment' comment_id=comment.id %}" method="post" style="display: inline;">
+                        
+                        {% endif %}
+                        <form action="{% url 'like_comment' comment_id=comment.id %}" method="post" class="inline-action-link">
                             {% csrf_token %}
                             <button type="submit" class="like-btn">Like</button>
                         </form>
                         - Likes: {{ comment.likes.count }}
-                        {% endif %}
                 
                 </div>  
                 <form action="." method="post" class="hide" id="comment{{ comment.id }}">
@@ -224,21 +228,23 @@
                     <br>
                     <div class="date-posted">Posted on: {{ reply.created_at|date:"F d, Y H:i" }}</div>
                         <div class="inline-action-links">
-                            {% if user.is_authenticated and reply.user.user == user %}
-                            <a href="{% url 'edit_reply' reply_id=reply.id %}">Edit Reply</a>
-                            <span class="separator">|</span>
-                            <div class="delete" data-url="{% url 'reply-delete' reply_id=reply.id %}" onclick="confirmDelete(this)">Delete</div>
-                            <span class="separator">|</span>
-                            {% endif %}
                             {% if user.is_authenticated %}
-                            <form action="{% url 'like_reply' reply_id=reply.id %}" method="post" style="display: inline-block;">
-                                {% csrf_token %}
-                                <button type="submit" class="like-btn" value="{{ reply.id }}" name="reply_id">Like</button>
+                                {% if user.is_authenticated and reply.user.user == user %}
+                                <a href="{% url 'edit_reply' reply_id=reply.id %}">Edit Reply</a>
+                                <span class="separator">|</span>
+                                <div class="delete" data-url="{% url 'reply-delete' reply_id=reply.id %}" onclick="confirmDelete(this)">Delete</div>
+                                <span class="separator">|</span>
+                                {% endif %}
                             
-                            </form>
-                            - Likes: {{ reply.likes.count }} 
-                            {% endif %}
+                                <form action="{% url 'like_reply' reply_id=reply.id %}" method="post" class="inline-action-link">
+                                    {% csrf_token %}
+                                    <button type="submit" class="like-btn" value="{{ reply.id }}" name="reply_id">Like</button>
+                                
+                                </form>
+                                - Likes: {{ reply.likes.count }} 
+                            {% else %}
                             Likes: {{ reply.likes.count }} 
+                            {% endif %}
                         </div>
                     </div> 
                 </div>

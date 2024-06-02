@@ -10,6 +10,30 @@
   <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
   <title>Quiz</title>
   <style>
+    /* Overlay */
+.overlay {
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 10; /* Ensure it's above other content */
+}
+
+/* Blurred background */
+.blur-background {
+    filter: blur(8px);
+}
+
+/* Container to center */
+.centered-content {
+    z-index: 11; /* Above the overlay */
+    position: relative; /* Adjust as needed */
+}
     /* Start Quiz Button Styling*/
 .container-quiz{
     position:relative;
@@ -81,12 +105,12 @@
     .quiz-buttons .start-btn-6 {
         flex: 1 0 45%; /* Adjust base width for smaller screens */
     }
-}
-
-@media (max-width: 480px) {
-  .container-quiz {
-        padding: 20px 10px; /* Reduced side padding for very small screens */
-        min-height: auto; /* Allows content to adjust based on its size */
+    .container-quiz .quiz-buttons button {
+        padding: 20px 30px; /* Smaller padding */
+        font-size: 18px; /* Smaller font size */
+        min-width: 120px; /* Smaller minimum width */
+        width: 250px; /* Allow width to adjust */
+        height: 100px;
     }
     .quiz-buttons .start-btn,
     .quiz-buttons .start-btn-2,
@@ -94,7 +118,43 @@
     .quiz-buttons .start-btn-4,
     .quiz-buttons .start-btn-5,
     .quiz-buttons .start-btn-6 {
-        flex: 1 0 100%; /* Stack buttons vertically on very small screens */
+        flex: 1 0 100%; /* Make buttons full width */
+        margin: 5px 0; /* Smaller margin */
+    }
+    .info-box, .info-box-2, .info-box-3, .info-box-4, .info-box-5, .info-box-6,
+    .quiz-box, .quiz-box-2, .quiz-box-3, .quiz-box-4, .quiz-box-5, .quiz-box-6,
+    .result-box, .result-box-2, .result-box-3, .result-box-4, .result-box-5, .result-box-6 {
+        width: 90%; /* Use more of the screen width */
+        padding: 15px; /* Adjust padding */
+    }
+    .info-list .info, .score-text span, .complete-text {
+        font-size: 16px; /* Smaller font size for better readability */
+    }
+    .result-box .buttons button, .result-box-2 .buttons-2 button, .result-box-3 .buttons-3 button,
+    .result-box-4 .buttons-4 button, .result-box-5 .buttons-5 button, .result-box-6 .buttons-6 button,
+    .info-box .buttons button, .info-box-2 .buttons2 button, .info-box-3 .buttons3 button,
+    .info-box-4 .buttons4 button, .info-box-5 .buttons5 button, .info-box-6 .buttons6 button {
+        padding: 10px 15px; /* Adjust button padding */
+        font-size: 14px; /* Adjust button font size */
+    }
+}
+
+@media (max-width: 480px) {
+  .container-quiz .quiz-buttons button {
+        padding: 15px; /* Even smaller padding */
+        font-size: 14px; /* Even smaller font size */
+    }
+    .quiz-box section .que-text,
+    .quiz-box-2 section .que-text-2,
+    .quiz-box-3 section .que-text-3,
+    .quiz-box-4 section .que-text-4,
+    .quiz-box-5 section .que-text-5,
+    .quiz-box-6 section .que-text-6 {
+        font-size: 18px; /* Smaller question text */
+    }
+    .option-list .option, .option-list-2 .option, .option-list-3 .option,
+    .option-list-4 .option, .option-list-5 .option, .option-list-6 .option {
+        font-size: 15px; /* Smaller option text */
     }
 }
   </style>

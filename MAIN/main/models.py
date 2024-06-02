@@ -16,14 +16,16 @@ from django.dispatch import receiver
 User = get_user_model()
 
 class Author(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
+    #user = models.ForeignKey(User, on_delete=models.CASCADE) 
     fullname = models.CharField(max_length=40, blank=True) 
     slug = models.SlugField(max_length=400, unique=True, blank=True) 
     bio = models.TextField(blank=True) 
     points = models.IntegerField(default=0) 
     profile_picture = ResizedImageField(size=[50, 80], quality=100, upload_to='authors', default=None, blank=True, null=True)
-
-    def str_(self):
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    
+    def _str_(self):
         return self.fullname
 
     def save(self, *args, **kwargs):
