@@ -84,8 +84,21 @@
     border: 1px solid #7d95a7;
     cursor: pointer;
   }
+  .nav-to-right i{
+    color: #38444d;
+  }
+
 .nav-line{
   width: 300px;
   margin-left: 150px;
   margin-bottom: 40px;
+}
+.nav-to-right i{
+  color: #38444d;
+}
+.nav-to-right button:hover>i{
+  color: #fff;  
+}
+.nav-to-right p:hover > i{
+  color: #fff; 
 }

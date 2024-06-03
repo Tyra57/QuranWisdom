@@ -9,6 +9,38 @@
     <link rel="stylesheet" href="{% static 'css\sciencescontent.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+      #languageMenu {
+        display: inline;
+        font-size: 15px;
+        padding: 11px 5px;
+        border: 1px solid #38444d;
+        cursor: pointer;
+        background: #dddddd4f;
+        color: #38444d;
+        font-family: 'poppins', sans-serif;
+      }
+      #languageMenu:hover {
+        background: #38444d;
+        color: #fff;
+      }
+      #languageMenu:focus {
+        outline: none;
+      }
+      .nav-to-right i{
+    color: #38444d;
+  }
+  .nav-to-right button:hover{
+    color: #fff;
+    background: #38444d;
+    border: 1px solid #7d95a7;
+    cursor: pointer;
+  }
+  .nav-to-right button:hover>i{
+    color: #fff;  
+  }
+  .nav-to-right p:hover > i{
+    color: #fff; 
+  }
   .sciences img{
     width: 600px;
     height: 400px;
@@ -74,6 +106,7 @@
   <div class="nav-to-right-content">
     <p><i class="fa-regular fa-bookmark fa-2x" onclick="toggleBookmark(this, 'Science-Anemochory')" data-slug="Science-Anemochory"></i></p>
     <button onclick="on()">See Discussion <i class="fa-regular fa-comment"></i></button>
+    {{languageMenu|safe}}
   </div>
 </div>
 
@@ -138,10 +171,10 @@
 
       <!--Sciences content-->
       <div class="sciences">
-
+        
         <h1>Anemochory</h1>
         <img src="{% static 'assets\sciences\anemochory.jpg' %}"><br>
-        <h4>Quranic Verse</h4><br>
+        <h4>{{Anemochory_Verse}}</h4><br>
         <p>وَأَرْسَلْنَا ٱلرِّيَـٰحَ لَوَٰقِحَ فَأَنزَلْنَا مِنَ ٱلسَّمَآءِ مَآءًۭ فَأَسْقَيْنَـٰكُمُوهُ وَمَآ أَنتُمْ لَهُۥ بِخَـٰزِنِينَ ٢٢</p>
         <p>“We send fertilizing winds, and bring down rain from the sky for you to drink. It is not you who hold its reserves.”</p>
         <br>

@@ -1,5 +1,5 @@
 from django.urls import path
-#from translate_app import candy
+from main import candy
 from .views import (
     home, story, science, doa, faq, quiz ,about, delete_post, edit_comment, edit_post, edit_reply, contact_view, like_post, like_comment, like_reply,
     science1, science2, science3, science4, science5, science6, science7, science8, science9, science10, science11, science12, science13, 
@@ -52,6 +52,7 @@ urlpatterns = [
     path("a2-story17-believerdisbeliever/", story17, name="story17"),
     path("a2-story18-sabbath/", story18, name="story18"),
     path("a2-story19-uzair/", story19, name="story19"),
+    *candy.path("a3-science1-anemochory//", science1, name="science1"),
     path("a3-science1-anemochory/", science1, name="science1"),
     path("a3-science2-celestialbodies/", science2, name="science2"),
     path("a3-science3-cloudlayers/", science3, name="science3"),

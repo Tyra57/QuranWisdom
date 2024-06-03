@@ -11,7 +11,7 @@ from django.utils.text import slugify
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
-#from . import candy
+from . import candy
 from django.core.exceptions import MultipleObjectsReturned
 
 def home(request):
@@ -42,10 +42,14 @@ def like_reply(request, reply_id):
         reply.likes.add(request.user)
     return redirect('detail', slug=reply.comment.post.slug)  # Adjust the redirect as needed
 
+#like for post
 @login_required
 def like_post(request, post_id):
-    post = get_object_or_404(Post, id= request.POST.get('post_id'))
-    post.likes.add(request.user)
+    post = get_object_or_404(Post, id=post_id)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
     return redirect('detail', slug=post.slug)
 
 def detail(request, slug):
@@ -665,7 +669,7 @@ def science1(request):
         "last_post":last_post,
     }
     context['page_slug'] = 'Science-Anemochory'
-    return render(request, "a3-science1-anemochory.html", context)
+    return candy.render(request, "a3-science1-anemochory.html", context)
 
 def science2(request):
     forums = Category.objects.all()

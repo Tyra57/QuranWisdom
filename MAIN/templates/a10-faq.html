@@ -16,7 +16,92 @@
       font-size: 14px;
       margin: 100px 50px 40px 50px;
       }
+      /* Improved mobile responsiveness */
+      @media screen and (max-width: 460px) {
+    .container, .container-post, .container-detail, .container-latest-post, .reply-container {
+        margin: 10px;
+        padding: 10px;
+    }
 
+    .subforum-row {
+        grid-template-columns: 1fr; /* Make it a single column layout */
+        grid-template-rows: auto; /* Adjust row height automatically */
+        margin-bottom: 30px; /* Increase the bottom margin for bigger gap */
+    }
+
+    .subforum-description, .subforum-stats, .subforum-info {
+        padding: 10px; /* Uniform padding for a cleaner look */
+        text-align: left; /* Align text to the left for consistency */
+    }
+
+    .subforum-info {
+        width: 100%; /* Make subforum-info full width */
+        order: 3; /* Ensure it's positioned correctly if using flexbox */
+        padding-top: 15px; /* Add extra padding on top for visual separation */
+        border-top: 1px solid #eee; /* Add a subtle border for separation */
+    }
+
+    .subforum-stats {
+        font-size: 12px; /* Adjust font size for readability */
+        order: 2; /* Adjust order if using flexbox */
+    }
+
+    .subforum-description h1, .subforum-title h1 {
+        font-size: 16px; /* Adjust title font size for mobile */
+    }
+
+    .subforum-description {
+        order: 1; /* Adjust order if using flexbox */
+    }
+
+    .search-box, .create-post {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Stretch elements to full width */
+        margin: 10px 0; /* Adjust margin for spacing */
+    }
+
+    .search-box select, .search-box input, .create-post button {
+        width: 100%; /* Full width for inputs and button */
+        margin-bottom: 10px; /* Add margin for spacing */
+    }
+
+    .create-post button {
+        font-size: 14px; /* Adjust button font size */
+    }
+}
+
+/* Adjustments for tablets */
+@media screen and (min-width: 461px) and (max-width: 1024px) {
+    .container, .container-post, .container-detail, .container-latest-post, .reply-container {
+        margin: 15px;
+        padding: 15px;
+    }
+
+    .subforum-row {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for tablet */
+    }
+
+    .subforum-description h1, .subforum-title h1 {
+        font-size: 18px; /* Slightly larger font size for tablet */
+    }
+
+    .subforum-stats, .subforum-info {
+        font-size: 14px; /* Adjust font size for readability */
+    }
+
+    .search-box, .create-post {
+        justify-content: space-between; /* Space elements evenly */
+    }
+
+    .search-box select, .search-box input, .create-post button {
+        width: auto; /* Auto width for better alignment */
+        margin-right: 10px; /* Add margin for spacing */
+    }
+
+    .create-post button {
+        font-size: 15px; /* Adjust button font size */
+    }
+}
       </style>
     {% endblock title %}
 

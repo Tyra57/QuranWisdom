@@ -197,51 +197,6 @@ html .container, .container-post, .container-detail,
     
 }
 
-/* Post.html */
-.table-head{
-    display: flex;
-}
-.table-head div{
-    padding: 5px;
-    margin: 2px;
-    background-color: #c6cacd;
-    font-weight: bold;
-}
-.table-head .status{
-    flex: 5%;
-}
-.table-head .subjects{
-    flex: 70%;
-}
-.table-head .replies{
-    flex: 10%;
-}
-.table-head .last-reply{
-    flex: 15%;
-}
-/*table body*/
-.table-row{
-    display:flex;
-}
-.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
-    padding: 5px;
-    margin: 2px;
-    background-color: rgb(234, 237, 240);
-}
-.table-row .status{
-    flex: 5%;
-    font-size: 30px;
-    text-align: center;
-}
-.table-row .subjects{
-    flex: 70%;
-}
-.table-row .replies{
-    flex: 10%;
-}
-.table-row .last-reply{
-    flex: 15%;
-}
 
 /*pagination*/
 .pagination{
@@ -305,7 +260,7 @@ html .container, .container-post, .container-detail,
     display: flex;
     padding: 10px;
     margin-top: 5px;
-    background-color: #ddd;
+    background-color: rgb(234, 237, 240);
 }
 .body-topic .authors .username{
     font-size: 15px;

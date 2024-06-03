@@ -28,6 +28,7 @@
         <li><a href="{% url 'doa' %}">Dua'</a></li>
         <li><a href="{% url 'faq' %}">Forum</a></li>
         <li><a href="{% url 'quiz' %}">Quiz</a></li>
+        
         {% if user.is_authenticated %}
         <!-- <div class="user-menu">  -->
       <img src="{% static 'assets\usermenuimg\user.svg' %}" class="user-pic" onclick="onMenu()" style="margin-right:20px">

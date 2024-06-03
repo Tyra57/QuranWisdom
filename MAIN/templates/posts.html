@@ -8,40 +8,125 @@
     <link rel="stylesheet" href="{% static 'css\forum.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        html, body {
+        
+/* Post.html */
+.table-head{
+    display: flex;
+}
+.table-head div{
+    padding: 5px;
+    margin: 2px;
+    background-color: #c6cacd;
+    font-weight: bold;
+}
+.table-head .status{
+    flex: 5%;
+}
+.table-head .subjects{
+    flex: 70%;
+}
+.table-head .replies{
+    flex: 10%;
+}
+.table-head .last-reply{
+    flex: 15%;
+}
+/*table body*/
+.table-row{
+    display:flex;
+}
+.table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
+    padding: 5px;
+    margin: 2px;
+    background-color: rgb(234, 237, 240);
+}
+.table-row .status{
+    flex: 5%;
+    font-size: 30px;
+    text-align: center;
+}
+.table-row .subjects{
+    flex: 70%;
+}
+.table-row .replies{
+    flex: 10%;
+}
+.table-row .last-reply{
+    flex: 15%;
+}
+    html, body {
     margin: 0;
     padding: 0;
     min-height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
-}
+    }
 
-.container-post {
-    flex: 1; /* Ensures content takes up the necessary space */
-}
+    .container-post {
+        flex: 1; /* Ensures content takes up the necessary space */
+    }
+    .nav-link{
+        color: #38444d;
+        font-size: 17px;
+        margin-bottom: 20px;
+        display: flex;
+    } 
+    .nav-link i{
+        font-size: 20px;
+    }
+    .nav-link a{
+        color: #38444d;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .nav-link a:hover{
+        text-shadow: 2px 2px 8px #555;
+    }
+    .nav-link p{
+        display: inline-block;
+    } 
+    @media screen and (max-width: 768px){
+        .nav-link{
+        margin-right: 0;
+        }
+     
+    }
+    
     </style>
     {% endblock title %}
 
     {% block content %}   
+    
+  
     <!--Forum Section-->
         <div class="container-post">
             <!--navigation-->
-            <div class="forum-navigate">
-                <span><!--<a href="#" onclick="goToLastVisitedPage()">--><a href ="{% url 'home' %}">Home</a> >> <a href="{{forum.get_url}}">{{forum.title}}</a></span>
-            </div>
+            
+                <span>
+                    <div class="nav-link">
+                        <div class="nav-link-content">
+                          <a href="{% url 'faq' %}"><!--<i class="fa-solid fa-house"></i>-->Forum</a>
+                          <i class="fa-solid fa-chevron-right"></i>
+                          <p> <a href="{{forum.get_url}}"> {{forum.title}} </a></p>
+                        </div> 
+                      </div>
+                </span>
+            
+            
                 <div class="posts-table">
                   <div class="table-head">
-                    <div class="status">User</div>
+                    <!--<div class="status">User</div>-->
                     <div class="subjects">Subjects</div>
                     <div class="replies">Replies/Views</div>
                     <div class="last-reply">Last Reply</div>
                   </div>
                   {% for post in posts %}
                   <div class="table-row">
-                    <div class="status">
+                    <!--<div class="status">
                         <a href=""><i class="fas fa-user"></i></a>
-                    </div>
+                    </div>-->
                     <div class="subjects">
                         <a href="{{post.get_url}}">{{post.title}}</a> <br>
                         <span>Started by<b><a href="#"> {{post.user.fullname|title}}</a></b>.</span>
@@ -66,15 +151,7 @@
              {% endif %}
              <!--pagination ends-->
         </div>
-            <!--Status note
-            <div class="status-note">
-                <i class="fas fa-frown"></i> - 0 Engagement Topic <br>
-                <i class="fas fa-rocket"></i> - High Engagement Topic <br>
-                <i class="fas fa-book"></i> - Low Engagement Topic <br>
-                <i class="fas fa-fire"></i> - Popular Topic <br>
-                <i class="fas fa-lock"></i> - Closed Topic <br>
-            </div>-->
-
+        
         <script>
                 function goToLastVisitedPage() {
                 const lastPage = sessionStorage.getItem('lastVisitedPage');

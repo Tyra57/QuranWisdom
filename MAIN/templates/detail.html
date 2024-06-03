@@ -5,97 +5,202 @@
     <title>Detail Forum</title>
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
-    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'css\forum.css' %}">-->
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
+        html .container-detail{
+            font-size: 14px;
+        }
+        .container-detail{
+            margin: 35px;
+        }
+        .head-topic{
+            display: flex;
+            padding: 5px;
+            background-color: #c6cacd;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .authors{
+            flex: 20%;
+        }
+        .content{
+            flex: 80%; 
+        }
+        .body-topic{
+            display: flex;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: rgb(234, 237, 240);
+        }
+        .comment-input textarea{
+            width: 100%;
+            min-height: 100px;
+            padding: 10px;
+            margin-block: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .comment-input input{
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .comment-input input:hover{
+            background-color: #38444d;
+            color: white;
+        }
+        .reply-text-area input:hover{
+            background-color: #38444d;
+            color: white;
+        }
         /* Inline Action Links Styling */
-.inline-action-links {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #6c757d; /* Pale color for the action links */
-}
+        .inline-action-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6c757d; /* Pale color for the action links */
+        }
 
-.inline-action-link {
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
+        .inline-action-link {
+            cursor: pointer;
+            transition: color 0.3s ease;
+            color: #6c757d;
+        }
 
-.inline-action-link:hover {
-    color: #007bff; /* Brighter color on hover */
-}
+        .inline-action-link:hover {
+            color: #007bff; /* Brighter color on hover */
+        }
 
-/* Separator Style */
-.separator {
-    color: #6c757d; /* Same pale color as links */
-}
-        /* Action Links Styling */
-.action-links {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-}
+        /* Separator Style */
+        .separator {
+            color: #6c757d; /* Same pale color as links */
+        }
+                /* Action Links Styling */
+        .action-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px; 
+            cursor: pointer;
+        }
 
-.action-link{
-    cursor: pointer;
-    transition: color 0.3s ease;
-    display: inline-block;
-}
-.edit-action, .reply-action {
-    background-color: #28a745;
-}
+        .action-link{
+            cursor: pointer;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .edit-action, .reply-action {
+            background-color: #28a745;
+        }
 
-.edit-action:hover, .reply-action:hover {
-    background-color: #218838;
-}
-.hide {
-    display: none;
-        } 
-.delete{
-    cursor: pointer;
-    font-weight: 300;
-    font-size: small;
-}
-.like-btn, .content.like-btn button{
-    color: black;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    text-decoration: none;  
-    border: none;
-    background: transparent;
-}
+        .edit-action:hover, .reply-action:hover {
+            background-color: #218838;
+        }
+        .hide {
+            display: none;
+                } 
+        .delete{
+            cursor: pointer;
+            font-weight: 300;
+            font-size: small;
+        }
+        .like-btn, .content.like-btn{
+            color: #6c757d;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            text-decoration: none;  
+            border: none;
+            background: transparent;
+        }
 
-.like-btn.liked {
-    background-color: #28a745; /* Green to indicate liked state */
-}
+        .like-btn.liked {
+            background-color: #28a745; /* Green to indicate liked state */
+        }
 
-.like-btn.liked:hover {
-    background-color: #218838; /* Darker green on hover */
-}
-.date-posted {
-    font-size: 12px;
-    color: #6c757d;
-    margin-top: 10px;
+        .like-btn.liked:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .date-posted {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 10px;
 
-}
+        }
 
-    </style>
+        /* Inline Action Links Styling */
+        .inline-action-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #6c757d; /* Pale color for the action links */
+        }
+
+        .inline-action-links button[type="submit"]
+            {
+                cursor: pointer; 
+                font-family: 'Poppins', sans-serif; 
+                font-size: 14px; 
+                text-decoration: none;  
+                border: none; 
+                background: transparent;
+                display: inline;
+                }
+                .nav-link{
+                color: #38444d;
+                font-size: 17px;
+                margin-bottom: 20px;
+                display: flex;
+            } 
+            .nav-link i{
+                font-size: 20px;
+            }
+            .nav-link a{
+                color: #38444d;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .nav-link a:hover{
+                text-shadow: 2px 2px 8px #555;
+            }
+            .nav-link p{
+                display: inline-block;
+            } 
+            @media screen and (max-width: 768px){
+                .nav-link{
+                margin-right: 0;
+                }
+            
+            }
+        
+        </style>
  {% endblock title %}
 
  {% block content %}
     <!--Forum Section-->
     <div class="container-detail">
         <!--navigation in forum-->
-        <div class="forum-navigate">
-            <span><!--<a href="#" onclick="goToLastVisitedPage()">--><a href ="{% url 'home' %}">Home</a> >> <a href="{{ post.Categories.all.0.get_url }}">{{ post.Categories.all.0 }}</a> >> <a href="{{ post.get_url }}">{{ post.title }}</a></span>
-        </div>
-
+        <span>
+            <div class="nav-link">
+                <div class="nav-link-content">
+                  <a href="{% url 'faq' %}"><!--<i class="fa-solid fa-house"></i>-->Forum</a>
+                  <i class="fa-solid fa-chevron-right"></i>
+                  <a href="{{ post.Categories.all.0.get_url }}"> {{ post.Categories.all.0 }} </a>
+                  <i class="fa-solid fa-chevron-right"></i>
+                  <a href="{{ post.get_url }}">{{ post.title }}</a>
+                </div> 
+              </div>
+        </span>
+    
+        
         <!--Topic Section-->
         <div class="topic-container">
             <div class="head-topic">
@@ -105,7 +210,7 @@
 
             <div class="body-topic">
                 <div class="authors">
-                    <div class="username"><a href="">{{post.user.fullname|title}}</a></div>
+                    <div class="username" style="padding-right: 7px;"><a href="">{{post.user.fullname|title}}</a></div>
                         <!--<div>Role</div>
                         <img src="{{post.user.profile_pic.url}}" >
                         <div>Posts: <u>{{post.user.num_posts}}</u></div>
@@ -117,22 +222,28 @@
                         <div class="inline-action-links">      
                             <div class="comment">
                                 {% if user.is_authenticated %}
-                                    <p class="action-link comment-action" onclick="toggleVisibility('comment-area')">Comment</p>
+                                    <p class="action-link comment-action" onclick="toggleVisibility('comment-area')"> Comment </p>
                                 
                                 
                                     {% if user.is_authenticated and post.user.user == user %}
-                                        <span class="separator">|</span> 
-                                        <a href="{% url 'edit_post' post_id=post.id %}" class="inline-action-link">Edit Post</a>
-                                        <span class="separator">|</span>
-                                        <span class="inline-action-link delete-action" data-url="{% url 'post-delete' post_id=post.id %}" onclick="confirmDelete(this)">Delete Post</span>
+                                        <span style="margin: 0 6px" class="separator">|</span> 
+                                        <span ><a href="{% url 'edit_post' post_id=post.id %}" class="inline-action-link"> Edit </a></span>
+                                        <span style="margin: 0 6px" class="separator">|</span>
+                                        <span style="margin: 0 6px 0 0" class="inline-action-link delete-action" data-url="{% url 'post-delete' post_id=post.id %}" onclick="confirmDelete(this)"> Delete </span>
                                         
                                     
                                     {% endif %}
-                                    <span class="separator">|</span>
+                                    <span style="margin: 0 6px 0 0" class="separator">|</span>
+                                    
                                     <form action="{% url 'like_post' post_id=post.id %}" method="post" style="display: inline;" class="inline-action-link">
                                         {% csrf_token %}
-                                        <button type="submit" class="like-btn" style="color: black; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14px; text-decoration: none;  
-                                        border: none; background: transparent; display: inline;" value="{{ post.id }}" name="post_id">Like</button>
+                                        <button type="submit" class="like-btn"  value="{{ post.id }}" name="post_id" id="likeButton" style="color: #6c757d;
+                                        cursor: pointer;
+                                        font-family: 'Poppins', sans-serif;
+                                        font-size: 14px;
+                                        text-decoration: none;  
+                                        border: none;
+                                        background: transparent;">Like </button>
                                     </form>
                                     - Likes: {{ post.total_likes }}
                                 {% endif %}
@@ -191,7 +302,7 @@
                         {% endif %}
                         <form action="{% url 'like_comment' comment_id=comment.id %}" method="post" class="inline-action-link">
                             {% csrf_token %}
-                            <button type="submit" class="like-btn">Like</button>
+                            <button type="submit" id="likeButton" class="like-btn">Like</button>
                         </form>
                         - Likes: {{ comment.likes.count }}
                 
@@ -201,7 +312,7 @@
                         <textarea class="reply-text-area" placeholder="Reply here" name="reply" 
                             style="width: 100%; min-height: 100px; padding: 10px; margin-block: 10px; font-family: 'Poppins', sans-serif;">
                         </textarea>
-                        <input type="submit" name="reply-form" value="Post Reply"
+                        <input class ="reply-text-area" type="submit" name="reply-form" value="Post Reply"
                             style="padding: 10px; border-radius: 10px; cursor: pointer; font-family: 'Poppins', sans-serif;">
                         <input type="hidden" name="comment-id" value="{{ comment.id }}">
                     </form>
@@ -230,15 +341,15 @@
                         <div class="inline-action-links">
                             {% if user.is_authenticated %}
                                 {% if user.is_authenticated and reply.user.user == user %}
-                                <a href="{% url 'edit_reply' reply_id=reply.id %}">Edit Reply</a>
+                                <a href="{% url 'edit_reply' reply_id=reply.id %}" class="inline-action-link">Edit</a>
                                 <span class="separator">|</span>
-                                <div class="delete" data-url="{% url 'reply-delete' reply_id=reply.id %}" onclick="confirmDelete(this)">Delete</div>
+                                <div class="inline-action-link" data-url="{% url 'reply-delete' reply_id=reply.id %}" onclick="confirmDelete(this)">Delete</div>
                                 <span class="separator">|</span>
                                 {% endif %}
                             
                                 <form action="{% url 'like_reply' reply_id=reply.id %}" method="post" class="inline-action-link">
                                     {% csrf_token %}
-                                    <button type="submit" class="like-btn" value="{{ reply.id }}" name="reply_id">Like</button>
+                                    <button type="submit" id="likeButton" class="like-btn" value="{{ reply.id }}" name="reply_id">Like</button>
                                 
                                 </form>
                                 - Likes: {{ reply.likes.count }} 
