@@ -63,7 +63,7 @@ def update_profile(request):
             update_profile = form.save(commit=False)
             update_profile.user = user
             update_profile.save()
-            return redirect("home")
+            return redirect("profile")
     else:
         form = UpdateForm(instance=author_profile)  # Pass the instance here as well for GET requests
 
