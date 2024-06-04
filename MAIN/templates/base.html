@@ -129,7 +129,7 @@
     box-sizing: border-box; /* Includes padding in the element's total width and height */
 }
 
-.footer-content h4 {
+.footer-content h4{
     font-size: 20px;
     margin-bottom: 20px;
     color: lightblue;
@@ -192,7 +192,9 @@
     <footer>
       <div class="footer-container">
         <div class="footer-content">
-          <h4>Contact Us</h4>
+          <h4 class="linkcontact" ><a href="{% url 'contact' %}" style="font-size: 20px;
+            margin-bottom: 20px;
+            color: lightblue;">Contact Us</a></h4>
           <p>Email: <a href="mailto:athirahzaaba00gmail.com" style="text-decoration: none; color:#fff; font-size: 13px;">athirahzaaba00gmail.com</a></p>
           <p>International Islamic University of Malaysia <br>Jalan Gombak, <br>53100 Kuala Lumpur, <br>Selangor</p>
         </div>

@@ -106,10 +106,10 @@ def contact_view_2(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your message has been submitted successfully!')
-            return redirect('faq')  # Redirect to FAQ with anchor
+            return redirect('contact')  # Redirect to FAQ with anchor
     else:
         form = ContactForm()
-    return render(request, 'a10-faq.html', {'form': form}) 
+    return render(request, 'contact.html', {'form': form}) 
 
 def posts(request, slug):
     category = get_object_or_404(Category, slug=slug)
@@ -349,6 +349,10 @@ def quiz(request):
 
 def about(request):
     return render(request, "a9-about.html")
+
+#contact.html view
+def contact(request):
+    return render(request, "contact.html")
 
 def story1(request):
     forums = Category.objects.all()

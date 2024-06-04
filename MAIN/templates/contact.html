@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+  {% block title %}
+    <title>Forum</title>
+    <link rel="stylesheet" href="{% static 'css\main.css' %}">
+    <link rel="stylesheet" href="{% static 'css\nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css\faq.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
+    <link rel="stylesheet" href="{% static 'css\forum.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    {% endblock title %}
+
+    {% block content %} 
+  
+
+
+
+<!--style for contact us-->
+<style>
+  .contact-content .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.contact-content .input-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-content .input-group input[type="text"] {
+  width: 48%; /* Adjusts the width to fit two inputs in one row */
+}
+  .faq-section {
+    margin-bottom: 50px;
+    max-height: 100vh;
+  }
+
+  .contact-container {
+  
+  padding: 50px 0;
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px; 
+}
+
+.contact-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.contact-content p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.contact-content .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 15%;
+}
+
+.contact-content .btn:hover {
+  background-color: #555;
+}
+.contact-content label{
+  font-family: 'poppins', sans-serif;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.contact-content textarea{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  }
+  .contact-content input[type="tel"]{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  }
+  .contact-content input[type="text"]{
+    display: inline-block;
+    width: 40%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'poppins', sans-serif;
+    margin-bottom: 10px;
+    left: 0;
+  }
+  .contact-content input[type="email"]{
+  font-family: 'poppins', sans-serif;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  }
+  .contact-content button{
+    padding: 10px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #ddd;
+  border: 1px solid #38444d;
+  outline: 0;
+  cursor: pointer;
+  color:#38444d;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 15%;
+  margin-top: 10px;
+  }
+  button:hover{
+  background-color: #38444d;
+  color: white;
+  border: 1px solid #fff;
+  }
+  /* Adjust input fields to stack on smaller screens */
+@media screen and (max-width: 768px) {
+  .contact-content .input-group input[type="text"] {
+    width: 100%; /* Make input fields full width */
+    margin-bottom: 10px; /* Add margin to the bottom for spacing */
+  }
+
+  .contact-content .input-group {
+    flex-direction: column; /* Stack input fields vertically */
+  }
+
+  .contact-content button, .contact-content .btn{
+    width: 100%; /* Full width for the submit button */
+  }
+}
+
+/* Additional media query for very small screens */
+@media screen and (max-width: 480px) {
+  .contact-content {
+    padding: 0 10px; /* Reduce padding for very small screens */
+  }
+}
+.messages {
+    width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.alert {
+    display: inline-block;
+    padding: 10px;
+    background-color: #dff0d8; /* Light green background */
+    color: #3c763d; /* Dark green text */
+    border-radius: 5px;
+    border: 1px solid #d6e9c6;
+}
+
+/* Additional styling for different message tags */
+.alert.error {
+    background-color: #f2dede; /* Light red for errors */
+    color: #a94442; /* Dark red text */
+    border-color: #ebccd1;
+}
+</style>
+
+<!--contact us-->
+
+<div class="contact-container">
+  <div class="contact-content">
+    <h2>Contact Us</h2>
+    <!--contact through form-->
+    <p>If you have any questions or feedback, feel free to contact us by filling in the form below.</p>
+    <form method="post" action="{% url 'contact2' %}" id="contact-form-section">
+      {% csrf_token %}
+      <div class="form-row">
+        <label for="name">*Name:</label>
+        <div class="input-group">
+          <input type="text" name="first_name" placeholder="First Name" required>
+          <input type="text" name="last_name" placeholder="Last Name" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for = "phone">*Phone Number:</label>
+        <input type="tel" name="phone" placeholder="Your Phone Number" required>
+      </div>
+      <div class="form-row">
+        <label for="email">*Email:</label>
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-row">
+        <label for="message">*Message:</label>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit">Send</button>
+    </form>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+    <div class="contact-content">
+      <!--contact thru email panel-->
+      <p style="margin-top: 40px;">Or directly email us</p>
+      <a href="mailto:athirahzaaba00gmail.com" class="btn">Email</a>
+    </div>
+  </div>
+</div>
+<script>
+  window.onload = function() {
+      if (window.location.href.indexOf('#contact-form') > -1) {
+          document.getElementById('contact-form-section').scrollIntoView();
+      }
+  };
+  </script>
+{% endblock content %}

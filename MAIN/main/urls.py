@@ -1,7 +1,7 @@
 from django.urls import path
 from main import candy
 from .views import (
-    home, story, science, doa, faq, quiz ,about, delete_post, edit_comment, edit_post, edit_reply, contact_view_1, contact_view_2, like_post, like_comment, like_reply,
+    home, story, science, doa, faq, quiz ,about, delete_post, edit_comment, edit_post, edit_reply, contact, contact_view_1, contact_view_2, like_post, like_comment, like_reply,
     science1, science2, science3, science4, science5, science6, science7, science8, science9, science10, science11, science12, science13, 
     science14, science15, science16, science17, science18, science19, science20, science21, science22, science23, science24, science25,
     science26, science27, science28, science29, science30, science31, science32, science33, 
@@ -20,7 +20,8 @@ urlpatterns = [
     path("a3-science/", science, name="science"),
     path("a4-doa/", doa, name="doa"),
     path("a10-faq/", faq, name="faq"),
-    path('contact/', contact_view_1, name='contact'),
+    path('contact/', contact, name='contact'),
+    path('contact1/', contact_view_1, name='contact1'),
     path('contact2/', contact_view_2, name='contact2'),
     path("a5-quiz/", quiz, name="quiz"),
     path("a8-profile/", profile, name="profile"),

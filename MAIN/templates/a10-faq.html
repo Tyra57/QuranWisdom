@@ -3,7 +3,7 @@
 
 
   {% block title %}
-    <title>FAQs</title>
+    <title>Forum</title>
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\faq.css' %}">
@@ -572,57 +572,5 @@ html .container, .container-post, .container-detail,
 }
 </style>
 
-<!--contact us-->
 
-<div class="contact-container">
-  <div class="contact-content">
-    <h2>Contact Us</h2>
-    <!--contact through form-->
-    <p>If you have any questions or feedback, feel free to contact us by filling in the form below.</p>
-    <form method="post" action="{% url 'contact2' %}" id="contact-form-section">
-      {% csrf_token %}
-      <div class="form-row">
-        <label for="name">Name:</label>
-        <div class="input-group">
-          <input type="text" name="first_name" placeholder="First Name" required>
-          <input type="text" name="last_name" placeholder="Last Name" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <label for = "phone">Phone Number:</label>
-        <input type="tel" name="phone" placeholder="Your Phone Number" required>
-      </div>
-      <div class="form-row">
-        <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="Your Email" required>
-      </div>
-      <div class="form-row">
-        <label for="message">Message:</label>
-        <textarea name="message" placeholder="Your Message" required></textarea>
-      </div>
-      <button type="submit">Send</button>
-    </form>
-    {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <div class="alert {{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
-    <div class="contact-content">
-      <!--contact thru email panel-->
-      <p style="margin-top: 40px;">Or directly email us</p>
-      <a href="mailto:athirahzaaba00gmail.com" class="btn">Email</a>
-    </div>
-  </div>
-</div>
-<script>
-  window.onload = function() {
-      if (window.location.href.indexOf('#contact-form') > -1) {
-          document.getElementById('contact-form-section').scrollIntoView();
-      }
-  };
-  </script>
 {% endblock content %}
