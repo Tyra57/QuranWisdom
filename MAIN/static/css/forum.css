@@ -50,7 +50,6 @@ html .container, .container-post, .container-detail,
     border-radius: 26px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
 }
-.container-post, .container-detail, 
 .container-latest-post, .reply-container{
     margin: 35px;
 }
@@ -160,8 +159,14 @@ html .container, .container-post, .container-detail,
     border: 1px solid #38444d;
     outline: 0;
     cursor: pointer;
-    color:#38444d;
     font-size: 15px;
+}
+.create-post button a{
+    text-decoration: none;
+    color: #38444d;
+}
+.create-post button:hover>a{
+    color: white;
 }
 .create-post button:hover{
     background-color: #38444d;
@@ -242,7 +247,7 @@ html .container, .container-post, .container-detail,
 }
 
 /*#############################*/
-/*detail.html*/
+/*detail.html
 .head-topic{
     display: flex;
     padding: 5px;
@@ -284,7 +289,7 @@ html .container, .container-post, .container-detail,
     background-color: #38444d;
     color: white;
 }
-/*comment*/
+/*comment
 
 .comment-input textarea{
     width: 100%;
@@ -303,3 +308,4 @@ html .container, .container-post, .container-detail,
     background-color: #38444d;
     color: white;
 }
+*/

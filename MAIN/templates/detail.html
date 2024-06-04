@@ -15,7 +15,8 @@
             font-size: 14px;
         }
         .container-detail{
-            margin: 35px;
+            
+            margin: 100px 50px 100px 50px;
         }
         .head-topic{
             display: flex;
@@ -23,6 +24,7 @@
             background-color: #c6cacd;
             font-weight: bold;
             font-size: 15px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         }
         .authors{
             flex: 20%;
@@ -35,6 +37,7 @@
             padding: 10px;
             margin-top: 5px;
             background-color: rgb(234, 237, 240);
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         }
         .comment-input textarea{
             width: 100%;
@@ -237,7 +240,7 @@
                                     
                                     <form action="{% url 'like_post' post_id=post.id %}" method="post" style="display: inline;" class="inline-action-link">
                                         {% csrf_token %}
-                                        <button type="submit" class="like-btn"  value="{{ post.id }}" name="post_id" id="likeButton" style="color: #6c757d;
+                                        <button type="submit" class="like-btn {% if post.is_liked_by_user %}liked{% endif %}"  value="{{ post.id }}" name="post_id" id="likeButton-{{ post.id }}" style="color: #6c757d;
                                         cursor: pointer;
                                         font-family: 'Poppins', sans-serif;
                                         font-size: 14px;
@@ -282,7 +285,14 @@
             <div class="authors">
                 <div class="username"><a href="#">{{ comment.user.fullname|title }}</a></div>
             </div>
+            
+
+
             <div class="content" id="comment-content-{{ comment.id }}">
+                <!-- Add "Replying to" information here -->
+                <div class="replying-to" style="font-size: 12px; color: #6c757d;">
+                    <p>Replying to <strong>{{ post.user.fullname|title }}</strong>:</p><br>
+                </div>
                 {{ comment.content }}
                 <br>
                 <div class="date-posted"> Posted on: {{ comment.created_at|date:"F d, Y H:i" }}</div> 
@@ -335,6 +345,10 @@
                     <div class="username"><a href="">{{ reply.user.fullname|title }}</a></div>
                 </div>
                 <div class="content">
+                    <!-- Add "Replying to" information here -->
+                    <div class="replying-to" style="font-size: 12px; color: #6c757d;">
+                        <p>Replying to <strong>{{ comment.user.fullname|title }}</strong>:</p><br>
+                    </div>
                     {{ reply.content }}
                     <br>
                     <div class="date-posted">Posted on: {{ reply.created_at|date:"F d, Y H:i" }}</div>
@@ -405,16 +419,8 @@
                     console.error('Elements not found for comment ID:', commentId);
                 }
             }
-            function toggleLike() {
-                var likeButton = document.getElementById("likeButton");
-                if (likeButton.classList.contains("liked")) {
-                    likeButton.classList.remove("liked");
-                    likeButton.textContent = "Like"; // Change to "Like" if it was "Liked" before
-                } else {
-                    likeButton.classList.add("liked");
-                    likeButton.textContent = "Liked"; // Change to "Liked" to show the post is liked
-                }
-            }
+            
+           
         </script>   
 </div>
 {% endblock content %}

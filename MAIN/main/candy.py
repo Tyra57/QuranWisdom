@@ -30,12 +30,12 @@ def translation_dictionary(lang):
         'Anemochory_Science part 2':'''In Surah Al-Hijr: verse 22, the word used is "lawaaqih," the plural form of "laqih" from the word "laqaha," which means to marry or to impregnate. In this context, marrying/impregnating means the wind carries flower seeds from the anther to the stigma to be married or impregnated. It can be the transfer of seeds on the same plant or different plants.''',
         }
     if lang == 'ms': return {
-        'Anemochory_Title':'''Anemochory''',
+        'Anemochory_Title':'''Penyebaran Biji Benih Melalui Angin''',
         'Anemochory_Verse':'''Ayat Al-Quran''',
         'Anemochory_Translation':'''“Kami mengirimkan angin yang membaja, dan Kami menurunkan hujan dari langit untuk kamu minum. Bukan kamu yang memegang rizabnya.”''',
         'Anemochory_Insight':'''Wawasan Saintifik''',
         'Anemochory_Science':'''Pendebungaan adalah salah satu proses pemindahan debunga dari anter ke stigma. Ia boleh berlaku dengan bantuan agen pendebungaan seperti angin, haiwan, dan air. Pendebungaan oleh angin dipanggil "Abiotik". Teori ini pertama kali disebut oleh Christian Konrad Sprengel dalam bukunya Das entdeckte Geheimnis der Natur im Bau und in der Befruchtung der Blumen (Berlin 1793) (1161 tahun selepas kewafatan Nabi Muhammad (632 CE)).''',
-        'Anemochory_Science part 2':'''Dalam Surah Al-Hijr: ayat 22, perkataan yang digunakan ialah "lawaaqih," bentuk jamak "laqih" daripada perkataan "laqaha," yang bermaksud berkahwin atau menghamili. Dalam konteks ini, mengahwini/menghamil bermaksud angin membawa benih bunga dari kepala sari ke stigma untuk dikahwinkan atau dihamilkan. Ia boleh menjadi pemindahan benih pada tumbuhan yang sama atau tumbuhan yang berbeza.''',
+        'Anemochory_Sciencept2':'''Dalam Surah Al-Hijr: ayat 22, perkataan yang digunakan ialah "lawaaqih," bentuk jamak "laqih" daripada perkataan "laqaha," yang bermaksud berkahwin atau menghamili. Dalam konteks ini, mengahwini/menghamil bermaksud angin membawa benih bunga dari kepala sari ke stigma untuk dikahwinkan atau dihamilkan. Ia boleh menjadi pemindahan benih pada tumbuhan yang sama atau tumbuhan yang berbeza.''',
         }
 
 

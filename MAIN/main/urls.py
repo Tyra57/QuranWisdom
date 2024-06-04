@@ -8,7 +8,7 @@ from .views import (
     story1, story2, story3, story4, story5, story6, story7, story8, story9, story10, story11, story12, story13, story14, story15, story16, story17, story18, story19,
     doa1, doa2, doa3, doa4, doa5, doa6, doa7, doa8, doa9, doa10, doa11, doa12, doa13, doa14,
     detail, posts, create_post, latest_posts, delete_comment, delete_reply, toggle_bookmark, 
-    submit_quiz, view_results, profile, get_user_bookmarks, bookmark_detail_view, help)
+    submit_quiz, view_results, profile, get_user_bookmarks, bookmark_detail_view, help, settings)
 
 urlpatterns = [
     path("", home, name="home"),
@@ -33,6 +33,7 @@ urlpatterns = [
     path('like-reply/<int:reply_id>/', like_reply, name='like_reply'),
     path('submit_quiz/', submit_quiz, name='submit_quiz'),
     path('results/', view_results, name='view_results'),
+    path('settings/', settings, name='settings'),
     path("a2-story1-barsisa/", story1, name="story1"),
     path("a2-story2-balqis/", story2, name="story2"),
     path("a2-story3-dwellers/", story3, name="story3"),
@@ -53,7 +54,7 @@ urlpatterns = [
     path("a2-story18-sabbath/", story18, name="story18"),
     path("a2-story19-uzair/", story19, name="story19"),
     *candy.path("a3-science1-anemochory//", science1, name="science1"),
-    path("a3-science1-anemochory/", science1, name="science1"),
+    #path("a3-science1-anemochory/", science1, name="science1"),
     path("a3-science2-celestialbodies/", science2, name="science2"),
     path("a3-science3-cloudlayers/", science3, name="science3"),
     path("a3-science4-constellationguide/", science4, name="science4"),

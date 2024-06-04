@@ -2,13 +2,103 @@
 {% load static %}
 {% load hitcount_tags %}
 {% block title %}
-    <title>Post Forum</title>
+    <title>Latest Post</title>
     <link rel="stylesheet" href="{% static 'css\main.css' %}">
     <link rel="stylesheet" href="{% static 'css\nav.css' %}">
     <link rel="stylesheet" href="{% static 'css\forum.css' %}">
     <link rel="stylesheet" href="{% static 'css\scroll.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container-latest-post{
+      font-size: 14px;
+      margin: 100px 50px 40px 50px;
+      }
+      .nav-link{
+        color: #38444d;
+        font-size: 17px;
+        margin-bottom: 20px;
+        display: flex;
+    } 
+    .nav-link i{
+        font-size: 20px;
+    }
+    .nav-link a{
+        color: #38444d;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .nav-link a:hover{
+        text-shadow: 2px 2px 8px #555;
+    }
+    .nav-link p{
+        display: inline-block;
+    } 
+    @media screen and (max-width: 768px){
+        .nav-link{
+        margin-right: 0;
+        }
+     
+    }
+    .forum-navigate{
+            color: #38444d;
+            font-size: 17px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }    
+        .posts-table{
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #c6cacd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            background-color: rgb(234, 237, 240);
+        }
+        .table-head{
+            display: flex;
+            background-color: #c6cacd;
+            font-weight: bold;
+        }
+        .table-head div{
+            padding: 5px;
+            margin: 2px;
+        }
+        .table-head .status{
+            flex: 5%;
+        }
+        .table-head .subjects{
+            flex: 70%;
+        }
+        .table-head .replies{
+            flex: 10%;
+        }
+        .table-head .last-reply{
+            flex: 15%;
+        }
+        .table-row{
+            display:flex;
+        }
+        .table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
+            padding: 5px;
+            margin: 2px;
+        }
+        .table-row .status{
+            flex: 5%;
+            font-size: 30px;
+            text-align: center;
+        }
+        .table-row .subjects{
+            flex: 70%;
+        }
+        .table-row .replies{
+            flex: 10%;
+        }
+        .table-row .last-reply{
+            flex: 15%;
+        }
+
+
+    </style>
     {% endblock title %}
 
     {% block content %}   
@@ -16,20 +106,29 @@
         <div class="container-latest-post">
             <!--navigation-->
             <div class="forum-navigate">
-                <span>Latest 10 Posts</span>
+                <div class="nav-link">
+                    <div class="nav-link-content">
+                      <a href="{% url 'faq' %}"><!--<i class="fa-solid fa-house"></i>-->Forum</a>
+                      <i class="fa-solid fa-chevron-right"></i>
+                      <span>Latest 10 Posts</span>
+                    </div> 
+                  </div>
             </div>
+         
+                
+        
                 <div class="posts-table">
                 <div class="table-head">
-                    <div class="status">Status</div>
+                    <!--<div class="status">Status</div>-->
                     <div class="subjects">Subjects</div>
                     <div class="replies">Replies/Views</div>
                     <div class="last-reply">Last Reply</div>
                 </div>
                 {% for post in posts %}
                 <div class="table-row">
-                    <div class="status">
+                    <!--<div class="status">
                         <i class="fas fa-user"></i>
-                    </div>
+                    </div>-->
                     <div class="subjects">
                         <a href="{{post.get_url}}">{{post.title}}</a> <br>
                         <span>Started by<b><a href="#"> {{post.user.fullname|title}}</a></b>.</span>

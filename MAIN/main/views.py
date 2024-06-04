@@ -303,6 +303,10 @@ def submit_quiz(request):
         return JsonResponse({'message': 'Quiz results saved successfully'})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
+#settings view
+def settings(request):
+    return render(request, "settings.html")
+
 def view_results(request):
     results = QuizResult.objects.filter(user=request.user).order_by('-date_taken')
     return render(request, 'quiz_results.html', {'results': results})
