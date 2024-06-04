@@ -102,3 +102,20 @@
 .nav-to-right p:hover > i{
   color: #fff; 
 }
+#languageMenu {
+  display: inline;
+  font-size: 15px;
+  padding: 11px 5px;
+  border: 1px solid #38444d;
+  cursor: pointer;
+  background: #dddddd4f;
+  color: #38444d;
+  font-family: 'poppins', sans-serif;
+}
+#languageMenu:hover {
+  background: #38444d;
+  color: #fff;
+}
+#languageMenu:focus {
+  outline: none;
+}

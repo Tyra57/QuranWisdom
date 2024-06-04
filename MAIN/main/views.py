@@ -698,7 +698,7 @@ def science2(request):
         "last_post":last_post,
     }
     context['page_slug'] = 'Science-Celestial-Bodies-and-Their-Orbits'
-    return render(request, "a3-science2-celestialbodies.html", context)
+    return candy.render(request, "a3-science2-celestialbodies.html", context)
 
 def science3(request):
     forums = Category.objects.all()

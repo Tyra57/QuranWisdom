@@ -11,7 +11,7 @@ from .views import (
     submit_quiz, view_results, profile, get_user_bookmarks, bookmark_detail_view, help, settings)
 
 urlpatterns = [
-    path("", home, name="home"),
+    *candy.path("", home, name="home"),
     path("help/", help, name="help"),
     path('get_user_bookmarks/', get_user_bookmarks, name='get_user_bookmarks'),
     path('bookmark/<slug:slug>/', bookmark_detail_view, name='bookmark_detail'),
@@ -56,7 +56,7 @@ urlpatterns = [
     path("a2-story19-uzair/", story19, name="story19"),
     *candy.path("a3-science1-anemochory//", science1, name="science1"),
     #path("a3-science1-anemochory/", science1, name="science1"),
-    path("a3-science2-celestialbodies/", science2, name="science2"),
+    *candy.path("a3-science2-celestialbodies/", science2, name="science2"),
     path("a3-science3-cloudlayers/", science3, name="science3"),
     path("a3-science4-constellationguide/", science4, name="science4"),
     path("a3-science5-difficultybreathing/", science5, name="science5"),
