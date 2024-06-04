@@ -51,22 +51,26 @@ def author(request):
 
 @login_required
 def update_profile(request):
-    context = {}
     user = request.user
- 
-    print(user)
-    form = UpdateForm(request.POST, request.FILES)
+    try:
+        author_profile = Author.objects.get(user=user)  # Try to get the existing Author instance
+    except Author.DoesNotExist:
+        author_profile = None  # If it doesn't exist, set it to None
+
     if request.method == "POST":
+        form = UpdateForm(request.POST, request.FILES, instance=author_profile)  # Pass the existing instance to the form
         if form.is_valid():
             update_profile = form.save(commit=False)
             update_profile.user = user
             update_profile.save()
             return redirect("home")
-        
-    context.update({
+    else:
+        form = UpdateForm(instance=author_profile)  # Pass the instance here as well for GET requests
+
+    context = {
         "form": form,
         "title": "Update Profile",
-        })
+    }
     return render(request, "register/update.html", context)
 
 @login_required

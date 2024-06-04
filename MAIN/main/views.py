@@ -13,6 +13,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from . import candy
 from django.core.exceptions import MultipleObjectsReturned
+from django.contrib import messages
 
 def home(request):
 
@@ -88,20 +89,27 @@ def detail(request, slug):
     update_views(request, post)
     return render(request, "detail.html", context)
 
-def contact_view(request):
+def contact_view_1(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            # Determine redirect based on the submitting page
-            if 'faq' in request.POST:
-                return redirect('faq')
-            else:
-                return redirect('home')
+            messages.success(request, 'Your message has been submitted successfully!')
+            return redirect('home')  # Redirect to home with anchor
     else:
         form = ContactForm()
-    # Adjust the template if necessary based on where the form is being loaded
     return render(request, 'home.html', {'form': form})
+
+def contact_view_2(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been submitted successfully!')
+            return redirect('faq')  # Redirect to FAQ with anchor
+    else:
+        form = ContactForm()
+    return render(request, 'a10-faq.html', {'form': form}) 
 
 def posts(request, slug):
     category = get_object_or_404(Category, slug=slug)

@@ -17,15 +17,116 @@
     min-height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
+}.bookmark {
+        flex: 1; /* Ensures content takes up the necessary space */
+       /*  background-color: #f5f5f5; Soft background color */
+        color: #333; /* Primary text color */
+        padding: 50px; /* Adjusted padding */
+        /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);  Subtle shadow for depth */
+        border-radius: 8px; /* Soften edges */
+        margin: 20px; /* Ensure some space around the container */
+    }
+    /* Profile Styling */
+    .hi {
+        color: #38444d; /* Highlight color */
+        margin-bottom: 20px;
+    }
+    .fullname, .bio, .email, .datejoined, .lastlogin {
+        margin-bottom: 10px; /* Consistent spacing */
+    }
+    .fullname {
+        font-weight: bold; /* Emphasize the name */
+    }
+    .bio {
+        font-style: italic; /* Style for bio */
+        color: #555; /* Subdued color for bio */
+    }
+    h1 {
+        color: #38444d; /* Consistent color for headings */
+    }
+    ul {
+        /* list-style-type: none; Remove default list style */
+        padding: 0;
+    }
+    .bookmark.li {
+        /* background-color: #e9ecef; Light background for list items */
+        margin-bottom: 8px; /* Space out list items */
+        padding: 10px; /* Padding inside list items */
+        border-radius: 5px; /* Rounded corners for list items */
+    }
+    .bookmark a {
+        color: #007bff; /* Link color */
+        text-decoration: none; /* No underline */
+    }
+    .bookmark.a:hover {
+        text-decoration: underline; /* Underline on hover for clarity */
+    }
+/* mobile responsive */
+@media screen and (max-width: 768px) {
+    .bookmark {
+        padding: 20px; /* Adjusted padding */
+    }
+    .hi {
+        font-size: 24px; /* Larger heading */
+    }
+    .fullname {
+        font-size: 20px; /* Larger name */
+    }
+    .bio {
+        font-size: 16px; /* Larger bio */
+    }
+    .email, .datejoined, .lastlogin {
+        font-size: 14px; /* Smaller date text */
+    }
+    .bookmark h1{
+        font-size: 24px; /* Larger heading */
+    }
+    .bookmark.li {
+        padding: 8px; /* Smaller padding */
+    }
+    .section-bookmark a {
+        font-size: 14px; /* Smaller link text */
+    }
 }
-.bookmark {
-    flex: 1; /* Ensures content takes up the necessary space */
+.btn-edit-profile {
+    display: inline-block;
+    background-color: #38444d;  /* Primary button color */
+    color: #ffffff; /* Text color */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline from link */
+    margin-top: 20px; /* Space above the button */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
+.edit-profile-button a{
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline from link */
+
+}
+
+.btn-edit-profile:hover {
+    background-color: #02080f; /* Darker shade on hover */
+}
+
     </style>
   {% endblock title %}
 
   {% block content %}   
       <div class="bookmark" style="padding: 100px 100px 100px 100px; margin-bottom: 65px;">
+        <!--show User fullname, bio-->
+        <h1 class="hi">Hi {{user}}</h1>
+        <h2 class="fullname">{{ user.author.fullname }}</h2>
+        <p class="bio">{{ user.author.bio }}</p>
+        <!--<p class="email">{{ user.email }}</p>-->
+        <p class="datejoined">Date Joined: {{ user.date_joined|date:"F d, Y" }}</p>
+        <p class="lastlogin">Last Login: {{ user.last_login|date:"F d, Y H:i" }}</p>
+    
+        <!-- Edit Profile Button -->
+        <div class="edit-profile-button">
+            <a href="{% url 'update_profile' %}" class="btn-edit-profile">Edit Profile</a>
+        </div>
+        <br>
+        <div class="section-bookmark">
           <h1>Your Bookmarks</h1>
           <ul>
               {% for bookmark in bookmarks %}
@@ -34,6 +135,6 @@
                   <li>No bookmarks found.</li>
               {% endfor %}
           </ul>
-
+          </div>
       </div>    
   {% endblock content %}
